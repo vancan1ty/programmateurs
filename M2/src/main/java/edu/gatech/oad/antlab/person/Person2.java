@@ -39,8 +39,8 @@ public class Person2 {
         }
         StringBuilder output = new StringBuilder(input.length());
         while(characters.size()!=0){
-            int randPicker = (int)(Math.random()*characters.size());
-        	output.append(characters.remove(randPicker));
+        	int randPicker = (int)(Math.random()*characters.size());
+    		output.append(characters.remove(randPicker));
         }
     	return output.toString();
 	}
