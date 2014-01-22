@@ -2,6 +2,8 @@ package edu.gatech.oad.antlab.person;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
+import java.util.Random;
 
 /**
  *  A simple class for person 2
@@ -33,16 +35,17 @@ public class Person2 {
 	 * @return the modified string
 	 */
 	private String calc(String input) {
+		String newString = "";
+		Random rand = new Random();
 		List<Character> characters = new ArrayList<Character>();
-    	for(char c:input.toCharArray()){
-    		characters.add(c);
-        }
-        StringBuilder output = new StringBuilder(input.length());
-        while(characters.size()!=0){
-        	int randPicker = (int)(Math.random()*characters.size());
-    		output.append(characters.remove(randPicker));
-        }
-    	return output.toString();
+    	for (int i = 0; i < input.length(); i++) {
+    		characters.add(input.charAt(i));
+    	}
+    	Collections.shuffle(characters,rand);
+    	for(char c : characters) {
+    		newString += c;
+    	}
+    	return newString;
 	}
 	/**
 	 * Return a string rep of this object
