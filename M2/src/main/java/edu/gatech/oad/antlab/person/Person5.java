@@ -1,3 +1,4 @@
+//Person 5 is Currell Berry
 package edu.gatech.oad.antlab.person;
 
 /**
@@ -31,7 +32,7 @@ public class Person5 {
 	 */
 	private String calc(String input) {
 	  //Person 5 put your implementation here
-	  return null;
+	  return input.substring(2)+input.substring(0,2);
 	}
 	
 	/**
