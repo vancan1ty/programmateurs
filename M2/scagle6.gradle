@@ -1,13 +1,14 @@
+//allows it to access java tasks
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
-sourceCompatibility = 1.6
+sourceCompatibility = 1.7
 version = '1.0'
 
 
 defaultTasks 'jar'
 
-
+//tells gradle we need this jar in order to run
 dependencies {
         compile files('lib/resources.jar')
                 runtime files('lib/resources.jar')
@@ -21,7 +22,7 @@ jar {
         }
 
         manifest {
-                attributes('Implementation-Title': 'CS 2340 M2',
+                attributes('Implementation-Title': 'CS2340 M2',
                                    'Main-Class': 'edu.gatech.oad.antlab.pkg1.AntLabMain')
         }
 }
