@@ -1,0 +1,21 @@
+apply plugin: 'java'
+
+defaultTasks 'jar'
+
+dependencies {
+	compile files('lib/resources.jar')
+		runtime files('lib/resources.jar')
+}
+
+jar {
+	from(configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }) {
+		exclude "META-INF/*.SF"
+			exclude "META-INF/*.DSA"
+			exclude "META-INF/*.RSA"
+	}
+
+	manifest {
+		attributes('Implementation-Title': 'CS 2340 M2',
+				   'Main-Class': 'edu.gatech.oad.antlab.pkg1.AntLabMain')
+	}
+}

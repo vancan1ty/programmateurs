@@ -30,8 +30,12 @@ public class Person4 {
      * @return the modified string
      */
     private String calc(String input) {
-      //Person 1 put your implementation here
-      return null;
+    	char[] charArray = input.toCharArray();
+    	String ans ="";
+    	for(char character: charArray){
+    		ans=ans+(char)(character+1);
+    	}
+      return ans;
     }
     
     /**
