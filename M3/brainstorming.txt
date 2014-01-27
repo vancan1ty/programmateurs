@@ -1,4 +1,3 @@
-
 capabilites:
 view reports/graphs
 view account history
@@ -14,13 +13,14 @@ database
 stock exchange
 
 use cases:
-user creates profile
-admin retrieves information
-user views purchase history
-user views reports (charts and graphs)
-user makes purchase
-user creates budget
-user earns/enters money
-user edits budget, transaction, &c.
-user deletes budget, transaction, &c.
+1. user creates profile
+2. admin retrieves information
+3. user views spending category report
+4. user views income source report
+5. user makes withdrawal
+6. user makes deposit
+7. user adds budget category
+8. user reconciles account balance
+9. user views transaction history
+10. user deletes account
 
