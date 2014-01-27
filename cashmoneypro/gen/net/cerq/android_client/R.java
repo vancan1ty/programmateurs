@@ -170,7 +170,7 @@ public final class R {
         public static final int pref_title_vibrate=0x7f06001f;
         public static final int title_activity_home=0x7f060010;
         public static final int title_activity_quip_browser=0x7f06000f;
-        public static final int title_activity_settings=0x7f060011;
+        public static final int title_activity_settings_activity2=0x7f060011;
         public static final int title_section1=0x7f060007;
         public static final int title_section2=0x7f060008;
         public static final int title_section3=0x7f060009;

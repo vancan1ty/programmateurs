@@ -44,6 +44,14 @@
             android:name="programmateurs.views.HomeActivity"
             android:label="@string/title_activity_home" >
         </activity>
+        <activity
+            android:name="programmateurs.views.SettingsActivity2"
+            android:label="@string/title_activity_settings_activity2"
+            android:parentActivityName="programmateurs.views.HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="programmateurs.views.HomeActivity" />
+        </activity>
     </application>
 
 </manifest>
