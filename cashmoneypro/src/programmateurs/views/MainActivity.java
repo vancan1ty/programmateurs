@@ -10,10 +10,10 @@ import java.net.URL;
 import programmateurs.models.Anchor;
 import programmateurs.models.DBHandler;
 
-import net.cerq.android_client.R;
-import net.cerq.android_client.R.id;
-import net.cerq.android_client.R.layout;
-import net.cerq.android_client.R.menu;
+import net.programmateurs.R;
+import net.programmateurs.R.id;
+import net.programmateurs.R.layout;
+import net.programmateurs.R.menu;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.Dialog;

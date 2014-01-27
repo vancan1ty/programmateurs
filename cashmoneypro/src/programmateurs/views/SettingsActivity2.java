@@ -21,9 +21,9 @@ import android.support.v4.app.NavUtils;
 
 import java.util.List;
 
-import net.cerq.android_client.R;
-import net.cerq.android_client.R.string;
-import net.cerq.android_client.R.xml;
+import net.programmateurs.R;
+import net.programmateurs.R.string;
+import net.programmateurs.R.xml;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On

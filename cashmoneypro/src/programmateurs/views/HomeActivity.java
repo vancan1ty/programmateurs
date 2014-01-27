@@ -2,11 +2,11 @@ package programmateurs.views;
 
 import java.util.Locale;
 
-import net.cerq.android_client.R;
-import net.cerq.android_client.R.id;
-import net.cerq.android_client.R.layout;
-import net.cerq.android_client.R.menu;
-import net.cerq.android_client.R.string;
+import net.programmateurs.R;
+import net.programmateurs.R.id;
+import net.programmateurs.R.layout;
+import net.programmateurs.R.menu;
+import net.programmateurs.R.string;
 
 import android.content.Intent;
 import android.os.Bundle;

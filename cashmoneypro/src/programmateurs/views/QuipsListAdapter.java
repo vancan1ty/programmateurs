@@ -4,7 +4,7 @@ import java.util.List;
 
 import programmateurs.models.Anchor;
 
-import net.cerq.android_client.R;
+import net.programmateurs.R;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
