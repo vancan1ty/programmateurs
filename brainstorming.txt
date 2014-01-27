@@ -1,0 +1,26 @@
+
+capabilites:
+view reports/graphs
+view account history
+enter deposits
+enter withdrawals
+enter stock purchase
+enter stock sales
+
+agents:
+users
+admin
+database
+stock exchange
+
+use cases:
+user creates profile
+admin retrieves information
+user views purchase history
+user views reports (charts and graphs)
+user makes purchase
+user creates budget
+user earns/enters money
+user edits budget, transaction, &c.
+user deletes budget, transaction, &c.
+
