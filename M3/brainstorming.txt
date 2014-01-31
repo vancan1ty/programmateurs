@@ -19,7 +19,7 @@ use cases:
 3. user views spending category report
 4. user views income source report
 5. user makes withdrawal
-6. user makes deposit
+6. user makes deposit (Brent McCorvey)
 7. user adds budget category
 8. user reconciles account balance
 9. user views transaction history
