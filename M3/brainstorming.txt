@@ -21,7 +21,7 @@ use cases:
 5. user makes withdrawal
 6. user makes deposit (Brent McCorvey)
 7. user adds budget category
-8. user reconciles account balance
+8. user reconciles account balance (Currell Berry)
 9. user views transaction history
 10. user deletes account
 
