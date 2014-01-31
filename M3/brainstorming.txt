@@ -1,12 +1,13 @@
-capabilites:
+Capabilites:
 view reports/graphs
 view account history
+create/view categories
 enter deposits
 enter withdrawals
 enter stock purchase
 enter stock sales
 
-agents:
+Agents/Actors:
 users
 admin
 database
