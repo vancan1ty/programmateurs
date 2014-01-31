@@ -30,24 +30,29 @@ import android.widget.Toast;
 //import com.google.android.gms.common.ConnectionResult;
 //import com.google.android.gms.common.GooglePlayServicesUtil;
 
-public class MainActivity extends Activity {
+public class LoginActivity extends Activity {
 	
 	EditText usernameField;
 	EditText passwordField;
 	Button buttonLogin;
+	Button buttonLaunchCreateUser;
 	public ProgressDialog progress;
-//	private DBHandler dbHandler = new DBHandler(this);
+	private DBHandler dbHandler; 
 	
 	Anchor anchor = Anchor.getInstance();
+	Activity me = this;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_login);
+		dbHandler = new DBHandler(this);
+		dbHandler.open();
 
 		usernameField = (EditText) findViewById(R.id.emailfield);
 		passwordField = (EditText) findViewById(R.id.passwordfield);
 		buttonLogin = (Button) findViewById(R.id.buttonlogin);
+		buttonLaunchCreateUser = (Button) findViewById(R.id.buttonLaunchCreateUser);
 		progress = new ProgressDialog(this);
 		
 		buttonLogin.setOnClickListener(new OnClickListener() {
@@ -57,30 +62,43 @@ public class MainActivity extends Activity {
 				String username = usernameField.getText().toString();
 				String password = passwordField.getText().toString();
 				Log.d("BERRY","username: " + username + " password: " + password);
-				boolean userExists = true; //dbHandler.isUserInDB(username, password);
+				boolean userExists =  dbHandler.isUserInDB(username, password);
 				if (userExists) {
 					Intent i = new Intent(v.getContext(), HomeActivity.class);
 					v.getContext().startActivity(i); 
 				} else {
-					Toast.makeText(v.getContext(), "couldn't log you in!", Toast.LENGTH_LONG);
+					anchor.showDialog(me, "Log in Failure", "couldn't log you in!");
 				}
 				
 			}
 			
 		});
+		
+		buttonLaunchCreateUser.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(v.getContext(), AddUserActivity.class);
+				v.getContext().startActivity(i); 
+			}
+		});
 	
-	//	checkForGooglePlayServices();
 		
 
 	}
 
+	@Override
+	protected void onResume() {
+		dbHandler.open();
+		super.onResume();
+	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+	protected void onPause() {
+		dbHandler.close();
+		super.onPause();
 	}
+
 	
 	public String getUsernameEntry() {
 		return usernameField.getText().toString();

@@ -22,5 +22,6 @@
     <string name="default_user_name">anonymous coward</string>
     <string name="title_activity_quip_browser">QuipBrowser</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_add_user">AddUserActivity</string>
 
 </resources>

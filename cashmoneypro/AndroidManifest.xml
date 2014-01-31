@@ -16,7 +16,7 @@
         android:label="Cash Money Pro"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="programmateurs.views.MainActivity"
+            android:name="programmateurs.views.LoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -28,7 +28,7 @@
         <activity
             android:name="programmateurs.views.CheckInActivity"
             android:label="Check In Activity"
-            android:parentActivityName="programmateurs.views.MainActivity"
+            android:parentActivityName="programmateurs.views.LoginActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -51,6 +51,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="programmateurs.views.HomeActivity" />
+        </activity>
+        <activity
+            android:name="programmateurs.views.AddUserActivity"
+            android:label="@string/title_activity_add_user" >
         </activity>
     </application>
 

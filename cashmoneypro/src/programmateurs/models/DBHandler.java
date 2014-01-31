@@ -25,11 +25,14 @@ public class DBHandler {
 
   public DBHandler(Context context) {
     dbHelper = new UsersHelper(context);
-    open();
   }
 
   public void open() throws SQLException {
     database = dbHelper.getWritableDatabase();
+  }
+
+  public void close() {
+    dbHelper.close();
   }
   
   public boolean isUserInDB(String username, String password) {
@@ -41,14 +44,14 @@ public class DBHandler {
 	  }
   }
   
-  public String hashPassword(String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
-	  byte[] salt = new byte[16]; // no salt for now
-	  KeySpec spec = new PBEKeySpec("password".toCharArray(), salt, 65536, 128);
-	  SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-	  byte[] hash = f.generateSecret(spec).getEncoded();
-	  return new BigInteger(1, hash).toString(16);
-  }
-  
+//  public String hashPassword(String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
+//	  byte[] salt = new byte[16]; // no salt for now
+//	  KeySpec spec = new PBEKeySpec("password".toCharArray(), salt, 65536, 128);
+//	  SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+//	  byte[] hash = f.generateSecret(spec).getEncoded();
+//	  return new BigInteger(1, hash).toString(16);
+//  }
+//  
   public void addUserToDB(String username, String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
 //	  String passHash = hashPassword(password);
 	  ContentValues toInsert = new ContentValues();
@@ -57,8 +60,6 @@ public class DBHandler {
 	  database.insert("users", null, toInsert);
   }
 
-  public void close() {
-    dbHelper.close();
-  }
+
 
 } 

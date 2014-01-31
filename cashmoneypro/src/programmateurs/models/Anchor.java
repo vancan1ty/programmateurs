@@ -19,7 +19,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
 import programmateurs.android_client.beans.SessionStatusObject;
-import programmateurs.views.MainActivity;
+import programmateurs.views.LoginActivity;
 
 import android.accounts.AuthenticatorException;
 import android.app.Activity;
@@ -48,13 +48,13 @@ public class Anchor {
 
 //	//demonstration of asynctask at least.  let's leave this for now
 //	public class VerifyUserLogin extends
-//			AsyncTask<MainActivity, Void, Boolean> {
-//		MainActivity mActivity;
+//			AsyncTask<LoginActivity, Void, Boolean> {
+//		LoginActivity mActivity;
 //		StringBuilder errResponseHeader = new StringBuilder();
 //
 //		@Override
 //		// check to see if the credentials work
-//		protected Boolean doInBackground(MainActivity... params) {
+//		protected Boolean doInBackground(LoginActivity... params) {
 //			publishProgress(); //make sure that progress gets shown...
 //			int count = params.length;
 //			if (count != 1) { // no assert on android ;(
