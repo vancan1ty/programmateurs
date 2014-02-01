@@ -13,14 +13,14 @@ database
 stock exchange
 
 use cases:
-1. user creates profile
-2. admin retrieves information
-3. user views spending category report
-4. user views income source report
-5. user makes withdrawal
-6. user makes deposit
-7. user adds budget category
-8. user reconciles account balance
-9. user views transaction history
-10. user deletes account
+1. create account
+2. retrieve lost password(s)
+3. view spending category report
+4. view income source report
+5. make withdrawal
+6. make deposit
+7. add budget category
+8. reconcile account balance
+9. view transaction history
+10. delete account
 
