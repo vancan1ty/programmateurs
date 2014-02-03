@@ -1,0 +1,7 @@
+Pavel Komarov
+CS 2340 M3
+3/2/2014
+
+Use case: View transaction history
+
+Primary Actor: User
