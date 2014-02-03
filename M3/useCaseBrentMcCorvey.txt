@@ -1,0 +1,27 @@
+Brent McCorvey
+CS 2340 M3
+2/3/2014
+
+Use Case: Make a deposit
+
+Primary Actor: User
+
+Preconditions: User has the app installed on their Android device and has an account. The user wants to deposit money to increase their available funds. 
+
+Stakeholders and Interests:
+User: The user wants a button that says “Deposit Funds” and text box in which the user can enter the amount of money they want to deposit in dollars. A confirm dialog will then pop up and once the deposit is confirmed, the user will be notified of the deposit via email. 
+
+Post Conditions: The users available balance will be updated with the all the transactions below the available balance. 
+
+Main Success Scenario:
+1. The user has logged in to their account successfully and navigates to the tab that has the button that says “Deposit Funds.”
+2. The user clicks the button which takes them to another screen with a text box that asks them they amount of money they want to deposit.
+3. The user enters the amount of money they want to deposit, or press the back button if the user accidentally presses the deposit button.
+4. The user inputs a valid amount of money and presses the confirm button to confirm that they want to make the deposit. 
+5. A dialog box pops up and the user selects “Yes” to confirm the deposit and the amount of money they deposit. 
+6. The app takes the user back to the deposit page and updates their balance accordingly. 
+
+Extension:
+3. The user enters an invalid amount of money, a box pops up and says to enter a valid amount of money. 
+5. If the user presses the “No” button the amount of money is not deposited and takes the user back to the deposit page with the text box and the “back” button.
+6. If the user enters the wrong routing or checking number, a box pops up saying the transaction was invalid.
