@@ -1,26 +1,26 @@
-capabilites:
+Capabilites:
 view reports/graphs
 view account history
+create/view categories
 enter deposits
 enter withdrawals
 enter stock purchase
 enter stock sales
 
-agents:
+Agents/Actors:
 users
 admin
 database
 stock exchange
 
 use cases:
-1. create account
-2. retrieve lost password(s)
+1. create account (Sara Cagle)
+2. retrieve lost password (Justin Nieto)
 3. view spending category report
 4. view income source report
 5. make withdrawal
-6. make deposit
+6. make deposit (Brent McCorvey)
 7. add budget category
-8. reconcile account balance
-9. view transaction history
+8. reconcile account balance (Currell Berry)
+9. view transaction history (Pavel Komarov)
 10. delete account
-

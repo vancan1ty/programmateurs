@@ -22,5 +22,5 @@ use cases:
 6. make deposit (Brent McCorvey)
 7. add budget category
 8. reconcile account balance (Currell Berry)
-9. view transaction history
+9. view transaction history (Pavel Komarov)
 10. delete account
