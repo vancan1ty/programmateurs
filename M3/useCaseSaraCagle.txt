@@ -3,6 +3,7 @@ CS 2340 M3
 02/02/2014
 
 Use case: Create a user account
+
 Primary Actor: User
 
 Preconditions: User has installed the app onto his Android device. The user does
@@ -50,15 +51,3 @@ Password, the app will prompt the user to complete the incomplete items for
 registration.
 5a. The user will be brought back to the Registration page and asked to input
 the missing information.
-
-
-----
-
-Stated as User does something, then system does something .... (5)
-Avoids implementation language .... (3)
-First step is the trigger event - what causes this use case to start? .... (2)
-Avoids conditional branches or exceptional conditions .... (5)
-Extensions or Alternate Flows (keyed to step where this occurs in Main Scenario)
-Number matches step in Main scenario where this exception or alternative happens .... (5)
-Identifies exceptional condition or alternative .... (5)
-Contains steps to follow if that condition happens .... (5)
