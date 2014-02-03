@@ -5,7 +5,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.Locale;
 
 import programmateurs.models.Anchor;
-import programmateurs.models.DBHandler;
+import programmateurs.models.UsersDAO;
 
 import net.programmateurs.R;
 import net.programmateurs.R.id;
@@ -45,7 +45,7 @@ public class AddUserActivity extends Activity {
 	EditText passwordField;
 	Button buttonLogin;
 	public ProgressDialog progress;
-	private DBHandler dbHandler; 
+	private UsersDAO dbHandler; 
 	
 	Anchor anchor = Anchor.getInstance();
 	Activity me = this;
@@ -55,7 +55,7 @@ public class AddUserActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_user);
 
-		dbHandler = new DBHandler(this);
+		dbHandler = new UsersDAO(this);
 		dbHandler.open();
 
 		usernameField = (EditText) findViewById(R.id.inputUsername);

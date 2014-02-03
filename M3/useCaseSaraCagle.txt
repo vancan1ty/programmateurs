@@ -1,0 +1,53 @@
+Sara Cagle
+CS 2340 M3
+02/02/2014
+
+Use case: Create a user account
+
+Primary Actor: User
+
+Preconditions: User has installed the app onto his Android device. The user does
+not yet have an account on the app.
+
+Stakeholders and Interests:
+User: The user would like a tool he can use to securely keep track of his 
+financial assets by tracking his account deposits and withdrawls.
+ 
+Post Conditions: The user will have an active account in which he can use to 
+keep track of his budgets.
+
+Main Success Scenario:
+1. The user opens the app on his Android device and finds himself at the Welcome
+page. There are two buttons on this Welcome page: "Login" and "Register".
+2. The user does not have an account yet, so he clicks "Register" instead of 
+"Login".
+3. The user will be brought to the account Registration page. This Registration 
+page will provide spaces for the user to input his Full Name, Username, E-mail
+Address, and Password.
+4. The user will provide the appropriate information as requested by the app.
+5. The app will verify this information: confirm that the username desired is 
+not taken, checks the accuracy of the e-mail address, and ensure that all items 
+required are reported.
+6. The account is created, and the user can now log into his new account using
+his username and password.
+
+
+Extension:
+Step 5: If the user attempts to register a username already taken by another 
+user, the app will detect this and prompt that the specified name is already
+taken, and the user must pick a different one. 
+5a. The user will be brought back to the Registration page and asked to input
+a different username.
+
+Step 5: If the user attempts to register with an email address that does not 
+work, or does not put in an email address (for example, @@@@@, 
+or abc@abc.internet), the app will detect this and prompt the user for an 
+accurate email address.
+5a. The user will be brought back to the Registration page and asked to input an
+accurate email address.
+
+Step 5: If the user does not input a Full Name, Username, E-Mail Address, and/or 
+Password, the app will prompt the user to complete the incomplete items for
+registration.
+5a. The user will be brought back to the Registration page and asked to input
+the missing information.

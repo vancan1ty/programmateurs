@@ -17,14 +17,14 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-public class DBHandler {
+public class UsersDAO {
 
   // Database fields
   private SQLiteDatabase database;
-  private UsersHelper dbHelper;
+  private DBHelper dbHelper;
 
-  public DBHandler(Context context) {
-    dbHelper = new UsersHelper(context);
+  public UsersDAO(Context context) {
+    dbHelper = new DBHelper(context);
   }
 
   public void open() throws SQLException {
