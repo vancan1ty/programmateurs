@@ -23,5 +23,9 @@
     <string name="title_activity_quip_browser">QuipBrowser</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_add_user">AddUserActivity</string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="welcome_activity_login">Login</string>
+    <string name="welcome_activity_register">Register</string>
+    <string name="welcome_text">Welcome Screen</string>
 
 </resources>

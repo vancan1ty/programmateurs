@@ -19,11 +19,6 @@
             android:name="programmateurs.views.LoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="programmateurs.views.CheckInActivity"
@@ -55,6 +50,14 @@
         <activity
             android:name="programmateurs.views.AddUserActivity"
             android:label="@string/title_activity_add_user" >
+        </activity>
+        <activity
+            android:name="programmateurs.views.WelcomeActivity"
+            android:label="@string/welcome_text">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
