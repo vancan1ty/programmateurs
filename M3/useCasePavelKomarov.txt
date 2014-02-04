@@ -39,3 +39,12 @@ provided menus.
 4. If the user wishes to configure the history to show by default his N most 
 recent transactions instead of 20 or to show all purchases made in the past N-day
 window of time, he can specify this in the settings menu.
+5. If the user wishes to modify the details of a purchase, he may do so by 
+selecting the "edit" button, which will take him to a screen similar to that for 
+creating a purchase wherein all fields are changeable. After edits are made, the 
+user is taken back to the detailed view of the transaction.
+5. If the user wishes to delete a purchase, he may select the delete button,
+which will cause a prompt asking him if he is certain of this choice and providing
+further options "yes" and "no". If he selects "no", he will be taken back to the
+detailed transaction view; if he selects "yes", he will be taken back to the
+overall history.
