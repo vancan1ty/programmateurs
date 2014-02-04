@@ -1,0 +1,58 @@
+Justin Nieto
+CS 2340 M3
+02/02/2014
+
+Use Case: Enable Password Reset
+Primary Actor: Admin
+
+Stakeholders and Interests:
+   -User:  The user can only access his financial information
+           through the application if he is logged in. If the user
+           has lost or forgotten his account information, he can not 
+           log in until the admin enables the user to reset his password.
+   -Admin: The sole purpose of having a designated admin account for
+           this application is so that the admin can enable a password resetting
+           in the case of forgotten account information.
+
+Preconditions:
+    The user and admin must have already registered their accounts.
+
+Postconditions:
+    The admin will have reset the user's forgotten account information,
+    changing it to a temporary password which the admin can supply to the user.
+    This will enable the user to log in to his account and choose a new
+    password.
+    
+Main Success Scenario:
+    1. At the request of a user who has lost his account information, the admin
+       opens the mobile application to reset the user's password.
+    2. The system brings the admin to a splash screen which displays the
+       application logo and the "Login" and "Register" buttons.
+    3. The admin selects the "Login" button.
+    4. The system takes the admin to the Login page, where he is prompted for
+       his username and password.
+    5. The admin enters his username and password.
+    6. The system will verify that the admin account exists and that the
+       password given is valid, then bring the admin to the Password Reset page,
+       which contains a list of accounts to choose from, a "Reset Password"
+       button, and a "Log Out" button.
+    7. The admin selects the appropriate account and selects the "Reset
+       Password" button.
+    8. The system will change the account's password to a temporary password,
+       which it will display along with an "Okay" button.
+    9. The admin selects the "Okay" button.
+   10. The system returns the admin to the Password Reset page.
+   11. The admin selects the "Log Out" button.
+   12. The system returns the admin to the splash screen.
+   
+Extension and Alternate Flow:
+    -Step 5:  If the admin enters a username that does not exist or supplies an
+              invalid password, then the system will detect this and display an
+              error message to the user. The system will then prompt for valid
+              account information.
+    -Step 6:  Alternatively, the admin can choose to select the "Log Out" button
+              here and the system will reutrn him to the splash screen without
+              reseting any passwords.
+    -Step 11: Alternatively, the admin can choose to reset the password of
+              another account, repeating steps 7-10.
+
