@@ -18,7 +18,7 @@ import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
-import programmateurs.android_client.beans.SessionStatusObject;
+import programmateurs.beans.SessionStatusObject;
 import programmateurs.views.LoginActivity;
 
 import android.accounts.AuthenticatorException;

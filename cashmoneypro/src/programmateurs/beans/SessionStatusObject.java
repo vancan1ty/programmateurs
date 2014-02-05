@@ -1,4 +1,4 @@
-package programmateurs.android_client.beans;
+package programmateurs.beans;
 
 public class SessionStatusObject {
 	
