@@ -1,6 +1,9 @@
 package programmateurs.models;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import programmateurs.beans.Account;
 import programmateurs.beans.Account.ACCOUNT_TYPE;
@@ -45,30 +48,79 @@ public class ArtificialDataSource implements DataSourceInterface {
 	Transaction transaction2 = new Transaction(2,5,TRANSACTION_TYPE.REBALANCE,"3-13-13", t2,false,new Category[]{});
 	Transaction transaction3 = new Transaction(3,5,TRANSACTION_TYPE.REBALANCE,"3-14-13", t3,false,new Category[]{});
 	Transaction transaction4 = new Transaction(4,5,TRANSACTION_TYPE.REBALANCE,"3-15-13", t0,false,new Category[]{});
+	
+	List<User> users;
+	List<Account> accounts;
+	List<Transaction> transactions;
+	List<Category>    categories;
+	
+	private static ArtificialDataSource instance;
+	
+	public static ArtificialDataSource getInstance() {
+		if (instance == null) {
+			instance = new ArtificialDataSource();
+		}
+
+		return instance;
+	}
+
+	private ArtificialDataSource() {
+		users = new ArrayList<User>(Arrays.asList(new User[]{user0, user1, user2, user3, user4, user5}));
+		accounts = new ArrayList<Account>(Arrays.asList(new Account[]{account0, account1, account2, account3, account4, account5}));
+		transactions = new ArrayList<Transaction>(Arrays.asList(new Transaction[]{transaction0, transaction1, transaction2, transaction3, transaction4}));
+		categories = new ArrayList<Category>(Arrays.asList(new Category[]{category0, category1}));
+
+	}
+
 
 
 	@Override
 	public User[] getUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		return users.toArray(new User[]{});
 	}
 
 	@Override
 	public Account[] getAccountsForUser(int userID) {
-		// TODO Auto-generated method stub
-		return null;
+		//Case in point, why I can't wait for java 8 
+		List<Account> outL = new ArrayList<Account>();
+
+		for (Account account : accounts) {
+			if (account.getUserID() == userID) {
+				outL.add(account);
+			}
+		}
+
+		return outL.toArray(new Account[]{});
 	}
 
 	@Override
 	public Category[] getCategoriesForUser(int userID) {
-		// TODO Auto-generated method stub
-		return null;
+
+		//Case in point, why I can't wait for java 8 
+		List<Category> outL = new ArrayList<Category>();
+
+		for (Category category : categories) {
+			if (category.getUserID() == userID) {
+				outL.add(category);
+			}
+		}
+
+		return outL.toArray(new Category[]{});
+
 	}
 
 	@Override
 	public Transaction[] getTransactionsForAccount(int accountID) {
-		// TODO Auto-generated method stub
-		return null;
+	//Case in point, why I can't wait for java 8 
+		List<Transaction> outL = new ArrayList<Transaction>();
+
+		for (Transaction transaction : transactions) {
+			if (transaction.getAccountID() == accountID) {
+				outL.add(transaction);
+			}
+		}
+
+		return outL.toArray(new Transaction[]{});
 	}
 
 	@Override

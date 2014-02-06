@@ -8,18 +8,24 @@ public class Category {
 
 	public Category(int categoryID, int userID, String category_name) {
 		super();
-		this.userID = userID;
 		this.categoryID = categoryID;
+		this.userID = userID;
 		this.category_name = category_name;
 	}
 
 	public int getCategoryID() {
-
 		return categoryID;
 	}
+
+	public int getUserID() {
+		return userID;
+	}
+
 	public String getCategory_name() {
 		return category_name;
 	}
+	
+
 
 	@Override
 	public String toString() {
