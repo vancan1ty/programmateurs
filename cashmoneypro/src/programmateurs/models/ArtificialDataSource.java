@@ -33,7 +33,7 @@ public class ArtificialDataSource implements DataSourceInterface {
 	Account account2 = new Account(2, 1, Account.ACCOUNT_TYPE.CHECKING, "sarachecking", 0);
 	Account account3 = new Account(3, 0, Account.ACCOUNT_TYPE.CHECKING, "justinchecking", 0);
 	Account account4 = new Account(2, 1, Account.ACCOUNT_TYPE.SAVINGS, "mccorveysavings", 0);
-	Account account5 = new Account(5, 1, Account.ACCOUNT_TYPE.SAVINGS, "bigfoot_saves", 100);
+	Account account5 = new Account(5, 5, Account.ACCOUNT_TYPE.SAVINGS, "bigfoot_saves", 100);
 	
 	Category category0 = new Category(0, 5, "gasoline");
 	Category category1 = new Category(1, 5, "costume repairs");
@@ -54,22 +54,11 @@ public class ArtificialDataSource implements DataSourceInterface {
 	List<Transaction> transactions;
 	List<Category>    categories;
 	
-	private static ArtificialDataSource instance;
-	
-	public static ArtificialDataSource getInstance() {
-		if (instance == null) {
-			instance = new ArtificialDataSource();
-		}
-
-		return instance;
-	}
-
-	private ArtificialDataSource() {
+	public ArtificialDataSource() {
 		users = new ArrayList<User>(Arrays.asList(new User[]{user0, user1, user2, user3, user4, user5}));
 		accounts = new ArrayList<Account>(Arrays.asList(new Account[]{account0, account1, account2, account3, account4, account5}));
 		transactions = new ArrayList<Transaction>(Arrays.asList(new Transaction[]{transaction0, transaction1, transaction2, transaction3, transaction4}));
 		categories = new ArrayList<Category>(Arrays.asList(new Category[]{category0, category1}));
-
 	}
 
 
@@ -126,29 +115,38 @@ public class ArtificialDataSource implements DataSourceInterface {
 	@Override
 	public User addUserToDB(String username, String passhash, String first,
 			String last, String email) {
-		// TODO Auto-generated method stub
-		return null;
+		int lastuserID = users.get(users.size()-1).getUserID();
+		User user = new User(lastuserID+1,username,passhash,first,last,email);
+		users.add(user);
+		return user;
 	}
 
 	@Override
 	public Account addAccountToDB(int userID, ACCOUNT_TYPE accountType,
 			String accountName, int interestRate) {
-		// TODO Auto-generated method stub
-		return null;
+		int lastAccountID = accounts.get(accounts.size()-1).getAccountID();
+		Account acct = new Account(lastAccountID+1,userID,accountType,accountName,interestRate);
+		accounts.add(acct);
+		return acct;
 	}
 
 	@Override
 	public Transaction addTransactionToDB(int accountID,
 			TRANSACTION_TYPE transactionType, String transactionDate,
 			Timestamp timestamp, boolean rolledback, Category[] categories) {
-		// TODO Auto-generated method stub
-		return null;
+		int lastTransactionID = transactions.get(transactions.size()-1).getTransactionID();
+		Transaction transaction = new Transaction(lastTransactionID+1,accountID,transactionType,
+				transactionDate,timestamp,rolledback,categories);
+		transactions.add(transaction);
+		return transaction;
 	}
 
 	@Override
 	public Category addCategoryToDB(int userID, String category_name) {
-		// TODO Auto-generated method stub
-		return null;
+		int lastCatID = categories.get(categories.size()-1).getCategoryID();
+		Category cat = new Category(lastCatID+1,userID,category_name);
+		categories.add(cat);
+		return cat;
 	}
 
 }
