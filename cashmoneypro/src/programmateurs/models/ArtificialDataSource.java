@@ -43,11 +43,11 @@ public class ArtificialDataSource implements DataSourceInterface {
 	Timestamp t2 = new Timestamp(1391629265);
 	Timestamp t3 = new Timestamp(1391636265);
 
-	Transaction transaction0 = new Transaction(0,5,TRANSACTION_TYPE.REBALANCE,"3-11-13", t0,false,new Category[]{});
-	Transaction transaction1 = new Transaction(1,5,TRANSACTION_TYPE.REBALANCE,"3-12-13", t1,false,new Category[]{});
-	Transaction transaction2 = new Transaction(2,5,TRANSACTION_TYPE.REBALANCE,"3-13-13", t2,false,new Category[]{});
-	Transaction transaction3 = new Transaction(3,5,TRANSACTION_TYPE.REBALANCE,"3-14-13", t3,false,new Category[]{});
-	Transaction transaction4 = new Transaction(4,5,TRANSACTION_TYPE.REBALANCE,"3-15-13", t0,false,new Category[]{});
+	Transaction transaction0 = new Transaction(0,5,TRANSACTION_TYPE.REBALANCE, 233,"3-11-13", t0,false,new Category[]{});
+	Transaction transaction1 = new Transaction(1,5,TRANSACTION_TYPE.REBALANCE, 542, "3-12-13", t1,false,new Category[]{});
+	Transaction transaction2 = new Transaction(2,5,TRANSACTION_TYPE.REBALANCE, 345, "3-13-13", t2,false,new Category[]{});
+	Transaction transaction3 = new Transaction(3,5,TRANSACTION_TYPE.REBALANCE, 756, "3-14-13", t3,false,new Category[]{});
+	Transaction transaction4 = new Transaction(4,5,TRANSACTION_TYPE.REBALANCE, 126, "3-15-13", t0,false,new Category[]{});
 	
 	List<User> users;
 	List<Account> accounts;
@@ -132,11 +132,11 @@ public class ArtificialDataSource implements DataSourceInterface {
 
 	@Override
 	public Transaction addTransactionToDB(int accountID,
-			TRANSACTION_TYPE transactionType, String transactionDate,
+			TRANSACTION_TYPE transactionType, int transactionAmount, String transactionDate,
 			Timestamp timestamp, boolean rolledback, Category[] categories) {
 		int lastTransactionID = transactions.get(transactions.size()-1).getTransactionID();
 		Transaction transaction = new Transaction(lastTransactionID+1,accountID,transactionType,
-				transactionDate,timestamp,rolledback,categories);
+				transactionAmount, transactionDate,timestamp,rolledback,categories);
 		transactions.add(transaction);
 		return transaction;
 	}

@@ -71,7 +71,8 @@ public interface DataSourceInterface {
 	 * @return
 	 */
 	public Transaction addTransactionToDB(int accountID,
-			Transaction.TRANSACTION_TYPE transactionType, String transactionDate,
+			Transaction.TRANSACTION_TYPE transactionType, int transactionAmount, 
+			String transactionDate,
 			Timestamp timestamp, boolean rolledback, Category[] categories); 
 
 	/**
