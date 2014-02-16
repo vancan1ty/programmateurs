@@ -22,24 +22,7 @@ public class AccountsDAO {
 		  + " FOREIGN KEY(userID) REFERENCES Users(userID) "
 		  + ");";
 
-  // Database fields
-  private SQLiteDatabase database;
-  private DBHelper dbHelper;
-
-  public AccountsDAO(Context context) {
-    dbHelper = new DBHelper(context);
-  }
-
-  public void open() throws SQLException {
-    database = dbHelper.getWritableDatabase();
-  }
-
-  public void close() {
-    dbHelper.close();
-  }
-  
- 
-  private Account cursorToAccount(Cursor cursor) {
+  private static Account cursorToAccount(Cursor cursor) {
 	long accountID = cursor.getInt(0);
 	long userID = cursor.getInt(1);
 	Account.ACCOUNT_TYPE accountType = Account.ACCOUNT_TYPE.valueOf(cursor.getString(2));
@@ -53,10 +36,10 @@ public class AccountsDAO {
 	 * @param userID
 	 * @return list of accounts owned by user
 	 */
-	public Account[] getAccountsForUser(int userID) {
+	public static Account[] getAccountsForUser(SQLiteDatabase db, long userID) {
 		
-		Cursor c = database.rawQuery("SELECT * FROM users WHERE userid = ?;", 
-				new String[]{Integer.toString(userID)});
+		Cursor c = db.rawQuery("SELECT * FROM users WHERE userid = ?;", 
+				new String[]{Long.toString(userID)});
 		List<Account> outL = new ArrayList<Account>();
 
 		c.moveToFirst();
@@ -78,14 +61,14 @@ public class AccountsDAO {
 	 * @param interestRate
 	 * @return
 	 */
-	public Account addAccountToDB(long userID, Account.ACCOUNT_TYPE accountType,
+	public static Account addAccountToDB(SQLiteDatabase db, long userID, Account.ACCOUNT_TYPE accountType,
 			String accountName, int interestRate) {
 		ContentValues toInsert = new ContentValues();
 		toInsert.put("userID", userID);
 		toInsert.put("account_type", accountType.name());
 		toInsert.put("account_name", accountName);
 		toInsert.put("interest_rate", interestRate);
-		long accountID = database.insert("accounts", null, toInsert);
+		long accountID = db.insert("accounts", null, toInsert);
 		Account acct = new Account(accountID,userID,accountType,accountName,interestRate);
 		return acct;
 	}

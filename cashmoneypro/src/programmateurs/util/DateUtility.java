@@ -22,8 +22,12 @@ public class DateUtility {
 	private static final SimpleDateFormat mdateFormat = new SimpleDateFormat(DATE_FORMAT);
 	private static final SimpleDateFormat mdatetimeFormat = new SimpleDateFormat(DATETIME_FORMAT);
 	
-	public static long formatDateAsLong(Calendar cal) {
+	public static long formatCalendarAsLong(Calendar cal) {
 		return Long.parseLong(mdateFormat.format(cal.getTime()));
+	}
+
+	public static long formatDateAsLong(Date date) {
+		return Long.parseLong(mdateFormat.format(date.getTime()));
 	}
 
 	public static Calendar getCalendarFromFormattedLong(long l) throws ParseException {
@@ -34,6 +38,14 @@ public class DateUtility {
 	
 	public static Date getDateFromString(String dstring) throws ParseException {
 		return mdateFormat.parse(dstring);
+	}
+	
+	public static String getDateStringFromDate(Date date) {
+		return mdateFormat.format(date);
+	}
+
+	public static String getDateTimeStringFromDate(Date date) {
+		return mdatetimeFormat.format(date);
 	}
 	
 }

@@ -85,6 +85,6 @@ public interface DataSourceInterface {
 	 * @param category_name
 	 * @return
 	 */
-	public Category addCategoryToDB(long userID, String category_name);
+	public Category addCategoryToDB(long userID, String categoryName);
 
 }

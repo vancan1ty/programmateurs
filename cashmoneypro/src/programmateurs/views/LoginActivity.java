@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import programmateurs.models.Anchor;
+import programmateurs.models.RealDataSource;
 import programmateurs.models.UsersDAO;
 
 import net.programmateurs.R;
@@ -37,7 +38,7 @@ public class LoginActivity extends Activity {
 	Button buttonLogin;
 	Button buttonLaunchCreateUser;
 	public ProgressDialog progress;
-	private UsersDAO dbHandler; 
+	private RealDataSource dbHandler; 
 	
 	Anchor anchor = Anchor.getInstance();
 	Activity me = this;
@@ -46,8 +47,7 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-		dbHandler = new UsersDAO(this);
-		dbHandler.open();
+		dbHandler = new RealDataSource(this);
 
 		usernameField = (EditText) findViewById(R.id.emailfield);
 		passwordField = (EditText) findViewById(R.id.passwordfield);
