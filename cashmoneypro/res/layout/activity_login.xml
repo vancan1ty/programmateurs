@@ -6,42 +6,24 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".LoginActivity"
-    tools:ignore="HardcodedText,UselessParent" >
-
- <LinearLayout
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:orientation="vertical"
-     android:gravity="center"
-     android:layout_centerHorizontal="true">
-      <TextView
-        android:id="@+id/textView1"
+    tools:context=".AddUserActivity" >
+    
+        <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="Cash Money Pro"
-        android:textColor="@color/cerqpurple"
+        android:text="Log In"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-     
-     <!--   <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
 
-        android:src="@drawable/cerqlogocvb"
-        android:scaleType="fitCenter"
-        android:layout_weight="0.1" android:contentDescription="cerq logo"/> -->
-     
-
-<EditText
+    <EditText
         android:id="@+id/emailfield"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="email"
-        android:inputType="textEmailAddress" >
+        android:hint="Username" >
 
         <requestFocus />
     </EditText>
@@ -50,28 +32,22 @@
         android:id="@+id/passwordfield"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_below="@+id/emailfield"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
         android:ems="10"
-        android:hint="password"
+        android:hint="Password"
         android:inputType="textPassword" />
 
     <Button
         android:id="@+id/buttonlogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
-        android:text="Log In" />
-    
- </LinearLayout>
+        android:layout_alignRight="@+id/emailfield"
+        android:layout_below="@+id/passwordfield"
+        android:layout_marginTop="72dp"
+        android:text="Login" />
 
- <Button
-     android:id="@+id/buttonLaunchCreateUser"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:layout_alignParentBottom="true"
-     android:layout_alignParentRight="true"
-     android:layout_marginBottom="15dp"
-     android:layout_marginRight="20dp"
-     android:text="Create User" />
-    
+
+
 </RelativeLayout>
