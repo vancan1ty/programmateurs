@@ -8,11 +8,10 @@ public class Account {
 		SAVINGS, CHECKING
 	}
 
-	private int accountID;
-	private int userID;
+	private long accountID;
+	private long userID;
 	private ACCOUNT_TYPE accountType;
 	private String accountName;
-
 	private int interestRate;
 
 	/**
@@ -23,7 +22,7 @@ public class Account {
 	 * @param accountName
 	 * @param interestRate specified as an integer over 1000
 	 */
-	public Account(int accountID, int userID, ACCOUNT_TYPE accountType,
+	public Account(long accountID, long userID, ACCOUNT_TYPE accountType,
 			String accountName, int interestRate) {
 		super();
 		this.accountID = accountID;
@@ -33,10 +32,10 @@ public class Account {
 		this.interestRate = interestRate;
 	}
 
-	public int getAccountID() {
+	public long getAccountID() {
 		return accountID;
 	}
-	public int getUserID() {
+	public long getUserID() {
 		return userID;
 	}
 	public ACCOUNT_TYPE getAccountType() {

@@ -5,6 +5,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.Locale;
 
 import programmateurs.models.Anchor;
+import programmateurs.models.RealDataSource;
 import programmateurs.models.UsersDAO;
 
 import net.programmateurs.R;
@@ -45,7 +46,7 @@ public class AddUserActivity extends Activity {
 	EditText passwordField;
 	Button buttonLogin;
 	public ProgressDialog progress;
-	private UsersDAO dbHandler; 
+	private RealDataSource dbHandler;
 	
 	Anchor anchor = Anchor.getInstance();
 	Activity me = this;
@@ -55,8 +56,7 @@ public class AddUserActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_user);
 
-		dbHandler = new UsersDAO(this);
-		dbHandler.open();
+		dbHandler = new RealDataSource(this);
 
 		usernameField = (EditText) findViewById(R.id.inputUsername);
 		passwordField = (EditText) findViewById(R.id.inputPassword);
@@ -71,15 +71,7 @@ public class AddUserActivity extends Activity {
 				String username = usernameField.getText().toString();
 				String password = passwordField.getText().toString();
 				Log.d("BERRY","username: " + username + " password: " + password);
-				try {
-					dbHandler.addUserToDB(username, password);
-				} catch (InvalidKeySpecException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (NoSuchAlgorithmException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+					dbHandler.cheapAddUserToDB(username, password);
 				boolean userExists = dbHandler.isUserInDB(username, password);
 				if (userExists) {
 					Intent i = new Intent(v.getContext(), HomeActivity.class);

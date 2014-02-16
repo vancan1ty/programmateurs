@@ -1,14 +1,14 @@
 package programmateurs.beans;
 
 public class User {
-	private int userID;
+	private long userID;
 	private String username;
 	private String passhash;
 	private String first;
 	private String last;
 	private String email;
 
-	public User(int userID, String username, String passhash, String first,
+	public User(long userID, String username, String passhash, String first,
 			String last, String email) {
 		super();
 		this.userID = userID;
@@ -19,7 +19,7 @@ public class User {
 		this.email = email;
 	}
 
-	public int getUserID() {
+	public long getUserID() {
 		return userID;
 	}
 	public String getUsername() {

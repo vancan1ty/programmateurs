@@ -28,11 +28,16 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 
+/**
+ * This class is called Anchor, because it's intended to provide a central place to store data
+ * accessible from everywhere in the app.  Notice that it uses the singleton pattern, so only
+ * one instance of this class can be instantiated during a given runtime.
+ * 
+ * @author vancan1ty
+ *
+ */
 public class Anchor {
-	public static String ROOTURL="bah";
 	private static Anchor instance;	
-	
-	public SessionStatusObject sessionStatus = new SessionStatusObject();
 	
 	public static Anchor getInstance() {
 		if (instance == null) {
@@ -138,9 +143,5 @@ public class Anchor {
 			}
 		});
 	}
-	
-	
-	/* ********* TESTING CODE, PROVIDES SAMPLE DATA FOR UI DEV PURPOSES ********* */
-	
 
 }

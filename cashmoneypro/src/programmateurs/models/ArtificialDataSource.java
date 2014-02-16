@@ -1,9 +1,13 @@
 package programmateurs.models;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+
+import android.util.Log;
 
 import programmateurs.beans.Account;
 import programmateurs.beans.Account.ACCOUNT_TYPE;
@@ -12,6 +16,7 @@ import programmateurs.beans.Transaction;
 import programmateurs.beans.Transaction.TRANSACTION_TYPE;
 import programmateurs.beans.User;
 import programmateurs.interfaces.DataSourceInterface;
+import programmateurs.util.DateUtility;
 
 /**
  * This class provides sample data to support UI development before we get
@@ -43,11 +48,11 @@ public class ArtificialDataSource implements DataSourceInterface {
 	Timestamp t2 = new Timestamp(1391629265);
 	Timestamp t3 = new Timestamp(1391636265);
 
-	Transaction transaction0 = new Transaction(0,5,TRANSACTION_TYPE.REBALANCE,"3-11-13", t0,false,new Category[]{});
-	Transaction transaction1 = new Transaction(1,5,TRANSACTION_TYPE.REBALANCE,"3-12-13", t1,false,new Category[]{});
-	Transaction transaction2 = new Transaction(2,5,TRANSACTION_TYPE.REBALANCE,"3-13-13", t2,false,new Category[]{});
-	Transaction transaction3 = new Transaction(3,5,TRANSACTION_TYPE.REBALANCE,"3-14-13", t3,false,new Category[]{});
-	Transaction transaction4 = new Transaction(4,5,TRANSACTION_TYPE.REBALANCE,"3-15-13", t0,false,new Category[]{});
+	Transaction transaction0;
+	Transaction transaction1;
+	Transaction transaction2;
+	Transaction transaction3;
+	Transaction transaction4;
 	
 	List<User> users;
 	List<Account> accounts;
@@ -59,6 +64,21 @@ public class ArtificialDataSource implements DataSourceInterface {
 		accounts = new ArrayList<Account>(Arrays.asList(new Account[]{account0, account1, account2, account3, account4, account5}));
 		transactions = new ArrayList<Transaction>(Arrays.asList(new Transaction[]{transaction0, transaction1, transaction2, transaction3, transaction4}));
 		categories = new ArrayList<Category>(Arrays.asList(new Category[]{category0, category1}));
+
+		try{
+			transaction0 = new Transaction(0,5,TRANSACTION_TYPE.REBALANCE, 233,DateUtility.getDateFromString("3-11-13"), 
+					t0,false,new Category[]{});
+			transaction1 = new Transaction(1,5,TRANSACTION_TYPE.REBALANCE, 542, DateUtility.getDateFromString("3-12-13"), 
+					t1,false,new Category[]{});
+			transaction2 = new Transaction(2,5,TRANSACTION_TYPE.REBALANCE, 345, DateUtility.getDateFromString("3-13-13"), 
+					t2,false,new Category[]{});
+			transaction3 = new Transaction(3,5,TRANSACTION_TYPE.REBALANCE, 756, DateUtility.getDateFromString("3-14-13"), 
+					t3,false,new Category[]{});
+			transaction4 = new Transaction(4,5,TRANSACTION_TYPE.REBALANCE, 126, DateUtility.getDateFromString("3-15-13"), 
+					t0,false,new Category[]{});
+		} catch (ParseException e) {
+			Log.d("ArtificialDataSource", "failed to initialize transactions...");
+		}
 	}
 
 
@@ -69,7 +89,7 @@ public class ArtificialDataSource implements DataSourceInterface {
 	}
 
 	@Override
-	public Account[] getAccountsForUser(int userID) {
+	public Account[] getAccountsForUser(long userID) {
 		//Case in point, why I can't wait for java 8 
 		List<Account> outL = new ArrayList<Account>();
 
@@ -83,7 +103,7 @@ public class ArtificialDataSource implements DataSourceInterface {
 	}
 
 	@Override
-	public Category[] getCategoriesForUser(int userID) {
+	public Category[] getCategoriesForUser(long userID) {
 
 		//Case in point, why I can't wait for java 8 
 		List<Category> outL = new ArrayList<Category>();
@@ -99,7 +119,7 @@ public class ArtificialDataSource implements DataSourceInterface {
 	}
 
 	@Override
-	public Transaction[] getTransactionsForAccount(int accountID) {
+	public Transaction[] getTransactionsForAccount(long accountID) {
 	//Case in point, why I can't wait for java 8 
 		List<Transaction> outL = new ArrayList<Transaction>();
 
@@ -115,35 +135,36 @@ public class ArtificialDataSource implements DataSourceInterface {
 	@Override
 	public User addUserToDB(String username, String passhash, String first,
 			String last, String email) {
-		int lastuserID = users.get(users.size()-1).getUserID();
+		long lastuserID = users.get(users.size()-1).getUserID();
 		User user = new User(lastuserID+1,username,passhash,first,last,email);
 		users.add(user);
 		return user;
 	}
 
 	@Override
-	public Account addAccountToDB(int userID, ACCOUNT_TYPE accountType,
+	public Account addAccountToDB(long userID, ACCOUNT_TYPE accountType,
 			String accountName, int interestRate) {
-		int lastAccountID = accounts.get(accounts.size()-1).getAccountID();
+		long lastAccountID = accounts.get(accounts.size()-1).getAccountID();
 		Account acct = new Account(lastAccountID+1,userID,accountType,accountName,interestRate);
 		accounts.add(acct);
 		return acct;
 	}
 
 	@Override
-	public Transaction addTransactionToDB(int accountID,
-			TRANSACTION_TYPE transactionType, String transactionDate,
-			Timestamp timestamp, boolean rolledback, Category[] categories) {
-		int lastTransactionID = transactions.get(transactions.size()-1).getTransactionID();
+	public Transaction addTransactionToDB(long accountID,
+			TRANSACTION_TYPE transactionType, long transactionAmount, Date transactionDate,
+			Date timestamp, boolean rolledback, Category[] categories) {
+		long lastTransactionID = transactions.get(transactions.size()-1).getTransactionID();
+
 		Transaction transaction = new Transaction(lastTransactionID+1,accountID,transactionType,
-				transactionDate,timestamp,rolledback,categories);
+				transactionAmount, transactionDate,timestamp,rolledback,categories);
 		transactions.add(transaction);
 		return transaction;
 	}
 
 	@Override
-	public Category addCategoryToDB(int userID, String category_name) {
-		int lastCatID = categories.get(categories.size()-1).getCategoryID();
+	public Category addCategoryToDB(long userID, String category_name) {
+		long lastCatID = categories.get(categories.size()-1).getCategoryID();
 		Category cat = new Category(lastCatID+1,userID,category_name);
 		categories.add(cat);
 		return cat;

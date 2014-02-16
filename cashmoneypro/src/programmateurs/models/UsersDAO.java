@@ -10,6 +10,8 @@ import java.util.List;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
+import programmateurs.beans.User;
+
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -19,24 +21,43 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class UsersDAO {
 
-  // Database fields
-  private SQLiteDatabase database;
-  private DBHelper dbHelper;
-
-  public UsersDAO(Context context) {
-    dbHelper = new DBHelper(context);
-  }
-
-  public void open() throws SQLException {
-    database = dbHelper.getWritableDatabase();
-  }
-
-  public void close() {
-    dbHelper.close();
+  public static final String CREATE_USERS_TABLE = "CREATE TABLE Users"
+		  + " (userID INTEGER PRIMARY KEY AUTOINCREMENT, "
+		  + " username TEXT NOT NULL, "
+		  + " passhash TEXT NOT NULL,"
+		  + " first TEXT DEFAULT '',"
+		  + " last TEXT DEFAULT '',"
+		  + " email TEXT DEFAULT ''"
+		  + ");";
+ 
+  public static User cursorToUser(Cursor c) {
+	long userID = c.getInt(0);
+	String username = c.getString(1);
+	String passhash = c.getString(2);
+	String first = c.getString(3);
+	String last = c.getString(4);
+	String email = c.getString(5);
+	return new User(userID, username, passhash, first, last, email);
   }
   
-  public boolean isUserInDB(String username, String password) {
-	  Cursor c = database.rawQuery("SELECT * FROM users WHERE username = ? AND passhash = ?", new String[]{username,password});
+  public static User[] getUsers(SQLiteDatabase db) {
+		Cursor c = db.rawQuery("SELECT * FROM users;",
+				new String[]{});
+		List<User> outL = new ArrayList<User>();
+
+		c.moveToFirst();
+		while (!c.isAfterLast()) {
+			User user = cursorToUser(c);
+			outL.add(user);
+			c.moveToNext();
+		}
+		// make sure to close the cursor
+		c.close();
+		return outL.toArray(new User[0]);
+  }
+ 
+  public static boolean isUserInDB(SQLiteDatabase db, String username, String password) {
+	  Cursor c = db.rawQuery("SELECT * FROM users WHERE username = ? AND passhash = ?", new String[]{username,password});
 	  if (c.getCount()==1) {
 		  return true;
 	  } else {
@@ -52,14 +73,26 @@ public class UsersDAO {
 //	  return new BigInteger(1, hash).toString(16);
 //  }
 //  
-  public void addUserToDB(String username, String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
+
+  public static void addUserToDB(SQLiteDatabase db, String username, String password) {
 //	  String passHash = hashPassword(password);
 	  ContentValues toInsert = new ContentValues();
 	  toInsert.put("username", username);
 	  toInsert.put("passhash", password);
-	  database.insert("users", null, toInsert);
+	  db.insert("users", null, toInsert);
   }
 
-
+  public static User addUserToDB(SQLiteDatabase db, String username, String password, String first, String last, String email) {
+//	  String passHash = hashPassword(password);
+	  ContentValues toInsert = new ContentValues();
+	  toInsert.put("username", username);
+	  toInsert.put("passhash", password);
+	  toInsert.put("first", first);
+	  toInsert.put("last", last);
+	  toInsert.put("email", email);
+	  long userid = db.insert("users", null, toInsert);
+	  User user = new User(userid, username, password, first, last, email);
+	  return user;
+  }
 
 } 
