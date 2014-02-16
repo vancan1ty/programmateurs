@@ -48,7 +48,6 @@ public class LoginActivity extends Activity {
 		setContentView(R.layout.activity_login);
 		dbHandler = new UsersDAO(this);
 		dbHandler.open();
-
 		usernameField = (EditText) findViewById(R.id.emailfield);
 		passwordField = (EditText) findViewById(R.id.passwordfield);
 		buttonLogin = (Button) findViewById(R.id.buttonlogin);
