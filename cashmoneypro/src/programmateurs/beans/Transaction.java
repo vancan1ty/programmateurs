@@ -2,6 +2,7 @@ package programmateurs.beans;
 
 import java.sql.Timestamp;
 import java.util.Arrays;
+import java.util.Date;
 
 
 
@@ -11,18 +12,18 @@ public class Transaction {
 		DEPOSIT, WITHDRAWAL, REBALANCE 
 	}
 
-	private int transactionID;
-	private int accountID;
+	private long transactionID;
+	private long accountID;
 	private TRANSACTION_TYPE transactionType;
-	private int transactionAmount;
-	private String transactionDate;
-	private Timestamp timestamp;
+	private long transactionAmount;
+	private Date transactionDate;
+	private Date timestamp;
 	private boolean rolledback;
 	private Category[] categories;
 	
-	public Transaction(int transactionID, int accountID,
-			TRANSACTION_TYPE transactionType, int transactionAmount, String transactionDate,
-			Timestamp timestamp, boolean rolledback, Category[] categories) {
+	public Transaction(long transactionID, long accountID,
+			TRANSACTION_TYPE transactionType, long transactionAmount, Date transactionDate,
+			Date timestamp, boolean rolledback, Category[] categories) {
 		super();
 		this.transactionID = transactionID;
 		this.accountID = accountID;
@@ -34,22 +35,22 @@ public class Transaction {
 		this.categories = categories;
 	}
 
-	public int getTransactionID() {
+	public long getTransactionID() {
 		return transactionID;
 	}
-	public int getAccountID() {
+	public long getAccountID() {
 		return accountID;
 	}
 	public TRANSACTION_TYPE getTransactionType() {
 		return transactionType;
 	}
-	public int getTransactionAmount() {
+	public long getTransactionAmount() {
 		return transactionAmount;
 	}
-	public String getTransactionDate() {
+	public Date getTransactionDate() {
 		return transactionDate;
 	}
-	public Timestamp getTimestamp() {
+	public Date getTimestamp() {
 		return timestamp;
 	}
 	public boolean isRolledback() {

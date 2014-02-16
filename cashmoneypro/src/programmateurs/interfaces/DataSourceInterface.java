@@ -1,10 +1,12 @@
 package programmateurs.interfaces;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import programmateurs.beans.Account;
 import programmateurs.beans.Category;
 import programmateurs.beans.Transaction;
+import programmateurs.beans.Transaction.TRANSACTION_TYPE;
 import programmateurs.beans.User;
 
 public interface DataSourceInterface {
@@ -20,14 +22,14 @@ public interface DataSourceInterface {
 	 * @param userID
 	 * @return list of accounts owned by user
 	 */
-	public Account[] getAccountsForUser(int userID);
+	public Account[] getAccountsForUser(long userID);
 
 	/**
 	 * returns a list of categories for a given user!  useful for reports.
 	 * @param userID
 	 * @return a list of categories for a given user.
 	 */
-	public Category[] getCategoriesForUser(int userID);
+	public Category[] getCategoriesForUser(long userID);
 
 	/**
 	 * a list of transactions for a given account.  need to decide what to do about rolling
@@ -35,7 +37,7 @@ public interface DataSourceInterface {
 	 * @param accountID
 	 * @return a list of transactions for a given account
 	 */
-	public Transaction[] getTransactionsForAccount(int accountID);
+	public Transaction[] getTransactionsForAccount(long accountID);
 
 	/**
 	 * adds a user with the given information to the db, returns the object created.
@@ -57,7 +59,7 @@ public interface DataSourceInterface {
 	 * @param interestRate
 	 * @return
 	 */
-	public Account addAccountToDB(int userID, Account.ACCOUNT_TYPE accountType,
+	public Account addAccountToDB(long userID, Account.ACCOUNT_TYPE accountType,
 			String accountName, int interestRate);
 	
 	/**
@@ -70,10 +72,12 @@ public interface DataSourceInterface {
 	 * @param categories
 	 * @return
 	 */
-	public Transaction addTransactionToDB(int accountID,
-			Transaction.TRANSACTION_TYPE transactionType, int transactionAmount, 
-			String transactionDate,
-			Timestamp timestamp, boolean rolledback, Category[] categories); 
+	public Transaction addTransactionToDB(long accountID,
+			TRANSACTION_TYPE transactionType, long transactionAmount,
+			Date transactionDate, Date timestamp, boolean rolledback,
+			Category[] categories);
+
+
 
 	/**
 	 * adds category with associated information to the DB, returns an object representation of it.
@@ -81,6 +85,6 @@ public interface DataSourceInterface {
 	 * @param category_name
 	 * @return
 	 */
-	public Category addCategoryToDB(int userID, String category_name);
+	public Category addCategoryToDB(long userID, String category_name);
 
 }

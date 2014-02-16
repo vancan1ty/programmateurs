@@ -2,22 +2,22 @@ package programmateurs.beans;
 
 public class Category {
 
-	private int categoryID;
-	private int userID; //user who owns this category
+	private long categoryID;
+	private long userID; //user who owns this category
 	private String category_name;
 
-	public Category(int categoryID, int userID, String category_name) {
+	public Category(long categoryID, long userID, String category_name) {
 		super();
 		this.categoryID = categoryID;
 		this.userID = userID;
 		this.category_name = category_name;
 	}
 
-	public int getCategoryID() {
+	public long getCategoryID() {
 		return categoryID;
 	}
 
-	public int getUserID() {
+	public long getUserID() {
 		return userID;
 	}
 

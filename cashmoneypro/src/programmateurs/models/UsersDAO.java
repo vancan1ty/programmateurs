@@ -19,6 +19,16 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class UsersDAO {
 
+  public static final String CREATE_USERS_TABLE = "CREATE TABLE Users"
+		  + " (userID INTEGER PRIMARY KEY AUTOINCREMENT, "
+		  + " username TEXT NOT NULL, "
+		  + " passhash TEXT NOT NULL,"
+		  + " first TEXT DEFAULT '',"
+		  + " last TEXT DEFAULT '',"
+		  + " email TEXT DEFAULT ''"
+		  + ");";
+ 
+
   // Database fields
   private SQLiteDatabase database;
   private DBHelper dbHelper;
@@ -52,6 +62,7 @@ public class UsersDAO {
 //	  return new BigInteger(1, hash).toString(16);
 //  }
 //  
+
   public void addUserToDB(String username, String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
 //	  String passHash = hashPassword(password);
 	  ContentValues toInsert = new ContentValues();
@@ -59,6 +70,18 @@ public class UsersDAO {
 	  toInsert.put("passhash", password);
 	  database.insert("users", null, toInsert);
   }
+
+  public void addUserToDB(String username, String password, String first, String last, String email) throws InvalidKeySpecException, NoSuchAlgorithmException {
+//	  String passHash = hashPassword(password);
+	  ContentValues toInsert = new ContentValues();
+	  toInsert.put("username", username);
+	  toInsert.put("passhash", password);
+	  toInsert.put("first", first);
+	  toInsert.put("last", last);
+	  toInsert.put("email", email);
+	  database.insert("users", null, toInsert);
+  }
+
 
 
 
