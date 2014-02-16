@@ -52,7 +52,6 @@ public class LoginActivity extends Activity {
 		usernameField = (EditText) findViewById(R.id.emailfield);
 		passwordField = (EditText) findViewById(R.id.passwordfield);
 		buttonLogin = (Button) findViewById(R.id.buttonlogin);
-		buttonLaunchCreateUser = (Button) findViewById(R.id.buttonLaunchCreateUser);
 		progress = new ProgressDialog(this);
 		
 		buttonLogin.setOnClickListener(new OnClickListener() {
@@ -73,16 +72,6 @@ public class LoginActivity extends Activity {
 			}
 			
 		});
-		
-		buttonLaunchCreateUser.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(v.getContext(), AddUserActivity.class);
-				v.getContext().startActivity(i); 
-			}
-		});
-	
 		
 
 	}
