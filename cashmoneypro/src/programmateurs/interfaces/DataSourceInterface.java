@@ -3,6 +3,8 @@ package programmateurs.interfaces;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import android.database.SQLException;
+
 import programmateurs.beans.Account;
 import programmateurs.beans.Category;
 import programmateurs.beans.Transaction;
@@ -11,6 +13,18 @@ import programmateurs.beans.User;
 
 public interface DataSourceInterface {
 	
+
+	/**
+	 * opens data source.  make sure to open before calling data access methods.
+	 * @throws SQLException
+	 */
+	public void open() throws SQLException; 
+
+	/**
+	 * close data source.  make sure to close when you're done with the data source!
+	 */
+	public void close() ;
+
 	/**
 	 * returns all users in the system.  useful for admin screen.
 	 * @return users in system

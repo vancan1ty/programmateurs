@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import android.database.SQLException;
 import android.util.Log;
 
 import programmateurs.beans.Account;
@@ -168,6 +169,20 @@ public class ArtificialDataSource implements DataSourceInterface {
 		Category cat = new Category(lastCatID+1,userID,category_name);
 		categories.add(cat);
 		return cat;
+	}
+
+
+
+	@Override
+	public void open() throws SQLException {
+		//do nothing
+	}
+
+
+
+	@Override
+	public void close() {
+		// do nothing
 	}
 
 }
