@@ -1,8 +1,5 @@
-package programmateurs.views;
+package net.programmateurs;
 
-import net.programmateurs.R;
-import net.programmateurs.R.layout;
-import net.programmateurs.R.menu;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
