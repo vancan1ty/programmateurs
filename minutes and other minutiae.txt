@@ -19,6 +19,11 @@
 		res/layout holds xml files
 		src/programmateurs.views holds all the views 
 		setContentView sets the xml to inflate the view of that object
+
+10/2/2013
+		Currell explains what is going on.
 		
+17/2/2013
+		Demoed M4. Discussed system sequence diagrams. Pushed Sarah's changes to git.
 		
 		
