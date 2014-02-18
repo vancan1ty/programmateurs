@@ -58,7 +58,7 @@ public class ArtificialDataSource implements DataSourceInterface {
 	List<User> users;
 	List<Account> accounts;
 	List<Transaction> transactions;
-	List<Category>    categories;
+	List<Category> categories;
 	
 	public ArtificialDataSource() {
 		users = new ArrayList<User>(Arrays.asList(new User[]{user0, user1, user2, user3, user4, user5}));

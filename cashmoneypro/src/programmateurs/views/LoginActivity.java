@@ -63,7 +63,11 @@ public class LoginActivity extends Activity {
 				Log.d("BERRY","username: " + username + " password: " + password);
 				boolean userExists =  dbHandler.isUserInDB(username, password);
 				if (userExists) {
-					Intent i = new Intent(v.getContext(), HomeActivity.class);
+					Intent i;
+					if(username.equals("admin"))
+						i = new Intent(v.getContext(), AdminActivity.class);
+					else
+						i = new Intent(v.getContext(), HomeActivity.class);
 					v.getContext().startActivity(i); 
 				} else {
 					anchor.showDialog(me, "Log in Failure", "couldn't log you in!");
