@@ -31,8 +31,7 @@ Extensions or Alternate Flows:
 2. If the user has not made 20 transactions, then the displayed record contains
 only as many as he has (0 to 19).
 2. If the user wishes to view purchases over a time period as opposed to twenty
-most recent, he can do so by specifying beginning and ending dates using 
-provided menus.
+most recent, he can do so by specifying beginning and ending dates.
 2. If the user wishes to configure the history to show by default his N most 
 recent transactions instead of 20 or to show all purchases made in the past N-day
 window of time, he can specify this in the settings menu.
