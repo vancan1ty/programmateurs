@@ -9,41 +9,38 @@ Primary Actor: User
 Stakeholders and Their Goals:
 User: The user would like to know what he has purchased and earned over some 
 past temporal period.
-Database: The database will need to provide the specifics of each transaction.
+
+Preconditions:
+The user has created an account within the app. The app is installed on his Android device. The user runs the application.
 
 Post Conditions: 
 The user will have obtained the desired information, and the database can cease 
 providing the information for this activity.
 
 Main Success Scenario:
-1. The user runs the application, already installed, on his android device.
-2. The user has an account with which he has cataloged numerous deposits and 
-withdrawals.
-3. The user navigates to the "history" menu option.
-4. The database provides the user with information regarding his twenty most 
+1. The user navigates to the "history" menu option.
+2. The database provides the user with information regarding his twenty most 
 recent transactions.
-5. The user wishes to view the specifics of a purchase, so he selects it, and
+3. The user wishes to view the specifics of a purchase, so he selects it, and
 the application displays the item in detail.
-6. The user navigates away from the transaction by selecting the "back" button, 
-the history tab by selecting a different tab, or exits the application, having 
-viewed the information he meant to.
+4. The user navigates away from the transaction by selecting a return option, 
+or back to the history full transaction history, or exits the application, 
+having viewed the information he meant to.
 
 Extensions or Alternate Flows:
-2. If the user is new and has not cataloged any transactions, then the database
-contains no history of the user, and there are no associated transactions.
-4. If the user has not made 20 transactions, then the displayed record contains
+2. If the user has not made 20 transactions, then the displayed record contains
 only as many as he has (0 to 19).
-4. If the user wishes to view purchases over a time period as opposed to twenty
+2. If the user wishes to view purchases over a time period as opposed to twenty
 most recent, he can do so by specifying beginning and ending dates using 
 provided menus.
-4. If the user wishes to configure the history to show by default his N most 
+2. If the user wishes to configure the history to show by default his N most 
 recent transactions instead of 20 or to show all purchases made in the past N-day
 window of time, he can specify this in the settings menu.
-5. If the user wishes to modify the details of a purchase, he may do so by 
+3. If the user wishes to modify the details of a purchase, he may do so by 
 selecting the "edit" button, which will take him to a screen similar to that for 
 creating a purchase wherein all fields are changeable. After edits are made, the 
 user is taken back to the detailed view of the transaction.
-5. If the user wishes to delete a purchase, he may select the delete button,
+3. If the user wishes to delete a purchase, he may select the delete button,
 which will cause a prompt asking him if he is certain of this choice and providing
 further options "yes" and "no". If he selects "no", he will be taken back to the
 detailed transaction view; if he selects "yes", he will be taken back to the
