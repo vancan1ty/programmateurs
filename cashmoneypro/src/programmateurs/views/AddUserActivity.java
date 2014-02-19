@@ -73,7 +73,7 @@ public class AddUserActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				SString name = nameField.getText().toString();
+				String name = nameField.getText().toString();
 				
 				//name function currently doesn't work but we still want to take in name
 				//check to see if name is valid
