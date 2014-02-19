@@ -20,6 +20,7 @@ import org.codehaus.jackson.type.TypeReference;
 
 import programmateurs.beans.SessionStatusObject;
 import programmateurs.views.LoginActivity;
+import programmateurs.beans.User;
 
 import android.accounts.AuthenticatorException;
 import android.app.Activity;
@@ -38,6 +39,8 @@ import android.os.AsyncTask;
  */
 public class Anchor {
 	private static Anchor instance;	
+	private User currentUser;
+	private User[] users;
 	
 	public static Anchor getInstance() {
 		if (instance == null) {
@@ -104,6 +107,13 @@ public class Anchor {
 //		}
 //	}
 	
+	public User getCurrentUser(){
+		return currentUser;
+	}
+	
+	public void setCurrentUser(String username, String passhash){
+		currentUser = new User(0,username,passhash,"","","");
+	}
 	
 	public static String readInputStream(java.io.InputStream in) {
 	    java.util.Scanner s = new java.util.Scanner(in).useDelimiter("\\A");

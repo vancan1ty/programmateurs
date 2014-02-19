@@ -61,7 +61,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="net.programmateurs.AdminActivity"
+            android:name="programmateurs.views.AdminActivity"
             android:label="@string/title_activity_admin" >
         </activity>
     </application>
