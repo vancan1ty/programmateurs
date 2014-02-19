@@ -55,6 +55,18 @@ public class UsersDAO {
 		c.close();
 		return outL.toArray(new User[0]);
   }
+  
+  public static User getUser(SQLiteDatabase db, long userID) {
+	  Cursor c = db.rawQuery("SELECT * FROM users WHERE userID = ?;",
+			  new String[]{Long.toString(userID)});
+	  List<User> outL = new ArrayList<User>();
+
+	  c.moveToFirst();
+	  User user = cursorToUser(c);
+
+	  return user;
+  }
+
  
   public static boolean isUserInDB(SQLiteDatabase db, String username, String password) {
 	  Cursor c = db.rawQuery("SELECT * FROM users WHERE username = ? AND passhash = ?", new String[]{username,password});
@@ -80,6 +92,24 @@ public class UsersDAO {
 	  toInsert.put("username", username);
 	  toInsert.put("passhash", password);
 	  db.insert("users", null, toInsert);
+  }
+ 
+  /**
+   * updates the user matching the parameter user in the db with whatever
+   * information the user parameter contains, returns the user read back from the database.
+   * @param db
+   * @param user
+   * @return reading the results of the operation back from the db
+   */
+  public static User updateUser(SQLiteDatabase db, User user) {
+	  ContentValues toSet = new ContentValues();
+	  toSet.put("username", user.getUsername());
+	  toSet.put("passhash", user.getPasshash());
+	  toSet.put("first", user.getFirst());
+	  toSet.put("last", user.getLast());
+	  toSet.put("email", user.getEmail());
+	  db.update("Users", toSet, "userid=?", new String[]{Long.toString(user.getUserID())});
+	  return getUser(db, user.getUserID());
   }
 
   public static User addUserToDB(SQLiteDatabase db, String username, String password, String first, String last, String email) {

@@ -29,10 +29,6 @@ import programmateurs.interfaces.DataSourceInterface;
 public class RealDataSource implements DataSourceInterface {
 	
 	/* ********INSTANCE VARS, AND SCAFFOLDING************** */
-	UsersDAO usersDAO;
-	AccountsDAO accountsDAO;
-	CategoriesDAO categoriesDAO;
-	TransactionsDAO transactionsDAO;
 
   // Database fields
   private SQLiteDatabase db;
@@ -61,7 +57,7 @@ public class RealDataSource implements DataSourceInterface {
 	
 	public User getUser(String username){
 		for(User user: getUsers()){
-			if(user.getUsername().equals(username))
+			if(user.getUsername().equalsIgnoreCase(username))
 				return user;
 		}
 		return null;
@@ -69,6 +65,11 @@ public class RealDataSource implements DataSourceInterface {
 	
 	public boolean isUserInDB(String username, String password) {
 		return UsersDAO.isUserInDB(db, username, password);
+	}
+	
+	@Override
+	public User updateUser(User user) {
+		return UsersDAO.updateUser(db, user);
 	}
 
 	@Override
