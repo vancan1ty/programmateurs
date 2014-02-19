@@ -25,6 +25,11 @@ public class User {
 	public String getUsername() {
 		return username;
 	}
+	
+	public void setPasshash(String passhash){
+		this.passhash = passhash;
+	}
+	
 	public String getPasshash() {
 		return passhash;
 	}
@@ -44,5 +49,7 @@ public class User {
 				+ ", passhash=" + passhash + ", first=" + first + ", last="
 				+ last + ", email=" + email + "]";
 	}
+	
+	
 
 }
