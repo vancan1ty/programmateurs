@@ -28,5 +28,6 @@
 		
 19/2/2013
 		Disscussed making package diagram. Discussed navigation approaches. Demoed. Made fun of Justin's celebrity status.
+		Plans on selling Justin's autograph for money for a webserver are in the works.
 		
 		
