@@ -61,8 +61,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="programmateurs.views.AdminActivity"
-            android:label="@string/title_activity_admin" >
+            android:name="net.programmateurs.DepositActivity"
+            android:label="@string/title_activity_deposit" >
         </activity>
     </application>
 

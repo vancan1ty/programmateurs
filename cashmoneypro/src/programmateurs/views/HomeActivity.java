@@ -2,11 +2,16 @@ package programmateurs.views;
 
 import java.util.Locale;
 
+import net.programmateurs.DepositActivity;
 import net.programmateurs.R;
 import net.programmateurs.R.id;
 import net.programmateurs.R.layout;
 import net.programmateurs.R.menu;
 import net.programmateurs.R.string;
+
+import programmateurs.models.ArtificialDataSource;
+import programmateurs.beans.Account;
+import programmateurs.beans.User;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,12 +21,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class HomeActivity extends FragmentActivity {
@@ -41,10 +49,13 @@ public class HomeActivity extends FragmentActivity {
 	 */
 	ViewPager mViewPager;
 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home2);
+		
+		
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
@@ -144,26 +155,6 @@ public class HomeActivity extends FragmentActivity {
 					.findViewById(R.id.section_label);
 			dummyTextView.setText(Integer.toString(getArguments().getInt(
 					ARG_SECTION_NUMBER)));
-			return rootView;
-		}
-	}
-	
-	public static class AccountFragment extends Fragment {
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
-		public static final String ARG_SECTION_NUMBER = "section_number";
-
-		public AccountFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_account,
-					container, false);
-
 			return rootView;
 		}
 	}
