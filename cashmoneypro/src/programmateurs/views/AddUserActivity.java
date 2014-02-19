@@ -95,34 +95,30 @@ public class AddUserActivity extends Activity {
 				
 				
 				String username = usernameField.getText().toString();
-				//check to see if username is valid
-				if(!validUsername(username)){//username is not valid
-					anchor.showDialog(me, "Invalid Username", "Usernames must be"+
-							" at least 5 characters long consisting of letters, numbers, and underscores." +
-							" Usernames are case-sensitive.");
-					//need to request a new username
-				}
-				
-				
 				String password = passwordField.getText().toString();
-				//check to see if password is valid
-				if(!validPassword(password)){//password is not valid
-					anchor.showDialog(me, "Invalid Password", "Password must be"+
-							" at least 5 characters long and are case-sensitive.");
-					//need to request a new password
-				}
-				
-				
 				Log.d("BERRY","username: " + username + " password: " + password);
-					dbHandler.cheapAddUserToDB(username, password);
+				dbHandler.cheapAddUserToDB(username, password);
+				
+				//check validity of username and password, and if the username is unique
+				boolean validUsername = validUsername(username);
+				boolean validPassword = validPassword(password); 
 				boolean userExists = dbHandler.isUserInDB(username, password);
-				if (userExists) {
+				
+				if (userExists&&validUsername&&validPassword) {
 					Intent i = new Intent(v.getContext(), HomeActivity.class);
 					v.getContext().startActivity(i); 
-				} else {
-					anchor.showDialog(me, "Log in Failure", "couldn't log you in!");
+				} else{
+					String errorMsg = "Please resolve the following errors:\n" +
+							"";
+					if(!validUsername)
+						errorMsg += "\n- Usernames must be at least 5 characters long and contain only letters, numbers, and underscores.";
+					if(!userExists)
+						errorMsg += "\n- The username you chose is already taken.";
+					if(!validPassword)
+						errorMsg += "\n- Password must be at least 5 characters long and are case-sensitive.";
+					anchor.showDialog(me, "Registration Error(s)", errorMsg);
 				}
-				
+			
 			}
 			
 		});
