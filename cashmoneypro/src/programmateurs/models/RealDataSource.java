@@ -67,6 +67,7 @@ public class RealDataSource implements DataSourceInterface {
 		return UsersDAO.isUserInDB(db, username, password);
 	}
 	
+	@Override
 	public User updateUser(User user) {
 		return UsersDAO.updateUser(db, user);
 	}

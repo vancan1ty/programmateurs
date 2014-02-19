@@ -93,7 +93,6 @@ public class UsersDAO {
 	  toInsert.put("passhash", password);
 	  db.insert("users", null, toInsert);
   }
-
  
   /**
    * updates the user matching the parameter user in the db with whatever

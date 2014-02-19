@@ -192,4 +192,12 @@ public class ArtificialDataSource implements DataSourceInterface {
 		// do nothing
 	}
 
+
+
+	@Override
+	public User updateUser(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
