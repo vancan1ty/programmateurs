@@ -59,6 +59,14 @@ public class RealDataSource implements DataSourceInterface {
 		return UsersDAO.getUsers(db);
 	}
 	
+	public User getUser(String username){
+		for(User user: getUsers()){
+			if(user.getUsername().equals(username))
+				return user;
+		}
+		return null;
+	}
+	
 	public boolean isUserInDB(String username, String password) {
 		return UsersDAO.isUserInDB(db, username, password);
 	}

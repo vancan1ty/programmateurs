@@ -32,6 +32,16 @@ public interface DataSourceInterface {
 	public User[] getUsers();
 
 	/**
+	 * returns user in system corresponding to given username.
+	 * returns null if there is no user in the system corresponding to
+	 * given username.
+	 * 
+	 * @param username
+	 * @return user in system, null if no user in system
+	 */
+	public User getUser(String username);
+	
+	/**
 	 * returns a list of all accounts owned by a given user
 	 * @param userID
 	 * @return list of accounts owned by user
