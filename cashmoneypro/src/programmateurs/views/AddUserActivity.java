@@ -42,8 +42,11 @@ import android.widget.Toast;
 
 public class AddUserActivity extends Activity {
 	
+
 	EditText usernameField;
 	EditText passwordField;
+	EditText nameField;
+	EditText emailField;
 	Button buttonLogin;
 	public ProgressDialog progress;
 	private RealDataSource dbHandler;
@@ -58,6 +61,8 @@ public class AddUserActivity extends Activity {
 
 		dbHandler = new RealDataSource(this);
 
+		nameField = (EditText) findViewById(R.id.inputName);
+		emailField = (EditText) findViewById(R.id.inputEmail);
 		usernameField = (EditText) findViewById(R.id.inputUsername);
 		passwordField = (EditText) findViewById(R.id.inputPassword);
 		buttonLogin = (Button) findViewById(R.id.buttonLaunchCreateUser);
@@ -68,8 +73,46 @@ public class AddUserActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				SString name = nameField.getText().toString();
+				
+				//name function currently doesn't work but we still want to take in name
+				//check to see if name is valid
+				//if we could make this happen when the user hits 'create account' that'd be best
+				/*if(!validName(name)){
+					anchor.showDialog(me, "Invalid Name", "Please use your real name, both first and last.");
+					//need to request your name be changed
+				}*/
+				
+				String email = emailField.getText().toString();
+				
+				
+				//email function currently doesn't work, but we still want to take in the email
+				//check to see if email is valid
+				/*if(!validEmail(email)){
+					anchor.showDialog(me, "Invalid Email", "Please check your email address and ensure it is a valid email address.");
+					//need to request a different email address
+				}*/
+				
+				
 				String username = usernameField.getText().toString();
+				//check to see if username is valid
+				if(!validUsername(username)){//username is not valid
+					anchor.showDialog(me, "Invalid Username", "Usernames must be"+
+							" at least 5 characters long consisting of letters, numbers, and underscores." +
+							" Usernames are case-sensitive.");
+					//need to request a new username
+				}
+				
+				
 				String password = passwordField.getText().toString();
+				//check to see if password is valid
+				if(!validPassword(password)){//password is not valid
+					anchor.showDialog(me, "Invalid Password", "Password must be"+
+							" at least 5 characters long and are case-sensitive.");
+					//need to request a new password
+				}
+				
+				
 				Log.d("BERRY","username: " + username + " password: " + password);
 					dbHandler.cheapAddUserToDB(username, password);
 				boolean userExists = dbHandler.isUserInDB(username, password);
@@ -97,6 +140,48 @@ public class AddUserActivity extends Activity {
 		dbHandler.close();
 		super.onPause();
 	}
+	
+	
+	private Boolean validUsername(String username){
+		if(username.matches("\\w{5,}")){
+			//letters, numbers, underscore length 5 or more
+			return true;
+		}
+		return false;
+	}
+	
+	private Boolean validPassword(String pass){
+		if(pass.matches(".{5,}")){
+			//anything length 5 or more
+			return true;
+		}
+		return false;
+	}
+	//currently does not work, will get back to later
+	/*private Boolean validEmail(String email){
+		if(email.matches("(\\w\\-\\+\\.)+@(\\w\\-\\.)+\\.[A-Za-z]{2,3}")){
+		//DEBUG fix this regex
+		//name: letters, numbers, dash, underscore, plus, dot
+		//@, URL: letters, dash, numbers, underscore, dot
+		//extension: letters from length 2 to 3 inclusive
+			return true;
+		}
+		return false;
+	}*/
+	
+	//currently does not work. will get back to later
+	/*private Boolean validName(String name){
+		if(name.matches("[A-Za-z]+\\-*[A-Za-z]*[\\s+(A-Za-z)+\\-*(A-Za-z)*]+")){
+			return true;
+			//DEBUG fix this regex
+			//first name and last name are expected, but any number of
+			//names (more than 2) will be allowed
+			//Must start with a letter
+			//allows dashes
+			//names are separated by any number of spaces more than 0
+		}
+		return false;
+	}*/
 
 	
 	public String getUsernameEntry() {
