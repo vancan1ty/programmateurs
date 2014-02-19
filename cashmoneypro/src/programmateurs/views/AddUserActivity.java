@@ -73,49 +73,44 @@ public class AddUserActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				String name = nameField.getText().toString();
+				String name = nameField.getText().toString(); //takes in name field
 				
 				//name function currently doesn't work but we still want to take in name
 				//check to see if name is valid
-				//if we could make this happen when the user hits 'create account' that'd be best
 				/*if(!validName(name)){
 					anchor.showDialog(me, "Invalid Name", "Please use your real name, both first and last.");
 					//need to request your name be changed
 				}*/
 				
-				String email = emailField.getText().toString();
-				
-				
-				//email function currently doesn't work, but we still want to take in the email
-				//check to see if email is valid
-				/*if(!validEmail(email)){
-					anchor.showDialog(me, "Invalid Email", "Please check your email address and ensure it is a valid email address.");
-					//need to request a different email address
-				}*/
-				
-				
-				String username = usernameField.getText().toString();
-				String password = passwordField.getText().toString();
+				String email = emailField.getText().toString(); //takes email from field
+				String username = usernameField.getText().toString(); //takes username from field
+				String password = passwordField.getText().toString(); //takes password from field
 				Log.d("BERRY","username: " + username + " password: " + password);
 				dbHandler.cheapAddUserToDB(username, password);
 				
-				//check validity of username and password, and if the username is unique
+				//check validity of username, password, and email, and if the username is unique
 				boolean validUsername = validUsername(username);
 				boolean validPassword = validPassword(password); 
-				boolean userExists = dbHandler.isUserInDB(username, password);
+				boolean validEmail = validEmail(email);
+				boolean userDoesntExists = dbHandler.isUserInDB(username, password);
+				//changed userExists to userDoesntExist to the way this is set up
 				
-				if (userExists&&validUsername&&validPassword) {
+				if (userDoesntExists&&validUsername&&validPassword) { //user already exists, username and pass is valid
 					Intent i = new Intent(v.getContext(), HomeActivity.class);
 					v.getContext().startActivity(i); 
-				} else{
+				}
+				else{
 					String errorMsg = "Please resolve the following errors:\n" +
 							"";
 					if(!validUsername)
-						errorMsg += "\n- Usernames must be at least 5 characters long and contain only letters, numbers, and underscores.";
-					if(!userExists)
+						errorMsg += "\n- Usernames must be at least 5 characters long and may contain only letters, numbers, and underscores.";
+					if(!userDoesntExists)
 						errorMsg += "\n- The username you chose is already taken.";
+					if(!validEmail){
+						errorMsg += "\n- The email you provided is not a valid email address.";
+					}
 					if(!validPassword)
-						errorMsg += "\n- Password must be at least 5 characters long and are case-sensitive.";
+						errorMsg += "\n- Passwords must be at least 5 characters long and are case-sensitive.";
 					anchor.showDialog(me, "Registration Error(s)", errorMsg);
 				}
 			
@@ -153,17 +148,16 @@ public class AddUserActivity extends Activity {
 		}
 		return false;
 	}
-	//currently does not work, will get back to later
-	/*private Boolean validEmail(String email){
-		if(email.matches("(\\w\\-\\+\\.)+@(\\w\\-\\.)+\\.[A-Za-z]{2,3}")){
-		//DEBUG fix this regex
-		//name: letters, numbers, dash, underscore, plus, dot
-		//@, URL: letters, dash, numbers, underscore, dot
+	
+	private Boolean validEmail(String email){
+		if(email.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}")){
+		//name: letters, numbers, dash, underscore, plus, dot, percent (1 or more)
+		//@, URL: letters, dash, numbers, dot
 		//extension: letters from length 2 to 3 inclusive
 			return true;
 		}
 		return false;
-	}*/
+	}
 	
 	//currently does not work. will get back to later
 	/*private Boolean validName(String name){
