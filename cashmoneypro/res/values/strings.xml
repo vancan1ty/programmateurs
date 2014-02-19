@@ -28,5 +28,6 @@
     <string name="welcome_activity_register">Register</string>
     <string name="welcome_text">Welcome Screen</string>
     <string name="title_activity_deposit">DepositActivity</string>
+    <string name="title_activity_admin">AdminActivity</string>
 
 </resources>
