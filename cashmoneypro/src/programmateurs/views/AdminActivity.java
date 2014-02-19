@@ -6,6 +6,7 @@ import net.programmateurs.R.layout;
 import net.programmateurs.R.menu;
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -64,6 +65,7 @@ public class AdminActivity extends Activity {
 							for(int i=0; i<5; i++)
 								temp+= rand.nextInt(10); //build random temp password
 							user.setPasshash(temp);
+							dbHandler.updateUser(user);
 							anchor.showDialog(me,"Password Reset","Password for "+username+" temporarily set to "+temp);
 							
 						} else{
