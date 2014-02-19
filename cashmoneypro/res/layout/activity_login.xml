@@ -25,7 +25,6 @@
         android:ems="10"
         android:hint="Username" >
 
-        <requestFocus />
     </EditText>
 
     <EditText
