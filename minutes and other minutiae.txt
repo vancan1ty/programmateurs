@@ -27,6 +27,6 @@
 		Demoed M4. Discussed system sequence diagrams. Pushed Sarah's changes to git.
 		
 19/2/2013
-		Make package diagram.
+		Disscussed making package diagram. Discussed navigation approaches. Demoed. Made fun of Justin's celebrity status.
 		
 		
