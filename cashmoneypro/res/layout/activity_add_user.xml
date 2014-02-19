@@ -16,38 +16,55 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
-        android:id="@+id/inputUsername"
+        android:id="@+id/inputName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="Username" >
+        android:layout_above="@+id/inputUsername"
+        android:layout_alignLeft="@+id/inputPassword"
+        android:layout_marginBottom="20dp"
+        android:ems="10" 
+        android:hint="Name">
 
         <requestFocus />
     </EditText>
 
     <EditText
+        android:id="@+id/inputEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/inputPassword"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:hint="Email" />
+
+    <EditText
         android:id="@+id/inputPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/inputUsername"
+        android:layout_below="@+id/inputEmail"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="21dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/inputUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/inputEmail"
+        android:layout_alignLeft="@+id/inputEmail"
+        android:layout_marginBottom="18dp"
+        android:ems="10"
+        android:hint="Username" />
 
     <Button
         android:id="@+id/buttonLaunchCreateUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/inputUsername"
+        android:layout_alignRight="@+id/inputEmail"
         android:layout_below="@+id/inputPassword"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="38dp"
         android:text="Create Account" />
-
-
 
 </RelativeLayout>
