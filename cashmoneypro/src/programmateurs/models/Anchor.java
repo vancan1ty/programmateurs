@@ -55,6 +55,7 @@ public class Anchor {
 
 
 
+
 //	//demonstration of asynctask at least.  let's leave this for now
 //	public class VerifyUserLogin extends
 //			AsyncTask<LoginActivity, Void, Boolean> {
@@ -111,8 +112,8 @@ public class Anchor {
 		return currentUser;
 	}
 	
-	public void setCurrentUser(String username, String passhash){
-		currentUser = new User(0,username,passhash,"","","");
+	public void setCurrentUser(User user){
+		currentUser = user;
 	}
 	
 	public static String readInputStream(java.io.InputStream in) {

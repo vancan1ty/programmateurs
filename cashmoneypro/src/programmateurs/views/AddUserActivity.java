@@ -106,6 +106,7 @@ public class AddUserActivity extends Activity {
 				
 				if (userExists&&validUsername&&validPassword) {
 					Intent i = new Intent(v.getContext(), HomeActivity.class);
+					anchor.setCurrentUser(dbHandler.getUser(username));
 					v.getContext().startActivity(i); 
 				} else{
 					String errorMsg = "Please resolve the following errors:\n" +

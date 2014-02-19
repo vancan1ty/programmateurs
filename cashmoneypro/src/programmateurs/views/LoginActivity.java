@@ -68,6 +68,7 @@ public class LoginActivity extends Activity {
 						i = new Intent(v.getContext(), AdminActivity.class);
 					else
 						i = new Intent(v.getContext(), HomeActivity.class);
+					anchor.setCurrentUser(dbHandler.getUser(username));
 					v.getContext().startActivity(i); 
 				} else {
 					anchor.showDialog(me, "Log in Failure", "couldn't log you in!");
