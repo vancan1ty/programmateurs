@@ -64,6 +64,10 @@
             android:name="programmateurs.views.AdminActivity"
             android:label="@string/title_activity_admin" >
         </activity>
+        <activity
+            android:name="programmateurs.views.TransactionHistoryActivity"
+            android:label="@string/title_activity_transaction_history" >
+        </activity>
     </application>
 
 </manifest>
