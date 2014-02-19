@@ -14,7 +14,9 @@ import android.widget.EditText;
 import android.view.View.OnClickListener;
 import programmateurs.models.RealDataSource;
 import android.content.Intent;
-
+import java.util.Random;
+import programmateurs.beans.User;
+import programmateurs.models.Anchor;
 
 public class AdminActivity extends Activity {
 	Button resetButton;
@@ -23,6 +25,7 @@ public class AdminActivity extends Activity {
 	EditText userField;
 	private RealDataSource dbHandler;
 	Activity me = this;
+	Anchor anchor = Anchor.getInstance();
 	
 	
 	@Override
@@ -30,12 +33,14 @@ public class AdminActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_admin);
 		
+		//instantiate dbHandler and UI stuff
 		dbHandler = new RealDataSource(this);
 		resetButton = (Button) findViewById(R.id.resetButton);
 		logoutButton = (Button) findViewById(R.id.logoutButton);
 		promptText = (TextView) findViewById(R.id.promptText);
 		userField = (EditText) findViewById(R.id.userField);
 		
+		//logout button sends user back to splash screen
 		logoutButton.setOnClickListener(new OnClickListener(){
 			public void onClick(View v){
 				Intent i = new Intent(v.getContext(), WelcomeActivity.class);
@@ -43,17 +48,27 @@ public class AdminActivity extends Activity {
 			}
 		});
 		
+		//reset button sets instance-only password for user
 		resetButton.setOnClickListener(new OnClickListener(){
 			public void onClick(View v){
 				final String username = userField.getText().toString();
-				PromptDialog confirm = new PromptDialog(me,"Confirm Password Reset","Are you sure you want to enable password reset for "
+				
+				//request confirmation of password reset
+				ConfirmDialog confirm = new ConfirmDialog(me,"Confirm Password Reset","Are you sure you want to enable password reset for "
 						+username+" ?"){
 					public boolean onOkClicked(String input){
-						//if(username!=null && dbHandler.getUser(username)!=null){
+						User user = dbHandler.getUser(username);
+						if(username!=null && user!=null){
+							Random rand = new Random();
+							String temp = "";
+							for(int i=0; i<5; i++)
+								temp+= rand.nextInt(10); //build random temp password
+							user.setPasshash(temp);
+							anchor.showDialog(me,"Password Reset","Password for "+username+" temporarily set to "+temp);
 							
-						//} else{
-							
-						//}
+						} else{
+							anchor.showDialog(me,"Password Reset Error","Given user does not exist." );
+						}
 						return true;	
 					}
 				};
