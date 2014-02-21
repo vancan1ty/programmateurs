@@ -106,7 +106,7 @@ public class Anchor {
 //			mActivity.progress.show();
 //		}
 //	}
-	//comment?
+
 	public User getCurrentUser(){
 		return currentUser;
 	}
