@@ -111,8 +111,8 @@ public class Anchor {
 		return currentUser;
 	}
 	
-	public void setCurrentUser(String username, String passhash){
-		currentUser = new User(0,username,passhash,"","","");
+	public void setCurrentUser(User user){
+		currentUser = user;
 	}
 	
 	public static String readInputStream(java.io.InputStream in) {
