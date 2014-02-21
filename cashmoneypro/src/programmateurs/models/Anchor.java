@@ -55,7 +55,6 @@ public class Anchor {
 
 
 
-
 //	//demonstration of asynctask at least.  let's leave this for now
 //	public class VerifyUserLogin extends
 //			AsyncTask<LoginActivity, Void, Boolean> {
@@ -107,7 +106,7 @@ public class Anchor {
 //			mActivity.progress.show();
 //		}
 //	}
-	
+	//comment?
 	public User getCurrentUser(){
 		return currentUser;
 	}
