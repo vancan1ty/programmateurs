@@ -97,6 +97,7 @@ public class AddUserActivity extends Activity {
 				
 				if (userDoesntExists&&validUsername&&validPassword) { //user already exists, username and pass is valid
 					Intent i = new Intent(v.getContext(), HomeActivity.class);
+					anchor.setCurrentUser(dbHandler.getUser(username));
 					v.getContext().startActivity(i); 
 				}
 				else{
