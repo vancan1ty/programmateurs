@@ -23,7 +23,7 @@
         android:layout_alignLeft="@+id/inputPassword"
         android:layout_marginBottom="20dp"
         android:ems="10" 
-        android:hint="Name">
+        android:hint="First and Last Name">
 
         <requestFocus />
     </EditText>
