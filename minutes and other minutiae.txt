@@ -31,3 +31,5 @@
 		Plans on selling Justin's autograph for money for a webserver are in the works.
 		
 		
+24/2/2014       Currell finds it amusing that our minutes are mostly all set in the wrong year.  Discussed package diagram.
+                Walked through creating an android ListView adapter.  Fixed accounts bug.
