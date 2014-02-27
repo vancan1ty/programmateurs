@@ -35,13 +35,21 @@ import android.os.AsyncTask;
  * one instance of this class can be instantiated during a given runtime.
  * 
  * @author vancan1ty
- *
+ * @version 0.0
  */
 public class Anchor {
 	private static Anchor instance;	
 	private User currentUser;
 	private User[] users;
 	
+	/**
+	 * Acts as a selective constructor for Anchor class.
+	 * If no instance of Anchor exists, instantiates Anchor
+	 * and returns that instance. Otherwise it just returns the
+	 * already-existing instance.
+	 * 
+	 * @return Current Anchor instance
+	 */
 	public static Anchor getInstance() {
 		if (instance == null) {
 			instance = new Anchor();
@@ -106,7 +114,12 @@ public class Anchor {
 //			mActivity.progress.show();
 //		}
 //	}
-	
+
+	/**
+	 * Getter for the User that is currently logged in.
+	 * 
+	 * @return User currently logged in
+	 */
 	public User getCurrentUser(){
 		return currentUser;
 	}
@@ -115,6 +128,12 @@ public class Anchor {
 		currentUser = user;
 	}
 	
+	/**
+	 * Unsure what this method does..
+	 * 
+	 * @param in The input stream to read
+	 * @return 
+	 */
 	public static String readInputStream(java.io.InputStream in) {
 	    java.util.Scanner s = new java.util.Scanner(in).useDelimiter("\\A");
 	    return s.hasNext() ? s.next() : "";
@@ -134,6 +153,15 @@ public class Anchor {
 		public abstract void run();
 	}
 
+	/**
+	 * Opens a dialog in the given activity with a given
+	 * title and message. Used to present information to 
+	 * the user.
+	 * 
+	 * @param activity Activity the dialog is to be displayed in
+	 * @param title Title of dialog
+	 * @param message Dialog message
+	 */
 	public void showDialog(Activity activity, String title, String message) {
 
 		activity.runOnUiThread(new ShowDialogPasser(title, message,

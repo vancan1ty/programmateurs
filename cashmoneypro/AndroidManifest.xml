@@ -68,10 +68,6 @@
             android:name="programmateurs.views.AdminActivity"
             android:label="@string/title_activity_admin" >
         </activity>
-        <activity
-            android:name="programmateurs.views.NewAccount"
-            android:label="@string/title_activity_new_account" >
-        </activity>
     </application>
 
 </manifest>

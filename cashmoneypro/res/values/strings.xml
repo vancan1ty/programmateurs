@@ -29,6 +29,7 @@
     <string name="welcome_text">Welcome Screen</string>
     <string name="title_activity_deposit">DepositActivity</string>
     <string name="title_activity_admin">AdminActivity</string>
+    <string name="title_activity_transaction_history">TransactionHistoryActivity</string>
 
     <string-array name="account_type">
         <item>Checking</item>
