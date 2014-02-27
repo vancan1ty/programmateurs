@@ -31,6 +31,13 @@ import android.widget.Toast;
 //import com.google.android.gms.common.ConnectionResult;
 //import com.google.android.gms.common.GooglePlayServicesUtil;
 
+/**
+ * LoginActivity is the login screen. It does different things based on the 
+ * username and password
+ * 
+ * @author currell
+ *
+ */
 public class LoginActivity extends Activity {
 	
 	EditText usernameField;
@@ -43,6 +50,10 @@ public class LoginActivity extends Activity {
 	Anchor anchor = Anchor.getInstance();
 	Activity me = this;
 
+	/**
+	 * The onCreate method sets all the objects on the screen
+	 * 
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -56,6 +67,10 @@ public class LoginActivity extends Activity {
 		
 		buttonLogin.setOnClickListener(new OnClickListener() {
 
+			/**
+			 * If the user's name is admin, go to the AdminActivity page
+			 * Else go to the HomeActivity page and set the current user
+			 */
 			@Override
 			public void onClick(View v) {
 				String username = usernameField.getText().toString();
@@ -68,7 +83,8 @@ public class LoginActivity extends Activity {
 						i = new Intent(v.getContext(), AdminActivity.class);
 					else
 						i = new Intent(v.getContext(), HomeActivity.class);
-					v.getContext().startActivity(i); 
+						anchor.setCurrentUser(dbHandler.getUser(username));
+						v.getContext().startActivity(i); 
 				} else {
 					anchor.showDialog(me, "Log in Failure", "couldn't log you in!");
 				}
@@ -80,23 +96,36 @@ public class LoginActivity extends Activity {
 
 	}
 
+	/**
+	 * Method used every time RealDataSource is used
+	 */
 	@Override
 	protected void onResume() {
 		dbHandler.open();
 		super.onResume();
 	}
 
+	/**
+	 * Method used every time RealDataSource is used
+	 */
 	@Override
 	protected void onPause() {
 		dbHandler.close();
 		super.onPause();
 	}
 
-	
+	/**
+	 * Return the user's username
+	 * @return string the username
+	 */
 	public String getUsernameEntry() {
 		return usernameField.getText().toString();
 	}
 	
+	/**
+	 * Returns the user's password
+	 * @return string the password
+	 */
 	public String getPasswordEntry() {
 		return passwordField.getText().toString();
 	}

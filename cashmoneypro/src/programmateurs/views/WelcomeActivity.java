@@ -11,6 +11,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+/**
+ * The main screen that is loaded when you click the app icon
+ *
+ * @author currell?
+ * @version 0.0
+ */
 public class WelcomeActivity extends Activity {
 	Button buttonLogin;
 	Button buttonRegister;

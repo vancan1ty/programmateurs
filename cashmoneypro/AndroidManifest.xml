@@ -61,12 +61,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="net.programmateurs.DepositActivity"
+            android:name="programmateurs.views.DepositActivity"
             android:label="@string/title_activity_deposit" >
         </activity>
         <activity
             android:name="programmateurs.views.AdminActivity"
             android:label="@string/title_activity_admin" >
+        </activity>
+        <activity
+            android:name="programmateurs.views.NewAccount"
+            android:label="@string/title_activity_new_account" >
         </activity>
     </application>
 

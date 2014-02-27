@@ -1,9 +1,21 @@
-package net.programmateurs;
+package programmateurs.views;
 
+import net.programmateurs.R;
+import net.programmateurs.R.layout;
+import net.programmateurs.R.menu;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
+
+/**
+ * The Deposit Activity class
+ * It will have a screen to deposit money to the user's account
+ * Right now it is just a skeleton
+ * 
+ * @author brent
+ * @version 0.0
+ */
 public class DepositActivity extends Activity {
 
 	@Override

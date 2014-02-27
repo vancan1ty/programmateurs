@@ -122,7 +122,6 @@ public class AddUserActivity extends Activity {
 			}
 			
 		});
-
 	}
 
 	@Override

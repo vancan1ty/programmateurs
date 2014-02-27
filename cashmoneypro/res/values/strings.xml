@@ -30,4 +30,11 @@
     <string name="title_activity_deposit">DepositActivity</string>
     <string name="title_activity_admin">AdminActivity</string>
 
+    <string-array name="account_type">
+        <item>Checking</item>
+        <item>Savings</item>
+    </string-array>
+
+    <string name="title_activity_new_account">NewAccount</string>
+
 </resources>

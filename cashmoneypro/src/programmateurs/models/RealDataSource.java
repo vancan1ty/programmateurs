@@ -5,6 +5,7 @@ import java.util.Date;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import programmateurs.beans.Account;
 import programmateurs.beans.Account.ACCOUNT_TYPE;
@@ -41,6 +42,7 @@ public class RealDataSource implements DataSourceInterface {
   @Override
   public void open() throws SQLException {
     db = dbHelper.getWritableDatabase();
+    Log.d("RealDataSource", "opened db: " + db);
   }
 
   @Override

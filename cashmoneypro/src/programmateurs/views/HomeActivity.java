@@ -2,7 +2,6 @@ package programmateurs.views;
 
 import java.util.Locale;
 
-import net.programmateurs.DepositActivity;
 import net.programmateurs.R;
 import net.programmateurs.R.id;
 import net.programmateurs.R.layout;
@@ -32,6 +31,16 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+
+/**
+ * The class sets up the main screen when the user logs in 
+ * It has the SectionsPagerAdapter, which allows the user to scroll to 
+ * new tabs
+ * 
+ * @author currell
+ * @version 0.0
+ *
+ */
 public class HomeActivity extends FragmentActivity {
 
 	/**

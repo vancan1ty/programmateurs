@@ -9,6 +9,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class AccountsDAO {
 
@@ -38,7 +39,8 @@ public class AccountsDAO {
 	 */
 	public static Account[] getAccountsForUser(SQLiteDatabase db, long userID) {
 		
-		Cursor c = db.rawQuery("SELECT * FROM users WHERE userid = ?;", 
+		Log.d("AccountsDAO","db + " + db);
+		Cursor c = db.rawQuery("SELECT * FROM Accounts WHERE userid = ?;", 
 				new String[]{Long.toString(userID)});
 		List<Account> outL = new ArrayList<Account>();
 

@@ -12,17 +12,36 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="42dp"
+        android:layout_marginBottom="113dp"
         android:text="Deposit Funds" />
+
+    <Button
+        android:id="@+id/newAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="48dp"
+        android:text="Make New Account" />
 
     <TextView
         android:id="@+id/textViewAccountName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="47dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
+        android:layout_toLeftOf="@+id/depositFunds"
         android:text="TextView" />
+
+    <ListView
+        android:id="@+id/listViewAccounts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/depositFunds"
+        android:layout_alignLeft="@+id/newAccount"
+        android:layout_alignRight="@+id/newAccount"
+        android:layout_below="@+id/textViewAccountName" >
+
+    </ListView>
 
 </RelativeLayout>

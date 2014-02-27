@@ -1,9 +1,13 @@
 package programmateurs.views;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import programmateurs.beans.Account;
 import programmateurs.beans.User;
+import programmateurs.models.Anchor;
 import programmateurs.models.ArtificialDataSource;
-import net.programmateurs.DepositActivity;
+import programmateurs.models.RealDataSource;
 import net.programmateurs.R;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,42 +17,56 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.webkit.WebView.FindListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
-
+/**
+ * Account Fragment class is part of HomeActivity. HomeActivity is an Activity and account
+ * fragment makes up the Accounts tab of Home Activity. 
+ * 
+ * @author brent
+ * @version 0.0
+ */
 public class AccountFragment extends Fragment {
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.
 	 */
-	public static final String ARG_SECTION_NUMBER = "section_number";
 	
 	private static Account[] accountArray;
-	private Account account;
-	private User[] users;
-	private ArtificialDataSource data;
+	Anchor anchor = Anchor.getInstance();
+	private User user;
+	private RealDataSource dbHandler;	 
+	private Button depositFunds, newAccount;
+	private TextView view;
+	private ListView accountView;
 	
-	Button depositFunds;
-
+	private AccountsAdapter adapter; 
+	
+	/**
+	 * The onCreateView method creates the view for the fragment. I have 
+	 * onClickListeners to detect when the button is pressed and perform actions
+	 * based on those events.
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_account,
 				container, false);
 		
-		data = new ArtificialDataSource();	//Importing the data source so I can access the account and user info
-		users = data.getUsers();
-		accountArray = data.getAccountsForUser(users[0].getUserID());
-		
-		depositFunds = (Button) rootView.findViewById(R.id.depositFunds);		/*Returns null????*/
-		
-		TextView view = (TextView) rootView.findViewById(R.id.textViewAccountName);
-	    view.setText(accountArray[0].getAccountName());		//Works but have to fix to work with current user logged in
+		depositFunds = (Button) rootView.findViewById(R.id.depositFunds);
+		newAccount = (Button) rootView.findViewById(R.id.newAccount);
+		view = (TextView) rootView.findViewById(R.id.textViewAccountName);
+		accountView = (ListView) rootView.findViewById(R.id.listViewAccounts);
 	    
-	    //Adds a new listener to the Deposit Funds button that will take 
-	  	//User to new Screen with Input box to enter the amount of funds to deposit
 	  	depositFunds.setOnClickListener(new OnClickListener() {
 
+	  		/**
+	  		 * If the user clicks the deposit funds button, the screen transitions
+	  		 * to DepositActivity
+	  		 */
 	  		@Override
 	  		public void onClick(View v) {
 	  			Intent i = new Intent(v.getContext(), DepositActivity.class);
@@ -57,7 +75,55 @@ public class AccountFragment extends Fragment {
 	  		}
 	  					
 	  	});
+	  	
+	  	newAccount.setOnClickListener(new OnClickListener() {
+			
+	  		/**
+	  		 * If the user clicks new account button, the screen transitions 
+	  		 * to NewAccount
+	  		 */
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(v.getContext(), NewAccount.class);
+				v.getContext().startActivity(i);
+			}
+		});
 
 		return rootView;
+	}
+	
+	/**
+	 * The reason why all the database stuff is in the onResume() method
+	 * is because of the nature of a Fragment's lifecycle. Whenever you use a 
+	 * fragment you must put the database code inside onResume(). 
+	 * Look up a Fragment's lifecycle on Google
+	 */
+	@Override
+	public void onResume() {
+		dbHandler = new RealDataSource(getActivity());
+		dbHandler.open();
+		user = anchor.getCurrentUser();
+		dbHandler.getAccountsForUser(user.getUserID()); 
+		accountArray = dbHandler.getAccountsForUser(user.getUserID()); 
+		List<Account> accountList = new ArrayList<Account>();
+		for(int i = 0; i<accountArray.length;i++) {
+			accountList.add(accountArray[i]);
+		}
+		adapter = new AccountsAdapter (getActivity(),accountList);
+		accountView.setAdapter(adapter);		
+		
+		//I'm leaving this for now to test the user. We can remove the "j"
+		//once user.getFirst() and user.getLast() return the appropriate information
+	    view.setText(user.getFirst()+ " j" + user.getLast());
+		super.onResume();
+	}
+
+	/**
+	 * The method need each time RealDataSource is used in a class
+	 */
+	@Override
+	public void onPause() {
+		dbHandler.close();
+		super.onPause();
 	}
 }
