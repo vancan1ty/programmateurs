@@ -9,8 +9,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context=".AddUserActivity" >
- 
-        <TextView
+
+    <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,14 +28,30 @@
 	    android:orientation="vertical"
         >
 
-    <EditText
-        android:id="@+id/inputName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="First and Last Name">
+        <EditText
+            android:id="@+id/inputName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="First and Last Name" />
 
-        <requestFocus />
-    </EditText>
+        <EditText
+            android:id="@+id/inputUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Username" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/inputPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword" />
 
     <EditText
         android:id="@+id/inputEmail"
@@ -43,26 +59,13 @@
         android:layout_height="wrap_content"
         android:hint="Email" />
 
-    <EditText
-        android:id="@+id/inputPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="textPassword" />
-
-    <EditText
-        android:id="@+id/inputUsername"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Username" />
-
 </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/buttonLaunchCreateUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Create Account" />
+	<Button
+	    android:id="@+id/buttonLaunchCreateUser"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="Create Account" />
 
 </LinearLayout>
