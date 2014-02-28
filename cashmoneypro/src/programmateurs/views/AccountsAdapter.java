@@ -6,7 +6,6 @@ import net.programmateurs.R;
 
 import programmateurs.beans.Account;
 import programmateurs.models.Anchor;
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;

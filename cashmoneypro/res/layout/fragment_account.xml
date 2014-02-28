@@ -37,9 +37,7 @@
         android:id="@+id/listViewAccounts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/depositFunds"
-        android:layout_alignLeft="@+id/newAccount"
-        android:layout_alignRight="@+id/newAccount"
+
         android:layout_below="@+id/textViewAccountName" >
 
     </ListView>
