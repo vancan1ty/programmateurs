@@ -84,17 +84,17 @@ public class AddUserActivity extends Activity {
 				String last = nameComponents[nameComponents.length-1];
 				//TODO handle contingencies
 //				dbHandler.cheapAddUserToDB(username, password);
-				dbHandler.addUserToDB(username, password, first , last, email);
 				
 				//check validity of username, password, and email, and if the username is unique
 				boolean validUsername = validUsername(username);
 				boolean validPassword = validPassword(password); 
 				boolean validEmail = validEmail(email);
 				//boolean validName = validName(name);
-				boolean userDoesntExists = dbHandler.isUserInDB(username, password);
+				boolean userDoesntExist = dbHandler.isUserInDB(username, password);
 				//changed userExists to userDoesntExist to the way this is set up
 				
-				if (userDoesntExists&&validUsername&&validPassword) { //user doesnt exist yet, username and pass is valid
+				if (userDoesntExist&&validUsername&&validPassword&&validEmail) { //user doesnt exist yet, username and pass is valid
+					dbHandler.addUserToDB(username, password, first , last, email);
 					Intent i = new Intent(v.getContext(), HomeActivity.class);
 					anchor.setCurrentUser(dbHandler.getUser(username));
 					v.getContext().startActivity(i); 
@@ -102,7 +102,7 @@ public class AddUserActivity extends Activity {
 				else{
 					String errorMsg = "Please resolve the following errors:\n" +
 							"";
-					if(!userDoesntExists)
+					if(!userDoesntExist)
 						errorMsg += "\n- The username you chose is already taken.";
 					/*if(!validName){
 						errorMsg += "\n- Please correct your first and last name.";
