@@ -90,7 +90,7 @@ public class AddUserActivity extends Activity {
 				boolean validPassword = validPassword(password); 
 				boolean validEmail = validEmail(email);
 				//boolean validName = validName(name);
-				boolean userDoesntExist = dbHandler.isUserInDB(username, password);
+				boolean userDoesntExist = !dbHandler.isUserInDB(username, password);
 				//changed userExists to userDoesntExist to the way this is set up
 				
 				if (userDoesntExist&&validUsername&&validPassword&&validEmail) { //user doesnt exist yet, username and pass is valid
