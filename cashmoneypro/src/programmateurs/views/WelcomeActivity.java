@@ -1,5 +1,7 @@
 package programmateurs.views;
 
+import programmateurs.models.Anchor;
+import programmateurs.models.RealDataSource;
 import net.programmateurs.R;
 import net.programmateurs.R.layout;
 import net.programmateurs.R.menu;
@@ -20,6 +22,8 @@ import android.widget.Button;
 public class WelcomeActivity extends Activity {
 	Button buttonLogin;
 	Button buttonRegister;
+	private Anchor anchor = Anchor.getInstance();
+	private RealDataSource src;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,29 @@ public class WelcomeActivity extends Activity {
 			}
 		});
 
+
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		src = new RealDataSource(this);
+		src.open();
+
+//		This code allows us to bypass login while testing
+		if (Anchor.TEST_MODE) {
+			Intent i = new Intent(this, HomeActivity.class);
+			anchor.setCurrentUser(src.getUser("test"));
+			this.startActivity(i); 
+		}
+
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		src.close();
 	}
 
 	@Override

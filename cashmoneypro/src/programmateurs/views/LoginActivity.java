@@ -93,7 +93,6 @@ public class LoginActivity extends Activity {
 			
 		});
 		
-
 	}
 
 	/**
@@ -101,8 +100,8 @@ public class LoginActivity extends Activity {
 	 */
 	@Override
 	protected void onResume() {
-		dbHandler.open();
 		super.onResume();
+		dbHandler.open();
 	}
 
 	/**

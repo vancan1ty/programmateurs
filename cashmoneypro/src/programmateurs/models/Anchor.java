@@ -40,7 +40,8 @@ import android.os.AsyncTask;
 public class Anchor {
 	private static Anchor instance;	
 	private User currentUser;
-	private User[] users;
+	public static final boolean TEST_MODE = false;
+	
 	
 	/**
 	 * Acts as a selective constructor for Anchor class.
