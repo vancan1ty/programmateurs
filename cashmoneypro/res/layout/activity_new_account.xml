@@ -8,49 +8,49 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".NewAccount" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
+    <LinearLayout 
+        	android:layout_width="match_parent"
+    		android:layout_height="wrap_content"
+    		android:orientation="vertical"
+    >
+     <EditText
+        android:id="@+id/accountName"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:ems="10"
+        android:hint="Account Name" 
+        >
+        <requestFocus />
+
+        </EditText>
+
 
     <EditText
-        android:id="@+id/accountName"
-        android:layout_width="wrap_content"
+        android:id="@+id/interestRate"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_alignTop="@+id/spinnerNewAccount"
         android:ems="10"
-        android:hint="Account Name" />
+        android:hint="Interest Rate"
+        android:inputType="number" >
+
+    </EditText>
 
     <Spinner
         android:id="@+id/spinnerNewAccount"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="20dp"
-        android:layout_toRightOf="@+id/accountName" />
+        />
+       
+        
+    </LinearLayout>
 
     <Button
         android:id="@+id/createAccount"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="89dp"
         android:text="Create New Account" />
-
-    <EditText
-        android:id="@+id/interestRate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/spinnerNewAccount"
-        android:layout_toLeftOf="@+id/spinnerNewAccount"
-        android:ems="10"
-        android:hint="Interest Rate"
-        android:inputType="number" >
-
-        <requestFocus />
-    </EditText>
 
 </RelativeLayout>
