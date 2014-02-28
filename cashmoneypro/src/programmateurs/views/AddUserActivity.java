@@ -78,7 +78,13 @@ public class AddUserActivity extends Activity {
 				String username = usernameField.getText().toString(); //takes username from field
 				String password = passwordField.getText().toString(); //takes password from field
 				Log.d("BERRY","username: " + username + " password: " + password);
-				dbHandler.cheapAddUserToDB(username, password);
+				
+				String[] nameComponents = name.split(" ");
+				String first = nameComponents[0];
+				String last = nameComponents[nameComponents.length-1];
+				//TODO handle contingencies
+//				dbHandler.cheapAddUserToDB(username, password);
+				dbHandler.addUserToDB(username, password, first , last, email);
 				
 				//check validity of username, password, and email, and if the username is unique
 				boolean validUsername = validUsername(username);
