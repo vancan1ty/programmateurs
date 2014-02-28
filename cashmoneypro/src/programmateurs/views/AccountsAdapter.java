@@ -42,7 +42,7 @@ public class AccountsAdapter extends BaseAdapter {
 
 	LayoutInflater inflater = (LayoutInflater)  activity
         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    View rowView = inflater.inflate(R.layout.corqitemlayout, parent, false);
+    View rowView = inflater.inflate(R.layout.unused_corqitemlayout, parent, false);
     TextView header = (TextView) rowView.findViewById(R.id.corqHeader);
     TextView body = (TextView) rowView.findViewById(R.id.corqText);
     ImageView imageView = (ImageView) rowView.findViewById(R.id.corqImage);
