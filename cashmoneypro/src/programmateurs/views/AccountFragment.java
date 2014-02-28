@@ -40,7 +40,7 @@ public class AccountFragment extends Fragment {
 	private User user;
 	private RealDataSource dbHandler;	 
 	private Button depositFunds, newAccount;
-	private TextView view;
+	private TextView nameText;
 	private ListView accountView;
 	
 	private AccountsAdapter adapter; 
@@ -53,12 +53,12 @@ public class AccountFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_account,
+		View rootView = inflater.inflate(R.layout.fragment_account_listing,
 				container, false);
 		
 		depositFunds = (Button) rootView.findViewById(R.id.depositFunds);
 		newAccount = (Button) rootView.findViewById(R.id.newAccount);
-		view = (TextView) rootView.findViewById(R.id.textViewAccountName);
+		nameText = (TextView) rootView.findViewById(R.id.textViewAccountName);
 		accountView = (ListView) rootView.findViewById(R.id.listViewAccounts);
 	    
 	  	depositFunds.setOnClickListener(new OnClickListener() {
@@ -114,7 +114,7 @@ public class AccountFragment extends Fragment {
 		
 		//I'm leaving this for now to test the user. We can remove the "j"
 		//once user.getFirst() and user.getLast() return the appropriate information
-	    view.setText(user.getFirst()+ " j" + user.getLast());
+	    nameText.setText(user.getFirst() + " " + user.getLast());
 		super.onResume();
 	}
 
