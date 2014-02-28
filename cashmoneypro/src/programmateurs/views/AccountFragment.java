@@ -53,7 +53,7 @@ public class AccountFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_accountlist,
+		View rootView = inflater.inflate(R.layout.fragment_account_listing,
 				container, false);
 		
 		depositFunds = (Button) rootView.findViewById(R.id.depositFunds);
