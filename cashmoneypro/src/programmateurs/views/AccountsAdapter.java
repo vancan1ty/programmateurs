@@ -8,6 +8,7 @@ import programmateurs.beans.Account;
 import programmateurs.models.Anchor;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -58,7 +59,8 @@ public class AccountsAdapter extends BaseAdapter {
     //We can change this to go to an Activity when pressed later. 
     rowView.setOnClickListener(new OnClickListener() {
     	public void onClick(View v) {
-    		Anchor.getInstance().showDialog(activity, "Details", "Account details");
+    		Intent i = new Intent(v.getContext(), NewAccount.class);
+
     	}
     });
     
