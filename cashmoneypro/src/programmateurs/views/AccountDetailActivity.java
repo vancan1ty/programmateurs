@@ -18,6 +18,7 @@ public class AccountDetailActivity extends Activity {
 	TextView textViewAccountTitle;
 	TextView textViewAccountType;
 	ListView listViewTransactions;
+	long accountID;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,17 +31,23 @@ public class AccountDetailActivity extends Activity {
 		textViewAccountType = (TextView) findViewById(R.id.textViewAccountType);
 		listViewTransactions = (ListView) findViewById(R.id.listViewTransactions);
 		
+		Bundle extras= getIntent().getExtras();
+		accountID = extras.getLong("accountID");
+		
+		textViewAccountTitle.setText(Long.toString(accountID));
 		src = new RealDataSource(this);
 	}
 	
 	@Override
 	protected void onResume() {
+		super.onResume();
 		src.open();
 		
 	};
 	
 	@Override
 	protected void onPause() {
+		super.onPause();
 		src.close();
 	};
 
