@@ -107,14 +107,14 @@ public class HomeActivity extends FragmentActivity {
 			Fragment fragment;
 			if (position == 0) {
 				fragment = new AccountFragment();
-			}
-			else {
+			} else if (position == 1) {
+				fragment = new TransactionHistoryFragment();
+			} else {
 				fragment = new DummySectionFragment();
 				Bundle args = new Bundle();
 				args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
 				fragment.setArguments(args);
 			}
-
 			return fragment;
 		}
 

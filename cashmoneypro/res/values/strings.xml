@@ -37,5 +37,6 @@
     </string-array>
 
     <string name="title_activity_new_account">NewAccount</string>
+    <string name="title_activity_transaction_history_fragment">TransactionHistoryFragment</string>
 
 </resources>
