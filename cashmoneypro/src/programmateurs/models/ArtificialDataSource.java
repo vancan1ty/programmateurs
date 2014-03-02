@@ -81,7 +81,11 @@ public class ArtificialDataSource implements DataSourceInterface {
 			Log.d("ArtificialDataSource", "failed to initialize transactions...");
 		}
 	}
-
+	
+	@Override
+	public boolean isUserInDB(String username, String password){
+		return true;
+	}
 
 
 	@Override
