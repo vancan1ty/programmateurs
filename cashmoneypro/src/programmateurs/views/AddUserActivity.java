@@ -112,8 +112,9 @@ public class AddUserActivity extends Activity {
 					if(!validEmail){
 						errorMsg += "\n- The email you provided is not a valid email address.";
 					}
-					if(!validPassword)
+					if(!validPassword){
 						errorMsg += "\n- Passwords must be at least 5 characters long and are case-sensitive.";
+					}
 					anchor.showDialog(me, "Registration Error(s)", errorMsg);
 				}
 			
