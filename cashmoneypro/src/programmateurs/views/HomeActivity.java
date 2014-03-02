@@ -10,6 +10,7 @@ import net.programmateurs.R.string;
 
 import programmateurs.beans.Account;
 import programmateurs.beans.User;
+import programmateurs.models.Anchor;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -70,25 +71,25 @@ public class HomeActivity extends FragmentActivity {
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
-
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.home, menu);
-		return true;
+		MenuItem settings = menu.add("Settings");
+		settings.setIntent(new Intent(this, SettingsActivity2.class));
+		MenuItem logout = menu.add("Log Out");
+		logout.setIntent(new Intent(this, WelcomeActivity.class));
+		//getMenuInflater().inflate(R.menu.home, menu);
+		return super.onCreateOptionsMenu(menu); 
 	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId()==0) {
-			Intent i = new Intent(this,SettingsActivity2.class);
-			this.startActivity(i);
-		} else if (item.getItemId()==1) {
-			Intent i = new Intent(this,SettingsActivity2.class);
-			this.startActivity(i);
+		//Log.d("HomeActivity","Title: " + item.getTitle());
+		if (item.getTitle().equals("Log Out")) {
+			Anchor.getInstance().setCurrentUser(null);//NOTE THAT SETTING THE USER TO NULL CAUSES THE PROGRAM TO CRASH IF THE USER HITS THE BACK BUTTON AFTER LOGGING OUT
 		}
+		this.startActivity(item.getIntent());
 		return true;
 	}
 
