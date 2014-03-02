@@ -62,7 +62,7 @@ public class HomeActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_home2);
+		setContentView(R.layout.activity_home);
 		
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.

@@ -9,27 +9,31 @@
 
 
 31/2/2014
-		
+		??
 
-3/2/2013
+3/2/2014
         Got project/app building on everyone’s machines. Created Welcome Screen. Discussed project UML diagram. Discussed Demo.
 
-5/2/2013
+5/2/2014
 		Demoed. Allocated tasks. (Pavel on tranactions screen, for example.)
 		res/layout holds xml files
 		src/programmateurs.views holds all the views 
 		setContentView sets the xml to inflate the view of that object
 
-10/2/2013
+10/2/2014
 		Currell explains what is going on.
 		
-17/2/2013
+17/2/2014
 		Demoed M4. Discussed system sequence diagrams. Pushed Sarah's changes to git.
 		
-19/2/2013
+19/2/2014
 		Disscussed making package diagram. Discussed navigation approaches. Demoed. Made fun of Justin's celebrity status.
 		Plans on selling Justin's autograph for money for a webserver are in the works.
 		
 		
-24/2/2014       Currell finds it amusing that our minutes are mostly all set in the wrong year.  Discussed package diagram.
-                Walked through creating an android ListView adapter.  Fixed accounts bug.
+24/2/2014
+		Currell finds it amusing that our minutes are mostly set in the wrong year (fixed). Discussed package diagram. Walked through creating an android ListView adapter. Fixed accounts bug.
+				
+26/2/2014
+		Talked about model, view, presenter. 
+		
