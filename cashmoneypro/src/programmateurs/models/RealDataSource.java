@@ -57,6 +57,7 @@ public class RealDataSource implements DataSourceInterface {
 		return UsersDAO.getUsers(db);
 	}
 	
+	@Override
 	public User getUser(String username){
 		for(User user: getUsers()){
 			if(user.getUsername().equalsIgnoreCase(username))
@@ -65,6 +66,7 @@ public class RealDataSource implements DataSourceInterface {
 		return null;
 	}
 	
+	@Override
 	public boolean isUserInDB(String username, String password) {
 		return UsersDAO.isUserInDB(db, username, password);
 	}
