@@ -82,8 +82,13 @@ public class HomeActivity extends FragmentActivity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent i = new Intent(this,SettingsActivity2.class);
-		this.startActivity(i); 
+		if (item.getItemId()==0) {
+			Intent i = new Intent(this,SettingsActivity2.class);
+			this.startActivity(i);
+		} else if (item.getItemId()==1) {
+			Intent i = new Intent(this,SettingsActivity2.class);
+			this.startActivity(i);
+		}
 		return true;
 	}
 
