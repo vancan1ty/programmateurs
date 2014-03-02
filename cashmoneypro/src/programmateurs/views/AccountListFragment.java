@@ -28,7 +28,7 @@ import android.widget.TextView;
  * @author brent
  * @version 0.0
  */
-public class AccountFragment extends Fragment {
+public class AccountListFragment extends Fragment {
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.

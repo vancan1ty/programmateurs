@@ -104,7 +104,7 @@ public class HomeActivity extends FragmentActivity {
 			// below) with the page number as its lone argument.
 			Fragment fragment;
 			if (position == 0) {
-				fragment = new AccountFragment();
+				fragment = new AccountListFragment();
 			} else if (position == 1) {
 				fragment = new TransactionHistoryFragment();
 			} else {
