@@ -112,5 +112,9 @@ public interface DataSourceInterface {
 	public Category addCategoryToDB(long userID, String categoryName);
 
 	User updateUser(User user);
-
+	
+	/**
+	 * @author Pavel
+	 */
+	public Transaction[] getTransactionsForUser(long userID);
 }

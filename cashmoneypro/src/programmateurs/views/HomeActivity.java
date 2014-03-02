@@ -8,7 +8,6 @@ import net.programmateurs.R.layout;
 import net.programmateurs.R.menu;
 import net.programmateurs.R.string;
 
-import programmateurs.models.ArtificialDataSource;
 import programmateurs.beans.Account;
 import programmateurs.beans.User;
 
@@ -30,7 +29,6 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-
 
 /**
  * The class sets up the main screen when the user logs in 

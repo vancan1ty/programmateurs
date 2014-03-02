@@ -6,7 +6,6 @@ import java.util.List;
 import programmateurs.beans.Account;
 import programmateurs.beans.User;
 import programmateurs.models.Anchor;
-import programmateurs.models.ArtificialDataSource;
 import programmateurs.models.RealDataSource;
 import net.programmateurs.R;
 import android.content.Intent;

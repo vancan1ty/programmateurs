@@ -3,10 +3,9 @@ package programmateurs.views;
 import java.util.ArrayList;
 import java.util.List;
 
-import programmateurs.beans.Account;
+import programmateurs.beans.Transaction;
 import programmateurs.beans.User;
 import programmateurs.models.Anchor;
-import programmateurs.models.ArtificialDataSource;
 import programmateurs.models.RealDataSource;
 import net.programmateurs.R;
 import android.content.Intent;
@@ -37,7 +36,7 @@ public class TransactionHistoryFragment extends Fragment {
 	 * fragment.
 	 */
 	
-	private static Account[] accountArray;
+	private static Transaction[] transactionArray;
 	Anchor anchor = Anchor.getInstance();
 	private User user;
 	private RealDataSource dbHandler;	 
@@ -45,7 +44,7 @@ public class TransactionHistoryFragment extends Fragment {
 	private TextView nameText;
 	private ListView accountView;
 	
-	private AccountsAdapter adapter; 
+	private TransactionAdapter adapter; 
 	
 	/**
 	 * The onCreateView method creates the view for the fragment. I have 
@@ -106,12 +105,12 @@ public class TransactionHistoryFragment extends Fragment {
 		dbHandler.open();
 		user = anchor.getCurrentUser();
 		dbHandler.getAccountsForUser(user.getUserID()); 
-		accountArray = dbHandler.getAccountsForUser(user.getUserID()); 
-		List<Account> accountList = new ArrayList<Account>();
-		for(int i = 0; i<accountArray.length;i++) {
-			accountList.add(accountArray[i]);
+		transactionArray = dbHandler.getTransactionsForUser(user.getUserID());
+		List<Transaction> transactionList = new ArrayList<Transaction>();
+		for(int i = 0; i<transactionArray.length;i++) {
+			transactionList.add(transactionArray[i]);
 		}
-		adapter = new AccountsAdapter (getActivity(),accountList);
+		adapter = new TransactionAdapter(getActivity(),transactionList);
 		accountView.setAdapter(adapter);		
 		
 		//I'm leaving this for now to test the user. We can remove the "j"

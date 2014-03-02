@@ -90,6 +90,11 @@ public class RealDataSource implements DataSourceInterface {
 	}
 
 	@Override
+	public Transaction[] getTransactionsForUser(long userID) {
+		return TransactionsDAO.getTransactionsForUser(db, userID);
+	}
+	
+	@Override
 	public User addUserToDB(String username, String passhash, String first,
 			String last, String email) {
 		return UsersDAO.addUserToDB(db, username, passhash, first, last, email);

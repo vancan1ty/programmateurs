@@ -100,4 +100,39 @@ public class TransactionsDAO {
 		return out;
 	}
 
+	/**
+	 * returns a list of all transactions belonging to a certain user
+	 * @param userID
+	 * @return list of accounts owned by user
+	 * @author Pavel
+	 */
+	public static Transaction[] getTransactionsForUser(SQLiteDatabase db, long userID) {
+		
+		Cursor c = db.rawQuery(
+					"SELECT transactionID, T.accountID, userID, transaction_type, transaction_amount, transaction_date, timestamp, rolledback " +
+					"	FROM transactions AS T JOIN Accounts AS A WHERE A.userID = ? AND T.accountID = A.accountID;", 
+					
+					
+					new String[]{Long.toString(userID)});
+		List<Transaction> outL = new ArrayList<Transaction>();
+
+		c.moveToFirst();
+		while (!c.isAfterLast()) {
+			Transaction transaction;
+			
+			try {
+				transaction = cursorToTransaction(c, db);
+			} catch (ParseException e) {
+				transaction = null;
+				e.printStackTrace();
+			}
+			outL.add(transaction);
+			c.moveToNext();
+		}
+		// make sure to close the cursor
+		c.close();
+		return outL.toArray(new Transaction[0]);
+	}
+	
+	
 }
