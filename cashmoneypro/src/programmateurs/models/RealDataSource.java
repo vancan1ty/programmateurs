@@ -118,5 +118,12 @@ public class RealDataSource implements DataSourceInterface {
 	public Category addCategoryToDB(long userID, String categoryName) {
 		return CategoriesDAO.addCategoryForDB(db, userID, categoryName);
 	}
+	
+	public void deleteAllFromDB() {
+		db.execSQL("delete from transactions");
+		db.execSQL("delete from categories");
+		db.execSQL("delete from accounts");
+		db.execSQL("delete from users");
+	}
 
 }
