@@ -109,7 +109,7 @@ public class AccountListFragment extends Fragment {
 			accountList.add(accountArray[i]);
 		}
 		adapter = new AccountsAdapter (getActivity(),accountList);
-		accountView.setAdapter(adapter);		
+		accountView.setAdapter(adapter);
 		
 		//I'm leaving this for now to test the user. We can remove the "j"
 		//once user.getFirst() and user.getLast() return the appropriate information

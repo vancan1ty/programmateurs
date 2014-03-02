@@ -116,7 +116,7 @@ public interface DataSourceInterface {
 	 */
 	public Transaction addTransactionToDB(long accountID,
 			TRANSACTION_TYPE transactionType, long transactionAmount,
-			Date transactionDate, Date timestamp, boolean rolledback,
+			Date transactionDate, boolean rolledback,
 			Category[] categories);
 
 

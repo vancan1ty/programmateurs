@@ -1,5 +1,11 @@
 package programmateurs.views;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import programmateurs.beans.Account;
+import programmateurs.beans.Transaction;
 import programmateurs.models.RealDataSource;
 import net.programmateurs.R;
 import net.programmateurs.R.layout;
@@ -9,6 +15,7 @@ import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 
@@ -19,6 +26,8 @@ public class AccountDetailActivity extends Activity {
 	TextView textViewAccountType;
 	ListView listViewTransactions;
 	long accountID;
+	Account account;
+	List<Transaction> transactionList = new ArrayList<Transaction>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +42,6 @@ public class AccountDetailActivity extends Activity {
 		
 		Bundle extras= getIntent().getExtras();
 		accountID = extras.getLong("accountID");
-		
-		textViewAccountTitle.setText(Long.toString(accountID));
 		src = new RealDataSource(this);
 	}
 	
@@ -43,7 +50,11 @@ public class AccountDetailActivity extends Activity {
 		super.onResume();
 		src.open();
 		
-		textViewAccountType.setText(src.getAccountWithID(accountID).toString());
+		account = src.getAccountWithID(accountID);
+		textViewAccountTitle.setText(account.getAccountName());
+		textViewAccountType.setText(account.getAccountType().toString() + " " + account.getInterestRate() + "%");
+		transactionList = Arrays.asList(src.getTransactionsForAccount(accountID));
+		listViewTransactions.setAdapter(new TransactionAdapter(this, transactionList));
 		
 	};
 	
@@ -52,6 +63,7 @@ public class AccountDetailActivity extends Activity {
 		super.onPause();
 		src.close();
 	};
+
 
 	/**
 	 * Set up the {@link android.app.ActionBar}.
@@ -66,7 +78,7 @@ public class AccountDetailActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.account_detail, menu);
-		return true;
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override

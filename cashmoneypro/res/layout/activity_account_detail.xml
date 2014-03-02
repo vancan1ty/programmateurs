@@ -16,7 +16,7 @@
    	    >
 
     <TextView
-        android:id="@+id/textViewAccountType"
+        android:id="@+id/textViewAccountTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -25,7 +25,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/textViewAccountTitle"
+        android:id="@+id/textViewAccountType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -43,5 +43,4 @@
     </ListView>
    	    
    	    
-
 </LinearLayout>

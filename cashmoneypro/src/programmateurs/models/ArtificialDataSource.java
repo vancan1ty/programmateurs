@@ -176,11 +176,11 @@ public class ArtificialDataSource implements DataSourceInterface {
 	@Override
 	public Transaction addTransactionToDB(long accountID,
 			TRANSACTION_TYPE transactionType, long transactionAmount, Date transactionDate,
-			Date timestamp, boolean rolledback, Category[] categories) {
+			boolean rolledback, Category[] categories) {
 		long lastTransactionID = transactions.get(transactions.size()-1).getTransactionID();
 
 		Transaction transaction = new Transaction(lastTransactionID+1,accountID,transactionType,
-				transactionAmount, transactionDate,timestamp,rolledback,categories);
+				transactionAmount, transactionDate,new Date(), rolledback,categories);
 		transactions.add(transaction);
 		return transaction;
 	}
