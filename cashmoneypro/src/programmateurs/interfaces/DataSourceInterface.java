@@ -42,6 +42,16 @@ public interface DataSourceInterface {
 	public User getUser(String username);
 	
 	/**
+	 * Verifies that given password is the password in the database for
+	 * the given username.
+	 * 
+	 * @param username
+	 * @param password
+	 * @return true if given username/password combination corresponds to database
+	 */
+	public boolean isUserInDB(String username, String password);
+	
+	/**
 	 * returns a list of all accounts owned by a given user
 	 * @param userID
 	 * @return list of accounts owned by user
@@ -112,5 +122,9 @@ public interface DataSourceInterface {
 	public Category addCategoryToDB(long userID, String categoryName);
 
 	User updateUser(User user);
-
+	
+	/**
+	 * @author Pavel
+	 */
+	public Transaction[] getTransactionsForUser(long userID);
 }

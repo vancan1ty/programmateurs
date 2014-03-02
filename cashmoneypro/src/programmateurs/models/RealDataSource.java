@@ -57,6 +57,7 @@ public class RealDataSource implements DataSourceInterface {
 		return UsersDAO.getUsers(db);
 	}
 	
+	@Override
 	public User getUser(String username){
 		for(User user: getUsers()){
 			if(user.getUsername().equalsIgnoreCase(username))
@@ -65,6 +66,7 @@ public class RealDataSource implements DataSourceInterface {
 		return null;
 	}
 	
+	@Override
 	public boolean isUserInDB(String username, String password) {
 		return UsersDAO.isUserInDB(db, username, password);
 	}
@@ -89,6 +91,11 @@ public class RealDataSource implements DataSourceInterface {
 		return TransactionsDAO.getTransactionsForAccount(db, accountID);
 	}
 
+	@Override
+	public Transaction[] getTransactionsForUser(long userID) {//Pavel
+		return TransactionsDAO.getTransactionsForUser(db, userID);
+	}
+	
 	@Override
 	public User addUserToDB(String username, String passhash, String first,
 			String last, String email) {
