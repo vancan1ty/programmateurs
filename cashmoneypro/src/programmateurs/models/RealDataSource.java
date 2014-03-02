@@ -75,6 +75,12 @@ public class RealDataSource implements DataSourceInterface {
 	public User updateUser(User user) {
 		return UsersDAO.updateUser(db, user);
 	}
+	
+	@Override
+	public Account getAccountWithID(long accountID) {
+		return AccountsDAO.getAccountWithID(db, accountID);
+		
+	}
 
 	@Override
 	public Account[] getAccountsForUser(long userID) {

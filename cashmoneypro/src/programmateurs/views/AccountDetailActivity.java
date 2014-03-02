@@ -43,6 +43,8 @@ public class AccountDetailActivity extends Activity {
 		super.onResume();
 		src.open();
 		
+		textViewAccountType.setText(src.getAccountWithID(accountID).toString());
+		
 	};
 	
 	@Override
