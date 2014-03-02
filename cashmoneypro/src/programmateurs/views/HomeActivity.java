@@ -62,7 +62,7 @@ public class HomeActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_home2);
+		setContentView(R.layout.activity_home);
 		
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
@@ -107,14 +107,14 @@ public class HomeActivity extends FragmentActivity {
 			Fragment fragment;
 			if (position == 0) {
 				fragment = new AccountFragment();
-			}
-			else {
+			} else if (position == 1) {
+				fragment = new TransactionHistoryFragment();
+			} else {
 				fragment = new DummySectionFragment();
 				Bundle args = new Bundle();
 				args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
 				fragment.setArguments(args);
 			}
-
 			return fragment;
 		}
 
@@ -129,11 +129,11 @@ public class HomeActivity extends FragmentActivity {
 			Locale l = Locale.getDefault();
 			switch (position) {
 			case 0:
-				return getString(R.string.title_section1).toUpperCase(l);
+				return getString(R.string.title_accounts).toUpperCase(l);
 			case 1:
-				return getString(R.string.title_section2).toUpperCase(l);
+				return getString(R.string.title_history).toUpperCase(l);
 			case 2:
-				return getString(R.string.title_section3).toUpperCase(l);
+				return getString(R.string.title_reports).toUpperCase(l);
 			}
 			return null;
 		}
