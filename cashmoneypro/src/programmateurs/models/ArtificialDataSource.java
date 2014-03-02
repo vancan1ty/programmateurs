@@ -203,5 +203,10 @@ public class ArtificialDataSource implements DataSourceInterface {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public Transaction[] getTransactionsForUser(long userID) {//Pavel
+		return null;
+	}
 
 }
