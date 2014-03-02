@@ -100,6 +100,17 @@ public class ArtificialDataSource implements DataSourceInterface {
 		}
 		return null;
 	}
+
+	@Override
+	public Account getAccountWithID(long accountID) {
+		for (Account acct : accounts) {
+			if (acct.getAccountID() == accountID) {
+				return acct;
+			}
+		}
+		return null;
+	}
+
 	@Override
 	public Account[] getAccountsForUser(long userID) {
 		//Case in point, why I can't wait for java 8 
@@ -208,5 +219,6 @@ public class ArtificialDataSource implements DataSourceInterface {
 	public Transaction[] getTransactionsForUser(long userID) {//Pavel
 		return null;
 	}
+
 
 }

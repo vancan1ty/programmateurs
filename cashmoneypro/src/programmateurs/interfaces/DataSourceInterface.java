@@ -51,6 +51,14 @@ public interface DataSourceInterface {
 	 */
 	public boolean isUserInDB(String username, String password);
 	
+
+	/**
+	 * retrieves an account with the given id, or null if none exists.
+	 * @param accountID
+	 * @return
+	 */
+	public Account getAccountWithID(long accountID);
+
 	/**
 	 * returns a list of all accounts owned by a given user
 	 * @param userID
@@ -124,7 +132,9 @@ public interface DataSourceInterface {
 	User updateUser(User user);
 	
 	/**
+	 * retrieves transactions associated with a given user.
 	 * @author Pavel
 	 */
 	public Transaction[] getTransactionsForUser(long userID);
+
 }
