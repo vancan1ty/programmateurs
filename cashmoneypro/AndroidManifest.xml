@@ -72,7 +72,7 @@
             android:label="@string/title_activity_admin" >
         </activity>
         <activity
-            android:name="programmateurs.views.NewAccount"
+            android:name="programmateurs.views.NewAccountActivity"
             android:label="New Account" >
         </activity>
         <activity

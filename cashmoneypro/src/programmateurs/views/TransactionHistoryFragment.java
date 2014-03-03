@@ -81,11 +81,11 @@ public class TransactionHistoryFragment extends Fragment {
 			
 	  		/**
 	  		 * If the user clicks new account button, the screen transitions 
-	  		 * to NewAccount
+	  		 * to NewAccountActivity
 	  		 */
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(v.getContext(), NewAccount.class);
+				Intent i = new Intent(v.getContext(), NewAccountActivity.class);
 				v.getContext().startActivity(i);
 			}
 		});
