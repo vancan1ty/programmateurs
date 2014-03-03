@@ -44,7 +44,7 @@ public class AccountDetailActivity extends Activity {
 		
 		Bundle extras= getIntent().getExtras();
 		accountID = extras.getLong("accountID");
-		src = new ArtificialDataSource();
+		src = new RealDataSource(this);
 	}
 	
 	@Override
