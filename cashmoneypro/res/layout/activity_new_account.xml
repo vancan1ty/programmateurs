@@ -20,7 +20,6 @@
         android:ems="10"
         android:hint="Account Name" 
         >
-        <requestFocus />
 
         </EditText>
 

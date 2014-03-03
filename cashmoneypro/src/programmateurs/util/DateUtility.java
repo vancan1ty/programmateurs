@@ -27,7 +27,7 @@ public class DateUtility {
 	}
 
 	public static long formatDateAsLong(Date date) {
-		return Long.parseLong(mdateFormat.format(date.getTime()));
+		return date.getTime();
 	}
 
 	public static Calendar getCalendarFromFormattedLong(long l) throws ParseException {

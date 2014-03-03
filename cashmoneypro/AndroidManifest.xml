@@ -51,7 +51,6 @@
             android:name="programmateurs.views.AddUserActivity"
             android:label="@string/title_activity_add_user"
             android:windowSoftInputMode="stateVisible|adjustResize" >
-            >
         </activity>
         <activity
             android:name="programmateurs.views.WelcomeActivity"
@@ -63,9 +62,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="programmateurs.views.DepositActivity"
-            android:label="@string/title_activity_deposit"
-            android:windowSoftInputMode="stateVisible|adjustResize" >
+            android:name="programmateurs.views.TransactionScreen"
+            android:label="@string/title_activity_deposit" 
+	        android:windowSoftInputMode="stateVisible|adjustResize">
         </activity>
         <activity
             android:name="programmateurs.views.AdminActivity"

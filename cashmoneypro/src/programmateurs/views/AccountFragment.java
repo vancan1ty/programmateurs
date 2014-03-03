@@ -3,9 +3,10 @@ package programmateurs.views;
 import java.util.ArrayList;
 import java.util.List;
 
-import programmateurs.beans.Transaction;
+import programmateurs.beans.Account;
 import programmateurs.beans.User;
 import programmateurs.models.Anchor;
+import programmateurs.models.ArtificialDataSource;
 import programmateurs.models.RealDataSource;
 import net.programmateurs.R;
 import android.content.Intent;
@@ -21,22 +22,20 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 /**
- * TransactionHistory Fragment class is part of HomeActivity. HomeActivity is an Activity and account
+ * Account Fragment class is part of HomeActivity. HomeActivity is an Activity and account
  * fragment makes up the Accounts tab of Home Activity. 
  * 
- * @author Pavel
+ * @author brent
  * @version 0.0
  */
-public class TransactionHistoryFragment extends Fragment {
-
+public class AccountFragment extends Fragment {
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.
 	 */
 	
-	private static Transaction[] transactionArray;
+	private static Account[] accountArray;
 	Anchor anchor = Anchor.getInstance();
 	private User user;
 	private RealDataSource dbHandler;	 
@@ -44,7 +43,7 @@ public class TransactionHistoryFragment extends Fragment {
 	private TextView nameText;
 	private ListView accountView;
 	
-	private TransactionAdapter adapter; 
+	private AccountsAdapter adapter; 
 	
 	/**
 	 * The onCreateView method creates the view for the fragment. I have 
@@ -81,7 +80,7 @@ public class TransactionHistoryFragment extends Fragment {
 			
 	  		/**
 	  		 * If the user clicks new account button, the screen transitions 
-	  		 * to NewAccountActivity
+	  		 * to NewAccount
 	  		 */
 			@Override
 			public void onClick(View v) {
@@ -105,12 +104,12 @@ public class TransactionHistoryFragment extends Fragment {
 		dbHandler.open();
 		user = anchor.getCurrentUser();
 		dbHandler.getAccountsForUser(user.getUserID()); 
-		transactionArray = dbHandler.getTransactionsForUser(user.getUserID());
-		List<Transaction> transactionList = new ArrayList<Transaction>();
-		for(int i = 0; i<transactionArray.length;i++) {
-			transactionList.add(transactionArray[i]);
+		accountArray = dbHandler.getAccountsForUser(user.getUserID()); 
+		List<Account> accountList = new ArrayList<Account>();
+		for(int i = 0; i<accountArray.length;i++) {
+			accountList.add(accountArray[i]);
 		}
-		adapter = new TransactionAdapter(getActivity(),transactionList);
+		adapter = new AccountsAdapter (getActivity(),accountList);
 		accountView.setAdapter(adapter);		
 		
 		//I'm leaving this for now to test the user. We can remove the "j"
@@ -127,6 +126,4 @@ public class TransactionHistoryFragment extends Fragment {
 		dbHandler.close();
 		super.onPause();
 	}
-
 }
-

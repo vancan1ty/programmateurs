@@ -11,6 +11,7 @@ import net.programmateurs.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +69,7 @@ public class AccountListFragment extends Fragment {
 	  		 */
 	  		@Override
 	  		public void onClick(View v) {
-	  			Intent i = new Intent(v.getContext(), DepositActivity.class);
+	  			Intent i = new Intent(v.getContext(), TransactionScreen.class);
 	  			v.getContext().startActivity(i); 		
 	  						
 	  		}
@@ -102,6 +103,8 @@ public class AccountListFragment extends Fragment {
 		dbHandler = new RealDataSource(getActivity());
 		dbHandler.open();
 		user = anchor.getCurrentUser();
+		Log.d("AccountsListFragment","user: " + user);
+		Log.d("AccountsListFragment","dbHandler: " + dbHandler);
 		dbHandler.getAccountsForUser(user.getUserID()); 
 		accountArray = dbHandler.getAccountsForUser(user.getUserID()); 
 		List<Account> accountList = new ArrayList<Account>();
