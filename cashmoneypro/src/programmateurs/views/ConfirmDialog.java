@@ -7,14 +7,17 @@ import android.content.DialogInterface.OnClickListener;
 import android.widget.EditText;  
   
 /** 
- * helper for Confirm-Dialog creation 
+ * Helper for creating dialogs that prompt for confirmation. Presents text with "ok" and
+ * "cancel" options. 
  * (basically stolen content from PromptDialog, but without the EditText)
- * 
+ * @author Justin
+ * @version 0.1
  */  
 public abstract class ConfirmDialog extends AlertDialog.Builder implements OnClickListener {  
 
   
  /** 
+  * Creates new ConfirDialog for given context using provided title and message.
   * @param context 
   */  
  public ConfirmDialog(Context context, String title, String message) {  
