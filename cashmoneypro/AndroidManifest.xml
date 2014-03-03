@@ -51,7 +51,7 @@
             android:name="programmateurs.views.AddUserActivity"
             android:label="@string/title_activity_add_user"
             android:windowSoftInputMode="stateVisible|adjustResize" >
-            >
+            >
         </activity>
         <activity
             android:name="programmateurs.views.WelcomeActivity"
