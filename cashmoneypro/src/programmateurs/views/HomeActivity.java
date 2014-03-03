@@ -8,9 +8,9 @@ import net.programmateurs.R.layout;
 import net.programmateurs.R.menu;
 import net.programmateurs.R.string;
 
-import programmateurs.models.ArtificialDataSource;
 import programmateurs.beans.Account;
 import programmateurs.beans.User;
+import programmateurs.models.Anchor;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,7 +30,6 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-
 
 /**
  * The class sets up the main screen when the user logs in 
@@ -62,7 +61,7 @@ public class HomeActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_home2);
+		setContentView(R.layout.activity_home);
 		
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
@@ -72,20 +71,25 @@ public class HomeActivity extends FragmentActivity {
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
-
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.home, menu);
-		return true;
+		MenuItem settings = menu.add("Settings");
+		settings.setIntent(new Intent(this, SettingsActivity2.class));
+		MenuItem logout = menu.add("Log Out");
+		logout.setIntent(new Intent(this, WelcomeActivity.class));
+		//getMenuInflater().inflate(R.menu.home, menu);
+		return super.onCreateOptionsMenu(menu); 
 	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent i = new Intent(this,SettingsActivity2.class);
-		this.startActivity(i); 
+		//Log.d("HomeActivity","Title: " + item.getTitle());
+		if (item.getTitle().equals("Log Out")) {
+			Anchor.getInstance().setCurrentUser(null);//NOTE THAT SETTING THE USER TO NULL CAUSES THE PROGRAM TO CRASH IF THE USER HITS THE BACK BUTTON AFTER LOGGING OUT
+		}
+		this.startActivity(item.getIntent());
 		return true;
 	}
 
@@ -106,15 +110,15 @@ public class HomeActivity extends FragmentActivity {
 			// below) with the page number as its lone argument.
 			Fragment fragment;
 			if (position == 0) {
-				fragment = new AccountFragment();
-			}
-			else {
+				fragment = new AccountListFragment();
+			} else if (position == 1) {
+				fragment = new TransactionHistoryFragment();
+			} else {
 				fragment = new DummySectionFragment();
 				Bundle args = new Bundle();
 				args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
 				fragment.setArguments(args);
 			}
-
 			return fragment;
 		}
 
@@ -129,11 +133,11 @@ public class HomeActivity extends FragmentActivity {
 			Locale l = Locale.getDefault();
 			switch (position) {
 			case 0:
-				return getString(R.string.title_section1).toUpperCase(l);
+				return getString(R.string.title_accounts).toUpperCase(l);
 			case 1:
-				return getString(R.string.title_section2).toUpperCase(l);
+				return getString(R.string.title_history).toUpperCase(l);
 			case 2:
-				return getString(R.string.title_section3).toUpperCase(l);
+				return getString(R.string.title_reports).toUpperCase(l);
 			}
 			return null;
 		}

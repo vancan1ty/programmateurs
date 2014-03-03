@@ -55,6 +55,21 @@ public class AccountsDAO {
 		return outL.toArray(new Account[0]);
 	}
 
+	public static Account getAccountWithID(SQLiteDatabase db, long accountID) {
+		
+		Log.d("AccountsDAO","db + " + db);
+		Cursor c = db.rawQuery("SELECT * FROM Accounts WHERE accountid = ?;", 
+				new String[]{Long.toString(accountID)});
+
+
+		c.moveToFirst();
+		Account acct = cursorToAccount(c);
+		// make sure to close the cursor
+		c.close();
+		return acct;
+	}
+
+
 	/**
 	 * adds an account with the associated information to the DB, returns an object representation of it
 	 * @param userID

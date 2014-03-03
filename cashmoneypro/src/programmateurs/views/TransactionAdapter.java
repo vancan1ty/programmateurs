@@ -4,11 +4,10 @@ import java.util.List;
 
 import net.programmateurs.R;
 
-import programmateurs.beans.Account;
+import programmateurs.beans.Transaction;
 import programmateurs.models.Anchor;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,14 +27,14 @@ import android.widget.TextView;
  * @version 0.0
  *
  */
-public class AccountsAdapter extends BaseAdapter {
+public class TransactionAdapter extends BaseAdapter {
 
   private final Activity activity;
-  List<Account> accounts ;
+  List<Transaction> transactions ;
 
-  public AccountsAdapter(Activity activity, List<Account> accounts) {
+  public TransactionAdapter(Activity activity, List<Transaction> transactions) {
     this.activity = activity;
-    this.accounts = accounts;
+    this.transactions = transactions;
   }
 
   @Override
@@ -47,22 +46,19 @@ public class AccountsAdapter extends BaseAdapter {
     TextView header = (TextView) rowView.findViewById(R.id.corqHeader);
     TextView body = (TextView) rowView.findViewById(R.id.corqText);
     ImageView imageView = (ImageView) rowView.findViewById(R.id.corqImage);
-    final Account q = accounts.get(position);
-    String headerText = q.getAccountName();
+    final Transaction q = transactions.get(position);
+    String headerText = q.getTransactionType() + " " + q.getTransactionAmount();
     
     header.setText(headerText);
-    body.setText(q.getAccountType().name() + " \n\n" + q.getInterestRate());
+    body.setText(q.toString());
 
-    imageView.setImageResource(R.drawable.cashmoney_icon);
-    
+    imageView.setImageResource(R.drawable.person_dark);
     
     //onClickListener for each view
     //We can change this to go to an Activity when pressed later. 
     rowView.setOnClickListener(new OnClickListener() {
     	public void onClick(View v) {
-    		Intent i = new Intent(v.getContext(), AccountDetailActivity.class);
-    		i.putExtra("accountID", q.getAccountID());
-    		v.getContext().startActivity(i); 		
+    		Anchor.getInstance().showDialog(activity, "Details", "Transaction details");
     	}
     });
     
@@ -71,12 +67,12 @@ public class AccountsAdapter extends BaseAdapter {
 
   @Override
   public int getCount() {
-	  return accounts.size();
+	  return transactions.size();
   }
 
   @Override
   public Object getItem(int position) {
-	  return accounts.get(position);
+	  return transactions.get(position);
   }
 
   @Override

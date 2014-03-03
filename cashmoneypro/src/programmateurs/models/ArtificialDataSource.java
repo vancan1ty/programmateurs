@@ -81,7 +81,11 @@ public class ArtificialDataSource implements DataSourceInterface {
 			Log.d("ArtificialDataSource", "failed to initialize transactions...");
 		}
 	}
-
+	
+	@Override
+	public boolean isUserInDB(String username, String password){
+		return true;
+	}
 
 
 	@Override
@@ -96,6 +100,17 @@ public class ArtificialDataSource implements DataSourceInterface {
 		}
 		return null;
 	}
+
+	@Override
+	public Account getAccountWithID(long accountID) {
+		for (Account acct : accounts) {
+			if (acct.getAccountID() == accountID) {
+				return acct;
+			}
+		}
+		return null;
+	}
+
 	@Override
 	public Account[] getAccountsForUser(long userID) {
 		//Case in point, why I can't wait for java 8 
@@ -161,11 +176,11 @@ public class ArtificialDataSource implements DataSourceInterface {
 	@Override
 	public Transaction addTransactionToDB(long accountID,
 			TRANSACTION_TYPE transactionType, long transactionAmount, Date transactionDate,
-			Date timestamp, boolean rolledback, Category[] categories) {
+			boolean rolledback, Category[] categories) {
 		long lastTransactionID = transactions.get(transactions.size()-1).getTransactionID();
 
 		Transaction transaction = new Transaction(lastTransactionID+1,accountID,transactionType,
-				transactionAmount, transactionDate,timestamp,rolledback,categories);
+				transactionAmount, transactionDate,new Date(), rolledback,categories);
 		transactions.add(transaction);
 		return transaction;
 	}
@@ -199,5 +214,11 @@ public class ArtificialDataSource implements DataSourceInterface {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public Transaction[] getTransactionsForUser(long userID) {//Pavel
+		return null;
+	}
+
 
 }

@@ -40,7 +40,7 @@ import android.os.AsyncTask;
 public class Anchor {
 	private static Anchor instance;	
 	private User currentUser;
-	public static final boolean TEST_MODE = false;
+	public static final boolean TEST_MODE = true;
 	
 	
 	/**

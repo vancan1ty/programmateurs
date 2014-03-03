@@ -96,12 +96,12 @@ public class TransactionScreen extends Activity {
 	  					number *= -1;
 	  					enumType = TRANSACTION_TYPE.WITHDRAWAL;
 	  					//Get accountID from clicking the list view and going to this activity
-	  					dbHandler.addTransactionToDB(accounts[0].getAccountID(), enumType, number, cal.getTime(), currentDate, false, null);
+	  					dbHandler.addTransactionToDB(accounts[0].getAccountID(), enumType, number, cal.getTime(), false, null);
 
 	  				}
 	  				else {
 	  					enumType = TRANSACTION_TYPE.DEPOSIT;
-	  					dbHandler.addTransactionToDB(accounts[0].getAccountID(), enumType, number, cal.getTime(), currentDate, false, null);
+	  					dbHandler.addTransactionToDB(accounts[0].getAccountID(), enumType, number, cal.getTime(), false, null);
 	  				}
 		  			v.getContext().startActivity(i);
 	  			}
@@ -135,12 +135,13 @@ public class TransactionScreen extends Activity {
 	 * @return
 	 */
 	private boolean validDate(Calendar cal) {
-		if(currentDate.getTime() > cal.getTime().getTime()) { 
+		return true;
+		/*if(currentDate.getTime() > cal.getTime().getTime()) { 
 			return true;
 		}
 		System.out.println(currentDate.getTime());
 		System.out.println(cal.getTime().getTime());
-		return false;
+		return false;*/
 	}
 
 	@Override

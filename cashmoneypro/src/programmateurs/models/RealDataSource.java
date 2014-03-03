@@ -57,6 +57,7 @@ public class RealDataSource implements DataSourceInterface {
 		return UsersDAO.getUsers(db);
 	}
 	
+	@Override
 	public User getUser(String username){
 		for(User user: getUsers()){
 			if(user.getUsername().equalsIgnoreCase(username))
@@ -65,6 +66,7 @@ public class RealDataSource implements DataSourceInterface {
 		return null;
 	}
 	
+	@Override
 	public boolean isUserInDB(String username, String password) {
 		return UsersDAO.isUserInDB(db, username, password);
 	}
@@ -72,6 +74,12 @@ public class RealDataSource implements DataSourceInterface {
 	@Override
 	public User updateUser(User user) {
 		return UsersDAO.updateUser(db, user);
+	}
+	
+	@Override
+	public Account getAccountWithID(long accountID) {
+		return AccountsDAO.getAccountWithID(db, accountID);
+		
 	}
 
 	@Override
@@ -89,6 +97,11 @@ public class RealDataSource implements DataSourceInterface {
 		return TransactionsDAO.getTransactionsForAccount(db, accountID);
 	}
 
+	@Override
+	public Transaction[] getTransactionsForUser(long userID) {//Pavel
+		return TransactionsDAO.getTransactionsForUser(db, userID);
+	}
+	
 	@Override
 	public User addUserToDB(String username, String passhash, String first,
 			String last, String email) {
@@ -109,14 +122,21 @@ public class RealDataSource implements DataSourceInterface {
 	@Override
 	public Transaction addTransactionToDB(long accountID,
 			TRANSACTION_TYPE transactionType, long transactionAmount,
-			Date transactionDate, Date timestamp, boolean rolledback,
+			Date transactionDate, boolean rolledback,
 			Category[] categories) {
-		return TransactionsDAO.addTransactionToDB(db, accountID, transactionType, transactionAmount, transactionDate, timestamp, rolledback);
+		return TransactionsDAO.addTransactionToDB(db, accountID, transactionType, transactionAmount, transactionDate, rolledback);
 	}
 
 	@Override
 	public Category addCategoryToDB(long userID, String categoryName) {
 		return CategoriesDAO.addCategoryForDB(db, userID, categoryName);
+	}
+	
+	public void deleteAllFromDB() {
+		db.execSQL("delete from transactions");
+		db.execSQL("delete from categories");
+		db.execSQL("delete from accounts");
+		db.execSQL("delete from users");
 	}
 
 }

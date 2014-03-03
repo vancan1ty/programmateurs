@@ -18,7 +18,18 @@ import android.content.Intent;
 import java.util.Random;
 import programmateurs.beans.User;
 import programmateurs.models.Anchor;
+import programmateurs.interfaces.DataSourceInterface;
 
+/**
+ * AdminActivity is the page that the admin is taken to immediately upon
+ * logging in. Provides a way for the admin to select an account to enable
+ * password reset for and the button which he actually clicks to enable the reset.
+ * Currently relies on the fact that the user will have a settings screen at some
+ * point that will allow them to permanently  change the password.
+ * 
+ * @author Justin
+ * @version 0.1
+ */
 public class AdminActivity extends Activity {
 	Button resetButton;
 	Button logoutButton;
@@ -29,6 +40,12 @@ public class AdminActivity extends Activity {
 	Anchor anchor = Anchor.getInstance();
 	
 	
+	/**
+	 * Displays an editable text field (where admin should input username of
+	 * user desiring password reset), button to enable reset (creates temporary password,
+	 * displays that password), and button to logout.
+	 * 
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,14 +78,8 @@ public class AdminActivity extends Activity {
 					public boolean onOkClicked(String input){
 						User user = dbHandler.getUser(username);
 						if(username!=null && user!=null){
-							Random rand = new Random();
-							String temp = "";
-							for(int i=0; i<5; i++)
-								temp+= rand.nextInt(10); //build random temp password
-							user.setPasshash(temp);
-							dbHandler.updateUser(user);
+							String temp = setTempPassword(user,dbHandler);
 							anchor.showDialog(me,"Password Reset","Password for "+username+" temporarily set to "+temp);
-							
 						} else{
 							anchor.showDialog(me,"Password Reset Error","Given user does not exist." );
 						}
@@ -79,8 +90,25 @@ public class AdminActivity extends Activity {
 			}
 		});
 	}
-				
-
+	
+	/**
+	 * Creates a random 5-digit password for given user and resets that
+	 * user's password in the given database. (Does no quality assurance)
+	 * 
+	 * @param user User whose password is being reset
+	 * @param db the DataSource containing the login information to update
+	 * @return password that User's password is temporarily set to
+	 */
+	private String setTempPassword(User user, DataSourceInterface db){
+		Random rand = new Random();
+		String temp = "";
+		for(int i=0; i<5; i++)
+			temp+= rand.nextInt(10); //build random temp password
+		user.setPasshash(temp);
+		db.updateUser(user);
+		return temp;
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

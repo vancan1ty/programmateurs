@@ -58,7 +58,7 @@ public class TransactionsDAO {
 	public static Transaction[] getTransactionsForAccount(SQLiteDatabase db, long accountID) {
 		
 		Cursor c = db.rawQuery(
-					"SELECT transactionID, accountID, userID, transaction_type, transaction_amount, transaction_date, timestamp, rolledback " +
+					"SELECT transactionID, T.accountID, userID, transaction_type, transaction_amount, transaction_date, timestamp, rolledback " +
 					"	FROM transactions AS T JOIN Accounts AS A WHERE T.accountID = ? AND T.accountID = A.accountID;", 
 				new String[]{Long.toString(accountID)});
 		List<Transaction> outL = new ArrayList<Transaction>();
@@ -85,19 +85,73 @@ public class TransactionsDAO {
 	 * adds a transaction with the associated information to the DB, returns an object representation of it
 	 */
 	public static Transaction addTransactionToDB(SQLiteDatabase db, long accountID, Transaction.TRANSACTION_TYPE transactionType,
-			long transactionAmount, Date transactionDate, Date timestamp, boolean rolledback) {
+			long transactionAmount, Date transactionDate, boolean rolledback) {
 		ContentValues toInsert = new ContentValues();
 		toInsert.put("accountID", accountID);
 		toInsert.put("transaction_type", transactionType.name());
 		toInsert.put("transaction_amount", transactionAmount);
 		toInsert.put("transaction_date", DateUtility.formatDateAsLong(transactionDate));
-		toInsert.put("timestamp", DateUtility.formatDateAsLong(transactionDate));
 		toInsert.put("rolledback", rolledback ? 1 : 0);
-		long transactionID = db.insert("accounts", null, toInsert);
+		long transactionID = db.insert("transactions", null, toInsert);
 		Category[] categories = CategoriesDAO.getCategoriesForTransaction(db, transactionID);
-		Transaction out = new Transaction(transactionID,accountID,transactionType,transactionAmount,
-				transactionDate,timestamp,rolledback,categories);
-		return out;
+		//Transaction thetrans = getTransactionWithID(db, transactionID);
+		Transaction thetrans = new Transaction(transactionID, accountID, transactionType, transactionAmount, transactionDate, new Date(), rolledback, categories);
+		return thetrans;
 	}
 
+	/**
+	 * returns a list of all transactions belonging to a certain user
+	 * @param userID
+	 * @return list of accounts owned by user
+	 * @author Pavel
+	 */
+	public static Transaction[] getTransactionsForUser(SQLiteDatabase db, long userID) {
+		
+		Cursor c = db.rawQuery(
+					"SELECT transactionID, T.accountID, userID, transaction_type, transaction_amount, transaction_date, timestamp, rolledback " +
+					"	FROM transactions AS T JOIN Accounts AS A WHERE A.userID = ? AND T.accountID = A.accountID;", 
+					
+					
+					new String[]{Long.toString(userID)});
+		List<Transaction> outL = new ArrayList<Transaction>();
+
+		c.moveToFirst();
+		while (!c.isAfterLast()) {
+			Transaction transaction;
+			
+			try {
+				transaction = cursorToTransaction(c, db);
+			} catch (ParseException e) {
+				transaction = null;
+				e.printStackTrace();
+			}
+			outL.add(transaction);
+			c.moveToNext();
+		}
+		// make sure to close the cursor
+		c.close();
+		return outL.toArray(new Transaction[0]);
+	}
+
+	public static Transaction getTransactionWithID(SQLiteDatabase db, long transactionID) {
+		
+		Cursor c = db.rawQuery(
+					"SELECT transactionID, T.accountID, userID, transaction_type, transaction_amount, transaction_date, timestamp, rolledback " +
+					"	FROM transactions AS T JOIN Accounts AS A WHERE T.transactionID = ? AND T.accountID = A.accountID;", 
+					new String[]{Long.toString(transactionID)});
+
+		c.moveToFirst();
+		Transaction out;
+			try {
+				out = cursorToTransaction(c, db);
+			} catch (Exception e) {
+				out = null;
+				e.printStackTrace();
+			}
+		// make sure to close the cursor
+		c.close();
+		return out;
+	}
+	
+	
 }

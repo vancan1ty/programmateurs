@@ -49,9 +49,10 @@
         </activity>
         <activity
             android:name="programmateurs.views.AddUserActivity"
-            android:label="@string/title_activity_add_user" 
-	        android:windowSoftInputMode="stateVisible|adjustResize">
+            android:label="@string/title_activity_add_user"
+            android:windowSoftInputMode="stateVisible|adjustResize" >
             >
+
         </activity>
         <activity
             android:name="programmateurs.views.WelcomeActivity"
@@ -74,6 +75,18 @@
         <activity
             android:name="programmateurs.views.NewAccountActivity"
             android:label="New Account">
+        </activity>
+        <activity
+            android:name="programmateurs.views.TransactionHistoryFragment"
+            android:label="@string/title_activity_transaction_history_fragment" >
+        </activity>
+        <activity
+            android:name="programmateurs.views.AccountDetailActivity"
+            android:label="@string/title_activity_account_detail"
+            android:parentActivityName="programmateurs.views.HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="programmateurs.views.HomeActivity" />
         </activity>
     </application>
 

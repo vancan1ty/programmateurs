@@ -42,6 +42,24 @@ public interface DataSourceInterface {
 	public User getUser(String username);
 	
 	/**
+	 * Verifies that given password is the password in the database for
+	 * the given username.
+	 * 
+	 * @param username
+	 * @param password
+	 * @return true if given username/password combination corresponds to database
+	 */
+	public boolean isUserInDB(String username, String password);
+	
+
+	/**
+	 * retrieves an account with the given id, or null if none exists.
+	 * @param accountID
+	 * @return
+	 */
+	public Account getAccountWithID(long accountID);
+
+	/**
 	 * returns a list of all accounts owned by a given user
 	 * @param userID
 	 * @return list of accounts owned by user
@@ -98,7 +116,7 @@ public interface DataSourceInterface {
 	 */
 	public Transaction addTransactionToDB(long accountID,
 			TRANSACTION_TYPE transactionType, long transactionAmount,
-			Date transactionDate, Date timestamp, boolean rolledback,
+			Date transactionDate, boolean rolledback,
 			Category[] categories);
 
 
@@ -112,5 +130,11 @@ public interface DataSourceInterface {
 	public Category addCategoryToDB(long userID, String categoryName);
 
 	User updateUser(User user);
+	
+	/**
+	 * retrieves transactions associated with a given user.
+	 * @author Pavel
+	 */
+	public Transaction[] getTransactionsForUser(long userID);
 
 }
