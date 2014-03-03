@@ -69,7 +69,7 @@ public class AccountFragment extends Fragment {
 	  		 */
 	  		@Override
 	  		public void onClick(View v) {
-	  			Intent i = new Intent(v.getContext(), DepositActivity.class);
+	  			Intent i = new Intent(v.getContext(), TransactionScreen.class);
 	  			v.getContext().startActivity(i); 		
 	  						
 	  		}
@@ -84,7 +84,7 @@ public class AccountFragment extends Fragment {
 	  		 */
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(v.getContext(), NewAccount.class);
+				Intent i = new Intent(v.getContext(), NewAccountActivity.class);
 				v.getContext().startActivity(i);
 			}
 		});

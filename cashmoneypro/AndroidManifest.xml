@@ -63,7 +63,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="programmateurs.views.DepositActivity"
+            android:name="programmateurs.views.TransactionScreen"
             android:label="@string/title_activity_deposit" 
 	        android:windowSoftInputMode="stateVisible|adjustResize">
         </activity>
@@ -72,7 +72,7 @@
             android:label="@string/title_activity_admin" >
         </activity>
         <activity
-            android:name="programmateurs.views.NewAccount"
+            android:name="programmateurs.views.NewAccountActivity"
             android:label="New Account">
         </activity>
     </application>

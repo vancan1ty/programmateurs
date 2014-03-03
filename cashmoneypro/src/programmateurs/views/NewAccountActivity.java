@@ -30,7 +30,7 @@ import programmateurs.beans.Account;
  * @author brent
  * @version 0.0
  */
-public class NewAccount extends Activity {
+public class NewAccountActivity extends Activity {
 
 	private User user;
 	private RealDataSource dbHandler;
