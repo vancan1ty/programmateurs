@@ -26,9 +26,17 @@ public class WelcomeActivity extends Activity {
 	private RealDataSource src;
 
 	@Override
+	public void onBackPressed(){
+		//This method intentionally does nothing. Overridden to prevent user from
+		//doing something stupid like hitting back after logging out and breaking
+		//our code.
+	}
+	
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
+		anchor.setCurrentUser(null);
 		buttonLogin = (Button) findViewById(R.id.buttontologin);
 		buttonRegister = (Button) findViewById(R.id.buttontoregister);
 		

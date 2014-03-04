@@ -36,7 +36,7 @@ import android.widget.Toast;
  * username and password
  * 
  * @author currell
- *
+ * @verison 0.1
  */
 public class LoginActivity extends Activity {
 	
@@ -93,6 +93,14 @@ public class LoginActivity extends Activity {
 			
 		});
 		
+	}
+	
+	/**
+	 * Forces the back button to take the user back to the welcome screen
+	 * when pressed during LoginActivity (to prevent weird user-hacks)
+	 */
+	public void onBackPressed(){
+		startActivity(new Intent(this,WelcomeActivity.class));
 	}
 
 	/**
