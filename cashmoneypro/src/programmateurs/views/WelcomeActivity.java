@@ -38,7 +38,7 @@ public class WelcomeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
-		anchor.setCurrentUser(null);
+//		anchor.setCurrentUser(null);
 		buttonLogin = (Button) findViewById(R.id.buttontologin);
 		buttonRegister = (Button) findViewById(R.id.buttontoregister);
 		

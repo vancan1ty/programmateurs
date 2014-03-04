@@ -32,7 +32,8 @@ public class DateUtility {
 
 	public static Calendar getCalendarFromFormattedLong(long l) throws ParseException {
 			Calendar c = Calendar.getInstance();
-			c.setTime(mdateFormat.parse(String.valueOf(l)));
+			Date d = new Date(l);
+			c.setTime(d);
 			return c;
 	}
 	

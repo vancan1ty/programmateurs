@@ -64,7 +64,7 @@ public class HomeActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
 		anchor = Anchor.getInstance();
-		this.setTitle("Cash Money Pro -- "+ anchor.getCurrentUser().getFirst());
+		this.setTitle(anchor.getCurrentUser().getFirst());
 		
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
@@ -90,9 +90,9 @@ public class HomeActivity extends FragmentActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		//Log.d("HomeActivity","Title: " + item.getTitle());
 		if (item.getTitle().equals("Log Out")) {
-			Anchor.getInstance().setCurrentUser(null);//NOTE THAT SETTING THE USER TO NULL CAUSES THE PROGRAM TO CRASH IF THE USER HITS THE BACK BUTTON AFTER LOGGING OUT
+//			Anchor.getInstance().setCurrentUser(null);//NOTE THAT SETTING THE USER TO NULL CAUSES THE PROGRAM TO CRASH IF THE USER HITS THE BACK BUTTON AFTER LOGGING OUT
+			this.startActivity(item.getIntent());
 		}
-		this.startActivity(item.getIntent());
 		return true;
 	}
 

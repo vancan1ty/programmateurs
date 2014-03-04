@@ -6,6 +6,7 @@ import java.util.List;
 
 import programmateurs.beans.Account;
 import programmateurs.beans.Transaction;
+import programmateurs.beans.Transaction.TRANSACTION_TYPE;
 import programmateurs.interfaces.DataSourceInterface;
 import programmateurs.models.ArtificialDataSource;
 import programmateurs.models.RealDataSource;
@@ -14,8 +15,12 @@ import net.programmateurs.R.layout;
 import net.programmateurs.R.menu;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -29,6 +34,8 @@ public class AccountDetailActivity extends Activity {
 	ListView listViewTransactions;
 	long accountID;
 	Account account;
+	Button buttonDeposit;
+	Button buttonWithdraw;
 	List<Transaction> transactionList = new ArrayList<Transaction>();
 
 	@Override
@@ -41,10 +48,33 @@ public class AccountDetailActivity extends Activity {
 		textViewAccountTitle = (TextView) findViewById(R.id.textViewAccountTitle);
 		textViewAccountType = (TextView) findViewById(R.id.textViewAccountType);
 		listViewTransactions = (ListView) findViewById(R.id.listViewTransactions);
+		buttonDeposit = (Button) findViewById(R.id.button_deposit);
+		buttonWithdraw = (Button) findViewById(R.id.button_withdraw);
+		
+		buttonDeposit.setOnClickListener( new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				gotoTransactionScreen(TRANSACTION_TYPE.DEPOSIT);
+			}
+		});
+
+		buttonWithdraw.setOnClickListener( new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				gotoTransactionScreen(TRANSACTION_TYPE.WITHDRAWAL);
+			}
+		});
 		
 		Bundle extras= getIntent().getExtras();
 		accountID = extras.getLong("accountID");
 		src = new RealDataSource(this);
+	}
+	
+	public void gotoTransactionScreen(TRANSACTION_TYPE type) {
+	  			Intent i = new Intent(this, TransactionScreen.class);
+	  			i.putExtra("transaction_type", TRANSACTION_TYPE.DEPOSIT);
+	  			i.putExtra("account_id", this.accountID);
+	  			this.startActivity(i);
 	}
 	
 	@Override

@@ -11,6 +11,7 @@ import net.programmateurs.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,6 @@ public class TransactionHistoryFragment extends Fragment {
 	Anchor anchor = Anchor.getInstance();
 	private User user;
 	private RealDataSource dbHandler;	 
-	private Button depositFunds, newAccount;
 	private ListView accountView;
 	
 	private TransactionAdapter adapter; 
@@ -53,41 +53,11 @@ public class TransactionHistoryFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_account_listing,
+		View rootView = inflater.inflate(R.layout.fragment_global_feed,
 				container, false);
 		
-		depositFunds = (Button) rootView.findViewById(R.id.depositFunds);
-		newAccount = (Button) rootView.findViewById(R.id.newAccount);
 		accountView = (ListView) rootView.findViewById(R.id.listViewAccounts);
 	    
-	  	depositFunds.setOnClickListener(new OnClickListener() {
-
-	  		/**
-	  		 * If the user clicks the deposit funds button, the screen transitions
-	  		 * to DepositActivity
-	  		 */
-	  		@Override
-	  		public void onClick(View v) {
-	  			Intent i = new Intent(v.getContext(), TransactionScreen.class);
-	  			v.getContext().startActivity(i); 		
-	  						
-	  		}
-	  					
-	  	});
-	  	
-	  	newAccount.setOnClickListener(new OnClickListener() {
-			
-	  		/**
-	  		 * If the user clicks new account button, the screen transitions 
-	  		 * to NewAccountActivity
-	  		 */
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(v.getContext(), NewAccountActivity.class);
-				v.getContext().startActivity(i);
-			}
-		});
-
 		return rootView;
 	}
 	
@@ -108,6 +78,7 @@ public class TransactionHistoryFragment extends Fragment {
 		for(int i = 0; i<transactionArray.length;i++) {
 			transactionList.add(transactionArray[i]);
 		}
+		Log.d("TransactionsHistoryScreen","transactions: " + transactionArray);
 		adapter = new TransactionAdapter(getActivity(),transactionList);
 		accountView.setAdapter(adapter);		
 		

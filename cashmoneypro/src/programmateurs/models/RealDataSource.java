@@ -120,11 +120,12 @@ public class RealDataSource implements DataSourceInterface {
 	}
 
 	@Override
-	public Transaction addTransactionToDB(long accountID,
+	public Transaction addTransactionToDB(long accountID, String transactionName,
 			TRANSACTION_TYPE transactionType, long transactionAmount,
-			Date transactionDate, boolean rolledback,
+			Date transactionDate, String transactionComment, boolean rolledback,
 			Category[] categories) {
-		return TransactionsDAO.addTransactionToDB(db, accountID, transactionType, transactionAmount, transactionDate, rolledback);
+		return TransactionsDAO.addTransactionToDB(db, accountID, transactionName, transactionType, 
+				transactionAmount, transactionDate, transactionComment, rolledback);
 	}
 
 	@Override

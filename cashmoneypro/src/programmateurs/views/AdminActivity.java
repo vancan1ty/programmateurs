@@ -62,7 +62,7 @@ public class AdminActivity extends Activity {
 		logoutButton.setOnClickListener(new OnClickListener(){
 			public void onClick(View v){
 				Intent i = new Intent(v.getContext(), WelcomeActivity.class);
-				anchor.setCurrentUser(null);
+//				anchor.setCurrentUser(null);
 				v.getContext().startActivity(i);
 			}
 		});

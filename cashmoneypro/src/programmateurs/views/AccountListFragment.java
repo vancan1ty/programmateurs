@@ -39,7 +39,7 @@ public class AccountListFragment extends Fragment {
 	Anchor anchor = Anchor.getInstance();
 	private User user;
 	private RealDataSource dbHandler;	 
-	private Button depositFunds, newAccount;
+	private Button newAccount;
 	private ListView accountView;
 	
 	private AccountsAdapter adapter; 
@@ -55,25 +55,10 @@ public class AccountListFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_account_listing,
 				container, false);
 		
-		depositFunds = (Button) rootView.findViewById(R.id.depositFunds);
+		this.setHasOptionsMenu(true);
 		newAccount = (Button) rootView.findViewById(R.id.newAccount);
 		accountView = (ListView) rootView.findViewById(R.id.listViewAccounts);
-	    
-	  	depositFunds.setOnClickListener(new OnClickListener() {
-
-	  		/**
-	  		 * If the user clicks the deposit funds button, the screen transitions
-	  		 * to DepositActivity
-	  		 */
-	  		@Override
-	  		public void onClick(View v) {
-	  			Intent i = new Intent(v.getContext(), TransactionScreen.class);
-	  			v.getContext().startActivity(i); 		
-	  						
-	  		}
-	  					
-	  	});
-	  	
+  	
 	  	newAccount.setOnClickListener(new OnClickListener() {
 			
 	  		/**
@@ -89,6 +74,21 @@ public class AccountListFragment extends Fragment {
 
 		return rootView;
 	}
+	@Override
+	public void onCreateOptionsMenu(android.view.Menu menu, android.view.MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.account_list_fragment, menu);
+			
+	};
+	
+	@Override
+	public boolean onOptionsItemSelected(android.view.MenuItem item) {
+		if (item.getItemId() == R.id.action_add_acount) {
+			
+		}
+		super.onOptionsItemSelected(item);
+		return true;
+	};
 	
 	/**
 	 * The reason why all the database stuff is in the onResume() method

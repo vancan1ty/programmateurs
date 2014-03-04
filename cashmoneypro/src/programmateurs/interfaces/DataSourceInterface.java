@@ -106,18 +106,11 @@ public interface DataSourceInterface {
 	
 	/**
 	 * adds transaction with associated information to the DB, returns an object representation of it.
-	 * @param accountID
-	 * @param transactionType
-	 * @param transactionDate
-	 * @param timestamp
-	 * @param rolledback
-	 * @param categories
-	 * @return
 	 */
-	public Transaction addTransactionToDB(long accountID,
+	public Transaction addTransactionToDB(long accountID, String transactionName,
 			TRANSACTION_TYPE transactionType, long transactionAmount,
-			Date transactionDate, boolean rolledback,
-			Category[] categories);
+			Date transactionDate, String transactionComment,
+			boolean rolledback, Category[] categories);
 
 
 
@@ -136,5 +129,6 @@ public interface DataSourceInterface {
 	 * @author Pavel
 	 */
 	public Transaction[] getTransactionsForUser(long userID);
+
 
 }

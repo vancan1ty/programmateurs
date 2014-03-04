@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import programmateurs.beans.Account;
+import programmateurs.beans.Category;
 import programmateurs.beans.Transaction.TRANSACTION_TYPE;
 import programmateurs.interfaces.DataSourceInterface;
 import programmateurs.models.Anchor;
@@ -40,7 +41,6 @@ public class TransactionScreen extends Activity {
 	
 	private EditText amountText;
 	private DatePicker picker;
-	private Spinner transactionType;
 	private Button buttonTransaction;
 	private Calendar cal = Calendar.getInstance();
 	DateFormat sdf = new SimpleDateFormat();
@@ -51,60 +51,46 @@ public class TransactionScreen extends Activity {
 	Account[] accounts = artificialSource.getAccountsForUser(4);
 	
 	Activity me = this;
-	TRANSACTION_TYPE enumType;
 	
 	//Account account1 = new Account(0, 4, Account.ACCOUNT_TYPE.CHECKING, "berrychecking", 0);
 	
 	Date currentDate = new Date(System.currentTimeMillis());
+	long accountID;
+	TRANSACTION_TYPE transactionType;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_transaction_screen);
 		
+		Bundle extras = getIntent().getExtras();
+		this.accountID = extras.getLong("account_id");
+		this.transactionType = TRANSACTION_TYPE.DEPOSIT;
+		
 		amountText = (EditText) findViewById(R.id.amountNumber);
 		picker = (DatePicker) findViewById(R.id.datePicker);
 		picker.setMaxDate(Calendar.getInstance().getTimeInMillis());
-		transactionType = (Spinner) findViewById(R.id.spinnerTransactionType);
 		buttonTransaction = (Button) findViewById(R.id.buttonTransaction);
-		
-		ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence> (this, android.R.layout.simple_spinner_item);
-		// Specify the layout to use when the list of choices appears
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		
-		adapter.add("Deposit");
-		adapter.add("Withdrawal");
-		adapter.add("Rebalance");		//Add rebalance functionality later
-		
-		transactionType.setAdapter(adapter);
-		
-		
+	
 		buttonTransaction.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 	  			Intent i = new Intent(v.getContext(), HomeActivity.class);
+	  			String transactionName = "testName";
+	  			String transactionComment = "testComment";
 	  			String money = amountText.getText().toString();
 	  			int day = picker.getDayOfMonth();
 	  			int month = picker.getMonth() + 1;
 	  			int year = picker.getYear();
 	  			cal.set(year, month, day);
-	  			String type = transactionType.getSelectedItem().toString();
 	  			if(validTransactionAmount(money) && validDate(cal)) {
 	  				int number = Integer.parseInt(money);
-	  				if(type.equals("Withdrawal")) {
-	  					number *= -1;
-	  					enumType = TRANSACTION_TYPE.WITHDRAWAL;
-	  					//Get accountID from clicking the list view and going to this activity
-	  					dbHandler.addTransactionToDB(accounts[0].getAccountID(), enumType, number, cal.getTime(), false, null);
+	  				dbHandler.addTransactionToDB(accountID, transactionName, transactionType, (long) number, 
+	  						cal.getTime(), transactionComment, false, new Category[0]);
 
-	  				}
-	  				else {
-	  					enumType = TRANSACTION_TYPE.DEPOSIT;
-	  					dbHandler.addTransactionToDB(accounts[0].getAccountID(), enumType, number, cal.getTime(), false, null);
-	  				}
-		  			v.getContext().startActivity(i);
+	  				me.onBackPressed();
 	  			}
 	  			else {
 		  			String errorMessage = "Please resolve the following errors:\n";

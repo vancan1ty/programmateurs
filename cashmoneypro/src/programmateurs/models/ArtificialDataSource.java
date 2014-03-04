@@ -67,16 +67,16 @@ public class ArtificialDataSource implements DataSourceInterface {
 
 		try{
 			Log.d("Artificial","HERE!!!");
-			transaction0 = new Transaction(0,5,TRANSACTION_TYPE.REBALANCE, 233,DateUtility.getDateFromString("3-11-13"), 
-					t0,false,new Category[]{});
-			transaction1 = new Transaction(1,5,TRANSACTION_TYPE.REBALANCE, 542, DateUtility.getDateFromString("3-12-13"), 
+			transaction0 = new Transaction(0,5,"first",TRANSACTION_TYPE.REBALANCE, 233,DateUtility.getDateFromString("3-11-13"), 
+					"bla", t0,false,new Category[]{});
+/*			transaction1 = new Transaction(1,5,TRANSACTION_TYPE.REBALANCE, 542, DateUtility.getDateFromString("3-12-13"), 
 					t1,false,new Category[]{});
 			transaction2 = new Transaction(2,5,TRANSACTION_TYPE.DEPOSIT, 345, DateUtility.getDateFromString("3-13-13"), 
 					t2,false,new Category[]{});
 			transaction3 = new Transaction(3,5,TRANSACTION_TYPE.DEPOSIT, 756, DateUtility.getDateFromString("3-14-13"), 
 					t3,false,new Category[]{});
 			transaction4 = new Transaction(4,5,TRANSACTION_TYPE.REBALANCE, 126, DateUtility.getDateFromString("3-15-13"), 
-					t0,false,new Category[]{});
+					t0,false,new Category[]{}); */
 		} catch (ParseException e) {
 			Log.e("ArtificialDataSource", "failed to initialize transactions...");
 		}
@@ -173,17 +173,7 @@ public class ArtificialDataSource implements DataSourceInterface {
 		return acct;
 	}
 
-	@Override
-	public Transaction addTransactionToDB(long accountID,
-			TRANSACTION_TYPE transactionType, long transactionAmount, Date transactionDate,
-			boolean rolledback, Category[] categories) {
-		long lastTransactionID = transactions.get(transactions.size()-1).getTransactionID();
 
-		Transaction transaction = new Transaction(lastTransactionID+1,accountID,transactionType,
-				transactionAmount, transactionDate,new Date(), rolledback,categories);
-		transactions.add(transaction);
-		return transaction;
-	}
 
 	@Override
 	public Category addCategoryToDB(long userID, String category_name) {
@@ -217,6 +207,15 @@ public class ArtificialDataSource implements DataSourceInterface {
 	
 	@Override
 	public Transaction[] getTransactionsForUser(long userID) {//Pavel
+		return null;
+	}
+
+	@Override
+	public Transaction addTransactionToDB(long accountID,
+			String transactionName, TRANSACTION_TYPE transactionType,
+			long transactionAmount, Date transactionDate,
+			String transactionComment, boolean rolledback, Category[] categories) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
