@@ -56,12 +56,15 @@ public class HomeActivity extends FragmentActivity {
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	ViewPager mViewPager;
+	Anchor anchor;
 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
+		anchor = Anchor.getInstance();
+		this.setTitle("Cash Money Pro -- "+ anchor.getCurrentUser().getFirst());
 		
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.

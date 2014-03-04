@@ -21,7 +21,7 @@ public class DBHelper extends SQLiteOpenHelper {
 //  public static final String COLUMN_ID = "_id";
 //  public static final String COLUMN_COMMENT = "comment";
 
-  private static final int DATABASE_VERSION = 10;
+  private static final int DATABASE_VERSION = 11;
 
   public DBHelper(Context context) {
     super(context, "programmateurs", null, DATABASE_VERSION);
@@ -42,6 +42,9 @@ public class DBHelper extends SQLiteOpenHelper {
     ContentValues toInsert2 = new ContentValues();
     toInsert2.put("username", "test");
     toInsert2.put("passhash", "test");
+    toInsert2.put("first", "tfirst");
+    toInsert2.put("last", "tlast");
+    toInsert2.put("email", "test@test.com");
     database.insert("users", null, toInsert2);
     
   }

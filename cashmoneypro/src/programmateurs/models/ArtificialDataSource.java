@@ -63,23 +63,25 @@ public class ArtificialDataSource implements DataSourceInterface {
 	public ArtificialDataSource() {
 		users = new ArrayList<User>(Arrays.asList(new User[]{user0, user1, user2, user3, user4, user5}));
 		accounts = new ArrayList<Account>(Arrays.asList(new Account[]{account0, account1, account2, account3, account4, account5}));
-		transactions = new ArrayList<Transaction>(Arrays.asList(new Transaction[]{transaction0, transaction1, transaction2, transaction3, transaction4}));
 		categories = new ArrayList<Category>(Arrays.asList(new Category[]{category0, category1}));
 
 		try{
+			Log.d("Artificial","HERE!!!");
 			transaction0 = new Transaction(0,5,TRANSACTION_TYPE.REBALANCE, 233,DateUtility.getDateFromString("3-11-13"), 
 					t0,false,new Category[]{});
 			transaction1 = new Transaction(1,5,TRANSACTION_TYPE.REBALANCE, 542, DateUtility.getDateFromString("3-12-13"), 
 					t1,false,new Category[]{});
-			transaction2 = new Transaction(2,5,TRANSACTION_TYPE.REBALANCE, 345, DateUtility.getDateFromString("3-13-13"), 
+			transaction2 = new Transaction(2,5,TRANSACTION_TYPE.DEPOSIT, 345, DateUtility.getDateFromString("3-13-13"), 
 					t2,false,new Category[]{});
-			transaction3 = new Transaction(3,5,TRANSACTION_TYPE.REBALANCE, 756, DateUtility.getDateFromString("3-14-13"), 
+			transaction3 = new Transaction(3,5,TRANSACTION_TYPE.DEPOSIT, 756, DateUtility.getDateFromString("3-14-13"), 
 					t3,false,new Category[]{});
 			transaction4 = new Transaction(4,5,TRANSACTION_TYPE.REBALANCE, 126, DateUtility.getDateFromString("3-15-13"), 
 					t0,false,new Category[]{});
 		} catch (ParseException e) {
-			Log.d("ArtificialDataSource", "failed to initialize transactions...");
+			Log.e("ArtificialDataSource", "failed to initialize transactions...");
 		}
+
+		transactions = new ArrayList<Transaction>(Arrays.asList(new Transaction[]{transaction0, transaction1, transaction2, transaction3, transaction4}));
 	}
 	
 	@Override
@@ -147,9 +149,7 @@ public class ArtificialDataSource implements DataSourceInterface {
 		List<Transaction> outL = new ArrayList<Transaction>();
 
 		for (Transaction transaction : transactions) {
-			if (transaction.getAccountID() == accountID) {
 				outL.add(transaction);
-			}
 		}
 
 		return outL.toArray(new Transaction[]{});

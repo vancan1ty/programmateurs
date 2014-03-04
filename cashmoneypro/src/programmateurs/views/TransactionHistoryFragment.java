@@ -41,7 +41,6 @@ public class TransactionHistoryFragment extends Fragment {
 	private User user;
 	private RealDataSource dbHandler;	 
 	private Button depositFunds, newAccount;
-	private TextView nameText;
 	private ListView accountView;
 	
 	private TransactionAdapter adapter; 
@@ -59,7 +58,6 @@ public class TransactionHistoryFragment extends Fragment {
 		
 		depositFunds = (Button) rootView.findViewById(R.id.depositFunds);
 		newAccount = (Button) rootView.findViewById(R.id.newAccount);
-		nameText = (TextView) rootView.findViewById(R.id.textViewAccountName);
 		accountView = (ListView) rootView.findViewById(R.id.listViewAccounts);
 	    
 	  	depositFunds.setOnClickListener(new OnClickListener() {
@@ -70,7 +68,7 @@ public class TransactionHistoryFragment extends Fragment {
 	  		 */
 	  		@Override
 	  		public void onClick(View v) {
-	  			Intent i = new Intent(v.getContext(), DepositActivity.class);
+	  			Intent i = new Intent(v.getContext(), TransactionScreen.class);
 	  			v.getContext().startActivity(i); 		
 	  						
 	  		}
@@ -81,11 +79,11 @@ public class TransactionHistoryFragment extends Fragment {
 			
 	  		/**
 	  		 * If the user clicks new account button, the screen transitions 
-	  		 * to NewAccount
+	  		 * to NewAccountActivity
 	  		 */
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(v.getContext(), NewAccount.class);
+				Intent i = new Intent(v.getContext(), NewAccountActivity.class);
 				v.getContext().startActivity(i);
 			}
 		});
@@ -113,9 +111,6 @@ public class TransactionHistoryFragment extends Fragment {
 		adapter = new TransactionAdapter(getActivity(),transactionList);
 		accountView.setAdapter(adapter);		
 		
-		//I'm leaving this for now to test the user. We can remove the "j"
-		//once user.getFirst() and user.getLast() return the appropriate information
-	    nameText.setText(user.getFirst() + " " + user.getLast());
 		super.onResume();
 	}
 

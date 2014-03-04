@@ -92,9 +92,10 @@ public class TransactionsDAO {
 		toInsert.put("transaction_amount", transactionAmount);
 		toInsert.put("transaction_date", DateUtility.formatDateAsLong(transactionDate));
 		toInsert.put("rolledback", rolledback ? 1 : 0);
-		long transactionID = db.insert("accounts", null, toInsert);
+		long transactionID = db.insert("transactions", null, toInsert);
 		Category[] categories = CategoriesDAO.getCategoriesForTransaction(db, transactionID);
-		Transaction thetrans = getTransactionWithID(db, transactionID);
+		//Transaction thetrans = getTransactionWithID(db, transactionID);
+		Transaction thetrans = new Transaction(transactionID, accountID, transactionType, transactionAmount, transactionDate, new Date(), rolledback, categories);
 		return thetrans;
 	}
 
@@ -135,15 +136,15 @@ public class TransactionsDAO {
 	public static Transaction getTransactionWithID(SQLiteDatabase db, long transactionID) {
 		
 		Cursor c = db.rawQuery(
-					"SELECT transactionID, accountID, userID, transaction_type, transaction_amount, transaction_date, timestamp, rolledback " +
-					"	FROM transactions WHERE transactionID = ?;", 
+					"SELECT transactionID, T.accountID, userID, transaction_type, transaction_amount, transaction_date, timestamp, rolledback " +
+					"	FROM transactions AS T JOIN Accounts AS A WHERE T.transactionID = ? AND T.accountID = A.accountID;", 
 					new String[]{Long.toString(transactionID)});
 
 		c.moveToFirst();
 		Transaction out;
 			try {
 				out = cursorToTransaction(c, db);
-			} catch (ParseException e) {
+			} catch (Exception e) {
 				out = null;
 				e.printStackTrace();
 			}

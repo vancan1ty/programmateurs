@@ -1,13 +1,12 @@
-<LinearLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
     tools:context=".AddUserActivity" >
 
     <TextView
@@ -16,56 +15,52 @@
         android:layout_height="wrap_content"
         android:text="Create Account"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-    
-	<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
-    
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-	    android:orientation="vertical"
-        >
+        android:layout_height="wrap_content" >
 
-        <EditText
-            android:id="@+id/inputName"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="First and Last Name" />
+            android:orientation="vertical" >
 
-        <EditText
-            android:id="@+id/inputUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Username" >
+            <EditText
+                android:id="@+id/inputName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="First and Last Name" >
 
-            <requestFocus />
-        </EditText>
+                <requestFocus />
+            </EditText>
 
-        <EditText
-            android:id="@+id/inputPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPassword" />
+            <EditText
+                android:id="@+id/inputEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="Email" />
 
-    <EditText
-        android:id="@+id/inputEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email" />
+            <EditText
+                android:id="@+id/inputUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Username" >
+            </EditText>
 
-</LinearLayout>
+            <EditText
+                android:id="@+id/inputPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:inputType="textPassword" />
+        </LinearLayout>
     </ScrollView>
 
-	<Button
-	    android:id="@+id/buttonLaunchCreateUser"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:text="Create Account" />
+    <Button
+        android:id="@+id/buttonLaunchCreateUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Account" />
 
 </LinearLayout>

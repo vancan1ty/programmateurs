@@ -60,7 +60,7 @@ public class LoginActivity extends Activity {
 		setContentView(R.layout.activity_login);
 
 		dbHandler = new RealDataSource(this);
-		usernameField = (EditText) findViewById(R.id.emailfield);
+		usernameField = (EditText) findViewById(R.id.usernameField);
 		passwordField = (EditText) findViewById(R.id.passwordfield);
 		buttonLogin = (Button) findViewById(R.id.buttonlogin);
 		progress = new ProgressDialog(this);

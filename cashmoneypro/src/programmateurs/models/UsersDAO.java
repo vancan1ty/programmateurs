@@ -23,7 +23,7 @@ public class UsersDAO {
 
   public static final String CREATE_USERS_TABLE = "CREATE TABLE Users"
 		  + " (userID INTEGER PRIMARY KEY AUTOINCREMENT, "
-		  + " username TEXT NOT NULL, "
+		  + " username TEXT NOT NULL COLLATE NOCASE, "
 		  + " passhash TEXT NOT NULL,"
 		  + " first TEXT DEFAULT '',"
 		  + " last TEXT DEFAULT '',"

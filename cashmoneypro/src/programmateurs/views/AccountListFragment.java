@@ -11,6 +11,7 @@ import net.programmateurs.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,6 @@ public class AccountListFragment extends Fragment {
 	private User user;
 	private RealDataSource dbHandler;	 
 	private Button depositFunds, newAccount;
-	private TextView nameText;
 	private ListView accountView;
 	
 	private AccountsAdapter adapter; 
@@ -57,7 +57,6 @@ public class AccountListFragment extends Fragment {
 		
 		depositFunds = (Button) rootView.findViewById(R.id.depositFunds);
 		newAccount = (Button) rootView.findViewById(R.id.newAccount);
-		nameText = (TextView) rootView.findViewById(R.id.textViewAccountName);
 		accountView = (ListView) rootView.findViewById(R.id.listViewAccounts);
 	    
 	  	depositFunds.setOnClickListener(new OnClickListener() {
@@ -68,7 +67,7 @@ public class AccountListFragment extends Fragment {
 	  		 */
 	  		@Override
 	  		public void onClick(View v) {
-	  			Intent i = new Intent(v.getContext(), DepositActivity.class);
+	  			Intent i = new Intent(v.getContext(), TransactionScreen.class);
 	  			v.getContext().startActivity(i); 		
 	  						
 	  		}
@@ -79,11 +78,11 @@ public class AccountListFragment extends Fragment {
 			
 	  		/**
 	  		 * If the user clicks new account button, the screen transitions 
-	  		 * to NewAccount
+	  		 * to NewAccountActivity
 	  		 */
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(v.getContext(), NewAccount.class);
+				Intent i = new Intent(v.getContext(), NewAccountActivity.class);
 				v.getContext().startActivity(i);
 			}
 		});
@@ -102,6 +101,8 @@ public class AccountListFragment extends Fragment {
 		dbHandler = new RealDataSource(getActivity());
 		dbHandler.open();
 		user = anchor.getCurrentUser();
+		Log.d("AccountsListFragment","user: " + user);
+		Log.d("AccountsListFragment","dbHandler: " + dbHandler);
 		dbHandler.getAccountsForUser(user.getUserID()); 
 		accountArray = dbHandler.getAccountsForUser(user.getUserID()); 
 		List<Account> accountList = new ArrayList<Account>();
@@ -111,9 +112,6 @@ public class AccountListFragment extends Fragment {
 		adapter = new AccountsAdapter (getActivity(),accountList);
 		accountView.setAdapter(adapter);
 		
-		//I'm leaving this for now to test the user. We can remove the "j"
-		//once user.getFirst() and user.getLast() return the appropriate information
-	    nameText.setText(user.getFirst() + " " + user.getLast());
 		super.onResume();
 	}
 

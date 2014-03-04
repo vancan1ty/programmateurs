@@ -6,6 +6,8 @@ import java.util.List;
 
 import programmateurs.beans.Account;
 import programmateurs.beans.Transaction;
+import programmateurs.interfaces.DataSourceInterface;
+import programmateurs.models.ArtificialDataSource;
 import programmateurs.models.RealDataSource;
 import net.programmateurs.R;
 import net.programmateurs.R.layout;
@@ -21,7 +23,7 @@ import android.support.v4.app.NavUtils;
 
 public class AccountDetailActivity extends Activity {
 	
-	RealDataSource src;
+	DataSourceInterface src;
 	TextView textViewAccountTitle;
 	TextView textViewAccountType;
 	ListView listViewTransactions;

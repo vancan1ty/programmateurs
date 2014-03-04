@@ -23,14 +23,18 @@ import programmateurs.models.RealDataSource;
 import programmateurs.beans.Account;
 
 /**
+<<<<<<< HEAD
+ * NewAccountActivity allows the user to create a NewAccountActivity with a given 
+=======
  * NewAccount allows the user to create a NewAccount with a given 
+>>>>>>> branch 'master' of https://github.com/vancan1ty/programmateurs.git
  * account name and interest rate. The user can also select if the 
  * account is Checking or Savings.
  * 
  * @author brent
  * @version 0.0
  */
-public class NewAccount extends Activity {
+public class NewAccountActivity extends Activity {
 
 	private User user;
 	private RealDataSource dbHandler;
