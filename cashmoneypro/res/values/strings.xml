@@ -8,6 +8,9 @@
 
     <color name="background">#e6e6e6</color>
     <color name="cerqpurple">#9658C6</color>
+    <color name="cashmoneygreen">#9BED00</color>
+    <color name="cashmoneyred">#FF0000</color>
+    <color name="cashmoneyorange">#FFAA00</color>
 
     <string name="action_profile">Profile</string>
     <string name="action_search">Search</string>

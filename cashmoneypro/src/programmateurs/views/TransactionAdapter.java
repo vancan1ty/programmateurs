@@ -52,7 +52,7 @@ public class TransactionAdapter extends BaseAdapter {
     header.setText(headerText);
     body.setText(q.toString());
 
-    imageView.setImageResource(R.drawable.person_dark);
+    imageView.setImageResource(R.drawable.circle_green);
     
     //onClickListener for each view
     //We can change this to go to an Activity when pressed later. 
