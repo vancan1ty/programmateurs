@@ -16,35 +16,27 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
-        android:id="@+id/emailfield"
-        android:layout_width="wrap_content"
+        android:id="@+id/usernameField"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:ems="10"
         android:hint="Username" >
 
     </EditText>
 
     <EditText
         android:id="@+id/passwordfield"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/emailfield"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
-        android:ems="10"
+        android:layout_below="@+id/usernameField"
         android:hint="Password"
         android:inputType="textPassword" />
 
     <Button
         android:id="@+id/buttonlogin"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/emailfield"
-        android:layout_below="@+id/passwordfield"
-        android:layout_marginTop="72dp"
+        android:layout_alignParentBottom="true"
         android:text="Login" />
 
 

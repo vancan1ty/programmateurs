@@ -17,25 +17,11 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="programmateurs.views.LoginActivity"
+	        android:windowSoftInputMode="stateVisible|adjustResize"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+             >
         </activity>
-        <activity
-            android:name="programmateurs.views.CheckInActivity"
-            android:label="Check In Activity"
-            android:parentActivityName="programmateurs.views.LoginActivity"
-            android:screenOrientation="portrait" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="net.cerq.android_client.views.MainActivity" />
-        </activity>
-        <activity
-            android:name="programmateurs.views.QuipBrowser"
-            android:label="Cerq"
-            android:parentActivityName="programmateurs.views.CheckInActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
+       <activity
             android:name="programmateurs.views.HomeActivity"
             android:label="@string/title_activity_home" >
         </activity>
@@ -72,7 +58,8 @@
         </activity>
         <activity
             android:name="programmateurs.views.NewAccountActivity"
-            android:label="New Account" >
+            android:label="New Account" 
+	        android:windowSoftInputMode="stateVisible|adjustResize">
         </activity>
         <activity
             android:name="programmateurs.views.TransactionHistoryFragment"
