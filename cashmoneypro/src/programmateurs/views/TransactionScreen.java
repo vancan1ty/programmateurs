@@ -65,7 +65,7 @@ public class TransactionScreen extends Activity {
 		
 		Bundle extras = getIntent().getExtras();
 		this.accountID = extras.getLong("account_id");
-		this.transactionType = TRANSACTION_TYPE.DEPOSIT;
+		this.transactionType = (TRANSACTION_TYPE) extras.getSerializable("transaction_type");
 		
 		amountText = (EditText) findViewById(R.id.amountNumber);
 		picker = (DatePicker) findViewById(R.id.datePicker);

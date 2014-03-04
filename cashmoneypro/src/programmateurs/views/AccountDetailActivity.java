@@ -72,7 +72,7 @@ public class AccountDetailActivity extends Activity {
 	
 	public void gotoTransactionScreen(TRANSACTION_TYPE type) {
 	  			Intent i = new Intent(this, TransactionScreen.class);
-	  			i.putExtra("transaction_type", TRANSACTION_TYPE.DEPOSIT);
+	  			i.putExtra("transaction_type", type);
 	  			i.putExtra("account_id", this.accountID);
 	  			this.startActivity(i);
 	}
