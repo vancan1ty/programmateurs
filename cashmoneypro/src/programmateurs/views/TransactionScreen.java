@@ -64,6 +64,7 @@ public class TransactionScreen extends Activity {
 		
 		amountText = (EditText) findViewById(R.id.amountNumber);
 		picker = (DatePicker) findViewById(R.id.datePicker);
+		picker.setMaxDate(Calendar.getInstance().getTimeInMillis());
 		transactionType = (Spinner) findViewById(R.id.spinnerTransactionType);
 		buttonTransaction = (Button) findViewById(R.id.buttonTransaction);
 		

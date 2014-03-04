@@ -33,7 +33,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="First and Last Name" />
+            android:hint="First and Last Name">
+            
+            <requestFocus />
+        </EditText> 
+    <EditText
+        android:id="@+id/inputEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email" />
+
 
         <EditText
             android:id="@+id/inputUsername"
@@ -42,7 +51,6 @@
             android:ems="10"
             android:hint="Username" >
 
-            <requestFocus />
         </EditText>
 
         <EditText
@@ -53,11 +61,6 @@
             android:hint="Password"
             android:inputType="textPassword" />
 
-    <EditText
-        android:id="@+id/inputEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email" />
 
 </LinearLayout>
     </ScrollView>

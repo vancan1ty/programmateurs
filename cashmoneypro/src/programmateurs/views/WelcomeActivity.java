@@ -8,7 +8,9 @@ import net.programmateurs.R.menu;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -82,6 +84,23 @@ public class WelcomeActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.welcome, menu);
 		return true;
+	}
+	
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		Log.d("WelcomeActivity", "featureID" + featureId);
+		if (item.getItemId() == R.id.about_us) {
+			anchor.showDialog(this, "About the Creators", "This superb specimen of software engineering.\n\n" +
+					"Which you are fortunate to have the opportunity to use.\n\n" +
+					"Was made by:\n" +
+					"Currell Berry,\n" +
+					"Sara Cagle,\n" +
+					"Pavel Komarov,\n" +
+					"Brent McCorvey,\n" +
+					"Justin Nieto.\n\n" +
+					"for our GT CS 2340 team project.");
+		}
+		return super.onMenuItemSelected(featureId, item);
 	}
 	
 }
