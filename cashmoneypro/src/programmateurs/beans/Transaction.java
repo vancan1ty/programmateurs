@@ -3,13 +3,21 @@ package programmateurs.beans;
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Date;
-
+import java.util.Locale;
+import java.text.NumberFormat;
 
 
 public class Transaction {
 
 	public enum TRANSACTION_TYPE {
-		DEPOSIT, WITHDRAWAL, REBALANCE 
+		DEPOSIT, WITHDRAWAL, REBALANCE;
+
+		@Override
+		public String toString(){
+			String type = super.toString();
+			type = type.charAt(0) + type.substring(1,type.length()).toLowerCase(Locale.US);
+			return type;
+		}
 	}
 
 	private long transactionID;
