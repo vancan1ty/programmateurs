@@ -39,7 +39,7 @@ import android.widget.Spinner;
  */
 public class TransactionScreen extends Activity {
 	
-	private EditText amountText;
+	private EditText amountText, textViewName, textViewComment;
 	private DatePicker picker;
 	private Button buttonTransaction;
 	private Calendar cal = Calendar.getInstance();
@@ -68,6 +68,8 @@ public class TransactionScreen extends Activity {
 		this.transactionType = (TRANSACTION_TYPE) extras.getSerializable("transaction_type");
 		
 		amountText = (EditText) findViewById(R.id.amountNumber);
+		textViewName = (EditText) findViewById(R.id.textViewName);
+		textViewComment = (EditText) findViewById(R.id.comment);
 		picker = (DatePicker) findViewById(R.id.datePicker);
 		picker.setMaxDate(Calendar.getInstance().getTimeInMillis());
 		buttonTransaction = (Button) findViewById(R.id.buttonTransaction);
@@ -78,16 +80,17 @@ public class TransactionScreen extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 	  			Intent i = new Intent(v.getContext(), HomeActivity.class);
-	  			String transactionName = "testName";
-	  			String transactionComment = "testComment";
+	  			String transactionName = textViewName.getText().toString();
+	  			String transactionComment = textViewComment.getText().toString();
 	  			String money = amountText.getText().toString();
 	  			int day = picker.getDayOfMonth();
 	  			int month = picker.getMonth() + 1;
 	  			int year = picker.getYear();
 	  			cal.set(year, month, day);
 	  			if(validTransactionAmount(money) && validDate(cal)) {
-	  				int number = Integer.parseInt(money);
-	  				dbHandler.addTransactionToDB(accountID, transactionName, transactionType, (long) number, 
+	  				double transactionAmountD = Double.parseDouble(money);
+	  				long transactionAmountL = Math.round(transactionAmountD*100);
+	  				dbHandler.addTransactionToDB(accountID, transactionName, transactionType, (long) transactionAmountL, 
 	  						cal.getTime(), transactionComment, false, new Category[0]);
 
 	  				me.onBackPressed();
