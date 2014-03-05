@@ -5,6 +5,7 @@ import java.util.List;
 import net.programmateurs.R;
 
 import programmateurs.beans.Transaction;
+import programmateurs.beans.Transaction.TRANSACTION_TYPE;
 import programmateurs.models.Anchor;
 import android.app.Activity;
 import android.content.Context;
@@ -52,7 +53,13 @@ public class TransactionAdapter extends BaseAdapter {
     header.setText(headerText);
     body.setText(q.toString());
 
-    imageView.setImageResource(R.drawable.circle_green);
+    if (q.getTransactionType() == TRANSACTION_TYPE.DEPOSIT) {
+    	imageView.setImageResource(R.drawable.circle_green);
+    } else if (q.getTransactionType() == TRANSACTION_TYPE.WITHDRAWAL){
+    	imageView.setImageResource(R.drawable.circle_red);
+    } else {
+    	imageView.setImageResource(R.drawable.circle_orange);
+    }
     
     //onClickListener for each view
     //We can change this to go to an Activity when pressed later. 

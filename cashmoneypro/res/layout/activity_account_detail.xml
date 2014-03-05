@@ -30,13 +30,26 @@
             android:layout_marginLeft="20dp"
             android:text="Account Type"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+
     </LinearLayout>
+
+        <TextView
+            android:id="@+id/textViewBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Balance"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
 
     <ListView
         android:id="@+id/listViewTransactions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" >
+        android:layout_weight="1" 
+        android:background="@drawable/border"
+        >
     </ListView>
 
     <LinearLayout

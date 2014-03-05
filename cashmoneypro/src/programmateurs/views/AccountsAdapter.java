@@ -5,6 +5,7 @@ import java.util.List;
 import net.programmateurs.R;
 
 import programmateurs.beans.Account;
+import programmateurs.beans.Account.ACCOUNT_TYPE;
 import programmateurs.models.Anchor;
 import android.app.Activity;
 import android.content.Context;
@@ -51,9 +52,14 @@ public class AccountsAdapter extends BaseAdapter {
     String headerText = q.getAccountName();
     
     header.setText(headerText);
-    body.setText(q.getAccountType().name() + " \n\n" + q.getInterestRate());
+    body.setText("\nAccount Type: " + q.getAccountType().name() + "\nInterest rate: " + q.getInterestRate() + "%");
 
-    imageView.setImageResource(R.drawable.cashmoney_icon);
+    ACCOUNT_TYPE type = q.getAccountType();
+    if (type == ACCOUNT_TYPE.SAVINGS) {
+    	imageView.setImageResource(R.drawable.social_person);
+    } else {
+    	imageView.setImageResource(R.drawable.person_dark);
+    }
     
     
     //onClickListener for each view

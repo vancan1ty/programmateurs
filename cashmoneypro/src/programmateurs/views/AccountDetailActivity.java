@@ -1,5 +1,6 @@
 package programmateurs.views;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,6 +32,7 @@ public class AccountDetailActivity extends Activity {
 	DataSourceInterface src;
 	TextView textViewAccountTitle;
 	TextView textViewAccountType;
+	TextView textViewBalance;
 	ListView listViewTransactions;
 	long accountID;
 	Account account;
@@ -47,6 +49,7 @@ public class AccountDetailActivity extends Activity {
 		
 		textViewAccountTitle = (TextView) findViewById(R.id.textViewAccountTitle);
 		textViewAccountType = (TextView) findViewById(R.id.textViewAccountType);
+		textViewBalance = (TextView) findViewById(R.id.textViewBalance);
 		listViewTransactions = (ListView) findViewById(R.id.listViewTransactions);
 		buttonDeposit = (Button) findViewById(R.id.button_deposit);
 		buttonWithdraw = (Button) findViewById(R.id.button_withdraw);
@@ -84,9 +87,26 @@ public class AccountDetailActivity extends Activity {
 		
 		account = src.getAccountWithID(accountID);
 		textViewAccountTitle.setText(account.getAccountName());
-		textViewAccountType.setText(account.getAccountType().toString() + " " + account.getInterestRate() + "%");
+		textViewAccountType.setText(account.getAccountType().toString());
 		transactionList = Arrays.asList(src.getTransactionsForAccount(accountID));
 		listViewTransactions.setAdapter(new TransactionAdapter(this, transactionList));
+		
+		int balance = 0;
+		for (Transaction transaction : transactionList) {
+			TRANSACTION_TYPE type = transaction.getTransactionType();
+			if ((type == TRANSACTION_TYPE.DEPOSIT || type == TRANSACTION_TYPE.REBALANCE) 
+					&& transaction.isRolledback() == false) {
+				balance += transaction.getTransactionAmount();
+			} else if (type == TRANSACTION_TYPE.WITHDRAWAL && transaction.isRolledback() == false) {
+				balance -= transaction.getTransactionAmount();
+			} else {
+				//should never get here?
+			}
+		}
+		NumberFormat fmter = NumberFormat.getCurrencyInstance();
+		String balanceString = fmter.format(balance);
+		textViewBalance.setText("balance: " + balanceString);
+
 		
 	};
 	
