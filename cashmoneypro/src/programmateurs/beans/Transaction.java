@@ -6,7 +6,11 @@ import java.util.Date;
 import java.util.Locale;
 import java.text.NumberFormat;
 
-
+/**
+ * 
+ * @author Somebody who wasn't paying attention during the "Please Javadoc" talk.
+ * @version 0.1
+ */
 public class Transaction {
 
 	public enum TRANSACTION_TYPE {
@@ -55,6 +59,10 @@ public class Transaction {
 	}
 	public TRANSACTION_TYPE getTransactionType() {
 		return transactionType;
+	}
+	
+	public double getTransactionAmountAsDouble(){
+		return (transactionAmount/100) + 0.01*(transactionAmount % 100);
 	}
 	public long getTransactionAmount() {
 		return transactionAmount;
