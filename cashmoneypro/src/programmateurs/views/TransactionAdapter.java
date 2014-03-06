@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 //Useful example of how to do list adapters in android... 
 
@@ -25,13 +27,14 @@ import android.widget.TextView;
  * Basically it make the view that fits inside a ListView object
  * 
  * @author currell
- * @version 0.0
+ * @version 0.1
  *
  */
 public class TransactionAdapter extends BaseAdapter {
-
+  private NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);
   private final Activity activity;
   List<Transaction> transactions ;
+  
 
   public TransactionAdapter(Activity activity, List<Transaction> transactions) {
     this.activity = activity;
@@ -48,7 +51,7 @@ public class TransactionAdapter extends BaseAdapter {
     TextView body = (TextView) rowView.findViewById(R.id.corqText);
     ImageView imageView = (ImageView) rowView.findViewById(R.id.corqImage);
     final Transaction q = transactions.get(position);
-    String headerText = q.getTransactionType() + " " + q.getTransactionAmount();
+    String headerText = q.getTransactionType() + " " + nf.format(q.getTransactionAmountAsDouble());
     
     header.setText(headerText);
     body.setText(q.toString());
@@ -65,13 +68,35 @@ public class TransactionAdapter extends BaseAdapter {
     //We can change this to go to an Activity when pressed later. 
     rowView.setOnClickListener(new OnClickListener() {
     	public void onClick(View v) {
-    		Anchor.getInstance().showDialog(activity, "Details", "Transaction details");
+    		Anchor.getInstance().showDialog(activity, q.getTransactionName()+ ": Details", formatDetails(q));
     	}
     });
     
     return rowView;
   }
 
+  
+  /**
+   * This is currently just a method that formats the transaction info to
+   * be displayed to the user. Eventually it may be wise to just move this
+   * into Transaction's toString, if the current toString format isn't needed
+   * anywhere.
+   * 
+   * @param t Transaction for which information will be formatted
+   * @return user-friendly String with transaction data
+   */
+  private String formatDetails(Transaction t){
+	  String returnStr = "\""+ t.getTransactionComment()+"\"\n\n";
+      returnStr += "-"+t.getTransactionType() +" Amount: "+ nf.format(t.getTransactionAmountAsDouble()) +"\n";
+	  returnStr += "-Transaction ID: "+t.getTransactionID()+"\n";
+	  returnStr += "-Account ID: "+ t.getAccountID()+"\n"; //TODO replace this with Account name.
+	  returnStr += "-Date: "+ t.getTransactionDate()+ "\n";
+	  
+	  return returnStr;
+  }
+  
+  
+  
   @Override
   public int getCount() {
 	  return transactions.size();

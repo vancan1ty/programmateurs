@@ -35,7 +35,7 @@ import android.widget.Spinner;
  * Right now it is just a skeleton
  * 
  * @author brent
- * @version 0.1
+ * @version 0.2
  */
 public class TransactionScreen extends Activity {
 	
@@ -103,7 +103,7 @@ public class TransactionScreen extends Activity {
 		  			if(!validDate(cal)) {
 						errorMessage += "\n- Enter a valid date.";
 		  			}
-					anchor.showDialog(me, "Registration Error(s)", errorMessage);
+					anchor.showDialog(me, "Transaction Error(s)", errorMessage);
 	  			}
 			}
 		});
