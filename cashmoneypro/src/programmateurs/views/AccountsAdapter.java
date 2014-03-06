@@ -52,7 +52,7 @@ public class AccountsAdapter extends BaseAdapter {
     String headerText = q.getAccountName();
     
     header.setText(headerText);
-    body.setText("\nAccount Type: " + q.getAccountType().name() + "\nInterest rate: " + q.getInterestRate() + "%");
+    body.setText("\nType: " + q.getAccountType() + "\nInterest rate: " + q.getInterestRate() + "%");
 
     ACCOUNT_TYPE type = q.getAccountType();
     if (type == ACCOUNT_TYPE.SAVINGS) {

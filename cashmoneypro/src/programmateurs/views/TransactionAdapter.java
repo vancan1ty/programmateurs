@@ -27,7 +27,7 @@ import java.util.Locale;
  * Basically it make the view that fits inside a ListView object
  * 
  * @author currell
- * @version 0.1
+ * @version 0.2
  *
  */
 public class TransactionAdapter extends BaseAdapter {
@@ -51,10 +51,13 @@ public class TransactionAdapter extends BaseAdapter {
     TextView body = (TextView) rowView.findViewById(R.id.corqText);
     ImageView imageView = (ImageView) rowView.findViewById(R.id.corqImage);
     final Transaction q = transactions.get(position);
-    String headerText = q.getTransactionType() + " " + nf.format(q.getTransactionAmountAsDouble());
+    String headerText = q.getTransactionName();
+    
+    String bodyText = q.getTransactionType() + " of " + nf.format(q.getTransactionAmountAsDouble());
+    bodyText += "\n\""+q.getTransactionComment()+"\"";
     
     header.setText(headerText);
-    body.setText(q.toString());
+    body.setText(bodyText);
 
     if (q.getTransactionType() == TRANSACTION_TYPE.DEPOSIT) {
     	imageView.setImageResource(R.drawable.circle_green);

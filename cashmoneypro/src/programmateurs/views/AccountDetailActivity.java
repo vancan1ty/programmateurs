@@ -105,7 +105,7 @@ public class AccountDetailActivity extends Activity {
 		}
 		NumberFormat fmter = NumberFormat.getCurrencyInstance();
 		String balanceString = fmter.format(balance/100.0);
-		textViewBalance.setText("balance: " + balanceString);
+		textViewBalance.setText("Balance: " + balanceString);
 
 		
 	};

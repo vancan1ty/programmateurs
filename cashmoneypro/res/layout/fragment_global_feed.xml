@@ -9,15 +9,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context=".HomeActivity$AccountFragment" >
-    <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:textAppearance="@android:style/TextAppearance.Large"
-      android:text="global financial info here."
-      >
-        
-    </TextView>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recent Transactions:"
+        android:textAppearance="@android:style/TextAppearance.Large" />
  
     <ListView
         android:id="@+id/listViewAccounts"
