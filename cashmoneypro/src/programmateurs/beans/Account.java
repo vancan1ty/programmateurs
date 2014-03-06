@@ -1,5 +1,7 @@
 package programmateurs.beans;
 
+import java.util.Locale;
+
 
 /**
  * The Account class represents an account possessed by a User.
@@ -7,12 +9,21 @@ package programmateurs.beans;
  * only one User
  * 
  * @author Currell
- * @version 0.0
+ * @version 0.1
  */
 public class Account {
 
 	public enum ACCOUNT_TYPE {
-		SAVINGS, CHECKING
+		SAVINGS, CHECKING;
+		
+		@Override
+		public String toString(){
+			//Look at this cute block of code. It takes an all-capital toString
+			//and makes everything but the first letter lower case.
+			String type = super.toString();
+			type = type.charAt(0) + type.substring(1,type.length()).toLowerCase(Locale.US);
+			return type + " Account";
+		}
 	}
 
 	private long accountID;
