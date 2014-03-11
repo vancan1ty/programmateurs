@@ -82,6 +82,8 @@ public class HomeActivity extends FragmentActivity {
 		settings.setIntent(new Intent(this, SettingsActivity2.class));
 		MenuItem logout = menu.add("Log Out");
 		logout.setIntent(new Intent(this, WelcomeActivity.class));
+		MenuItem categories = menu.add("Edit Categories");
+		categories.setIntent(new Intent(this,CategoryActivity.class));
 		//getMenuInflater().inflate(R.menu.home, menu);
 		return super.onCreateOptionsMenu(menu); 
 	}
