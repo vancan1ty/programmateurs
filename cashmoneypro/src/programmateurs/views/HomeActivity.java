@@ -93,8 +93,8 @@ public class HomeActivity extends FragmentActivity {
 		//Log.d("HomeActivity","Title: " + item.getTitle());
 		if (item.getTitle().equals("Log Out")) {
 //			Anchor.getInstance().setCurrentUser(null);//NOTE THAT SETTING THE USER TO NULL CAUSES THE PROGRAM TO CRASH IF THE USER HITS THE BACK BUTTON AFTER LOGGING OUT
-			this.startActivity(item.getIntent());
 		}
+		this.startActivity(item.getIntent());
 		return true;
 	}
 
