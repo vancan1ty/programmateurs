@@ -42,6 +42,7 @@ public class TransactionScreen extends Activity {
 	private EditText amountText, textViewName, textViewComment;
 	private DatePicker picker;
 	private Button buttonTransaction;
+	private Spinner spinner;
 	private Calendar cal = Calendar.getInstance();
 	DateFormat sdf = new SimpleDateFormat();
 	Anchor anchor = Anchor.getInstance();
