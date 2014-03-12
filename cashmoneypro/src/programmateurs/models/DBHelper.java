@@ -21,7 +21,7 @@ public class DBHelper extends SQLiteOpenHelper {
 //  public static final String COLUMN_ID = "_id";
 //  public static final String COLUMN_COMMENT = "comment";
 
-  private static final int DATABASE_VERSION = 18;
+  private static final int DATABASE_VERSION = 19;
 
   public DBHelper(Context context) {
     super(context, "programmateurs", null, DATABASE_VERSION);

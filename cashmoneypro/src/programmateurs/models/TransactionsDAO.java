@@ -1,9 +1,12 @@
 package programmateurs.models;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import programmateurs.beans.Account;
 import programmateurs.beans.Category;
@@ -197,6 +200,42 @@ public class TransactionsDAO {
 		// make sure to close the cursor
 		c.close();
 		return out;
+	}
+
+public static String getCategoryReport(SQLiteDatabase db, Calendar dateStart, Calendar dateEnd) {
+		
+		
+		Cursor c = db.rawQuery(
+
+					 " SELECT category_name, transaction_amount" 
+				   + " FROM Transactions AS T" 
+				   + " LEFT JOIN Categories as C ON T.categoryID = C.categoryID"
+				   + " WHERE transaction_date > ? AND transaction_date < ?"
+				   + " GROUP BY category_name" 
+				   + " UNION"
+				   + " SELECT 'Total' AS category_name, SUM(transaction_amount) AS transaction_amount"
+				   + " FROM transactions"
+				   + " WHERE transaction_date > ? AND transaction_date < ?"
+				   + ";",
+					new String[]{
+						   	Long.toString(DateUtility.formatCalendarAsLong(dateStart)),
+							Long.toString(DateUtility.formatCalendarAsLong(dateEnd)),
+							Long.toString(DateUtility.formatCalendarAsLong(dateStart)),
+							Long.toString(DateUtility.formatCalendarAsLong(dateEnd))});
+
+		c.moveToFirst();
+
+		StringBuilder out = new StringBuilder();
+			out.append("Category\t\tAmount\n");
+		NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);
+		while (!c.isAfterLast()) {
+			out.append(gcs(c,"category_name") + "\t\t" + nf.format(gcl(c,"transaction_amount")/100.0) + "\n");
+
+			c.moveToNext();
+		}
+		// make sure to close the cursor
+		c.close();
+		return out.toString();
 	}
 	
 	

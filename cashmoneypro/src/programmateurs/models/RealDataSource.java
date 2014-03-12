@@ -1,5 +1,6 @@
 package programmateurs.models;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import android.content.Context;
@@ -128,6 +129,11 @@ public class RealDataSource implements DataSourceInterface {
 				transactionAmount, transactionDate, transactionComment, rolledback, category);
 	}
 
+
+public String getCategoryReport(Calendar dateStart, Calendar dateEnd) {
+	return TransactionsDAO.getCategoryReport(db, dateStart, dateEnd);
+}
+	
 	@Override
 	public Category addCategoryToDB(long userID, String categoryName) {
 		return CategoriesDAO.addCategoryForDB(db, userID, categoryName);

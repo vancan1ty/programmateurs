@@ -23,7 +23,7 @@ public class DateUtility {
 	private static final SimpleDateFormat mdatetimeFormat = new SimpleDateFormat(DATETIME_FORMAT);
 	
 	public static long formatCalendarAsLong(Calendar cal) {
-		return Long.parseLong(mdateFormat.format(cal.getTime()));
+		return cal.getTime().getTime();
 	}
 
 	public static long formatDateAsLong(Date date) {
