@@ -1,5 +1,7 @@
 package programmateurs.beans;
 
+import java.util.ArrayList;
+
 public class User {
 	private long userID;
 	private String username;
@@ -7,6 +9,7 @@ public class User {
 	private String first;
 	private String last;
 	private String email;
+	private ArrayList<Category> categories;
 
 	public User(long userID, String username, String passhash, String first,
 			String last, String email) {
@@ -17,6 +20,7 @@ public class User {
 		this.first = first;
 		this.last = last;
 		this.email = email;
+		categories = new ArrayList<Category>();
 	}
 
 	public long getUserID() {
@@ -43,6 +47,16 @@ public class User {
 		return email;
 	}
 
+	public void addCategory(Category toAdd){
+		categories.add(toAdd);
+	}
+/*	
+	public String[] getCategoryNames(){
+		Category[] catArray = (Category[]) categories.toArray();
+		String[] returnArray = new String[catArray.length];
+		for(int i= 0; )
+	}
+	*/
 	@Override
 	public String toString() {
 		return "User [userID=" + userID + ", username=" + username
