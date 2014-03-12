@@ -202,7 +202,8 @@ public class TransactionsDAO {
 		return out;
 	}
 
-public static String getCategoryReport(SQLiteDatabase db, Calendar dateStart, Calendar dateEnd) {
+public static String getCategoryReport(SQLiteDatabase db, Calendar dateStart, Calendar dateEnd, 
+		Transaction.TRANSACTION_TYPE transactionType) {
 		
 		
 		Cursor c = db.rawQuery(
@@ -211,17 +212,22 @@ public static String getCategoryReport(SQLiteDatabase db, Calendar dateStart, Ca
 				   + " FROM Transactions AS T" 
 				   + " LEFT JOIN Categories as C ON T.categoryID = C.categoryID"
 				   + " WHERE transaction_date > ? AND transaction_date < ?"
-				   //+ " GROUP BY category_name" 
+				   + " AND transaction_type = ?"
+				   + " GROUP BY category_name" 
 				   + " UNION"
 				   + " SELECT 'Total' AS category_name, SUM(transaction_amount) AS transaction_amount"
 				   + " FROM transactions"
 				   + " WHERE transaction_date > ? AND transaction_date < ?"
+				   + " AND transaction_type = ?"
 				   + ";",
 					new String[]{
 						   	Long.toString(DateUtility.formatCalendarAsLong(dateStart)),
 							Long.toString(DateUtility.formatCalendarAsLong(dateEnd)),
+							transactionType.name(),
 							Long.toString(DateUtility.formatCalendarAsLong(dateStart)),
-							Long.toString(DateUtility.formatCalendarAsLong(dateEnd))});
+							Long.toString(DateUtility.formatCalendarAsLong(dateEnd)),
+							transactionType.name()
+							});
 
 		c.moveToFirst();
 

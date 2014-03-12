@@ -12,6 +12,8 @@ import net.programmateurs.R.menu;
 
 import org.codehaus.jackson.map.module.SimpleAbstractTypeResolver;
 
+import programmateurs.beans.Transaction;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -30,6 +32,8 @@ public class ReportBuilder extends Activity {
 	Calendar startCalendar = Calendar.getInstance();
 	Calendar endCalendar = Calendar.getInstance();
 	Button buttonGenerateReport;
+	
+	Transaction.TRANSACTION_TYPE reportType;
 
 	DatePickerDialog.OnDateSetListener startDate = new DatePickerDialog.OnDateSetListener() {
 
@@ -69,6 +73,8 @@ public class ReportBuilder extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_report_builder);
+		Bundle extras = getIntent().getExtras();
+//		reportType = extras.getSerializable("reportType");
 		textStartDate = (EditText) findViewById(R.id.text_start_date);
 		textEndDate = (EditText) findViewById(R.id.text_end_date);
 		buttonGenerateReport = (Button) findViewById(R.id.button_generate_report);
@@ -105,6 +111,7 @@ public class ReportBuilder extends Activity {
 				Intent i = new Intent(v.getContext(), CategoryReportActivity.class);
 				i.putExtra("startCalendar", startCalendar);
 				i.putExtra("endCalendar", endCalendar);
+				i.putExtra("reportType", reportType);
 				v.getContext().startActivity(i);
 			
 		}

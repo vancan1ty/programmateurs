@@ -130,8 +130,8 @@ public class RealDataSource implements DataSourceInterface {
 	}
 
 
-public String getCategoryReport(Calendar dateStart, Calendar dateEnd) {
-	return TransactionsDAO.getCategoryReport(db, dateStart, dateEnd);
+public String getCategoryReport(Calendar dateStart, Calendar dateEnd, Transaction.TRANSACTION_TYPE type) {
+	return TransactionsDAO.getCategoryReport(db, dateStart, dateEnd, type);
 }
 	
 	@Override

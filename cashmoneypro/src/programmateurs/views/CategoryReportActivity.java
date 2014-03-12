@@ -2,6 +2,7 @@ package programmateurs.views;
 
 import java.util.Calendar;
 
+import programmateurs.beans.Transaction.TRANSACTION_TYPE;
 import programmateurs.models.RealDataSource;
 
 import net.programmateurs.R;
@@ -40,7 +41,7 @@ public class CategoryReportActivity extends Activity {
 		super.onResume();
 
 		src.open();
-		textReport.setText(src.getCategoryReport(startCalendar, endCalendar));
+		textReport.setText(src.getCategoryReport(startCalendar, endCalendar, TRANSACTION_TYPE.WITHDRAWAL));
 
 	}
 	
