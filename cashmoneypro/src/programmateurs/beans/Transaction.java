@@ -111,7 +111,7 @@ public class Transaction {
 	  returnStr.append("-Transaction ID: "+this.getTransactionID()+"\n");
 	  returnStr.append("-Account ID: "+ this.getAccountID()+"\n"); //TODO replace this with Account name.
 	  returnStr.append("-Date: "+ this.getTransactionDate()+ "\n");
-	  returnStr.append("-Category: "+ this.getCategory() + "\n");
+	  returnStr.append("-Category: "+ this.getCategory().getCategory_name() + "\n");
 	  
 	  return returnStr.toString();
   }

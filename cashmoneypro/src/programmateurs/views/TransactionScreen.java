@@ -98,7 +98,7 @@ public class TransactionScreen extends Activity {
 	  				double transactionAmountD = Double.parseDouble(money);
 	  				long transactionAmountL = Math.round(transactionAmountD*100);
 	  				dbHandler.addTransactionToDB(accountID, transactionName, transactionType, (long) transactionAmountL, 
-	  						cal.getTime(), transactionComment, false, (Category) categorySpinner.getSelectedItem());
+	  						cal.getTime(), transactionComment, false, getCategoryByName((String)categorySpinner.getSelectedItem()));
 
 	  				me.onBackPressed();
 	  			}
@@ -153,14 +153,37 @@ public class TransactionScreen extends Activity {
 	}
 	
 	/**
+	 * 
+	 * @param name Name of category being searched for
+	 * @return category with matching name
+	 */
+	public Category getCategoryByName(String name){
+		Category[] categories = dbHandler.getCategoriesForUser(anchor.getCurrentUser().getUserID());
+		for(Category c: categories){
+			if(c.getCategory_name().equals(name)){
+				return c;
+			}
+		}
+		throw new RuntimeException("No existing category with name "+name); //only executed if somebody done goofed.
+	}
+	/**
 	 * Method used when RealDataSource is used
 	 */
 	@Override
 	protected void onResume() {
 		dbHandler.open();
 		super.onResume();
-		ArrayAdapter<Category> adapter = new ArrayAdapter<Category>(this,
-                    android.R.layout.simple_list_item_1, dbHandler.getCategoriesForUser(anchor.getCurrentUser().getUserID()));
+		Category[] categories = dbHandler.getCategoriesForUser(anchor.getCurrentUser().getUserID());
+		String[] stringArray = new String[categories.length];
+		if(categories != null){
+			for(int i =0; i < categories.length ; i++){
+				if(categories[i]!=null)
+					stringArray[i] = categories[i].getCategory_name();
+			}
+		}
+		
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_list_item_1, stringArray);
 		categorySpinner.setAdapter(adapter);
 	}
 
