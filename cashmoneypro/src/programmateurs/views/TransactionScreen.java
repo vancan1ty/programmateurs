@@ -84,7 +84,7 @@ public class TransactionScreen extends Activity {
 	  			String transactionComment = textViewComment.getText().toString();
 	  			String money = amountText.getText().toString();
 	  			int day = picker.getDayOfMonth();
-	  			int month = picker.getMonth() + 1;
+	  			int month = picker.getMonth();
 	  			int year = picker.getYear();
 	  			cal.set(year, month, day);
 	  			if(validTransactionAmount(money) && validDate(cal)) {

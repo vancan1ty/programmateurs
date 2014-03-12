@@ -126,6 +126,7 @@ public class TransactionsDAO {
 		toInsert.put("transaction_name", transactionName);
 		toInsert.put("transaction_type", transactionType.name());
 		toInsert.put("transaction_amount", transactionAmount);
+		Log.d("TransactionsDAO","about to add w/ date: " + transactionDate.toString());
 		toInsert.put("transaction_date", DateUtility.formatDateAsLong(transactionDate));
 		toInsert.put("transaction_comment", transactionComment);
 		toInsert.put("rolledback", rolledback ? 1 : 0);
