@@ -8,6 +8,7 @@ import java.util.Date;
 
 import programmateurs.beans.Account;
 import programmateurs.beans.Category;
+import programmateurs.beans.Transaction;
 import programmateurs.beans.Transaction.TRANSACTION_TYPE;
 import programmateurs.interfaces.DataSourceInterface;
 import programmateurs.models.Anchor;
@@ -91,7 +92,9 @@ public class TransactionScreen extends Activity {
 	  			int month = picker.getMonth();
 	  			int year = picker.getYear();
 	  			cal.set(year, month, day);
-	  			if(validTransactionAmount(money) && validDate(cal)) {
+	  			Double amount = Double.parseDouble(money);
+	  			Account account = dbHandler.getAccountWithID(accountID);
+	  			if(validTransactionAmount(money) && validDate(cal) && !account.overdrawn(me, amount, transactionType) ) {
 	  				double transactionAmountD = Double.parseDouble(money);
 	  				long transactionAmountL = Math.round(transactionAmountD*100);
 	  				dbHandler.addTransactionToDB(accountID, transactionName, transactionType, (long) transactionAmountL, 
@@ -107,12 +110,16 @@ public class TransactionScreen extends Activity {
 		  			if(!validDate(cal)) {
 						errorMessage += "\n- Enter a valid startDate.";
 		  			}
+		  			if(account.overdrawn(me, amount, transactionType)){
+		  				errorMessage += "\n- You have insufficient funds to complete\nthistransaction.";
+		  			}
 					anchor.showDialog(me, "Transaction Error(s)", errorMessage);
 	  			}
 			}
 		});
 		//System.out.println(artificialSource.getTransactionsForAccount(0));
 	}
+	
 	
 	private boolean validTransactionAmount(String money) {
 		if(money.matches("^0*[1-9][0-9]*(\\.[0-9]+)?|0+\\.[0-9]*[1-9][0-9]*$")) {
