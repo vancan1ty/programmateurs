@@ -42,7 +42,7 @@ public class TransactionScreen extends Activity {
 	private EditText amountText, textViewName, textViewComment;
 	private DatePicker picker;
 	private Button buttonTransaction;
-	private Spinner spinner;
+	private Spinner categorySpinner;
 	private Calendar cal = Calendar.getInstance();
 	DateFormat sdf = new SimpleDateFormat();
 	Anchor anchor = Anchor.getInstance();
@@ -74,6 +74,9 @@ public class TransactionScreen extends Activity {
 		picker = (DatePicker) findViewById(R.id.datePicker);
 		picker.setMaxDate(Calendar.getInstance().getTimeInMillis());
 		buttonTransaction = (Button) findViewById(R.id.buttonTransaction);
+		categorySpinner = (Spinner) findViewById(R.id.transaction_category_spinner);
+		
+
 	
 		buttonTransaction.setOnClickListener(new OnClickListener() {
 			
@@ -92,7 +95,7 @@ public class TransactionScreen extends Activity {
 	  				double transactionAmountD = Double.parseDouble(money);
 	  				long transactionAmountL = Math.round(transactionAmountD*100);
 	  				dbHandler.addTransactionToDB(accountID, transactionName, transactionType, (long) transactionAmountL, 
-	  						cal.getTime(), transactionComment, false, null);
+	  						cal.getTime(), transactionComment, false, (Category) categorySpinner.getSelectedItem());
 
 	  				me.onBackPressed();
 	  			}
@@ -149,6 +152,9 @@ public class TransactionScreen extends Activity {
 	protected void onResume() {
 		dbHandler.open();
 		super.onResume();
+		ArrayAdapter<Category> adapter = new ArrayAdapter<Category>(this,
+                    android.R.layout.simple_list_item_1, dbHandler.getCategoriesForUser(anchor.getCurrentUser().getUserID()));
+		categorySpinner.setAdapter(adapter);
 	}
 
 	/**
