@@ -2,6 +2,12 @@ package programmateurs.beans;
 
 import java.util.Locale;
 
+import programmateurs.beans.Transaction.TRANSACTION_TYPE;
+import programmateurs.interfaces.DataSourceInterface;
+import programmateurs.models.RealDataSource;
+
+import android.content.Context;
+
 
 /**
  * The Account class represents an account possessed by a User.
@@ -9,7 +15,7 @@ import java.util.Locale;
  * only one User
  * 
  * @author Currell
- * @version 0.1
+ * @version 0.2
  */
 public class Account {
 
@@ -58,6 +64,45 @@ public class Account {
 	 */
 	public long getAccountID() {
 		return accountID;
+	}
+	
+	/**
+	 * Calculates the balance for this account.
+	 * 
+	 * @param context The view from which the method is called
+	 * @return balance of the account
+	 */
+	public double getBalance(Context context){
+		DataSourceInterface db = new RealDataSource(context);
+		db.open();
+		double balance = 0;
+		for (Transaction transaction : db.getTransactionsForAccount(accountID)) {
+			TRANSACTION_TYPE type = transaction.getTransactionType();
+			if ((type == TRANSACTION_TYPE.DEPOSIT || type == TRANSACTION_TYPE.REBALANCE) 
+					&& transaction.isRolledback() == false) {
+				balance += transaction.getTransactionAmountAsDouble();
+			} else if (type == TRANSACTION_TYPE.WITHDRAWAL && transaction.isRolledback() == false) {
+				balance -= transaction.getTransactionAmountAsDouble();
+			}
+		}
+		db.close();
+		return balance;
+	}
+	
+	/**
+	 * Checks to see if a potential transaction would result in overdrawing from the account.
+	 * 
+	 * @param context The view from which the method is called
+	 * @param amount The amount of the potential transaction
+	 * @param type The type of the potential transaction
+	 * @return true if transaction would result in overdrawing from account
+	 */
+	public boolean overdrawn(Context context, Double amount, Transaction.TRANSACTION_TYPE type){
+		if(type == Transaction.TRANSACTION_TYPE.WITHDRAWAL){
+			return (getBalance(context) - amount) < 0;
+		} else{
+			return true;
+		}
 	}
 	
 	/**

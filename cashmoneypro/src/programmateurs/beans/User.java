@@ -52,9 +52,14 @@ public class User {
 	}
 /*	
 	public String[] getCategoryNames(){
-		Category[] catArray = (Category[]) categories.toArray();
-		String[] returnArray = new String[catArray.length];
-		for(int i= 0; )
+		categories = dbHandler.getCategoriesForUser(user.getUserID());
+		String[] categoryArray = new String[categories.length];
+		if(categories != null){
+			for(int i =0; i < categories.length ; i++){
+				if(categories[i]!=null)
+					categoryArray[i] = categories[i].getCategory_name();
+			}
+		}
 	}
 	*/
 	@Override
