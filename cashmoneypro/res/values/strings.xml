@@ -4,7 +4,7 @@
     <string name="app_name">Cash Money Pro</string>
     <string name="action_settings">Settings</string>
     <string name="logout">Log Out</string>
-     <string name="categories">Edit Categories</string>
+    <string name="categories">Edit Categories</string>
     <string name="hello_world">Hello world!</string>
 
     <color name="background">#e6e6e6</color>
@@ -45,5 +45,7 @@
     <string name="title_activity_transaction_history_fragment">TransactionHistoryFragment</string>
     <string name="title_activity_account_detail">AccountDetailActivity</string>
     <string name="title_activity_category">CategoryActivity</string>
+    <string name="title_activity_category_report">CategoryReportActivity</string>
+    <string name="title_activity_report_builder">ReportBuilder</string>
 
 </resources>

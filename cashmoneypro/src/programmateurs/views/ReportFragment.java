@@ -56,10 +56,22 @@ public class ReportFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				//TODO implement
-				Intent i = new Intent(v.getContext(), NewAccountActivity.class);
+				Intent i = new Intent(v.getContext(), ReportBuilder.class);
 				v.getContext().startActivity(i);
 			}
 		});
+
+
+	  	buttonIncomeSource.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				//TODO implement
+				Intent i = new Intent(v.getContext(), ReportBuilder.class);
+				v.getContext().startActivity(i);
+			}
+		});
+
 
 		return rootView;
 	}

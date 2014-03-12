@@ -76,6 +76,14 @@
             android:name="programmateurs.views.CategoryActivity"
             android:label="@string/title_activity_category" >
         </activity>
+        <activity
+            android:name="programmateurs.views.CategoryReportActivity"
+            android:label="@string/title_activity_category_report" >
+        </activity>
+        <activity
+            android:name="programmateurs.views.ReportBuilder"
+            android:label="@string/title_activity_report_builder" >
+        </activity>
     </application>
 
 </manifest>

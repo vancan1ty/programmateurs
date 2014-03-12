@@ -101,7 +101,7 @@ public class TransactionScreen extends Activity {
 						errorMessage += "\n- Enter an amount greater than 0.";
 		  			}
 		  			if(!validDate(cal)) {
-						errorMessage += "\n- Enter a valid date.";
+						errorMessage += "\n- Enter a valid startDate.";
 		  			}
 					anchor.showDialog(me, "Transaction Error(s)", errorMessage);
 	  			}
@@ -118,7 +118,7 @@ public class TransactionScreen extends Activity {
 	}
 	
 	/**
-	 * Makes sure the date is valid. I hate Date
+	 * Makes sure the startDate is valid. I hate Date
 	 * @param year
 	 * @param month
 	 * @param day

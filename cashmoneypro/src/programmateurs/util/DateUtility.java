@@ -7,10 +7,10 @@ import java.util.Date;
 
 
 /**
- * class to handle date operations between app and database.
+ * class to handle startDate operations between app and database.
  * based on this site:
  * 
- * http://joeshacks.blogspot.com/2011/02/managing-date-and-time-data-in-android.html
+ * http://joeshacks.blogspot.com/2011/02/managing-startDate-and-time-data-in-android.html
  * 
  * @author vancan1ty
  *
