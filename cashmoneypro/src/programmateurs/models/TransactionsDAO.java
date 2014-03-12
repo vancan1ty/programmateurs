@@ -15,6 +15,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.format.DateUtils;
+import android.util.Log;
 
 /**
  * This class manages transaction data in the database.
@@ -48,9 +49,9 @@ public class TransactionsDAO {
 
   private static Transaction cursorToTransaction(Cursor c, SQLiteDatabase db) throws ParseException {
 	long transactionID = gcl(c, "transactionID");
-	long accountID = gcl(c, "Transactions.accountID");
-	long userID = gcl(c,"Accounts.userID");
-	long categoryID = gcl(c,"Transactions.categoryID");
+	long accountID = gcl(c, "accountID");
+	long userID = gcl(c,"userID");
+	long categoryID = gcl(c,"categoryID");
 	String transactionName = gcs(c,"transaction_name");
 	Transaction.TRANSACTION_TYPE transactionType = 
 			Transaction.TRANSACTION_TYPE.valueOf(gcs(c, "transaction_type"));
@@ -59,15 +60,19 @@ public class TransactionsDAO {
 			gcl(c,"transaction_date")).getTime();
 	String transactionComment = gcs(c,"transaction_comment");
 	Date timestamp = DateUtility.getCalendarFromFormattedLong(
-			gcl(c,"Transactions.timestamp")).getTime();
+			gcl(c,"timestamp")).getTime();
 	boolean rolledback = (gcl(c, "rolledback") == 1) ? true : false;
 	
 	Category category = null;
-	int categoryNameIndex = c.getColumnIndex("category_name");
+	String categoryName = gcs(c, "category_name");
+	if (categoryName != null) {
+		category = new Category(categoryID, userID, categoryName);
+	}
+	/*int categoryNameIndex = c.getColumnIndex("category_name");
 	if (categoryNameIndex != -1) {
 		String categoryName = c.getString(categoryNameIndex);
 		category = new Category(categoryID, userID, categoryName);	
-	}
+	} */
 
 	return new Transaction(transactionID,accountID,transactionName,transactionType,transactionAmount,
 				transactionDate,transactionComment,timestamp,rolledback,category);
@@ -81,8 +86,10 @@ public class TransactionsDAO {
 	public static Transaction[] getTransactionsForAccount(SQLiteDatabase db, long accountID) {
 		
 		Cursor c = db.rawQuery(
-					"SELECT *" +
-					"	FROM transactions AS T JOIN Accounts AS A WHERE T.accountID = ? AND T.accountID = A.accountID;", 
+					"SELECT * " +
+					"FROM transactions AS T " +
+					"JOIN Accounts AS A ON T.accountID = ? AND T.accountID = A.accountID " +
+					"LEFT JOIN Categories AS C ON T.categoryID = C.categoryID;", 
 				new String[]{Long.toString(accountID)});
 		List<Transaction> outL = new ArrayList<Transaction>();
 
@@ -93,8 +100,8 @@ public class TransactionsDAO {
 			try {
 				transaction = cursorToTransaction(c, db);
 			} catch (ParseException e) {
-				transaction = null;
 				e.printStackTrace();
+				transaction = null;
 			}
 			outL.add(transaction);
 			c.moveToNext();
@@ -123,9 +130,9 @@ public class TransactionsDAO {
 		toInsert.put("transaction_comment", transactionComment);
 		toInsert.put("rolledback", rolledback ? 1 : 0);
 		long transactionID = db.insert("transactions", null, toInsert);
-		//Transaction thetrans = getTransactionWithID(db, transactionID);
-		Transaction thetrans = new Transaction(transactionID, accountID, transactionName, transactionType, 
-				transactionAmount, transactionDate, transactionComment, new Date(), rolledback, category);
+		Transaction thetrans = getTransactionWithID(db, transactionID);
+		//Transaction thetrans = new Transaction(transactionID, accountID, transactionName, transactionType, 
+		//		transactionAmount, transactionDate, transactionComment, transa, rolledback, category);
 		return thetrans;
 	}
 
@@ -136,16 +143,20 @@ public class TransactionsDAO {
 	 * @author Pavel
 	 */
 	public static Transaction[] getTransactionsForUser(SQLiteDatabase db, long userID) {
+		Log.d("TransactionsDAO","starting getTransactionsForUser");
 		
 		Cursor c = db.rawQuery(
-					"SELECT *" +
-					"	FROM transactions AS T JOIN Accounts AS A WHERE A.userID = ? AND T.accountID = A.accountID;", 
-					
+
+					"SELECT * " +
+					"FROM transactions AS T " +
+					"JOIN Accounts AS A ON A.userID = ? AND T.accountID = A.accountID " +
+					"LEFT JOIN Categories AS C ON T.categoryID = C.categoryID;", 
 					
 					new String[]{Long.toString(userID)});
 		List<Transaction> outL = new ArrayList<Transaction>();
 
 		c.moveToFirst();
+		Log.d("TransactionsDAO", "count: " + c.getCount());
 		while (!c.isAfterLast()) {
 			Transaction transaction;
 			
@@ -160,6 +171,8 @@ public class TransactionsDAO {
 		}
 		// make sure to close the cursor
 		c.close();
+
+		Log.d("TransactionsDAO","outlen: " + outL.size());
 		return outL.toArray(new Transaction[0]);
 	}
 
@@ -167,9 +180,9 @@ public class TransactionsDAO {
 		
 		Cursor c = db.rawQuery(
 					"SELECT * " +
-					"	FROM transactions AS T " +
-					"JOIN Accounts AS A WHERE T.transactionID = ? AND T.accountID = A.accountID " +
-					"LEFT JOIN Categories as C WHERE T.categoryID = C.categoryID;", 
+					"FROM transactions AS T " +
+					"JOIN Accounts AS A ON T.transactionID = ? AND T.accountID = A.accountID " +
+					"LEFT JOIN Categories as C ON T.categoryID = C.categoryID;", 
 					new String[]{Long.toString(transactionID)});
 
 		c.moveToFirst();

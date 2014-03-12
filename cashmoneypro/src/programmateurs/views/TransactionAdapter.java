@@ -71,33 +71,12 @@ public class TransactionAdapter extends BaseAdapter {
     //We can change this to go to an Activity when pressed later. 
     rowView.setOnClickListener(new OnClickListener() {
     	public void onClick(View v) {
-    		Anchor.getInstance().showDialog(activity, q.getTransactionName()+ ": Details", formatDetails(q));
+    		Anchor.getInstance().showDialog(activity, q.getTransactionName()+ ": Details", q.formatDetails());
     	}
     });
     
     return rowView;
   }
-
-  
-  /**
-   * This is currently just a method that formats the transaction info to
-   * be displayed to the user. Eventually it may be wise to just move this
-   * into Transaction's toString, if the current toString format isn't needed
-   * anywhere.
-   * 
-   * @param t Transaction for which information will be formatted
-   * @return user-friendly String with transaction data
-   */
-  private String formatDetails(Transaction t){
-	  String returnStr = "\""+ t.getTransactionComment()+"\"\n\n";
-      returnStr += "-"+t.getTransactionType() +" Amount: "+ nf.format(t.getTransactionAmountAsDouble()) +"\n";
-	  returnStr += "-Transaction ID: "+t.getTransactionID()+"\n";
-	  returnStr += "-Account ID: "+ t.getAccountID()+"\n"; //TODO replace this with Account name.
-	  returnStr += "-Date: "+ t.getTransactionDate()+ "\n";
-	  
-	  return returnStr;
-  }
-  
   
   
   @Override

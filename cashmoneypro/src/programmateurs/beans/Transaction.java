@@ -9,6 +9,7 @@ import java.text.NumberFormat;
 /**
  * 
  * @author Somebody who wasn't paying attention during the "Please Javadoc" talk.
+ * @comment ^Hi Justin (this is currell)^
  * @version 0.1
  */
 public class Transaction {
@@ -96,5 +97,23 @@ public class Transaction {
 	public String getTransactionComment() {
 		return transactionComment;
 	}
+
+/**
+   * This is currently just a method that formats the transaction info to
+   * be displayed to the user. 
+   * 
+   * @return user-friendly String with transaction data
+   */
+  public String formatDetails(){
+	  NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);
+	  StringBuilder returnStr = new StringBuilder("\""+ this.getTransactionComment()+"\"\n\n");
+      returnStr.append("-"+this.getTransactionType() +" Amount: "+ nf.format(this.getTransactionAmountAsDouble()) +"\n");
+	  returnStr.append("-Transaction ID: "+this.getTransactionID()+"\n");
+	  returnStr.append("-Account ID: "+ this.getAccountID()+"\n"); //TODO replace this with Account name.
+	  returnStr.append("-Date: "+ this.getTransactionDate()+ "\n");
+	  returnStr.append("-Category: "+ this.getCategory() + "\n");
+	  
+	  return returnStr.toString();
+  }
 
 }
