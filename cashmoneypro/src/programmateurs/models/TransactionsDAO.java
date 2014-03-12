@@ -27,15 +27,15 @@ public class TransactionsDAO {
 	//v1
   public static final String CREATE_TRANSACTIONS_TABLE = "CREATE TABLE Transactions"
 		  + " (transactionID INTEGER PRIMARY KEY AUTOINCREMENT, "
-		  + " accountID INTEGER NOT NULL, "
+		  + " accountID INTEGER NOT NULL REFERENCES Accounts(accountID), "
+		  + " categoryID INTEGER REFERENCES Categories(categoryID), "
 		  + " transaction_name TEXT DEFAULT '',"
 		  + " transaction_type TEXT NOT NULL, "
 		  + " transaction_amount INTEGER NOT NULL,"
 		  + " transaction_date DATE, "
 		  + " transaction_comment TEXT DEFAULT '',"
 		  + " timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, "
-		  + " rolledback BOOLEAN NOT NULL, "
-		  + " FOREIGN KEY(accountID) REFERENCES Accounts(accountID) "
+		  + " rolledback BOOLEAN NOT NULL "
 		  + ");";
 
   private static long gcl (Cursor c, String columnName) {
@@ -48,8 +48,9 @@ public class TransactionsDAO {
 
   private static Transaction cursorToTransaction(Cursor c, SQLiteDatabase db) throws ParseException {
 	long transactionID = gcl(c, "transactionID");
-	long accountID = gcl(c, "accountID");
-	long userID = gcl(c,"userID");
+	long accountID = gcl(c, "Transactions.accountID");
+	long userID = gcl(c,"Accounts.userID");
+	long categoryID = gcl(c,"Transactions.categoryID");
 	String transactionName = gcs(c,"transaction_name");
 	Transaction.TRANSACTION_TYPE transactionType = 
 			Transaction.TRANSACTION_TYPE.valueOf(gcs(c, "transaction_type"));
@@ -58,11 +59,18 @@ public class TransactionsDAO {
 			gcl(c,"transaction_date")).getTime();
 	String transactionComment = gcs(c,"transaction_comment");
 	Date timestamp = DateUtility.getCalendarFromFormattedLong(
-			gcl(c,"timestamp")).getTime();
+			gcl(c,"Transactions.timestamp")).getTime();
 	boolean rolledback = (gcl(c, "rolledback") == 1) ? true : false;
-	Category[] categories = CategoriesDAO.getCategoriesForUser(db, userID);
+	
+	Category category = null;
+	int categoryNameIndex = c.getColumnIndex("category_name");
+	if (categoryNameIndex != -1) {
+		String categoryName = c.getString(categoryNameIndex);
+		category = new Category(categoryID, userID, categoryName);	
+	}
+
 	return new Transaction(transactionID,accountID,transactionName,transactionType,transactionAmount,
-				transactionDate,transactionComment,timestamp,rolledback,categories);
+				transactionDate,transactionComment,timestamp,rolledback,category);
   }
 
 	/**
@@ -73,8 +81,7 @@ public class TransactionsDAO {
 	public static Transaction[] getTransactionsForAccount(SQLiteDatabase db, long accountID) {
 		
 		Cursor c = db.rawQuery(
-					"SELECT transactionID, T.accountID, userID, transaction_name, transaction_type, transaction_amount, " +
-					"transaction_date, transaction_comment, timestamp, rolledback " +
+					"SELECT *" +
 					"	FROM transactions AS T JOIN Accounts AS A WHERE T.accountID = ? AND T.accountID = A.accountID;", 
 				new String[]{Long.toString(accountID)});
 		List<Transaction> outL = new ArrayList<Transaction>();
@@ -101,9 +108,14 @@ public class TransactionsDAO {
 	 * adds a transaction with the associated information to the DB, returns an object representation of it
 	 */
 	public static Transaction addTransactionToDB(SQLiteDatabase db, long accountID, String transactionName, Transaction.TRANSACTION_TYPE transactionType,
-			long transactionAmount, Date transactionDate, String transactionComment, boolean rolledback) {
+			long transactionAmount, Date transactionDate, String transactionComment, boolean rolledback, Category category) {
 		ContentValues toInsert = new ContentValues();
 		toInsert.put("accountID", accountID);
+		if (category != null) {
+			toInsert.put("categoryID", category.getCategoryID());
+		} else {
+			toInsert.putNull("categoryID");
+		}
 		toInsert.put("transaction_name", transactionName);
 		toInsert.put("transaction_type", transactionType.name());
 		toInsert.put("transaction_amount", transactionAmount);
@@ -111,10 +123,9 @@ public class TransactionsDAO {
 		toInsert.put("transaction_comment", transactionComment);
 		toInsert.put("rolledback", rolledback ? 1 : 0);
 		long transactionID = db.insert("transactions", null, toInsert);
-		Category[] categories = CategoriesDAO.getCategoriesForTransaction(db, transactionID);
 		//Transaction thetrans = getTransactionWithID(db, transactionID);
 		Transaction thetrans = new Transaction(transactionID, accountID, transactionName, transactionType, 
-				transactionAmount, transactionDate, transactionComment, new Date(), rolledback, categories);
+				transactionAmount, transactionDate, transactionComment, new Date(), rolledback, category);
 		return thetrans;
 	}
 
@@ -127,8 +138,7 @@ public class TransactionsDAO {
 	public static Transaction[] getTransactionsForUser(SQLiteDatabase db, long userID) {
 		
 		Cursor c = db.rawQuery(
-					"SELECT transactionID, T.accountID, userID, transaction_name, transaction_type, transaction_amount, " +
-					"transaction_date, transaction_comment, timestamp, rolledback " +
+					"SELECT *" +
 					"	FROM transactions AS T JOIN Accounts AS A WHERE A.userID = ? AND T.accountID = A.accountID;", 
 					
 					
@@ -156,9 +166,10 @@ public class TransactionsDAO {
 	public static Transaction getTransactionWithID(SQLiteDatabase db, long transactionID) {
 		
 		Cursor c = db.rawQuery(
-					"SELECT transactionID, T.accountID, userID, transaction_name, transaction_type," +
-					" transaction_amount, transaction_date, transaction_comment, timestamp, rolledback " +
-					"	FROM transactions AS T JOIN Accounts AS A WHERE T.transactionID = ? AND T.accountID = A.accountID;", 
+					"SELECT * " +
+					"	FROM transactions AS T " +
+					"JOIN Accounts AS A WHERE T.transactionID = ? AND T.accountID = A.accountID " +
+					"LEFT JOIN Categories as C WHERE T.categoryID = C.categoryID;", 
 					new String[]{Long.toString(transactionID)});
 
 		c.moveToFirst();

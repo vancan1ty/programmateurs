@@ -110,7 +110,7 @@ public interface DataSourceInterface {
 	public Transaction addTransactionToDB(long accountID, String transactionName,
 			TRANSACTION_TYPE transactionType, long transactionAmount,
 			Date transactionDate, String transactionComment,
-			boolean rolledback, Category[] categories);
+			boolean rolledback, Category category);
 
 
 

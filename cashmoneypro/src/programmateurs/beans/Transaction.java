@@ -33,11 +33,11 @@ public class Transaction {
 	private String transactionComment;
 	private Date timestamp;
 	private boolean rolledback;
-	private Category[] categories;
+	private Category category;
 	
 	public Transaction(long transactionID, long accountID,
 			String transactionName, TRANSACTION_TYPE transactionType, long transactionAmount, Date transactionDate,
-			String transactionComment, Date timestamp, boolean rolledback, Category[] categories) {
+			String transactionComment, Date timestamp, boolean rolledback, Category category) {
 		super();
 		this.transactionID = transactionID;
 		this.accountID = accountID;
@@ -48,7 +48,7 @@ public class Transaction {
 		this.transactionComment = transactionComment;
 		this.timestamp = timestamp;
 		this.rolledback = rolledback;
-		this.categories = categories;
+		this.category = category;
 	}
 
 	public long getTransactionID() {
@@ -76,8 +76,8 @@ public class Transaction {
 	public boolean isRolledback() {
 		return rolledback;
 	}
-	public Category[] getCategories() {
-		return this.categories;
+	public Category getCategory() {
+		return this.category;
 	}
 
 	@Override
@@ -85,8 +85,8 @@ public class Transaction {
 		return "Transaction [transactionID=" + transactionID + ", accountID="
 				+ accountID + ", transactionName=" + transactionName + ", transactionType=" + transactionType + ", transactionAmount: " + transactionAmount
 				+ ", transactionDate=" + transactionDate + ", timestamp=" + ",transactionComment=" + transactionComment 
-				+ timestamp + ", rolledback=" + rolledback + ", categories="
-				+ Arrays.toString(categories) + "]";
+				+ timestamp + ", rolledback=" + rolledback + ", category="
+				+ category + "]";
 	}
 
 	public String getTransactionName() {

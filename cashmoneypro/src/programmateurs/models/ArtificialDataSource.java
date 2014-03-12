@@ -68,7 +68,7 @@ public class ArtificialDataSource implements DataSourceInterface {
 		try{
 			Log.d("Artificial","HERE!!!");
 			transaction0 = new Transaction(0,5,"first",TRANSACTION_TYPE.REBALANCE, 233,DateUtility.getDateFromString("3-11-13"), 
-					"bla", t0,false,new Category[]{});
+					"bla", t0,false,null);
 /*			transaction1 = new Transaction(1,5,TRANSACTION_TYPE.REBALANCE, 542, DateUtility.getDateFromString("3-12-13"), 
 					t1,false,new Category[]{});
 			transaction2 = new Transaction(2,5,TRANSACTION_TYPE.DEPOSIT, 345, DateUtility.getDateFromString("3-13-13"), 
@@ -214,7 +214,7 @@ public class ArtificialDataSource implements DataSourceInterface {
 	public Transaction addTransactionToDB(long accountID,
 			String transactionName, TRANSACTION_TYPE transactionType,
 			long transactionAmount, Date transactionDate,
-			String transactionComment, boolean rolledback, Category[] categories) {
+			String transactionComment, boolean rolledback, Category category) {
 		// TODO Auto-generated method stub
 		return null;
 	}

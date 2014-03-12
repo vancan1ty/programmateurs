@@ -21,13 +21,14 @@ public class CategoriesDAO {
 		  + " FOREIGN KEY(userID) REFERENCES Users(userID)"
 		  + ");";
   
-  public static final String CREATE_TRANSACTIONS_CATEGORIES_TABLE = "CREATE TABLE Transactions_Categories"
+  //NO LONGER NEEDED BECAUSE ONLY ONE CATEGORY PER TRANSACTION
+/*  public static final String CREATE_TRANSACTIONS_CATEGORIES_TABLE = "CREATE TABLE Transactions_Categories"
 		  + " (transactions_categoriesID INTEGER PRIMARY KEY AUTOINCREMENT, "
 		  + " transactionID INTEGER NOT NULL, "
 		  + " categoryID INTEGER NOT NULL, "
 		  + " FOREIGN KEY(transactionID) REFERENCES Transactions(transactionID), "
 		  + " FOREIGN KEY(categoryID) REFERENCES Categories(categoryID)"
-		  + ");";
+		  + ");"; */
 
   private static Category cursorToCategory(Cursor cursor) {
 	long categoryID = cursor.getInt(0);

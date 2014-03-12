@@ -91,7 +91,7 @@ public class TransactionScreen extends Activity {
 	  				double transactionAmountD = Double.parseDouble(money);
 	  				long transactionAmountL = Math.round(transactionAmountD*100);
 	  				dbHandler.addTransactionToDB(accountID, transactionName, transactionType, (long) transactionAmountL, 
-	  						cal.getTime(), transactionComment, false, new Category[0]);
+	  						cal.getTime(), transactionComment, false, null);
 
 	  				me.onBackPressed();
 	  			}
