@@ -208,7 +208,7 @@ public static String getCategoryReport(SQLiteDatabase db, Calendar dateStart, Ca
 		
 		Cursor c = db.rawQuery(
 
-					 " SELECT category_name, SUM(transaction_amount) As transaction_amount" 
+					 " SELECT category_name, SUM(transaction_amount) As transaction_amount, 0 AS order_fac" 
 				   + " FROM Transactions AS T" 
 				   + " LEFT JOIN Categories as C ON T.categoryID = C.categoryID"
 				   + " JOIN Accounts as A ON A.accountID = T.accountID"
@@ -216,11 +216,12 @@ public static String getCategoryReport(SQLiteDatabase db, Calendar dateStart, Ca
 				   + " AND transaction_type = ? AND A.userID = ?"
 				   + " GROUP BY category_name" 
 				   + " UNION"
-				   + " SELECT 'Total' AS category_name, SUM(transaction_amount) AS transaction_amount"
+				   + " SELECT 'Total' AS category_name, SUM(transaction_amount) AS transaction_amount, 1 AS order_fac"
 				   + " FROM transactions AS T"
 				   + " JOIN Accounts as A ON A.accountID = T.accountID"
 				   + " WHERE transaction_date > ? AND transaction_date < ? AND userID = ?"
 				   + " AND transaction_type = ?"
+				   + " ORDER BY order_fac"
 				   + ";",
 					new String[]{
 						   	Long.toString(DateUtility.formatCalendarAsLong(dateStart)),
