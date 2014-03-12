@@ -101,7 +101,7 @@ public class Account {
 		if(type == Transaction.TRANSACTION_TYPE.WITHDRAWAL){
 			return (getBalance(context) - amount) < 0;
 		} else{
-			return true;
+			return false;
 		}
 	}
 	
