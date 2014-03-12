@@ -52,8 +52,7 @@ public class CategoryActivity extends Activity implements OnItemSelectedListener
 		user = anchor.getCurrentUser();
 
 		categorySpinner = (Spinner) findViewById(R.id.category_spinner);
-		//categorySpinner.setOnItemSelectedListener(this);
-	    populateSpinner();
+		categorySpinner.setOnItemSelectedListener(this);
 	    
 		addButton.setOnClickListener(new OnClickListener(){
 			@Override
@@ -65,15 +64,14 @@ public class CategoryActivity extends Activity implements OnItemSelectedListener
 	}
 	
 	private void populateSpinner(){
-		//categories = dbHandler.getCategoriesForUser(user.getUserID());
-		//String[] categoryArray = new String[categories.length];
-		//if(categories != null){
-		//	for(int i =0; i < categories.length ; i++){
-		//		if(categories[i]!=null)
-		//			categoryArray[i] = categories[i].getCategroy_name();
-		//	}
-		//}
-		String[] categoryArray = {"Category 1", "Category 2", "Category 3"};
+		categories = dbHandler.getCategoriesForUser(user.getUserID());
+		String[] categoryArray = new String[categories.length];
+		if(categories != null){
+			for(int i =0; i < categories.length ; i++){
+				if(categories[i]!=null)
+					categoryArray[i] = categories[i].getCategory_name();
+			}
+		}
 		adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, categoryArray);
 		
@@ -83,7 +81,7 @@ public class CategoryActivity extends Activity implements OnItemSelectedListener
 	
 	@Override
 	public void  onItemSelected(AdapterView<?> parent, View view, int pos, long id){
-		toDelete = (Category) parent.getItemAtPosition(pos); //THIS METHOD DOES NOT WORK YET. Will come back later.
+		//toDelete = (Category) parent.getItemAtPosition(pos); //THIS METHOD DOES NOT WORK YET. Will come back later.
 	}
 	
 	@Override
@@ -94,7 +92,7 @@ public class CategoryActivity extends Activity implements OnItemSelectedListener
 	private void addCategory(String name){
 		dbHandler.addCategoryToDB(anchor.getCurrentUser().getUserID(), name);
 		anchor.showDialog(this, "Add Category", addButton.getText()+" was added to categories!");
-		addButton.setText("");
+		categoryNameField.setText("");
 		populateSpinner();
 	}
 	
@@ -105,6 +103,7 @@ public class CategoryActivity extends Activity implements OnItemSelectedListener
 	@Override
 	public void onResume(){
 		dbHandler.open();
+		populateSpinner();
 		super.onResume();
 	}
 	
