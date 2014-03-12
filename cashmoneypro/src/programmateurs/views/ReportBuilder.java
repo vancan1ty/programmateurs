@@ -2,6 +2,7 @@ package programmateurs.views;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import net.programmateurs.R;
@@ -102,6 +103,8 @@ public class ReportBuilder extends Activity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 				Intent i = new Intent(v.getContext(), CategoryReportActivity.class);
+				i.putExtra("startCalendar", startCalendar);
+				i.putExtra("endCalendar", endCalendar);
 				v.getContext().startActivity(i);
 			
 		}
