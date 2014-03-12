@@ -25,7 +25,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
         android:ems="10"
-        android:text="Enter Category Name" />
+        android:hint="Enter Category Name"
+        android:text=" " />
 
     <Button
         android:id="@+id/add_button"
