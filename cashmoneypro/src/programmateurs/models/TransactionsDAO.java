@@ -203,7 +203,7 @@ public class TransactionsDAO {
 	}
 
 public static String getCategoryReport(SQLiteDatabase db, Calendar dateStart, Calendar dateEnd, 
-		Transaction.TRANSACTION_TYPE transactionType) {
+		Transaction.TRANSACTION_TYPE transactionType, long userID) {
 		
 		
 		Cursor c = db.rawQuery(
@@ -211,31 +211,36 @@ public static String getCategoryReport(SQLiteDatabase db, Calendar dateStart, Ca
 					 " SELECT category_name, SUM(transaction_amount) As transaction_amount" 
 				   + " FROM Transactions AS T" 
 				   + " LEFT JOIN Categories as C ON T.categoryID = C.categoryID"
+				   + " JOIN Accounts as A ON A.accountID = T.accountID"
 				   + " WHERE transaction_date > ? AND transaction_date < ?"
-				   + " AND transaction_type = ?"
+				   + " AND transaction_type = ? AND A.userID = ?"
 				   + " GROUP BY category_name" 
 				   + " UNION"
 				   + " SELECT 'Total' AS category_name, SUM(transaction_amount) AS transaction_amount"
-				   + " FROM transactions"
-				   + " WHERE transaction_date > ? AND transaction_date < ?"
+				   + " FROM transactions AS T"
+				   + " JOIN Accounts as A ON A.accountID = T.accountID"
+				   + " WHERE transaction_date > ? AND transaction_date < ? AND userID = ?"
 				   + " AND transaction_type = ?"
 				   + ";",
 					new String[]{
 						   	Long.toString(DateUtility.formatCalendarAsLong(dateStart)),
 							Long.toString(DateUtility.formatCalendarAsLong(dateEnd)),
 							transactionType.name(),
+							Long.toString(userID),
 							Long.toString(DateUtility.formatCalendarAsLong(dateStart)),
 							Long.toString(DateUtility.formatCalendarAsLong(dateEnd)),
+							Long.toString(userID),
 							transactionType.name()
 							});
 
 		c.moveToFirst();
 
 		StringBuilder out = new StringBuilder();
-			out.append("Category\t\tAmount\n");
+			out.append(String.format("%-15s %s\n", "Category", "Amount"));
 		NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);
 		while (!c.isAfterLast()) {
-			out.append(gcs(c,"category_name") + "\t\t" + nf.format(gcl(c,"transaction_amount")/100.0) + "\n");
+			out.append(String.format("%-15s %s\n", gcs(c,"category_name"), 
+					nf.format(gcl(c,"transaction_amount")/100.0)));
 
 			c.moveToNext();
 		}

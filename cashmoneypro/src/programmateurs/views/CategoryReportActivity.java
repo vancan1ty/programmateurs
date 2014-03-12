@@ -3,6 +3,7 @@ package programmateurs.views;
 import java.util.Calendar;
 
 import programmateurs.beans.Transaction.TRANSACTION_TYPE;
+import programmateurs.models.Anchor;
 import programmateurs.models.RealDataSource;
 
 import net.programmateurs.R;
@@ -19,11 +20,13 @@ public class CategoryReportActivity extends Activity {
 	TextView textReport;
 	Calendar startCalendar;
 	Calendar endCalendar;
+	Anchor anchor;
 	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		anchor = Anchor.getInstance();
 		setContentView(R.layout.activity_category_report);
 		Bundle extras = getIntent().getExtras();
 		startCalendar = (Calendar) extras.getSerializable("startCalendar");
@@ -41,7 +44,8 @@ public class CategoryReportActivity extends Activity {
 		super.onResume();
 
 		src.open();
-		textReport.setText(src.getCategoryReport(startCalendar, endCalendar, TRANSACTION_TYPE.WITHDRAWAL));
+		textReport.setText(src.getCategoryReport(startCalendar, endCalendar, 
+				TRANSACTION_TYPE.WITHDRAWAL, anchor.getCurrentUser().getUserID()));
 
 	}
 	
