@@ -74,7 +74,7 @@ public class ReportBuilder extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_report_builder);
 		Bundle extras = getIntent().getExtras();
-//		reportType = extras.getSerializable("reportType");
+		reportType = (Transaction.TRANSACTION_TYPE) extras.getSerializable("reportType");
 		textStartDate = (EditText) findViewById(R.id.text_start_date);
 		textEndDate = (EditText) findViewById(R.id.text_end_date);
 		buttonGenerateReport = (Button) findViewById(R.id.button_generate_report);

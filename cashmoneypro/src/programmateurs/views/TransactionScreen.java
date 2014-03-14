@@ -111,7 +111,7 @@ public class TransactionScreen extends Activity {
 						errorMessage += "\n- Enter a valid startDate.";
 		  			}
 		  			if(account.overdrawn(me, amount, transactionType)){
-		  				errorMessage += "\n- You have insufficient funds to complete\nthistransaction.";
+		  				errorMessage += "\n- You have insufficient funds to complete this transaction.";
 		  			}
 					anchor.showDialog(me, "Transaction Error(s)", errorMessage);
 	  			}

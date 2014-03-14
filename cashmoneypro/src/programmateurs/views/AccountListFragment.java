@@ -83,9 +83,9 @@ public class AccountListFragment extends Fragment {
 	
 	@Override
 	public boolean onOptionsItemSelected(android.view.MenuItem item) {
-		if (item.getItemId() == R.id.action_add_acount) {
-			
-		}
+//		if (item.getItemId() == R.id.action_add_acount) {
+//			
+//		}
 		super.onOptionsItemSelected(item);
 		return true;
 	};

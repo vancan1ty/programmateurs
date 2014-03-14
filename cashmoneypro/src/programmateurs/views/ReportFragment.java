@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import programmateurs.beans.Account;
+import programmateurs.beans.Transaction;
 import programmateurs.beans.User;
 import programmateurs.models.Anchor;
 import programmateurs.models.RealDataSource;
@@ -57,6 +58,7 @@ public class ReportFragment extends Fragment {
 			public void onClick(View v) {
 				//TODO implement
 				Intent i = new Intent(v.getContext(), ReportBuilder.class);
+				i.putExtra("reportType", Transaction.TRANSACTION_TYPE.WITHDRAWAL);
 				v.getContext().startActivity(i);
 			}
 		});
@@ -68,6 +70,7 @@ public class ReportFragment extends Fragment {
 			public void onClick(View v) {
 				//TODO implement
 				Intent i = new Intent(v.getContext(), ReportBuilder.class);
+				i.putExtra("reportType", Transaction.TRANSACTION_TYPE.DEPOSIT);
 				v.getContext().startActivity(i);
 			}
 		});
