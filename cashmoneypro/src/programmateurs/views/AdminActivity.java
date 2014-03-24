@@ -67,7 +67,6 @@ public class AdminActivity extends Activity {
 			}
 		});
 		
-		//reset button sets instance-only password for user
 		resetButton.setOnClickListener(new OnClickListener(){
 			public void onClick(View v){
 				final String username = userField.getText().toString();
