@@ -116,7 +116,7 @@ public class RealDataSource implements DataSourceInterface {
 
 	@Override
 	public Account addAccountToDB(long userID, ACCOUNT_TYPE accountType,
-			String accountName, int interestRate) {
+			String accountName, double interestRate) {
 		return AccountsDAO.addAccountToDB(db, userID, accountType, accountName, interestRate);
 	}
 
