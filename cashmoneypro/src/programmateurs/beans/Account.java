@@ -49,7 +49,6 @@ public class Account {
 	 */
 	public Account(long accountID, long userID, ACCOUNT_TYPE accountType,
 			String accountName, double interestRate) {
-		super();
 		this.accountID = accountID;
 		this.userID = userID;
 		this.accountType = accountType;

@@ -97,9 +97,7 @@ public class NewAccountActivity extends Activity {
 					anchor.showDialog(me, "Invalid Interst Rate", "Please enter an interest rate between 0 and 100");
 				}
 				
-				if((interestNum<=100 && interestNum>=0) && !account.equals("")) {
-					validAccount = true;
-				}
+				validAccount = (interestNum<=100 && interestNum>=0 && !account.equals(""));
 				
 				if (spinner.getSelectedItem().toString().equals("Checking") && validAccount) {
 					accountType = ACCOUNT_TYPE.CHECKING;
