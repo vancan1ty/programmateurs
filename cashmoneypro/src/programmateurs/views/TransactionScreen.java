@@ -104,7 +104,7 @@ public class TransactionScreen extends Activity {
 	  						cal.getTime(), transactionComment, false, getCategoryByName((String)categorySpinner.getSelectedItem()));
 
 	  				//$$.mp3 sound goes here:  
-	  		        depositSound.start();
+	  		        	depositSound.start();
 	  				//end sound
 	  				me.onBackPressed();
 	  			}
