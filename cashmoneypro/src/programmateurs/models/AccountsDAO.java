@@ -28,7 +28,7 @@ public class AccountsDAO {
 	long userID = cursor.getInt(1);
 	Account.ACCOUNT_TYPE accountType = Account.ACCOUNT_TYPE.valueOf(cursor.getString(2));
 	String accountName = cursor.getString(3);
-	int interestRate = cursor.getInt(4);
+	double interestRate = cursor.getInt(4);
 	return new Account(accountID, userID, accountType, accountName, interestRate);
   }
 
@@ -79,7 +79,7 @@ public class AccountsDAO {
 	 * @return
 	 */
 	public static Account addAccountToDB(SQLiteDatabase db, long userID, Account.ACCOUNT_TYPE accountType,
-			String accountName, int interestRate) {
+			String accountName, double interestRate) {
 		ContentValues toInsert = new ContentValues();
 		toInsert.put("userID", userID);
 		toInsert.put("account_type", accountType.name());

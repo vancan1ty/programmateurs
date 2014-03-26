@@ -29,8 +29,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Interest Rate"
-        android:inputType="number" >
+        android:hint="Interest rate (3.2 -> 3.2%)"
+        android:inputType="numberDecimal" >
 
     </EditText>
 

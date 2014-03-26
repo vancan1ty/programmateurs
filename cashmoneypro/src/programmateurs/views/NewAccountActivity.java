@@ -88,9 +88,9 @@ public class NewAccountActivity extends Activity {
 					anchor.showDialog(me, "Invalid Account Name", "Please enter an account name");
 				}
 				String interestString = interestRate.getText().toString();
-				int interestNum = -1;
+				double interestNum = -1.0;
 				if (!interestString.equals("")) {
-					interestNum = Integer.parseInt(interestString);
+					interestNum = Double.parseDouble(interestString);
 				}
 				
 				if (interestNum < 0 || interestNum > 100) {

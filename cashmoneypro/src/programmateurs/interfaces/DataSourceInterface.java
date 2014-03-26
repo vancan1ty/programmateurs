@@ -102,7 +102,7 @@ public interface DataSourceInterface {
 	 * @return
 	 */
 	public Account addAccountToDB(long userID, Account.ACCOUNT_TYPE accountType,
-			String accountName, int interestRate);
+			String accountName, double interestRate);
 	
 	/**
 	 * adds transaction with associated information to the DB, returns an object representation of it.

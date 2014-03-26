@@ -166,7 +166,7 @@ public class ArtificialDataSource implements DataSourceInterface {
 
 	@Override
 	public Account addAccountToDB(long userID, ACCOUNT_TYPE accountType,
-			String accountName, int interestRate) {
+			String accountName, double interestRate) {
 		long lastAccountID = accounts.get(accounts.size()-1).getAccountID();
 		Account acct = new Account(lastAccountID+1,userID,accountType,accountName,interestRate);
 		accounts.add(acct);
