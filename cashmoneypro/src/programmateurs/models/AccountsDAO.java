@@ -19,7 +19,7 @@ public class AccountsDAO {
 		  + " userID INTEGER NOT NULL, "
 		  + " account_type TEXT NOT NULL, "
 		  + " account_name TEXT NOT NULL, "
-		  + " interest_rate INTEGER NOT NULL, "
+		  + " interest_rate DOUBLE NOT NULL, "
 		  + " FOREIGN KEY(userID) REFERENCES Users(userID) "
 		  + ");";
 
@@ -29,6 +29,7 @@ public class AccountsDAO {
 	Account.ACCOUNT_TYPE accountType = Account.ACCOUNT_TYPE.valueOf(cursor.getString(2));
 	String accountName = cursor.getString(3);
 	double interestRate = cursor.getInt(4);
+	Log.d("uponpullfromdb",Double.toString(interestRate));
 	return new Account(accountID, userID, accountType, accountName, interestRate);
   }
 
@@ -85,6 +86,7 @@ public class AccountsDAO {
 		toInsert.put("account_type", accountType.name());
 		toInsert.put("account_name", accountName);
 		toInsert.put("interest_rate", interestRate);
+		Log.d("uponaddaccount",Double.toString(interestRate));
 		long accountID = db.insert("accounts", null, toInsert);
 		Account acct = new Account(accountID,userID,accountType,accountName,interestRate);
 		return acct;
