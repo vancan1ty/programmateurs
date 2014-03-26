@@ -26,6 +26,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
+import android.media.MediaPlayer; //for sounds, delete this import if error
 
 public class AccountDetailActivity extends Activity {
 	
@@ -39,6 +40,8 @@ public class AccountDetailActivity extends Activity {
 	Button buttonDeposit;
 	Button buttonWithdraw;
 	List<Transaction> transactionList = new ArrayList<Transaction>();
+	
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
