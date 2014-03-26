@@ -4,6 +4,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Locale;
 
+import programmateurs.beans.User;
 import programmateurs.models.Anchor;
 import programmateurs.models.RealDataSource;
 import programmateurs.models.UsersDAO;
@@ -96,7 +97,9 @@ public class AddUserActivity extends Activity {
 				if (userDoesntExist&&validUsername&&validPassword&&validEmail) { //user doesnt exist yet, username and pass is valid
 					dbHandler.addUserToDB(username, password, first , last, email);
 					Intent i = new Intent(v.getContext(), HomeActivity.class);
-					anchor.setCurrentUser(dbHandler.getUser(username));
+					User user = dbHandler.getUser(username);
+					anchor.setCurrentUser(user);		
+					dbHandler.addCategoryToDB(user.getUserID(),"Misc."); //Adds a default category at user creation to avoid brreaking
 					v.getContext().startActivity(i); 
 				}
 				else{
