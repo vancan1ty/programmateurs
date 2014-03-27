@@ -54,7 +54,7 @@ public class TransactionAdapter extends BaseAdapter {
     String headerText = q.getTransactionName();
     
     String bodyText = q.getTransactionType() + " of " + nf.format(q.getTransactionAmountAsDouble());
-    bodyText += "\n\""+q.getTransactionComment()+"\"";
+    bodyText += "\n"+q.getTransactionComment();
     
     header.setText(headerText);
     body.setText(bodyText);
