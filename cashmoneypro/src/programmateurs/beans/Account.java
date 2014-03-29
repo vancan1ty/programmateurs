@@ -78,9 +78,9 @@ public class Account {
 		for (Transaction transaction : db.getTransactionsForAccount(accountID)) {
 			TRANSACTION_TYPE type = transaction.getTransactionType();
 			if ((type == TRANSACTION_TYPE.DEPOSIT || type == TRANSACTION_TYPE.REBALANCE) 
-					&& transaction.isRolledback() == false) {
+					&& !transaction.isRolledback()) {
 				balance += transaction.getTransactionAmountAsDouble();
-			} else if (type == TRANSACTION_TYPE.WITHDRAWAL && transaction.isRolledback() == false) {
+			} else if (type == TRANSACTION_TYPE.WITHDRAWAL && !transaction.isRolledback()) {
 				balance -= transaction.getTransactionAmountAsDouble();
 			}
 		}
