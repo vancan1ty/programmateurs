@@ -1,6 +1,8 @@
 package programmateurs.models;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
@@ -69,7 +71,9 @@ public class UsersDAO {
 
  
   public static boolean isUserInDB(SQLiteDatabase db, String username, String password) {
-	  Cursor c = db.rawQuery("SELECT * FROM users WHERE username = ? AND passhash = ?", new String[]{username,password});
+	  Cursor c;
+	c = db.rawQuery("SELECT * FROM users WHERE username = ? AND passhash = ?", new String[]{username,
+			  hashPassword(password)});
 	  if (c.getCount()==1) {
 		  return true;
 	  } else {
@@ -90,9 +94,44 @@ public class UsersDAO {
 //	  String passHash = hashPassword(password);
 	  ContentValues toInsert = new ContentValues();
 	  toInsert.put("username", username);
-	  toInsert.put("passhash", password);
+	  toInsert.put("passhash", hashPassword(password));
 	  db.insert("users", null, toInsert);
   }
+  
+  public static final String HASH = "ludicrousHash";
+
+	public static String hashPassword(String password) {
+		MessageDigest md;
+		try {
+			md = MessageDigest.getInstance("SHA-256");
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "nosuchalgorithm";
+		}
+		try {
+			md.update((password + HASH).getBytes("UTF-8")); // Change this to "UTF-16" if needed
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "unsupportedencoding";
+		} 
+		byte[] digest = md.digest();
+		BigInteger bigInt = new BigInteger(1, digest);
+		String output = bigInt.toString(16);
+		return output;
+	}
+	
+	public static boolean passwordEquals(String password, String passhash) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		String npasshash = hashPassword(password);
+		if (passhash.equals(npasshash)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	
  
   /**
    * updates the user matching the parameter user in the db with whatever
@@ -116,7 +155,7 @@ public class UsersDAO {
 //	  String passHash = hashPassword(password);
 	  ContentValues toInsert = new ContentValues();
 	  toInsert.put("username", username);
-	  toInsert.put("passhash", password);
+	  toInsert.put("passhash", hashPassword(password));
 	  toInsert.put("first", first);
 	  toInsert.put("last", last);
 	  toInsert.put("email", email);

@@ -27,6 +27,17 @@ public class DatabaseTest extends AndroidTestCase {
 		Log.d("TESTER","number of users: " + src.getUsers().length);
 		assertTrue(src.getUsers().length == 2);
 	}
+	
+	public void testIsUserInDB() {
+		src.addUserToDB("cvberry", "mypass", "Currell", "Berry", "cvberry@gatech.edu");
+		assertTrue(src.isUserInDB("cvberry", "mypass")); //standard case
+		assertFalse(src.isUserInDB("okuser", "thepass")); //standard nonexistent user
+
+		assertFalse(src.isUserInDB("cvberry", "mypassb")); //password doesn't match!
+		assertFalse(src.isUserInDB("cvberry", "Mypass")); //different case password!
+
+		assertTrue(src.isUserInDB("CvBeRry", "mypass")); //different case username!
+	}
 
 	public void tearDown() throws Exception{
 		src.deleteAllFromDB();

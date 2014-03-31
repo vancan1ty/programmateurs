@@ -21,7 +21,7 @@ public class DBHelper extends SQLiteOpenHelper {
 //  public static final String COLUMN_ID = "_id";
 //  public static final String COLUMN_COMMENT = "comment";
 
-  private static final int DATABASE_VERSION = 20;
+  private static final int DATABASE_VERSION = 21;
 
   public DBHelper(Context context) {
     super(context, "programmateurs", null, DATABASE_VERSION);
@@ -35,12 +35,12 @@ public class DBHelper extends SQLiteOpenHelper {
     database.execSQL(TransactionsDAO.CREATE_TRANSACTIONS_TABLE);
     ContentValues toInsert = new ContentValues();
     toInsert.put("username", "admin");
-    toInsert.put("passhash", "pass123");
+    toInsert.put("passhash", UsersDAO.hashPassword("pass123"));
     database.insert("users", null, toInsert);
     
     ContentValues toInsert2 = new ContentValues();
     toInsert2.put("username", "test");
-    toInsert2.put("passhash", "test");
+    toInsert2.put("passhash", UsersDAO.hashPassword("test"));
     toInsert2.put("first", "tfirst");
     toInsert2.put("last", "tlast");
     toInsert2.put("email", "test@test.com");

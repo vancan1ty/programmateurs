@@ -1,5 +1,7 @@
 package programmateurs.interfaces;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -89,9 +91,11 @@ public interface DataSourceInterface {
 	 * @param last
 	 * @param email
 	 * @return
+	 * @throws UnsupportedEncodingException 
+	 * @throws NoSuchAlgorithmException 
 	 */
 	public User addUserToDB(String username, String passhash, String first,
-			String last, String email);
+			String last, String email) throws NoSuchAlgorithmException, UnsupportedEncodingException;
 	
 	/**
 	 * adds an account with the associated information to the DB, returns an object representation of it
