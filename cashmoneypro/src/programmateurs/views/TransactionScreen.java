@@ -11,6 +11,7 @@ import programmateurs.beans.Category;
 import programmateurs.beans.Transaction;
 import programmateurs.beans.Transaction.TRANSACTION_TYPE;
 import programmateurs.interfaces.DataSourceInterface;
+import programmateurs.models.AccountsDAO;
 import programmateurs.models.Anchor;
 import programmateurs.models.RealDataSource;
 import programmateurs.models.ArtificialDataSource;
@@ -48,9 +49,6 @@ public class TransactionScreen extends Activity {
 	DateFormat sdf = new SimpleDateFormat();
 	Anchor anchor = Anchor.getInstance();
 	DataSourceInterface dbHandler = new RealDataSource(this);
-	
-	DataSourceInterface artificialSource = new ArtificialDataSource();
-	Account[] accounts = artificialSource.getAccountsForUser(4);
 	
 	Activity me = this;
 	
@@ -93,8 +91,8 @@ public class TransactionScreen extends Activity {
 	  			int year = picker.getYear();
 	  			cal.set(year, month, day);
 	  			Double amount = Double.parseDouble(money);
-	  			Account account = dbHandler.getAccountWithID(accountID);
-	  			if(validTransactionAmount(money) && validDate(cal) && !account.overdrawn(me, amount, transactionType) ) {
+	  			if(validTransactionAmount(money) && validDate(cal) && !AccountsDAO.overdrawn(dbHandler, accountID, 
+	  					amount, transactionType) ) {
 	  				double transactionAmountD = Double.parseDouble(money);
 	  				long transactionAmountL = Math.round(transactionAmountD*100);
 	  				dbHandler.addTransactionToDB(accountID, transactionName, transactionType, (long) transactionAmountL, 
@@ -110,7 +108,7 @@ public class TransactionScreen extends Activity {
 		  			if(!validDate(cal)) {
 						errorMessage += "\n- Enter a valid startDate.";
 		  			}
-		  			if(account.overdrawn(me, amount, transactionType)){
+		  			if(AccountsDAO.overdrawn(dbHandler, accountID, amount, transactionType)){
 		  				errorMessage += "\n- You have insufficient funds to complete this transaction.";
 		  			}
 					anchor.showDialog(me, "Transaction Error(s)", errorMessage);

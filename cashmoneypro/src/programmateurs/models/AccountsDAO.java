@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import programmateurs.beans.Account;
+import programmateurs.beans.Transaction;
+import programmateurs.beans.Transaction.TRANSACTION_TYPE;
+import programmateurs.interfaces.DataSourceInterface;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -88,5 +91,41 @@ public class AccountsDAO {
 		long accountID = db.insert("accounts", null, toInsert);
 		Account acct = new Account(accountID,userID,accountType,accountName,interestRate);
 		return acct;
+	}
+
+	/**
+	 * Calculates the balance for an account.
+	 * 
+	 * @param context The view from which the method is called
+	 * @return balance of the account
+	 */
+	public static double getBalance(DataSourceInterface src, long accountID){
+		double balance = 0;
+		for (Transaction transaction : src.getTransactionsForAccount(accountID)) {
+			TRANSACTION_TYPE type = transaction.getTransactionType();
+			if ((type == TRANSACTION_TYPE.DEPOSIT || type == TRANSACTION_TYPE.REBALANCE) 
+					&& transaction.isRolledback() == false) {
+				balance += transaction.getTransactionAmountAsDouble();
+			} else if (type == TRANSACTION_TYPE.WITHDRAWAL && transaction.isRolledback() == false) {
+				balance -= transaction.getTransactionAmountAsDouble();
+			}
+		}
+		return balance;
+	}
+	
+	/**
+	 * Checks to see if a potential transaction would result in overdrawing from an account.
+	 * 
+	 * @param context The view from which the method is called
+	 * @param amount The amount of the potential transaction
+	 * @param type The type of the potential transaction
+	 * @return true if transaction would result in overdrawing from account
+	 */
+	public static boolean overdrawn(DataSourceInterface src, long accountID, Double amount, Transaction.TRANSACTION_TYPE type){
+		if(type == Transaction.TRANSACTION_TYPE.WITHDRAWAL){
+			return (getBalance(src, accountID) - amount) < 0;
+		} else{
+			return false;
+		}
 	}
 }

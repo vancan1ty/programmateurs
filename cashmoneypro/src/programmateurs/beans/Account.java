@@ -66,44 +66,7 @@ public class Account {
 		return accountID;
 	}
 	
-	/**
-	 * Calculates the balance for this account.
-	 * 
-	 * @param context The view from which the method is called
-	 * @return balance of the account
-	 */
-	public double getBalance(Context context){
-		DataSourceInterface db = new RealDataSource(context);
-		db.open();
-		double balance = 0;
-		for (Transaction transaction : db.getTransactionsForAccount(accountID)) {
-			TRANSACTION_TYPE type = transaction.getTransactionType();
-			if ((type == TRANSACTION_TYPE.DEPOSIT || type == TRANSACTION_TYPE.REBALANCE) 
-					&& transaction.isRolledback() == false) {
-				balance += transaction.getTransactionAmountAsDouble();
-			} else if (type == TRANSACTION_TYPE.WITHDRAWAL && transaction.isRolledback() == false) {
-				balance -= transaction.getTransactionAmountAsDouble();
-			}
-		}
-		db.close();
-		return balance;
-	}
-	
-	/**
-	 * Checks to see if a potential transaction would result in overdrawing from the account.
-	 * 
-	 * @param context The view from which the method is called
-	 * @param amount The amount of the potential transaction
-	 * @param type The type of the potential transaction
-	 * @return true if transaction would result in overdrawing from account
-	 */
-	public boolean overdrawn(Context context, Double amount, Transaction.TRANSACTION_TYPE type){
-		if(type == Transaction.TRANSACTION_TYPE.WITHDRAWAL){
-			return (getBalance(context) - amount) < 0;
-		} else{
-			return false;
-		}
-	}
+
 	
 	/**
 	 * Getter for the ID of the user who owns the account.
