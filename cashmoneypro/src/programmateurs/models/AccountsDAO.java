@@ -31,7 +31,7 @@ public class AccountsDAO {
 	long userID = cursor.getInt(1);
 	Account.ACCOUNT_TYPE accountType = Account.ACCOUNT_TYPE.valueOf(cursor.getString(2));
 	String accountName = cursor.getString(3);
-	double interestRate = cursor.getInt(4);
+	double interestRate = cursor.getDouble(4);
 	Log.d("uponpullfromdb",Double.toString(interestRate));
 	return new Account(accountID, userID, accountType, accountName, interestRate);
   }

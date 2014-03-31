@@ -21,7 +21,7 @@ public class DatabaseTest extends AndroidTestCase {
 		src.deleteAllFromDB();
 	}
 	
-	public void testAddUser() {
+	public void testAddUser() { 
 		src.addUserToDB("vancan1ty", "blabla", "Currell", "Berry", "currellberry@gmail.com");
 		src.addUserToDB("bigfoot", "bigfoot", "bigfoot", "bigfoot", "currellberry@gmail.com");
 		Log.d("TESTER","number of users: " + src.getUsers().length);
