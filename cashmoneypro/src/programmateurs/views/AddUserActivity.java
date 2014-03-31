@@ -1,42 +1,18 @@
 package programmateurs.views;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.util.Locale;
-
+import net.programmateurs.R;
 import programmateurs.beans.User;
 import programmateurs.models.Anchor;
 import programmateurs.models.RealDataSource;
-import programmateurs.models.UsersDAO;
-
-import net.programmateurs.R;
-import net.programmateurs.R.id;
-import net.programmateurs.R.layout;
-import net.programmateurs.R.menu;
-import net.programmateurs.R.string;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.NavUtils;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 //import com.google.android.gms.common.ConnectionResult;
 //import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -91,10 +67,9 @@ public class AddUserActivity extends Activity {
 				boolean validPassword = validPassword(password); 
 				boolean validEmail = validEmail(email);
 				//boolean validName = validName(name);
-				boolean userDoesntExist = !dbHandler.isUserInDB(username, password);
-				//changed userExists to userDoesntExist to the way this is set up
+				boolean userExists = dbHandler.isUserInDB(username, password);
 				
-				if (userDoesntExist&&validUsername&&validPassword&&validEmail) { //user doesnt exist yet, username and pass is valid
+				if (!userExists&&validUsername&&validPassword&&validEmail) { //user doesnt exist yet, username and pass is valid
 					dbHandler.addUserToDB(username, password, first , last, email);
 					Intent i = new Intent(v.getContext(), HomeActivity.class);
 					User user = dbHandler.getUser(username);
@@ -105,7 +80,7 @@ public class AddUserActivity extends Activity {
 				else{
 					String errorMsg = "Please resolve the following errors:\n" +
 							"";
-					if(!userDoesntExist)
+					if(userExists)
 						errorMsg += "\n- The username you chose is already taken.";
 					/*if(!validName){
 						errorMsg += "\n- Please correct your first and last name.";
