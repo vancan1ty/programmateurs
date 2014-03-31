@@ -30,6 +30,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import android.media.MediaPlayer; //for sounds, delete this import if error
+
 
 /**
  * The Deposit Activity class
@@ -76,12 +78,13 @@ public class TransactionScreen extends Activity {
 		categorySpinner = (Spinner) findViewById(R.id.transaction_category_spinner);
 		
 
+		//stuff for sound so it's not created in line with the button
+		final MediaPlayer depositSound = MediaPlayer.create(this, R.raw.caching);
 	
 		buttonTransaction.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 	  			Intent i = new Intent(v.getContext(), HomeActivity.class);
 	  			String transactionName = textViewName.getText().toString();
 	  			String transactionComment = textViewComment.getText().toString();
@@ -98,6 +101,9 @@ public class TransactionScreen extends Activity {
 	  				dbHandler.addTransactionToDB(accountID, transactionName, transactionType, (long) transactionAmountL, 
 	  						cal.getTime(), transactionComment, false, getCategoryByName((String)categorySpinner.getSelectedItem()));
 
+	  				//$$.mp3 sound goes here:  
+	  		        	depositSound.start();
+	  				//end sound
 	  				me.onBackPressed();
 	  			}
 	  			else {

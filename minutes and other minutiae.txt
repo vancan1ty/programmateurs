@@ -37,3 +37,5 @@
 26/2/2014
 		Talked about model, view, presenter. 
 		
+26/3/2014
+		Changed interest rates to be doubles. Added default category to avert crashing. Demoed M9.

@@ -94,8 +94,17 @@ public class Transaction {
 		return transactionName;
 	}
 
+	
+	/**
+	 * Not just a standard getter. If the user provided no transaction comment,
+	 * then this returns "No Comment Provided"
+	 * @return
+	 */
 	public String getTransactionComment() {
-		return transactionComment;
+		if(!transactionComment.equals(""))
+			return "\""+ transactionComment+"\"";
+		else
+			return"No Comment Provided";
 	}
 
 /**
@@ -106,12 +115,12 @@ public class Transaction {
    */
   public String formatDetails(){
 	  NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);
-	  StringBuilder returnStr = new StringBuilder("\""+ this.getTransactionComment()+"\"\n\n");
-      returnStr.append("-"+this.getTransactionType() +" Amount: "+ nf.format(this.getTransactionAmountAsDouble()) +"\n");
-	  returnStr.append("-Transaction ID: "+this.getTransactionID()+"\n");
-	  returnStr.append("-Account ID: "+ this.getAccountID()+"\n"); //TODO replace this with Account name.
-	  returnStr.append("-Date: "+ this.getTransactionDate()+ "\n");
-	  returnStr.append("-Category: "+ this.getCategory().getCategory_name() + "\n");
+	  StringBuilder returnStr = new StringBuilder(getTransactionComment()+"\n\n");
+      returnStr.append("-"+ transactionType +" Amount: "+ nf.format(getTransactionAmountAsDouble()) +"\n");
+	  returnStr.append("-Transaction ID: "+transactionID+"\n");
+	  returnStr.append("-Account ID: "+ accountID+"\n"); //TODO replace this with Account name.
+	  returnStr.append("-Date: "+ transactionDate+ "\n");
+	  returnStr.append("-Category: "+ category.getCategory_name() + "\n");
 	  
 	  return returnStr.toString();
   }

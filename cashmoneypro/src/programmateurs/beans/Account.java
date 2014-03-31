@@ -36,7 +36,7 @@ public class Account {
 	private long userID;
 	private ACCOUNT_TYPE accountType;
 	private String accountName;
-	private int interestRate;
+	private double interestRate;
 
 	/**
 	 * Constructor for Account class; assigns all appropriate values.
@@ -45,11 +45,10 @@ public class Account {
 	 * @param userID ID of owner
 	 * @param accountType Type of account (enum)
 	 * @param accountName Name given to an account 
-	 * @param interestRate Specified as an integer over 1000
+	 * @param interestRate Specified as a double
 	 */
 	public Account(long accountID, long userID, ACCOUNT_TYPE accountType,
-			String accountName, int interestRate) {
-		super();
+			String accountName, double interestRate) {
 		this.accountID = accountID;
 		this.userID = userID;
 		this.accountType = accountType;
@@ -100,7 +99,7 @@ public class Account {
 	 * 
 	 * @return Account interest rate
 	 */
-	public int getInterestRate() {
+	public double getInterestRate() {
 		return interestRate;
 	}
 
