@@ -28,7 +28,7 @@ import programmateurs.interfaces.DataSourceInterface;
  * point that will allow them to permanently  change the password.
  * 
  * @author Justin
- * @version 0.1
+ * @version 0.2
  */
 public class AdminActivity extends Activity {
 	Button resetButton;
@@ -75,13 +75,8 @@ public class AdminActivity extends Activity {
 				ConfirmDialog confirm = new ConfirmDialog(me,"Confirm Password Reset","Are you sure you want to enable password reset for "
 						+username+" ?"){
 					public boolean onOkClicked(String input){
-						User user = dbHandler.getUser(username);
-						if(username!=null && user!=null){
-							String temp = setTempPassword(user,dbHandler);
-							anchor.showDialog(me,"Password Reset","Password for "+username+" temporarily set to "+temp);
-						} else{
-							anchor.showDialog(me,"Password Reset Error","Given user does not exist." );
-						}
+							String[] message = setTempPassword(username,dbHandler);
+							anchor.showDialog(me, message[0], message[1]);
 						return true;	
 					}
 				};
@@ -90,22 +85,29 @@ public class AdminActivity extends Activity {
 		});
 	}
 	
+
 	/**
 	 * Creates a random 5-digit password for given user and resets that
-	 * user's password in the given database. (Does no quality assurance)
+	 * user's password in the given database, if a user with that username exists.
+	 * Otherwise, does nothing.
 	 * 
-	 * @param user User whose password is being reset
+	 * @param username Username of user whose password is being reset
 	 * @param db the DataSource containing the login information to update
-	 * @return password that User's password is temporarily set to
+	 * @return String array containing the header and message for the UI display
 	 */
-	private String setTempPassword(User user, DataSourceInterface db){
-		Random rand = new Random();
-		String temp = "";
-		for(int i=0; i<5; i++)
-			temp+= rand.nextInt(10); //build random temp password
-		user.setPasshash(temp);
-		db.updateUser(user);
-		return temp;
+	protected String[] setTempPassword(String username, DataSourceInterface db){
+		User user = db.getUser(username);
+		if(username != null && user != null){
+			String temp = "";
+			Random rand = new Random();
+			for(int i=0; i<5; i++)
+				temp+= rand.nextInt(10); //build random temp password
+			user.setPasshash(temp);
+			db.updateUser(user);
+			return new String[]{"Password Reset","Password for "+username+" temporarily set to "+temp};
+		} else{
+			return new String[]{"Password Reset Error","Given user does not exist."};
+		}
 	}
 	
 	@Override
