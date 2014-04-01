@@ -80,7 +80,12 @@ public class AdminActivity extends Activity {
 						return true;	
 					}
 				};
-				confirm.show();
+				
+				if(username != null && !username.equals("")){
+					confirm.show();
+				} else{
+					anchor.showDialog(me,"Invalid Input","Please supply a username.");
+				}
 			}
 		});
 	}
@@ -89,15 +94,15 @@ public class AdminActivity extends Activity {
 	/**
 	 * Creates a random 5-digit password for given user and resets that
 	 * user's password in the given database, if a user with that username exists.
-	 * Otherwise, does nothing.
+	 * Otherwise, does nothing. To be called after database is opened.
 	 * 
 	 * @param username Username of user whose password is being reset
 	 * @param db the DataSource containing the login information to update
 	 * @return String array containing the header and message for the UI display
 	 */
-	protected String[] setTempPassword(String username, DataSourceInterface db){
+	private String[] setTempPassword(String username, DataSourceInterface db){
 		User user = db.getUser(username);
-		if(username != null && user != null){
+		if(user != null){
 			String temp = "";
 			Random rand = new Random();
 			for(int i=0; i<5; i++)
