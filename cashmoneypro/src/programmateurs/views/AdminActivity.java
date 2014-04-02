@@ -106,14 +106,13 @@ public class AdminActivity extends Activity {
         if (user != null) {
             String temp = "";
             Random rand = new Random();
-            for (int i = 0; i < 5; i++)
-             {
+            for (int i = 0; i < 5; i++) {
                 temp += rand.nextInt(10); // build random temp password
             }
             user.setPasshash(temp);
             db.updateUser(user);
             return new String[] {"Password Reset",
-                    "Password for " + username + " temporarily set to " + temp };
+                "Password for " + username + " temporarily set to " + temp };
         } else {
             return new String[] {"Password Reset Error",
                     "Given user does not exist." };

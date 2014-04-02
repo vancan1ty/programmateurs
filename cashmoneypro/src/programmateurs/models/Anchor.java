@@ -103,7 +103,7 @@ public final class Anchor {
      * Unsure what this method does..
      * @param in
      *            The input stream to read
-     * @return
+     * @return the next input
      */
     public static String readInputStream(final java.io.InputStream in) {
         java.util.Scanner s = new java.util.Scanner(in).useDelimiter("\\A");

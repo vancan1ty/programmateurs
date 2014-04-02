@@ -83,8 +83,12 @@ public class CategoriesDAO {
     }
 
     /**
-     * adds a category with the associated information to the DB, returns an
+     * Adds a category with the associated information to the DB, returns an
      * object representation of it.
+     * @param db the database to which to add
+     * @param userID the user's identification number
+     * @param categoryName name of the new category
+     * @return the category inserted
      */
     public static Category addCategoryForDB(final SQLiteDatabase db, final long userID,
             final String categoryName) {
