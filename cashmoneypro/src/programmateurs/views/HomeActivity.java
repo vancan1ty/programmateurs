@@ -3,32 +3,19 @@ package programmateurs.views;
 import java.util.Locale;
 
 import net.programmateurs.R;
-import net.programmateurs.R.id;
-import net.programmateurs.R.layout;
-import net.programmateurs.R.menu;
-import net.programmateurs.R.string;
-
-import programmateurs.beans.Account;
-import programmateurs.beans.User;
 import programmateurs.models.Anchor;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.TextView;
 
 /**

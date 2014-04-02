@@ -3,10 +3,8 @@ package programmateurs.views;
 import java.util.List;
 
 import net.programmateurs.R;
-
 import programmateurs.beans.Account;
 import programmateurs.beans.Account.ACCOUNT_TYPE;
-import programmateurs.models.Anchor;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;

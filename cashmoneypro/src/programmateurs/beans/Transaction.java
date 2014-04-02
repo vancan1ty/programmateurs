@@ -1,10 +1,8 @@
 package programmateurs.beans;
 
-import java.sql.Timestamp;
-import java.util.Arrays;
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.text.NumberFormat;
 
 /**
  * 

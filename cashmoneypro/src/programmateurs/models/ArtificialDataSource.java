@@ -7,9 +7,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import android.database.SQLException;
-import android.util.Log;
-
 import programmateurs.beans.Account;
 import programmateurs.beans.Account.ACCOUNT_TYPE;
 import programmateurs.beans.Category;
@@ -18,6 +15,8 @@ import programmateurs.beans.Transaction.TRANSACTION_TYPE;
 import programmateurs.beans.User;
 import programmateurs.interfaces.DataSourceInterface;
 import programmateurs.util.DateUtility;
+import android.database.SQLException;
+import android.util.Log;
 
 /**
  * This class provides sample data to support UI development before we get the

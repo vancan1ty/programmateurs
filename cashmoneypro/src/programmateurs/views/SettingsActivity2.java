@@ -1,5 +1,8 @@
 package programmateurs.views;
 
+import java.util.List;
+
+import net.programmateurs.R;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -15,15 +18,9 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
+import android.support.v4.app.NavUtils;
 import android.text.TextUtils;
 import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
-
-import java.util.List;
-
-import net.programmateurs.R;
-import net.programmateurs.R.string;
-import net.programmateurs.R.xml;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On

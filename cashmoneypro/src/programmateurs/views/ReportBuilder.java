@@ -2,22 +2,14 @@ package programmateurs.views;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 import net.programmateurs.R;
-import net.programmateurs.R.id;
-import net.programmateurs.R.layout;
-import net.programmateurs.R.menu;
-
-import org.codehaus.jackson.map.module.SimpleAbstractTypeResolver;
-
 import programmateurs.beans.Transaction;
-
-import android.os.Bundle;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;

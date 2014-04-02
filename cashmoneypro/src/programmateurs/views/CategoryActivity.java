@@ -1,13 +1,13 @@
 package programmateurs.views;
 
+import net.programmateurs.R;
 import programmateurs.beans.Category;
 import programmateurs.beans.User;
 import programmateurs.interfaces.DataSourceInterface;
 import programmateurs.models.Anchor;
 import programmateurs.models.RealDataSource;
-import net.programmateurs.R;
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;

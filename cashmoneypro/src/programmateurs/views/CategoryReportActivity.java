@@ -2,16 +2,13 @@ package programmateurs.views;
 
 import java.util.Calendar;
 
+import net.programmateurs.R;
 import programmateurs.beans.Transaction;
 import programmateurs.beans.Transaction.TRANSACTION_TYPE;
 import programmateurs.models.Anchor;
 import programmateurs.models.RealDataSource;
-
-import net.programmateurs.R;
-import net.programmateurs.R.layout;
-import net.programmateurs.R.menu;
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.widget.TextView;
 

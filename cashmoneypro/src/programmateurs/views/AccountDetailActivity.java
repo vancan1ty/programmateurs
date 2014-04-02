@@ -5,28 +5,24 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import net.programmateurs.R;
 import programmateurs.beans.Account;
 import programmateurs.beans.Transaction;
 import programmateurs.beans.Transaction.TRANSACTION_TYPE;
 import programmateurs.interfaces.DataSourceInterface;
-import programmateurs.models.ArtificialDataSource;
 import programmateurs.models.RealDataSource;
-import net.programmateurs.R;
-import net.programmateurs.R.layout;
-import net.programmateurs.R.menu;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.support.v4.app.NavUtils;
-import android.media.MediaPlayer; //for sounds, delete this import if error
+//for sounds, delete this import if error
 
 public class AccountDetailActivity extends Activity {
 

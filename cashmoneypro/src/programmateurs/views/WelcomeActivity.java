@@ -1,13 +1,11 @@
 package programmateurs.views;
 
+import net.programmateurs.R;
 import programmateurs.models.Anchor;
 import programmateurs.models.RealDataSource;
-import net.programmateurs.R;
-import net.programmateurs.R.layout;
-import net.programmateurs.R.menu;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;

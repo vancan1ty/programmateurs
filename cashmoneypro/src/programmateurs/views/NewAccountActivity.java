@@ -1,11 +1,15 @@
 package programmateurs.views;
 
+import java.util.Random;
+
 import net.programmateurs.R;
-import net.programmateurs.R.layout;
-import net.programmateurs.R.menu;
-import android.os.Bundle;
+import programmateurs.beans.Account.ACCOUNT_TYPE;
+import programmateurs.beans.User;
+import programmateurs.models.Anchor;
+import programmateurs.models.RealDataSource;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,14 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-
-import java.util.Random;
-
-import programmateurs.beans.Account.ACCOUNT_TYPE;
-import programmateurs.beans.User;
-import programmateurs.models.Anchor;
-import programmateurs.models.RealDataSource;
-import programmateurs.beans.Account;
 
 /**
  * <<<<<<< HEAD NewAccountActivity allows the user to create a

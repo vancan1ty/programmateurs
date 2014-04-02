@@ -1,33 +1,8 @@
 package programmateurs.models;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-import org.codehaus.jackson.JsonFactory;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
-
-import programmateurs.beans.SessionStatusObject;
-import programmateurs.views.LoginActivity;
 import programmateurs.beans.User;
-
-import android.accounts.AuthenticatorException;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.AsyncTask;
 
 /**
  * This class is called Anchor, because it's intended to provide a central place

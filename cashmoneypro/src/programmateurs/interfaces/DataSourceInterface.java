@@ -2,16 +2,14 @@ package programmateurs.interfaces;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Timestamp;
 import java.util.Date;
-
-import android.database.SQLException;
 
 import programmateurs.beans.Account;
 import programmateurs.beans.Category;
 import programmateurs.beans.Transaction;
 import programmateurs.beans.Transaction.TRANSACTION_TYPE;
 import programmateurs.beans.User;
+import android.database.SQLException;
 
 public interface DataSourceInterface {
 

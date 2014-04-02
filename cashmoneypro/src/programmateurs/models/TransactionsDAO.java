@@ -8,16 +8,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import programmateurs.beans.Account;
 import programmateurs.beans.Category;
 import programmateurs.beans.Transaction;
 import programmateurs.util.DateUtility;
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.text.format.DateUtils;
 import android.util.Log;
 
 /**

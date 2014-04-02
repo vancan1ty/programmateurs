@@ -1,26 +1,21 @@
 package programmateurs.views;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import programmateurs.beans.Account;
+import net.programmateurs.R;
 import programmateurs.beans.Category;
-import programmateurs.beans.Transaction;
 import programmateurs.beans.Transaction.TRANSACTION_TYPE;
 import programmateurs.interfaces.DataSourceInterface;
 import programmateurs.models.AccountsDAO;
 import programmateurs.models.Anchor;
 import programmateurs.models.RealDataSource;
-import programmateurs.models.ArtificialDataSource;
-import net.programmateurs.R;
-import net.programmateurs.R.layout;
-import net.programmateurs.R.menu;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,8 +24,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-
-import android.media.MediaPlayer; //for sounds, delete this import if error
+//for sounds, delete this import if error
 
 /**
  * The Deposit Activity class It will have a screen to deposit money to the

@@ -1,24 +1,21 @@
 package programmateurs.views;
 
+import java.util.Random;
+
 import net.programmateurs.R;
-import net.programmateurs.R.id;
-import net.programmateurs.R.layout;
-import net.programmateurs.R.menu;
-import android.os.Bundle;
+import programmateurs.beans.User;
+import programmateurs.interfaces.DataSourceInterface;
+import programmateurs.models.Anchor;
+import programmateurs.models.RealDataSource;
 import android.app.Activity;
-import android.util.Log;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.EditText;
 import android.view.View.OnClickListener;
-import programmateurs.models.RealDataSource;
-import android.content.Intent;
-import java.util.Random;
-import programmateurs.beans.User;
-import programmateurs.models.Anchor;
-import programmateurs.interfaces.DataSourceInterface;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * AdminActivity is the page that the admin is taken to immediately upon logging

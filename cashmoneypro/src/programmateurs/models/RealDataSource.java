@@ -3,11 +3,6 @@ package programmateurs.models;
 import java.util.Calendar;
 import java.util.Date;
 
-import android.content.Context;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
 import programmateurs.beans.Account;
 import programmateurs.beans.Account.ACCOUNT_TYPE;
 import programmateurs.beans.Category;
@@ -15,6 +10,10 @@ import programmateurs.beans.Transaction;
 import programmateurs.beans.Transaction.TRANSACTION_TYPE;
 import programmateurs.beans.User;
 import programmateurs.interfaces.DataSourceInterface;
+import android.content.Context;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 /**
  * Usage of RealDataSource

@@ -1,9 +1,10 @@
 package programmateurs.views;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import net.programmateurs.R;
-
 import programmateurs.beans.Transaction;
 import programmateurs.beans.Transaction.TRANSACTION_TYPE;
 import programmateurs.models.Anchor;
@@ -16,8 +17,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import java.text.NumberFormat;
-import java.util.Locale;
 
 //Useful example of how to do list adapters in android... 
 

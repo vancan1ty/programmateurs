@@ -3,25 +3,18 @@ package programmateurs.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.programmateurs.R;
 import programmateurs.beans.Transaction;
 import programmateurs.beans.User;
 import programmateurs.models.Anchor;
 import programmateurs.models.RealDataSource;
-import net.programmateurs.R;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.webkit.WebView.FindListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 /**
  * TransactionHistory Fragment class is part of HomeActivity. HomeActivity is an
