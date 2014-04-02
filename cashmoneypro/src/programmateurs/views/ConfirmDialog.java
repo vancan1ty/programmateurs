@@ -15,49 +15,49 @@ import android.widget.EditText;
  * @version 0.1
  */
 public abstract class ConfirmDialog extends AlertDialog.Builder implements
-		OnClickListener {
+        OnClickListener {
 
-	/**
-	 * Creates new ConfirDialog for given context using provided title and
-	 * message.
-	 * 
-	 * @param context
-	 */
-	public ConfirmDialog(Context context, String title, String message) {
-		super(context);
-		setTitle(title);
-		setMessage(message);
+    /**
+     * Creates new ConfirDialog for given context using provided title and
+     * message.
+     * 
+     * @param context
+     */
+    public ConfirmDialog(Context context, String title, String message) {
+        super(context);
+        setTitle(title);
+        setMessage(message);
 
-		setPositiveButton("ok", this);
-		setNegativeButton("cancel", this);
-	}
+        setPositiveButton("ok", this);
+        setNegativeButton("cancel", this);
+    }
 
-	/**
-	 * will be called when "cancel" pressed. closes the dialog. can be
-	 * overridden.
-	 * 
-	 * @param dialog
-	 */
-	public void onCancelClicked(DialogInterface dialog) {
-		dialog.dismiss();
-	}
+    /**
+     * will be called when "cancel" pressed. closes the dialog. can be
+     * overridden.
+     * 
+     * @param dialog
+     */
+    public void onCancelClicked(DialogInterface dialog) {
+        dialog.dismiss();
+    }
 
-	@Override
-	public void onClick(DialogInterface dialog, int which) {
-		if (which == DialogInterface.BUTTON_POSITIVE) {
-			if (onOkClicked("")) {
-				dialog.dismiss();
-			}
-		} else {
-			onCancelClicked(dialog);
-		}
-	}
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+        if (which == DialogInterface.BUTTON_POSITIVE) {
+            if (onOkClicked("")) {
+                dialog.dismiss();
+            }
+        } else {
+            onCancelClicked(dialog);
+        }
+    }
 
-	/**
-	 * called when "ok" pressed.
-	 * 
-	 * @param input
-	 * @return true, if the dialog should be closed. false, if not.
-	 */
-	abstract public boolean onOkClicked(String input);
+    /**
+     * called when "ok" pressed.
+     * 
+     * @param input
+     * @return true, if the dialog should be closed. false, if not.
+     */
+    abstract public boolean onOkClicked(String input);
 }

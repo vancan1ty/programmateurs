@@ -17,50 +17,50 @@ import android.widget.TextView;
 
 public class CategoryReportActivity extends Activity {
 
-	private RealDataSource src;
-	TextView textReport;
-	Calendar startCalendar;
-	Calendar endCalendar;
-	Transaction.TRANSACTION_TYPE reportType;
-	Anchor anchor;
+    private RealDataSource src;
+    TextView textReport;
+    Calendar startCalendar;
+    Calendar endCalendar;
+    Transaction.TRANSACTION_TYPE reportType;
+    Anchor anchor;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		anchor = Anchor.getInstance();
-		setContentView(R.layout.activity_category_report);
-		Bundle extras = getIntent().getExtras();
-		startCalendar = (Calendar) extras.getSerializable("startCalendar");
-		endCalendar = (Calendar) extras.getSerializable("endCalendar");
-		reportType = (TRANSACTION_TYPE) extras.getSerializable("reportType");
-		src = new RealDataSource(this);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        anchor = Anchor.getInstance();
+        setContentView(R.layout.activity_category_report);
+        Bundle extras = getIntent().getExtras();
+        startCalendar = (Calendar) extras.getSerializable("startCalendar");
+        endCalendar = (Calendar) extras.getSerializable("endCalendar");
+        reportType = (TRANSACTION_TYPE) extras.getSerializable("reportType");
+        src = new RealDataSource(this);
 
-		textReport = (TextView) findViewById(R.id.text_cat_report);
+        textReport = (TextView) findViewById(R.id.text_cat_report);
 
-	}
+    }
 
-	@Override
-	protected void onResume() {
-		super.onResume();
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-		src.open();
-		textReport.setText(src.getCategoryReport(startCalendar, endCalendar,
-				reportType, anchor.getCurrentUser().getUserID()));
+        src.open();
+        textReport.setText(src.getCategoryReport(startCalendar, endCalendar,
+                reportType, anchor.getCurrentUser().getUserID()));
 
-	}
+    }
 
-	@Override
-	protected void onPause() {
-		super.onPause();
+    @Override
+    protected void onPause() {
+        super.onPause();
 
-		src.close();
-	}
+        src.close();
+    }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.category_report, menu);
-		return true;
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.category_report, menu);
+        return true;
+    }
 
 }
