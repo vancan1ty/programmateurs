@@ -37,15 +37,15 @@ public class TransactionsDAO {
             + " timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, "
             + " rolledback BOOLEAN NOT NULL " + ");";
 
-    private static long gcl(Cursor c, String columnName) {
+    private static long gcl(final Cursor c, final String columnName) {
         return c.getLong(c.getColumnIndexOrThrow(columnName));
     }
 
-    private static String gcs(Cursor c, String columnName) {
+    private static String gcs(final Cursor c, final String columnName) {
         return c.getString(c.getColumnIndexOrThrow(columnName));
     }
 
-    private static Transaction cursorToTransaction(Cursor c, SQLiteDatabase db)
+    private static Transaction cursorToTransaction(final Cursor c, final SQLiteDatabase db)
             throws ParseException {
         long transactionID = gcl(c, "transactionID");
         long accountID = gcl(c, "accountID");
@@ -85,8 +85,8 @@ public class TransactionsDAO {
      * @param userID
      * @return list of accounts owned by user
      */
-    public static Transaction[] getTransactionsForAccount(SQLiteDatabase db,
-            long accountID) {
+    public static Transaction[] getTransactionsForAccount(final SQLiteDatabase db,
+            final long accountID) {
 
         Cursor c = db
                 .rawQuery(
@@ -119,11 +119,11 @@ public class TransactionsDAO {
      * adds a transaction with the associated information to the DB, returns an
      * object representation of it
      */
-    public static Transaction addTransactionToDB(SQLiteDatabase db,
-            long accountID, String transactionName,
-            Transaction.TRANSACTION_TYPE transactionType,
-            long transactionAmount, Date transactionDate,
-            String transactionComment, boolean rolledback, Category category) {
+    public static Transaction addTransactionToDB(final SQLiteDatabase db,
+            final long accountID, final String transactionName,
+            final Transaction.TRANSACTION_TYPE transactionType,
+            final long transactionAmount, final Date transactionDate,
+            final String transactionComment, final boolean rolledback, final Category category) {
         ContentValues toInsert = new ContentValues();
         toInsert.put("accountID", accountID);
         if (category != null) {
@@ -156,8 +156,8 @@ public class TransactionsDAO {
      * @return list of accounts owned by user
      * @author Pavel
      */
-    public static Transaction[] getTransactionsForUser(SQLiteDatabase db,
-            long userID) {
+    public static Transaction[] getTransactionsForUser(final SQLiteDatabase db,
+            final long userID) {
         Log.d("TransactionsDAO", "starting getTransactionsForUser");
 
         Cursor c = db
@@ -192,8 +192,8 @@ public class TransactionsDAO {
         return outL.toArray(new Transaction[0]);
     }
 
-    public static Transaction getTransactionWithID(SQLiteDatabase db,
-            long transactionID) {
+    public static Transaction getTransactionWithID(final SQLiteDatabase db,
+            final long transactionID) {
 
         Cursor c = db
                 .rawQuery(
@@ -216,9 +216,9 @@ public class TransactionsDAO {
         return out;
     }
 
-    public static String getCategoryReport(SQLiteDatabase db,
-            Calendar dateStart, Calendar dateEnd,
-            Transaction.TRANSACTION_TYPE transactionType, long userID) {
+    public static String getCategoryReport(final SQLiteDatabase db,
+            final Calendar dateStart, final Calendar dateEnd,
+            final Transaction.TRANSACTION_TYPE transactionType, final long userID) {
 
         Cursor c = db
                 .rawQuery(

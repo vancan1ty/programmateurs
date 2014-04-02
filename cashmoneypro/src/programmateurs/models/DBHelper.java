@@ -23,12 +23,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 21;
 
-    public DBHelper(Context context) {
+    public DBHelper(final Context context) {
         super(context, "programmateurs", null, DATABASE_VERSION);
     }
 
     @Override
-    public void onCreate(SQLiteDatabase database) {
+    public final void onCreate(final SQLiteDatabase database) {
         database.execSQL(UsersDAO.CREATE_USERS_TABLE);
         database.execSQL(AccountsDAO.CREATE_ACCOUNTS_TABLE);
         database.execSQL(CategoriesDAO.CREATE_CATEGORIES_TABLE);
@@ -49,7 +49,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public final void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
         Log.w(DBHelper.class.getName(), "Upgrading database from version "
                 + oldVersion + " to " + newVersion
                 + ", which will destroy all old data");

@@ -43,8 +43,8 @@ public class TransactionHistoryFragment extends Fragment {
      * based on those events.
      */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+    public final View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+            final Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_global_feed,
                 container, false);
 
@@ -60,7 +60,7 @@ public class TransactionHistoryFragment extends Fragment {
      * Fragment's lifecycle on Google
      */
     @Override
-    public void onResume() {
+    public final void onResume() {
         dbHandler = new RealDataSource(getActivity());
         dbHandler.open();
         user = anchor.getCurrentUser();
@@ -81,7 +81,7 @@ public class TransactionHistoryFragment extends Fragment {
      * The method need each time RealDataSource is used in a class
      */
     @Override
-    public void onPause() {
+    public final void onPause() {
         dbHandler.close();
         super.onPause();
     }

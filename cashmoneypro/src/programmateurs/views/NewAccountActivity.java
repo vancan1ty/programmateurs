@@ -46,7 +46,7 @@ public class NewAccountActivity extends Activity {
      * Creates the objects on the screen
      */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_account);
 
@@ -77,7 +77,7 @@ public class NewAccountActivity extends Activity {
              * valid entries
              */
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 Intent i = new Intent(v.getContext(), HomeActivity.class);
                 String account = accountField.getText().toString();
                 boolean validAccount = false;
@@ -123,7 +123,7 @@ public class NewAccountActivity extends Activity {
      * Creates the menu
      */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public final boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.new_account, menu);
         return true;
@@ -133,7 +133,7 @@ public class NewAccountActivity extends Activity {
      * Method used when RealDataSource is used
      */
     @Override
-    protected void onResume() {
+    protected final void onResume() {
         dbHandler.open();
         super.onResume();
     }
@@ -142,7 +142,7 @@ public class NewAccountActivity extends Activity {
      * Method used when RealDataSource is used
      */
     @Override
-    protected void onPause() {
+    protected final void onPause() {
         dbHandler.close();
         super.onPause();
     }

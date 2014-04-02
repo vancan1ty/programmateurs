@@ -40,7 +40,7 @@ public class LoginActivity extends Activity {
      * 
      */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -57,7 +57,7 @@ public class LoginActivity extends Activity {
              * to the HomeActivity page and set the current user
              */
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 String username = usernameField.getText().toString();
                 String password = passwordField.getText().toString();
                 Log.d("BERRY", "username: " + username + " password: "
@@ -65,10 +65,11 @@ public class LoginActivity extends Activity {
                 boolean userExists = dbHandler.isUserInDB(username, password);
                 if (userExists) {
                     Intent i;
-                    if (username.equals("admin"))
+                    if (username.equals("admin")) {
                         i = new Intent(v.getContext(), AdminActivity.class);
-                    else
+                    } else {
                         i = new Intent(v.getContext(), HomeActivity.class);
+                    }
                     anchor.setCurrentUser(dbHandler.getUser(username));
                     v.getContext().startActivity(i);
                 } else {
@@ -87,7 +88,7 @@ public class LoginActivity extends Activity {
      * pressed during LoginActivity (to prevent weird user-hacks)
      */
     @Override
-    public void onBackPressed() {
+    public final void onBackPressed() {
         startActivity(new Intent(this, WelcomeActivity.class));
     }
 
@@ -95,7 +96,7 @@ public class LoginActivity extends Activity {
      * Method used every time RealDataSource is used
      */
     @Override
-    protected void onResume() {
+    protected final void onResume() {
         super.onResume();
         dbHandler.open();
     }
@@ -104,7 +105,7 @@ public class LoginActivity extends Activity {
      * Method used every time RealDataSource is used
      */
     @Override
-    protected void onPause() {
+    protected final void onPause() {
         dbHandler.close();
         super.onPause();
     }
@@ -114,7 +115,7 @@ public class LoginActivity extends Activity {
      * 
      * @return string the username
      */
-    public String getUsernameEntry() {
+    public final String getUsernameEntry() {
         return usernameField.getText().toString();
     }
 
@@ -123,7 +124,7 @@ public class LoginActivity extends Activity {
      * 
      * @return string the password
      */
-    public String getPasswordEntry() {
+    public final String getPasswordEntry() {
         return passwordField.getText().toString();
     }
 }

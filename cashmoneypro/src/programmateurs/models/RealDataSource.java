@@ -33,112 +33,113 @@ public class RealDataSource implements DataSourceInterface {
     private SQLiteDatabase db;
     private DBHelper dbHelper;
 
-    public RealDataSource(Context context) {
+    public RealDataSource(final Context context) {
         dbHelper = new DBHelper(context);
     }
 
     @Override
-    public void open() throws SQLException {
+    public final void open() throws SQLException {
         db = dbHelper.getWritableDatabase();
         Log.d("RealDataSource", "opened db: " + db);
     }
 
     @Override
-    public void close() {
+    public final void close() {
         db.close();
     }
 
     /* ******** Operations on USERS ************** */
 
     @Override
-    public User[] getUsers() {
+    public final User[] getUsers() {
         return UsersDAO.getUsers(db);
     }
 
     @Override
-    public User getUser(String username) {
+    public final User getUser(final String username) {
         for (User user : getUsers()) {
-            if (user.getUsername().equalsIgnoreCase(username))
+            if (user.getUsername().equalsIgnoreCase(username)) {
                 return user;
+            }
         }
         return null;
     }
 
     @Override
-    public boolean isUserInDB(String username, String password) {
+    public final boolean isUserInDB(final String username, final String password) {
         return UsersDAO.isUserInDB(db, username, password);
     }
 
     @Override
-    public User updateUser(User user) {
+    public final User updateUser(final User user) {
         return UsersDAO.updateUser(db, user);
     }
 
     @Override
-    public Account getAccountWithID(long accountID) {
+    public final Account getAccountWithID(final long accountID) {
         return AccountsDAO.getAccountWithID(db, accountID);
 
     }
 
     @Override
-    public Account[] getAccountsForUser(long userID) {
+    public final Account[] getAccountsForUser(final long userID) {
         return AccountsDAO.getAccountsForUser(db, userID);
     }
 
     @Override
-    public Category[] getCategoriesForUser(long userID) {
+    public final Category[] getCategoriesForUser(final long userID) {
         return CategoriesDAO.getCategoriesForUser(db, userID);
     }
 
     @Override
-    public Transaction[] getTransactionsForAccount(long accountID) {
+    public final Transaction[] getTransactionsForAccount(final long accountID) {
         return TransactionsDAO.getTransactionsForAccount(db, accountID);
     }
 
     @Override
-    public Transaction[] getTransactionsForUser(long userID) {// Pavel
+    public final Transaction[] getTransactionsForUser(final long userID) {// Pavel
         return TransactionsDAO.getTransactionsForUser(db, userID);
     }
 
     @Override
-    public User addUserToDB(String username, String passhash, String first,
-            String last, String email) {
+    public final User addUserToDB(final String username, final String passhash, final String first,
+            final String last, final String email) {
         return UsersDAO.addUserToDB(db, username, passhash, first, last, email);
     }
 
-    public void cheapAddUserToDB(String username, String password) {
+    public final void cheapAddUserToDB(final String username, final String password) {
         UsersDAO.addUserToDB(db, username, password);
     }
 
     @Override
-    public Account addAccountToDB(long userID, ACCOUNT_TYPE accountType,
-            String accountName, double interestRate) {
+    public final Account addAccountToDB(final long userID, final ACCOUNT_TYPE accountType,
+            final String accountName, final double interestRate) {
         return AccountsDAO.addAccountToDB(db, userID, accountType, accountName,
                 interestRate);
     }
 
     @Override
-    public Transaction addTransactionToDB(long accountID,
-            String transactionName, TRANSACTION_TYPE transactionType,
-            long transactionAmount, Date transactionDate,
-            String transactionComment, boolean rolledback, Category category) {
+    public final Transaction addTransactionToDB(final long accountID,
+            final String transactionName, final TRANSACTION_TYPE transactionType,
+            final long transactionAmount, final Date transactionDate,
+            final String transactionComment, final boolean rolledback, final Category category) {
         return TransactionsDAO.addTransactionToDB(db, accountID,
                 transactionName, transactionType, transactionAmount,
                 transactionDate, transactionComment, rolledback, category);
     }
 
-    public String getCategoryReport(Calendar dateStart, Calendar dateEnd,
-            Transaction.TRANSACTION_TYPE type, long userID) {
+    public final String getCategoryReport(final Calendar dateStart, final Calendar dateEnd,
+            final Transaction.TRANSACTION_TYPE type, final long userID) {
         return TransactionsDAO.getCategoryReport(db, dateStart, dateEnd, type,
                 userID);
     }
 
     @Override
-    public Category addCategoryToDB(long userID, String categoryName) {
+    public final Category addCategoryToDB(final long userID, final String categoryName) {
         return CategoriesDAO.addCategoryForDB(db, userID, categoryName);
     }
 
-    public void deleteAllFromDB() {
+    public final void deleteAllFromDB() {
         db.execSQL("delete from transactions");
         db.execSQL("delete from categories");
         db.execSQL("delete from accounts");

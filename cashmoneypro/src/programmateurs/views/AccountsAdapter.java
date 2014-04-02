@@ -16,28 +16,27 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-//Useful example of how to do list adapters in android... 
+//Useful example of how to do list adapters in android...
 
 /**
  * I'd ask Currell for more information on how this class works Basically it
  * make the view that fits inside a ListView object
- * 
+ *
  * @author currell
  * @version 0.0
- * 
  */
 public class AccountsAdapter extends BaseAdapter {
 
     private final Activity activity;
     List<Account> accounts;
 
-    public AccountsAdapter(Activity activity, List<Account> accounts) {
+    public AccountsAdapter(final Activity activity, final List<Account> accounts) {
         this.activity = activity;
         this.accounts = accounts;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public final View getView(final int position, final View convertView, final ViewGroup parent) {
 
         LayoutInflater inflater = (LayoutInflater) activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -64,7 +63,7 @@ public class AccountsAdapter extends BaseAdapter {
         // We can change this to go to an Activity when pressed later.
         rowView.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 Intent i = new Intent(v.getContext(),
                         AccountDetailActivity.class);
                 i.putExtra("accountID", q.getAccountID());
@@ -76,17 +75,17 @@ public class AccountsAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
+    public final int getCount() {
         return accounts.size();
     }
 
     @Override
-    public Object getItem(int position) {
+    public final Object getItem(final int position) {
         return accounts.get(position);
     }
 
     @Override
-    public long getItemId(int position) {
+    public final long getItemId(final int position) {
         return position;
     }
 

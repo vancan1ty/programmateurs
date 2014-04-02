@@ -23,7 +23,7 @@ import android.widget.TextView;
  * reset for and the button which he actually clicks to enable the reset.
  * Currently relies on the fact that the user will have a settings screen at
  * some point that will allow them to permanently change the password.
- * 
+ *
  * @author Justin
  * @version 0.2
  */
@@ -42,7 +42,7 @@ public class AdminActivity extends Activity {
      * password, displays that password), and button to logout.
      */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
@@ -56,7 +56,7 @@ public class AdminActivity extends Activity {
         // logout button sends user back to splash screen
         logoutButton.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 Intent i = new Intent(v.getContext(), WelcomeActivity.class);
                 // anchor.setCurrentUser(null);
                 v.getContext().startActivity(i);
@@ -65,7 +65,7 @@ public class AdminActivity extends Activity {
 
         resetButton.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 final String username = userField.getText().toString();
 
                 // request confirmation of password reset
@@ -74,7 +74,7 @@ public class AdminActivity extends Activity {
                         "Are you sure you want to enable password reset for "
                                 + username + " ?") {
                     @Override
-                    public boolean onOkClicked(String input) {
+                    public boolean onOkClicked(final String input) {
                         String[] message = setTempPassword(username, dbHandler);
                         anchor.showDialog(me, message[0], message[1]);
                         return true;
@@ -102,13 +102,15 @@ public class AdminActivity extends Activity {
      *            the DataSource containing the login information to update
      * @return String array containing the header and message for the UI display
      */
-    private String[] setTempPassword(String username, DataSourceInterface db) {
+    private String[] setTempPassword(final String username, final DataSourceInterface db) {
         User user = db.getUser(username);
         if (user != null) {
             String temp = "";
             Random rand = new Random();
             for (int i = 0; i < 5; i++)
+             {
                 temp += rand.nextInt(10); // build random temp password
+            }
             user.setPasshash(temp);
             db.updateUser(user);
             return new String[] { "Password Reset",
@@ -120,20 +122,20 @@ public class AdminActivity extends Activity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public final boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.admin, menu);
         return true;
     }
 
     @Override
-    protected void onResume() {
+    protected final void onResume() {
         dbHandler.open();
         super.onResume();
     }
 
     @Override
-    protected void onPause() {
+    protected final void onPause() {
         dbHandler.close();
         super.onPause();
     }

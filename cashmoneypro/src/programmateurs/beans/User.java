@@ -11,8 +11,8 @@ public class User {
     private String email;
     private ArrayList<Category> categories;
 
-    public User(long userID, String username, String passhash, String first,
-            String last, String email) {
+    public User(final long userID, final String username, final String passhash, final String first,
+            final String last, final String email) {
         super();
         this.userID = userID;
         this.username = username;
@@ -23,35 +23,35 @@ public class User {
         categories = new ArrayList<Category>();
     }
 
-    public long getUserID() {
+    public final long getUserID() {
         return userID;
     }
 
-    public String getUsername() {
+    public final String getUsername() {
         return username;
     }
 
-    public void setPasshash(String passhash) {
+    public final void setPasshash(final String passhash) {
         this.passhash = passhash;
     }
 
-    public String getPasshash() {
+    public final String getPasshash() {
         return passhash;
     }
 
-    public String getFirst() {
+    public final String getFirst() {
         return first;
     }
 
-    public String getLast() {
+    public final String getLast() {
         return last;
     }
 
-    public String getEmail() {
+    public final String getEmail() {
         return email;
     }
 
-    public void addCategory(Category toAdd) {
+    public final void addCategory(final Category toAdd) {
         categories.add(toAdd);
     }
 
@@ -63,7 +63,7 @@ public class User {
      * categories[i].getCategory_name(); } } }
      */
     @Override
-    public String toString() {
+    public final String toString() {
         return "User [userID=" + userID + ", username=" + username
                 + ", passhash=" + passhash + ", first=" + first + ", last="
                 + last + ", email=" + email + "]";

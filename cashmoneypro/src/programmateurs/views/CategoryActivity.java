@@ -39,7 +39,7 @@ public class CategoryActivity extends Activity implements
     private Category toDelete;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
 
@@ -55,7 +55,7 @@ public class CategoryActivity extends Activity implements
 
         addButton.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 addCategory(categoryNameField.getText().toString());
             }
         });
@@ -83,14 +83,14 @@ public class CategoryActivity extends Activity implements
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int pos,
-            long id) {
+    public void onItemSelected(final AdapterView<?> parent, final View view, final int pos,
+            final long id) {
         // toDelete = (Category) parent.getItemAtPosition(pos); //THIS METHOD
         // DOES NOT WORK YET. Will come back later.
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    public void onNothingSelected(final AdapterView<?> parent) {
         // intentionally empty
     }
 
@@ -99,7 +99,7 @@ public class CategoryActivity extends Activity implements
      * 
      * @param name
      */
-    private void addCategory(String name) {
+    private void addCategory(final String name) {
         dbHandler.addCategoryToDB(anchor.getCurrentUser().getUserID(), name);
         anchor.showDialog(this, "Add Category", addButton.getText()
                 + " was added to categories!");
@@ -115,20 +115,20 @@ public class CategoryActivity extends Activity implements
     }
 
     @Override
-    public void onResume() {
+    public final void onResume() {
         super.onResume();
         dbHandler.open();
         populateSpinner();
     }
 
     @Override
-    public void onDestroy() {
+    public final void onDestroy() {
         dbHandler.close();
         super.onDestroy();
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public final boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.category, menu);
         return true;

@@ -20,7 +20,7 @@ public class UsersDAO {
             + " passhash TEXT NOT NULL," + " first TEXT DEFAULT '',"
             + " last TEXT DEFAULT ''," + " email TEXT DEFAULT ''" + ");";
 
-    public static User cursorToUser(Cursor c) {
+    public static User cursorToUser(final Cursor c) {
         long userID = c.getInt(0);
         String username = c.getString(1);
         String passhash = c.getString(2);
@@ -30,7 +30,7 @@ public class UsersDAO {
         return new User(userID, username, passhash, first, last, email);
     }
 
-    public static User[] getUsers(SQLiteDatabase db) {
+    public static User[] getUsers(final SQLiteDatabase db) {
         Cursor c = db.rawQuery("SELECT * FROM users;", new String[] {});
         List<User> outL = new ArrayList<User>();
 
@@ -45,7 +45,7 @@ public class UsersDAO {
         return outL.toArray(new User[0]);
     }
 
-    public static User getUser(SQLiteDatabase db, long userID) {
+    public static User getUser(final SQLiteDatabase db, final long userID) {
         Cursor c = db.rawQuery("SELECT * FROM users WHERE userID = ?;",
                 new String[] { Long.toString(userID) });
         List<User> outL = new ArrayList<User>();
@@ -56,17 +56,13 @@ public class UsersDAO {
         return user;
     }
 
-    public static boolean isUserInDB(SQLiteDatabase db, String username,
-            String password) {
+    public static boolean isUserInDB(final SQLiteDatabase db, final String username,
+            final String password) {
         Cursor c;
         c = db.rawQuery(
                 "SELECT * FROM users WHERE username = ? AND passhash = ?",
                 new String[] { username, hashPassword(password) });
-        if (c.getCount() == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return c.getCount() == 1;
     }
 
     // public String hashPassword(String password) throws
@@ -80,8 +76,8 @@ public class UsersDAO {
     // }
     //
 
-    public static void addUserToDB(SQLiteDatabase db, String username,
-            String password) {
+    public static void addUserToDB(final SQLiteDatabase db, final String username,
+            final String password) {
         // String passHash = hashPassword(password);
         ContentValues toInsert = new ContentValues();
         toInsert.put("username", username);
@@ -91,7 +87,7 @@ public class UsersDAO {
 
     public static final String HASH = "ludicrousHash";
 
-    public static String hashPassword(String password) {
+    public static String hashPassword(final String password) {
         MessageDigest md;
         try {
             md = MessageDigest.getInstance("SHA-256");
@@ -115,14 +111,10 @@ public class UsersDAO {
         return output;
     }
 
-    public static boolean passwordEquals(String password, String passhash)
+    public static boolean passwordEquals(final String password, final String passhash)
             throws NoSuchAlgorithmException, UnsupportedEncodingException {
         String npasshash = hashPassword(password);
-        if (passhash.equals(npasshash)) {
-            return true;
-        } else {
-            return false;
-        }
+        return passhash.equals(npasshash);
     }
 
     /**
@@ -134,7 +126,7 @@ public class UsersDAO {
      * @param user
      * @return reading the results of the operation back from the db
      */
-    public static User updateUser(SQLiteDatabase db, User user) {
+    public static User updateUser(final SQLiteDatabase db, final User user) {
         ContentValues toSet = new ContentValues();
         toSet.put("username", user.getUsername());
         toSet.put("passhash", user.getPasshash());
@@ -146,8 +138,8 @@ public class UsersDAO {
         return getUser(db, user.getUserID());
     }
 
-    public static User addUserToDB(SQLiteDatabase db, String username,
-            String password, String first, String last, String email) {
+    public static User addUserToDB(final SQLiteDatabase db, final String username,
+            final String password, final String first, final String last, final String email) {
         // String passHash = hashPassword(password);
         ContentValues toInsert = new ContentValues();
         toInsert.put("username", username);

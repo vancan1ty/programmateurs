@@ -111,26 +111,27 @@ public class ArtificialDataSource implements DataSourceInterface {
     }
 
     @Override
-    public boolean isUserInDB(String username, String password) {
+    public final boolean isUserInDB(final String username, final String password) {
         return true;
     }
 
     @Override
-    public User[] getUsers() {
+    public final User[] getUsers() {
         return users.toArray(new User[] {});
     }
 
     @Override
-    public User getUser(String username) {
+    public final User getUser(final String username) {
         for (User user : getUsers()) {
-            if (user.getUsername().equals(username))
+            if (user.getUsername().equals(username)) {
                 return user;
+            }
         }
         return null;
     }
 
     @Override
-    public Account getAccountWithID(long accountID) {
+    public final Account getAccountWithID(final long accountID) {
         for (Account acct : accounts) {
             if (acct.getAccountID() == accountID) {
                 return acct;
@@ -140,7 +141,7 @@ public class ArtificialDataSource implements DataSourceInterface {
     }
 
     @Override
-    public Account[] getAccountsForUser(long userID) {
+    public final Account[] getAccountsForUser(final long userID) {
         // Case in point, why I can't wait for java 8
         List<Account> outL = new ArrayList<Account>();
 
@@ -154,7 +155,7 @@ public class ArtificialDataSource implements DataSourceInterface {
     }
 
     @Override
-    public Category[] getCategoriesForUser(long userID) {
+    public final Category[] getCategoriesForUser(final long userID) {
 
         // Case in point, why I can't wait for java 8
         List<Category> outL = new ArrayList<Category>();
@@ -170,7 +171,7 @@ public class ArtificialDataSource implements DataSourceInterface {
     }
 
     @Override
-    public Transaction[] getTransactionsForAccount(long accountID) {
+    public final Transaction[] getTransactionsForAccount(final long accountID) {
         // Case in point, why I can't wait for java 8
         List<Transaction> outL = new ArrayList<Transaction>();
 
@@ -182,8 +183,8 @@ public class ArtificialDataSource implements DataSourceInterface {
     }
 
     @Override
-    public User addUserToDB(String username, String passhash, String first,
-            String last, String email) {
+    public final User addUserToDB(final String username, final String passhash, final String first,
+            final String last, final String email) {
         long lastuserID = users.get(users.size() - 1).getUserID();
         User user = new User(lastuserID + 1, username, passhash, first, last,
                 email);
@@ -192,8 +193,8 @@ public class ArtificialDataSource implements DataSourceInterface {
     }
 
     @Override
-    public Account addAccountToDB(long userID, ACCOUNT_TYPE accountType,
-            String accountName, double interestRate) {
+    public final Account addAccountToDB(final long userID, final ACCOUNT_TYPE accountType,
+            final String accountName, final double interestRate) {
         long lastAccountID = accounts.get(accounts.size() - 1).getAccountID();
         Account acct = new Account(lastAccountID + 1, userID, accountType,
                 accountName, interestRate);
@@ -202,7 +203,7 @@ public class ArtificialDataSource implements DataSourceInterface {
     }
 
     @Override
-    public Category addCategoryToDB(long userID, String category_name) {
+    public final Category addCategoryToDB(final long userID, final String category_name) {
         long lastCatID = categories.get(categories.size() - 1).getCategoryID();
         Category cat = new Category(lastCatID + 1, userID, category_name);
         categories.add(cat);
@@ -220,21 +221,21 @@ public class ArtificialDataSource implements DataSourceInterface {
     }
 
     @Override
-    public User updateUser(User user) {
+    public final User updateUser(final User user) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public Transaction[] getTransactionsForUser(long userID) {// Pavel
+    public final Transaction[] getTransactionsForUser(final long userID) {// Pavel
         return null;
     }
 
     @Override
-    public Transaction addTransactionToDB(long accountID,
-            String transactionName, TRANSACTION_TYPE transactionType,
-            long transactionAmount, Date transactionDate,
-            String transactionComment, boolean rolledback, Category category) {
+    public final Transaction addTransactionToDB(final long accountID,
+            final String transactionName, final TRANSACTION_TYPE transactionType,
+            final long transactionAmount, final Date transactionDate,
+            final String transactionComment, final boolean rolledback, final Category category) {
         // TODO Auto-generated method stub
         return null;
     }

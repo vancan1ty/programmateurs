@@ -27,7 +27,7 @@ public class CategoriesDAO {
      * " FOREIGN KEY(categoryID) REFERENCES Categories(categoryID)" + ");";
      */
 
-    private static Category cursorToCategory(Cursor cursor) {
+    private static Category cursorToCategory(final Cursor cursor) {
         long categoryID = cursor.getInt(0);
         long userID = cursor.getInt(1);
         String category_name = cursor.getString(2);
@@ -41,7 +41,7 @@ public class CategoriesDAO {
      * @param userID
      * @return list of categories owned by user
      */
-    public static Category[] getCategoriesForUser(SQLiteDatabase db, long userID) {
+    public static Category[] getCategoriesForUser(final SQLiteDatabase db, final long userID) {
 
         Cursor c = db.rawQuery("SELECT * FROM categories WHERE userid = ?;",
                 new String[] { Long.toString(userID) });
@@ -58,8 +58,8 @@ public class CategoriesDAO {
         return outL.toArray(new Category[0]);
     }
 
-    public static Category[] getCategoriesForTransaction(SQLiteDatabase db,
-            long transactionID) {
+    public static Category[] getCategoriesForTransaction(final SQLiteDatabase db,
+            final long transactionID) {
 
         Cursor c = db.rawQuery(
                 "SELECT C.categoryID, C.userID, C.category_name "
@@ -87,8 +87,8 @@ public class CategoriesDAO {
      * adds a category with the associated information to the DB, returns an
      * object representation of it
      */
-    public static Category addCategoryForDB(SQLiteDatabase db, long userID,
-            String categoryName) {
+    public static Category addCategoryForDB(final SQLiteDatabase db, final long userID,
+            final String categoryName) {
         ContentValues toInsert = new ContentValues();
         toInsert.put("userID", userID);
         toInsert.put("category_name", categoryName);

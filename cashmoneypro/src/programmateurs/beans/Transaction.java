@@ -36,11 +36,11 @@ public class Transaction {
     private boolean rolledback;
     private Category category;
 
-    public Transaction(long transactionID, long accountID,
-            String transactionName, TRANSACTION_TYPE transactionType,
-            long transactionAmount, Date transactionDate,
-            String transactionComment, Date timestamp, boolean rolledback,
-            Category category) {
+    public Transaction(final long transactionID, final long accountID,
+            final String transactionName, final TRANSACTION_TYPE transactionType,
+            final long transactionAmount, final Date transactionDate,
+            final String transactionComment, final Date timestamp, final boolean rolledback,
+            final Category category) {
         super();
         this.transactionID = transactionID;
         this.accountID = accountID;
@@ -54,44 +54,44 @@ public class Transaction {
         this.category = category;
     }
 
-    public long getTransactionID() {
+    public final long getTransactionID() {
         return transactionID;
     }
 
-    public long getAccountID() {
+    public final long getAccountID() {
         return accountID;
     }
 
-    public TRANSACTION_TYPE getTransactionType() {
+    public final TRANSACTION_TYPE getTransactionType() {
         return transactionType;
     }
 
-    public double getTransactionAmountAsDouble() {
+    public final double getTransactionAmountAsDouble() {
         return (transactionAmount / 100) + 0.01 * (transactionAmount % 100);
     }
 
-    public long getTransactionAmount() {
+    public final long getTransactionAmount() {
         return transactionAmount;
     }
 
-    public Date getTransactionDate() {
+    public final Date getTransactionDate() {
         return transactionDate;
     }
 
-    public Date getTimestamp() {
+    public final Date getTimestamp() {
         return timestamp;
     }
 
-    public boolean isRolledback() {
+    public final boolean isRolledback() {
         return rolledback;
     }
 
-    public Category getCategory() {
+    public final Category getCategory() {
         return this.category;
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return "Transaction [transactionID=" + transactionID + ", accountID="
                 + accountID + ", transactionName=" + transactionName
                 + ", transactionType=" + transactionType
@@ -101,7 +101,7 @@ public class Transaction {
                 + ", rolledback=" + rolledback + ", category=" + category + "]";
     }
 
-    public String getTransactionName() {
+    public final String getTransactionName() {
         return transactionName;
     }
 
@@ -111,11 +111,12 @@ public class Transaction {
      * 
      * @return
      */
-    public String getTransactionComment() {
-        if (!transactionComment.equals(""))
+    public final String getTransactionComment() {
+        if (!transactionComment.equals("")) {
             return "\"" + transactionComment + "\"";
-        else
+        } else {
             return "No Comment Provided";
+        }
     }
 
     /**
@@ -124,7 +125,7 @@ public class Transaction {
      * 
      * @return user-friendly String with transaction data
      */
-    public String formatDetails() {
+    public final String formatDetails() {
         NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);
         StringBuilder returnStr = new StringBuilder(getTransactionComment()
                 + "\n\n");

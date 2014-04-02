@@ -46,8 +46,8 @@ public class AccountListFragment extends Fragment {
      * based on those events.
      */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+    public final View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+            final Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_account_listing,
                 container, false);
 
@@ -62,7 +62,7 @@ public class AccountListFragment extends Fragment {
              * NewAccountActivity
              */
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 Intent i = new Intent(v.getContext(), NewAccountActivity.class);
                 v.getContext().startActivity(i);
             }
@@ -72,15 +72,15 @@ public class AccountListFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(android.view.Menu menu,
-            android.view.MenuInflater inflater) {
+    public final void onCreateOptionsMenu(final android.view.Menu menu,
+            final android.view.MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.account_list_fragment, menu);
 
     };
 
     @Override
-    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+    public final boolean onOptionsItemSelected(final android.view.MenuItem item) {
         // if (item.getItemId() == R.id.action_add_acount) {
         //
         // }
@@ -95,7 +95,7 @@ public class AccountListFragment extends Fragment {
      * Fragment's lifecycle on Google
      */
     @Override
-    public void onResume() {
+    public final void onResume() {
         dbHandler = new RealDataSource(getActivity());
         dbHandler.open();
         user = anchor.getCurrentUser();
@@ -117,7 +117,7 @@ public class AccountListFragment extends Fragment {
      * The method need each time RealDataSource is used in a class
      */
     @Override
-    public void onPause() {
+    public final void onPause() {
         dbHandler.close();
         super.onPause();
     }

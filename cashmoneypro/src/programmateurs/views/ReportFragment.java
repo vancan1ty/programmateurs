@@ -35,8 +35,8 @@ public class ReportFragment extends Fragment {
      * based on those events.
      */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+    public final View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+            final Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.report_fragment, container,
                 false);
 
@@ -49,7 +49,7 @@ public class ReportFragment extends Fragment {
         buttonSpendingCategory.setOnClickListener(new OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 // TODO implement
                 Intent i = new Intent(v.getContext(), ReportBuilder.class);
                 i.putExtra("reportType",
@@ -61,7 +61,7 @@ public class ReportFragment extends Fragment {
         buttonIncomeSource.setOnClickListener(new OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 // TODO implement
                 Intent i = new Intent(v.getContext(), ReportBuilder.class);
                 i.putExtra("reportType", Transaction.TRANSACTION_TYPE.DEPOSIT);
@@ -73,15 +73,15 @@ public class ReportFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(android.view.Menu menu,
-            android.view.MenuInflater inflater) {
+    public final void onCreateOptionsMenu(final android.view.Menu menu,
+            final android.view.MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.report_fragment, menu);
 
     };
 
     @Override
-    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+    public final boolean onOptionsItemSelected(final android.view.MenuItem item) {
         /*
          * if (item.getItemId() == R.id.action_add_acount) {
          * 
@@ -98,7 +98,7 @@ public class ReportFragment extends Fragment {
      * Fragment's lifecycle on Google
      */
     @Override
-    public void onResume() {
+    public final void onResume() {
         dbHandler = new RealDataSource(getActivity());
         dbHandler.open();
         user = anchor.getCurrentUser();
@@ -112,7 +112,7 @@ public class ReportFragment extends Fragment {
      * The method need each time RealDataSource is used in a class
      */
     @Override
-    public void onPause() {
+    public final void onPause() {
         dbHandler.close();
         super.onPause();
     }

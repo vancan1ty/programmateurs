@@ -36,7 +36,7 @@ public class AccountsDAO {
      * @param cursor
      * @return
      */
-    private static Account cursorToAccount(Cursor cursor) {
+    private static Account cursorToAccount(final Cursor cursor) {
         long accountID = cursor.getInt(0);
         long userID = cursor.getInt(1);
         Account.ACCOUNT_TYPE accountType = Account.ACCOUNT_TYPE.valueOf(cursor
@@ -57,7 +57,7 @@ public class AccountsDAO {
      * @return list of accounts owned by user
      */
     public static Account[] getAccountsForUser(final SQLiteDatabase db,
-            long userID) {
+            final long userID) {
 
         Log.d("AccountsDAO", "db + " + db);
         Cursor c = db.rawQuery("SELECT * FROM Accounts WHERE userid = ?;",
@@ -75,7 +75,7 @@ public class AccountsDAO {
         return outL.toArray(new Account[0]);
     }
 
-    public static Account getAccountWithID(SQLiteDatabase db, long accountID) {
+    public static Account getAccountWithID(final SQLiteDatabase db, final long accountID) {
 
         Log.d("AccountsDAO", "db + " + db);
         Cursor c = db.rawQuery("SELECT * FROM Accounts WHERE accountid = ?;",
@@ -98,9 +98,9 @@ public class AccountsDAO {
      * @param interestRate
      * @return
      */
-    public static Account addAccountToDB(SQLiteDatabase db, long userID,
-            Account.ACCOUNT_TYPE accountType, String accountName,
-            double interestRate) {
+    public static Account addAccountToDB(final SQLiteDatabase db, final long userID,
+            final Account.ACCOUNT_TYPE accountType, final String accountName,
+            final double interestRate) {
         ContentValues toInsert = new ContentValues();
         toInsert.put("userID", userID);
         toInsert.put("account_type", accountType.name());
@@ -120,7 +120,7 @@ public class AccountsDAO {
      *            The view from which the method is called
      * @return balance of the account
      */
-    public static double getBalance(DataSourceInterface src, long accountID) {
+    public static double getBalance(final DataSourceInterface src, final long accountID) {
         double balance = 0;
         for (Transaction transaction : src.getTransactionsForAccount(accountID)) {
             TRANSACTION_TYPE type = transaction.getTransactionType();
@@ -147,8 +147,8 @@ public class AccountsDAO {
      *            The type of the potential transaction
      * @return true if transaction would result in overdrawing from account
      */
-    public static boolean overdrawn(DataSourceInterface src, long accountID,
-            Double amount, Transaction.TRANSACTION_TYPE type) {
+    public static boolean overdrawn(final DataSourceInterface src, final long accountID,
+            final Double amount, final Transaction.TRANSACTION_TYPE type) {
         if (type == Transaction.TRANSACTION_TYPE.WITHDRAWAL) {
             return (getBalance(src, accountID) - amount) < 0;
         } else {

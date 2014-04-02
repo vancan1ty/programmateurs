@@ -50,8 +50,8 @@ public class Account {
      * @param interestRate
      *            Specified as a double
      */
-    public Account(long accountID, long userID, ACCOUNT_TYPE accountType,
-            String accountName, double interestRate) {
+    public Account(final long accountID, final long userID, final ACCOUNT_TYPE accountType,
+            final String accountName, final double interestRate) {
         this.accountID = accountID;
         this.userID = userID;
         this.accountType = accountType;
@@ -64,7 +64,7 @@ public class Account {
      * 
      * @return Account ID
      */
-    public long getAccountID() {
+    public final long getAccountID() {
         return accountID;
     }
 
@@ -73,7 +73,7 @@ public class Account {
      * 
      * @return ID of owner
      */
-    public long getUserID() {
+    public final long getUserID() {
         return userID;
     }
 
@@ -82,7 +82,7 @@ public class Account {
      * 
      * @return Account type
      */
-    public ACCOUNT_TYPE getAccountType() {
+    public final ACCOUNT_TYPE getAccountType() {
         return accountType;
     }
 
@@ -91,7 +91,7 @@ public class Account {
      * 
      * @return Account name
      */
-    public String getAccountName() {
+    public final String getAccountName() {
         return accountName;
     }
 
@@ -100,7 +100,7 @@ public class Account {
      * 
      * @return Account interest rate
      */
-    public double getInterestRate() {
+    public final double getInterestRate() {
         return interestRate;
     }
 
@@ -109,7 +109,7 @@ public class Account {
      * @return String representation of Account
      */
     @Override
-    public String toString() {
+    public final String toString() {
         return "Account [accountID=" + accountID + ", userID=" + userID
                 + ", accountType=" + accountType + ", accountName="
                 + accountName + ", interestRate=" + interestRate + "]";

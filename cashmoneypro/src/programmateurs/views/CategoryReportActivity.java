@@ -22,7 +22,7 @@ public class CategoryReportActivity extends Activity {
     Anchor anchor;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         anchor = Anchor.getInstance();
         setContentView(R.layout.activity_category_report);
@@ -37,7 +37,7 @@ public class CategoryReportActivity extends Activity {
     }
 
     @Override
-    protected void onResume() {
+    protected final void onResume() {
         super.onResume();
 
         src.open();
@@ -47,14 +47,14 @@ public class CategoryReportActivity extends Activity {
     }
 
     @Override
-    protected void onPause() {
+    protected final void onPause() {
         super.onPause();
 
         src.close();
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public final boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.category_report, menu);
         return true;

@@ -16,7 +16,7 @@ public abstract class PromptDialog extends AlertDialog.Builder implements
     /**
      * @param context
      */
-    public PromptDialog(Context context, String title, String message) {
+    public PromptDialog(final Context context, final String title, final String message) {
         super(context);
         setTitle(title);
         setMessage(message);
@@ -34,12 +34,12 @@ public abstract class PromptDialog extends AlertDialog.Builder implements
      * 
      * @param dialog
      */
-    public void onCancelClicked(DialogInterface dialog) {
+    public final void onCancelClicked(final DialogInterface dialog) {
         dialog.dismiss();
     }
 
     @Override
-    public void onClick(DialogInterface dialog, int which) {
+    public final void onClick(final DialogInterface dialog, final int which) {
         if (which == DialogInterface.BUTTON_POSITIVE) {
             if (onOkClicked(input.getText().toString())) {
                 dialog.dismiss();
@@ -49,7 +49,7 @@ public abstract class PromptDialog extends AlertDialog.Builder implements
         }
     }
 
-    public String getText() {
+    public final String getText() {
         return input.getText().toString();
     }
 
@@ -59,5 +59,5 @@ public abstract class PromptDialog extends AlertDialog.Builder implements
      * @param input
      * @return true, if the dialog should be closed. false, if not.
      */
-    abstract public boolean onOkClicked(String input);
+    public abstract boolean onOkClicked(String input);
 }

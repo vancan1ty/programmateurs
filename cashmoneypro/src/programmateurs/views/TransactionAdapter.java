@@ -33,13 +33,13 @@ public class TransactionAdapter extends BaseAdapter {
     private final Activity activity;
     List<Transaction> transactions;
 
-    public TransactionAdapter(Activity activity, List<Transaction> transactions) {
+    public TransactionAdapter(final Activity activity, final List<Transaction> transactions) {
         this.activity = activity;
         this.transactions = transactions;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public final View getView(final int position, final View convertView, final ViewGroup parent) {
 
         LayoutInflater inflater = (LayoutInflater) activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -70,7 +70,7 @@ public class TransactionAdapter extends BaseAdapter {
         // We can change this to go to an Activity when pressed later.
         rowView.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 Anchor.getInstance()
                         .showDialog(activity,
                                 q.getTransactionName() + ": Details",
@@ -82,17 +82,17 @@ public class TransactionAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
+    public final int getCount() {
         return transactions.size();
     }
 
     @Override
-    public Object getItem(int position) {
+    public final Object getItem(final int position) {
         return transactions.get(position);
     }
 
     @Override
-    public long getItemId(int position) {
+    public final long getItemId(final int position) {
         return position;
     }
 

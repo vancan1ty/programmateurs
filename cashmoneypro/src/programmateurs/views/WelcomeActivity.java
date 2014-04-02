@@ -35,7 +35,7 @@ public class WelcomeActivity extends Activity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         // anchor.setCurrentUser(null);
@@ -45,7 +45,7 @@ public class WelcomeActivity extends Activity {
         buttonLogin.setOnClickListener(new OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 Intent i = new Intent(v.getContext(), LoginActivity.class);
                 v.getContext().startActivity(i);
             }
@@ -55,7 +55,7 @@ public class WelcomeActivity extends Activity {
         buttonRegister.setOnClickListener(new OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 Intent i = new Intent(v.getContext(), AddUserActivity.class);
                 v.getContext().startActivity(i);
 
@@ -65,7 +65,7 @@ public class WelcomeActivity extends Activity {
     }
 
     @Override
-    protected void onResume() {
+    protected final void onResume() {
         super.onResume();
         src = new RealDataSource(this);
         src.open();
@@ -80,21 +80,21 @@ public class WelcomeActivity extends Activity {
     }
 
     @Override
-    protected void onPause() {
+    protected final void onPause() {
         // TODO Auto-generated method stub
         super.onPause();
         src.close();
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public final boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.welcome, menu);
         return true;
     }
 
     @Override
-    public boolean onMenuItemSelected(int featureId, MenuItem item) {
+    public final boolean onMenuItemSelected(final int featureId, final MenuItem item) {
         Log.d("WelcomeActivity", "featureID" + featureId);
         if (item.getItemId() == R.id.about_us) {
             anchor.showDialog(

@@ -45,7 +45,7 @@ public class HomeActivity extends FragmentActivity {
     Anchor anchor;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         anchor = Anchor.getInstance();
@@ -62,7 +62,7 @@ public class HomeActivity extends FragmentActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public final boolean onCreateOptionsMenu(final Menu menu) {
         MenuItem settings = menu.add("Settings");
         settings.setIntent(new Intent(this, SettingsActivity2.class));
         MenuItem logout = menu.add("Log Out");
@@ -74,7 +74,7 @@ public class HomeActivity extends FragmentActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public final boolean onOptionsItemSelected(final MenuItem item) {
         // Log.d("HomeActivity","Title: " + item.getTitle());
         if (item.getTitle().equals("Log Out")) {
             // Anchor.getInstance().setCurrentUser(null);//NOTE THAT SETTING THE
@@ -91,12 +91,12 @@ public class HomeActivity extends FragmentActivity {
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        public SectionsPagerAdapter(final FragmentManager fm) {
             super(fm);
         }
 
         @Override
-        public Fragment getItem(int position) {
+        public final Fragment getItem(final int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a DummySectionFragment (defined as a static inner class
             // below) with the page number as its lone argument.
@@ -116,13 +116,13 @@ public class HomeActivity extends FragmentActivity {
         }
 
         @Override
-        public int getCount() {
+        public final int getCount() {
             // Show 3 total pages.
             return 3;
         }
 
         @Override
-        public CharSequence getPageTitle(int position) {
+        public final CharSequence getPageTitle(final int position) {
             Locale l = Locale.getDefault();
             switch (position) {
             case 0:
@@ -131,6 +131,8 @@ public class HomeActivity extends FragmentActivity {
                 return getString(R.string.title_history).toUpperCase(l);
             case 2:
                 return getString(R.string.title_reports).toUpperCase(l);
+            default:
+                break;
             }
             return null;
         }
@@ -151,8 +153,8 @@ public class HomeActivity extends FragmentActivity {
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+        public final View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                final Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_home_dummy,
                     container, false);
             TextView dummyTextView = (TextView) rootView

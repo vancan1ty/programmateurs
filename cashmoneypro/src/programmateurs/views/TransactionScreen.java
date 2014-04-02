@@ -55,7 +55,7 @@ public class TransactionScreen extends Activity {
     TRANSACTION_TYPE transactionType;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_screen);
 
@@ -79,7 +79,7 @@ public class TransactionScreen extends Activity {
         buttonTransaction.setOnClickListener(new OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 Intent i = new Intent(v.getContext(), HomeActivity.class);
                 String transactionName = textViewName.getText().toString();
                 String transactionComment = textViewComment.getText()
@@ -126,7 +126,7 @@ public class TransactionScreen extends Activity {
         // System.out.println(artificialSource.getTransactionsForAccount(0));
     }
 
-    private boolean validTransactionAmount(String money) {
+    private boolean validTransactionAmount(final String money) {
         if (money.matches("^0*[1-9][0-9]*(\\.[0-9]+)?|0+\\.[0-9]*[1-9][0-9]*$")) {
             return true;
         }
@@ -141,7 +141,7 @@ public class TransactionScreen extends Activity {
      * @param day
      * @return
      */
-    private boolean validDate(Calendar cal) {
+    private boolean validDate(final Calendar cal) {
         return true;
         /*
          * if(currentDate.getTime() > cal.getTime().getTime()) { return true; }
@@ -151,7 +151,7 @@ public class TransactionScreen extends Activity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public final boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.deposit, menu);
         return true;
@@ -163,7 +163,7 @@ public class TransactionScreen extends Activity {
      *            Name of category being searched for
      * @return category with matching name
      */
-    public Category getCategoryByName(String name) {
+    public final Category getCategoryByName(final String name) {
         Category[] categories = dbHandler.getCategoriesForUser(anchor
                 .getCurrentUser().getUserID());
         for (Category c : categories) {
@@ -183,7 +183,7 @@ public class TransactionScreen extends Activity {
      * Method used when RealDataSource is used
      */
     @Override
-    protected void onResume() {
+    protected final void onResume() {
         dbHandler.open();
         super.onResume();
         Category[] categories = dbHandler.getCategoriesForUser(anchor
@@ -191,8 +191,9 @@ public class TransactionScreen extends Activity {
         String[] stringArray = new String[categories.length];
         if (categories != null) {
             for (int i = 0; i < categories.length; i++) {
-                if (categories[i] != null)
+                if (categories[i] != null) {
                     stringArray[i] = categories[i].getCategory_name();
+                }
             }
         }
 
@@ -205,7 +206,7 @@ public class TransactionScreen extends Activity {
      * Method used when RealDataSource is used
      */
     @Override
-    protected void onPause() {
+    protected final void onPause() {
         dbHandler.close();
         super.onPause();
     }

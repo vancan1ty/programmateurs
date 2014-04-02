@@ -23,7 +23,7 @@ public class Category {
      * @param category_name
      *            User-assigned name of category
      */
-    public Category(long categoryID, long userID, String category_name) {
+    public Category(final long categoryID, final long userID, final String category_name) {
         super();
         this.categoryID = categoryID;
         this.userID = userID;
@@ -35,7 +35,7 @@ public class Category {
      * 
      * @return ID of category
      */
-    public long getCategoryID() {
+    public final long getCategoryID() {
         return categoryID;
     }
 
@@ -44,7 +44,7 @@ public class Category {
      * 
      * @return ID of owner
      */
-    public long getUserID() {
+    public final long getUserID() {
         return userID;
     }
 
@@ -53,7 +53,7 @@ public class Category {
      * 
      * @return Category name
      */
-    public String getCategory_name() {
+    public final String getCategory_name() {
         return category_name;
     }
 
@@ -62,7 +62,7 @@ public class Category {
      * @return String representation of Category
      */
     @Override
-    public String toString() {
+    public final String toString() {
         return "Category [userID=" + userID + " categoryID=" + categoryID
                 + ", category_name=" + category_name + "]";
     }

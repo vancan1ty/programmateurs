@@ -30,8 +30,8 @@ public class ReportBuilder extends Activity {
     DatePickerDialog.OnDateSetListener startDate = new DatePickerDialog.OnDateSetListener() {
 
         @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                int dayOfMonth) {
+        public void onDateSet(final DatePicker view, final int year, final int monthOfYear,
+                final int dayOfMonth) {
             // TODO Auto-generated method stub
             startCalendar.set(Calendar.YEAR, year);
             startCalendar.set(Calendar.MONTH, monthOfYear);
@@ -44,8 +44,8 @@ public class ReportBuilder extends Activity {
     DatePickerDialog.OnDateSetListener endDate = new DatePickerDialog.OnDateSetListener() {
 
         @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                int dayOfMonth) {
+        public void onDateSet(final DatePicker view, final int year, final int monthOfYear,
+                final int dayOfMonth) {
             // TODO Auto-generated method stub
             endCalendar.set(Calendar.YEAR, year);
             endCalendar.set(Calendar.MONTH, monthOfYear);
@@ -55,14 +55,14 @@ public class ReportBuilder extends Activity {
 
     };
 
-    private void updateLabel(EditText toSet, Calendar cal) {
+    private void updateLabel(final EditText toSet, final Calendar cal) {
         String myFormat = "MM/dd/yy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         toSet.setText(sdf.format(cal.getTime()));
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_builder);
         Bundle extras = getIntent().getExtras();
@@ -75,7 +75,7 @@ public class ReportBuilder extends Activity {
         textStartDate.setOnClickListener(new OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 // TODO Auto-generated method stub
                 new DatePickerDialog(ReportBuilder.this, startDate,
                         startCalendar.get(Calendar.YEAR), startCalendar
@@ -87,7 +87,7 @@ public class ReportBuilder extends Activity {
         textEndDate.setOnClickListener(new OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 // TODO Auto-generated method stub
                 new DatePickerDialog(ReportBuilder.this, endDate, endCalendar
                         .get(Calendar.YEAR), endCalendar.get(Calendar.MONTH),
@@ -98,7 +98,7 @@ public class ReportBuilder extends Activity {
         buttonGenerateReport.setOnClickListener(new OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 // TODO Auto-generated method stub
                 Intent i = new Intent(v.getContext(),
                         CategoryReportActivity.class);
@@ -113,7 +113,7 @@ public class ReportBuilder extends Activity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public final boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.report_builder, menu);
         return true;

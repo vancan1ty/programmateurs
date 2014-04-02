@@ -13,7 +13,7 @@ import android.app.AlertDialog;
  * @author vancan1ty
  * @version 0.0
  */
-public class Anchor {
+public final class Anchor {
     private static Anchor instance;
     private User currentUser;
     public static final boolean TEST_MODE = false;
@@ -98,7 +98,7 @@ public class Anchor {
         return currentUser;
     }
 
-    public void setCurrentUser(User user) {
+    public void setCurrentUser(final User user) {
         currentUser = user;
     }
 
@@ -109,7 +109,7 @@ public class Anchor {
      *            The input stream to read
      * @return
      */
-    public static String readInputStream(java.io.InputStream in) {
+    public static String readInputStream(final java.io.InputStream in) {
         java.util.Scanner s = new java.util.Scanner(in).useDelimiter("\\A");
         return s.hasNext() ? s.next() : "";
     }
@@ -119,7 +119,7 @@ public class Anchor {
         protected String message;
         protected Activity parent;
 
-        public ShowDialogPasser(String title, String message, Activity parent) {
+        public ShowDialogPasser(final String title, final String message, final Activity parent) {
             this.title = title;
             this.message = message;
             this.parent = parent;
@@ -140,7 +140,7 @@ public class Anchor {
      * @param message
      *            Dialog message
      */
-    public void showDialog(Activity activity, String title, String message) {
+    public void showDialog(final Activity activity, final String title, final String message) {
 
         activity.runOnUiThread(new ShowDialogPasser(title, message, activity) {
             @Override
