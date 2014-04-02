@@ -54,7 +54,7 @@ public class AddUserActivity extends Activity {
 				String email = emailField.getText().toString(); //takes email from field
 				String username = usernameField.getText().toString(); //takes username from field
 				String password = passwordField.getText().toString(); //takes password from field
-				Log.d("BERRY","username: " + username + " password: " + password);
+//				Log.d("BERRY","username: " + username + " password: " + password);
 				
 				String[] nameComponents = name.split(" ");
 				String first = nameComponents[0];
@@ -168,7 +168,7 @@ public class AddUserActivity extends Activity {
 	* @version 0.1
 	*/
 	private Boolean validEmail(String email){
-		if(email.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}")){
+		if(email.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}")){
 		//name: letters, numbers, dash, underscore, plus, dot, percent (1 or more)
 		//@, URL: letters, dash, numbers, dot
 		//extension: letters from length 2 to 3 inclusive
