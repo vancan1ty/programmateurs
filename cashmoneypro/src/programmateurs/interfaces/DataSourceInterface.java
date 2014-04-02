@@ -26,7 +26,6 @@ public interface DataSourceInterface {
 
     /**
      * returns all users in the system. useful for admin screen.
-     * 
      * @return users in system
      */
     User[] getUsers();
@@ -34,7 +33,6 @@ public interface DataSourceInterface {
     /**
      * returns user in system corresponding to given username. returns null if
      * there is no user in the system corresponding to given username.
-     * 
      * @param username
      * @return user in system, null if no user in system
      */
@@ -43,7 +41,6 @@ public interface DataSourceInterface {
     /**
      * Verifies that given password is the password in the database for the
      * given username.
-     * 
      * @param username
      * @param password
      * @return true if given username/password combination corresponds to
@@ -53,7 +50,6 @@ public interface DataSourceInterface {
 
     /**
      * retrieves an account with the given id, or null if none exists.
-     * 
      * @param accountID
      * @return
      */
@@ -68,7 +64,6 @@ public interface DataSourceInterface {
 
     /**
      * returns a list of categories for a given user! useful for reports.
-     * 
      * @param userID
      * @return a list of categories for a given user.
      */
@@ -77,7 +72,6 @@ public interface DataSourceInterface {
     /**
      * a list of transactions for a given account. need to decide what to do
      * about rolling back transactions.
-     * 
      * @param accountID
      * @return a list of transactions for a given account
      */
@@ -86,7 +80,6 @@ public interface DataSourceInterface {
     /**
      * adds a user with the given information to the db, returns the object
      * created.
-     * 
      * @param username
      * @param passhash
      * @param first
@@ -134,7 +127,6 @@ public interface DataSourceInterface {
     /**
      * adds category with associated information to the DB, returns an object
      * representation of it.
-     * 
      * @param userID
      * @param category_name
      * @return
@@ -145,7 +137,6 @@ public interface DataSourceInterface {
 
     /**
      * retrieves transactions associated with a given user.
-     * 
      * @author Pavel
      */
     Transaction[] getTransactionsForUser(long userID);

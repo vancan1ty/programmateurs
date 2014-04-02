@@ -9,11 +9,8 @@ import android.util.Log;
 /**
  * This class manages creating and updating the database schema on your android
  * device.
- * 
  * Note: Sqlite "Integer" corresponds to long in java, apparently.
- * 
  * @author vancan1ty
- * 
  */
 public class DBHelper extends SQLiteOpenHelper {
 

@@ -19,7 +19,6 @@ import android.widget.ListView;
 /**
  * TransactionHistory Fragment class is part of HomeActivity. HomeActivity is an
  * Activity and account fragment makes up the Accounts tab of Home Activity.
- * 
  * @author Pavel
  * @version 0.0
  */

@@ -19,7 +19,6 @@ import android.widget.EditText;
 /**
  * LoginActivity is the login screen. It does different things based on the
  * username and password
- * 
  * @author currell
  * @version 0.1
  */
@@ -37,7 +36,6 @@ public class LoginActivity extends Activity {
 
     /**
      * The onCreate method sets all the objects on the screen.
-     * 
      */
     @Override
     protected final void onCreate(final Bundle savedInstanceState) {

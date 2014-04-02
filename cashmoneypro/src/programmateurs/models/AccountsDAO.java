@@ -14,9 +14,7 @@ import android.util.Log;
 
 /**
  * this class manages access to Accounts data.
- * 
  * @author vancan1ty
- * 
  */
 public class AccountsDAO {
 
@@ -32,7 +30,6 @@ public class AccountsDAO {
 
     /**
      * converts a db cursor to an Account object.
-     * 
      * @param cursor
      * @return
      */
@@ -135,9 +132,6 @@ public class AccountsDAO {
     /**
      * Checks to see if a potential transaction would result in overdrawing from
      * an account.
-     * 
-     * @param context
-     *            The view from which the method is called
      * @param amount
      *            The amount of the potential transaction
      * @param type

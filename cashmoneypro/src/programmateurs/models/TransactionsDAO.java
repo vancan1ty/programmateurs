@@ -18,9 +18,7 @@ import android.util.Log;
 
 /**
  * This class manages transaction data in the database.
- * 
  * @author vancan1ty
- * 
  */
 public class TransactionsDAO {
 

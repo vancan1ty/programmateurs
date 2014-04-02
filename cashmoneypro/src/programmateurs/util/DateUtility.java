@@ -8,12 +8,9 @@ import java.util.Date;
 /**
  * class to handle startDate operations between app and database. based on this
  * site:
- * 
  * http://joeshacks.blogspot.com/2011/02/managing-startDate-and-time-data-in-
  * android.html
- * 
  * @author vancan1ty
- * 
  */
 public class DateUtility {
     public static final String DATE_FORMAT = "yyyy-MM-dd";

@@ -9,7 +9,6 @@ import android.app.AlertDialog;
  * to store data accessible from everywhere in the app. Notice that it uses the
  * singleton pattern, so only one instance of this class can be instantiated
  * during a given runtime.
- * 
  * @author vancan1ty
  * @version 0.0
  */
@@ -22,7 +21,6 @@ public final class Anchor {
      * Acts as a selective constructor for Anchor class. If no instance of
      * Anchor exists, instantiates Anchor and returns that instance. Otherwise
      * it just returns the already-existing instance.
-     * 
      * @return Current Anchor instance
      */
     public static Anchor getInstance() {
@@ -91,7 +89,6 @@ public final class Anchor {
 
     /**
      * Getter for the User that is currently logged in.
-     * 
      * @return User currently logged in
      */
     public User getCurrentUser() {
@@ -104,7 +101,6 @@ public final class Anchor {
 
     /**
      * Unsure what this method does..
-     * 
      * @param in
      *            The input stream to read
      * @return

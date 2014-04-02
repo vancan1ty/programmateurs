@@ -31,7 +31,6 @@ public abstract class PromptDialog extends AlertDialog.Builder implements
     /**
      * will be called when "cancel" pressed. closes the dialog. can be
      * overridden.
-     * 
      * @param dialog
      */
     public final void onCancelClicked(final DialogInterface dialog) {
@@ -55,7 +54,6 @@ public abstract class PromptDialog extends AlertDialog.Builder implements
 
     /**
      * called when "ok" pressed.
-     * 
      * @param input
      * @return true, if the dialog should be closed. false, if not.
      */

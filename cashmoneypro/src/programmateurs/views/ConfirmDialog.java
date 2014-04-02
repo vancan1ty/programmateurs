@@ -55,7 +55,6 @@ public abstract class ConfirmDialog extends AlertDialog.Builder implements
 
     /**
      * called when "ok" pressed.
-     * 
      * @param input
      * @return true, if the dialog should be closed. false, if not.
      */

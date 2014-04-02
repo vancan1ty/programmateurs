@@ -18,7 +18,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-//Useful example of how to do list adapters in android... 
+//Useful example of how to do list adapters in android...
 
 /**
  * I'd ask Currell for more information on how this class works Basically it

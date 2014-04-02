@@ -11,6 +11,9 @@ import java.util.Locale;
  */
 public class Transaction {
 
+    /**
+     * @author Currell Probably
+     */
     public enum TRANSACTION_TYPE {
         DEPOSIT, WITHDRAWAL, REBALANCE;
 
@@ -65,38 +68,66 @@ public class Transaction {
         this.category = category;
     }
 
+    /**
+     * @return The ID number associated with the transaction
+     */
     public final long getTransactionID() {
         return transactionID;
     }
 
+    /**
+     * @return The ID of the account to which this transaction belongs
+     */
     public final long getAccountID() {
         return accountID;
     }
 
+    /**
+     * @return The category of the transaction
+     */
     public final TRANSACTION_TYPE getTransactionType() {
         return transactionType;
     }
 
+    /**
+     * @return The quantity of monies associated with the transaction in the
+     * form of a double
+     */
     public final double getTransactionAmountAsDouble() {
         return (transactionAmount / 100) + 0.01 * (transactionAmount % 100);
     }
 
+    /**
+     * @return The quantity of monies associated with the transaction
+     */
     public final long getTransactionAmount() {
         return transactionAmount;
     }
 
+    /**
+     * @return The date associated with the transaction
+     */
     public final Date getTransactionDate() {
         return transactionDate;
     }
 
+    /**
+     * @return The time associated with the transaction
+     */
     public final Date getTimestamp() {
         return timestamp;
     }
 
+    /**
+     * @return Whether the transaction has been rolled back
+     */
     public final boolean isRolledback() {
         return rolledback;
     }
 
+    /**
+     * @return The category to which a transaction belongs
+     */
     public final Category getCategory() {
         return this.category;
     }

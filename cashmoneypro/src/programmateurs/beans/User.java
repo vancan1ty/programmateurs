@@ -14,8 +14,17 @@ public class User {
     private String email;
     private ArrayList<Category> categories;
 
-    public User(final long userID, final String username, final String passhash, final String first,
-            final String last, final String email) {
+    /**
+     * User's constructor.
+     * @param userID a number
+     * @param username a name
+     * @param passhash a hash
+     * @param first a first name
+     * @param last a surname
+     * @param email an email
+     */
+    public User(final long userID, final String username, final String passhash,
+            final String first, final String last, final String email) {
         super();
         this.userID = userID;
         this.username = username;

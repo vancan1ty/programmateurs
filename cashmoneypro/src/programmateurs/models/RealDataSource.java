@@ -17,13 +17,10 @@ import android.util.Log;
 
 /**
  * Usage of RealDataSource
- * 
  * **IMPORTANT, READ THESE DIRECTIONS** in any activity that uses RealDataSource
  * put a call to open() in onResume and a call to close() in onPause.
  * RealDataSource will manage the DB connection otherwise. thanks!
- * 
  * @author vancan1ty
- * 
  */
 public class RealDataSource implements DataSourceInterface {
 

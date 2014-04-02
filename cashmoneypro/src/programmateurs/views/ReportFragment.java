@@ -17,7 +17,6 @@ import android.widget.Button;
 
 /**
  * ReportFragment serves as a jump-off point for the user to build reports.
- * 
  * @author Currell
  * @version 0.0
  */
@@ -82,11 +81,6 @@ public class ReportFragment extends Fragment {
 
     @Override
     public final boolean onOptionsItemSelected(final android.view.MenuItem item) {
-        /*
-         * if (item.getItemId() == R.id.action_add_acount) {
-         * 
-         * }
-         */
         super.onOptionsItemSelected(item);
         return true;
     };

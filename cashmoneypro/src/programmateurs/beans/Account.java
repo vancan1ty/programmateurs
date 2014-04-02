@@ -38,7 +38,6 @@ public class Account {
 
     /**
      * Constructor for Account class; assigns all appropriate values.
-     * 
      * @param accountID
      *            ID of the account
      * @param userID
@@ -97,7 +96,6 @@ public class Account {
 
     /**
      * Getter for account interest rate.
-     * 
      * @return Account interest rate
      */
     public final double getInterestRate() {

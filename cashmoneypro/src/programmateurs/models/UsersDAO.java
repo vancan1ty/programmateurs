@@ -121,7 +121,6 @@ public class UsersDAO {
      * updates the user matching the parameter user in the db with whatever
      * information the user parameter contains, returns the user read back from
      * the database.
-     * 
      * @param db
      * @param user
      * @return reading the results of the operation back from the db

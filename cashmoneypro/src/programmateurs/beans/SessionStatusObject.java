@@ -1,5 +1,8 @@
 package programmateurs.beans;
 
+/**
+ * @author Currell Probably
+ */
 public class SessionStatusObject {
 
     private Integer userID;
