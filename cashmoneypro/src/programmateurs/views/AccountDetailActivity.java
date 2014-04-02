@@ -71,6 +71,9 @@ public class AccountDetailActivity extends Activity {
         src = new RealDataSource(this);
     }
 
+    /**
+     * @param type The transaction's category
+     */
     public final void gotoTransactionScreen(final TRANSACTION_TYPE type) {
         Intent i = new Intent(this, TransactionScreen.class);
         i.putExtra("transaction_type", type);

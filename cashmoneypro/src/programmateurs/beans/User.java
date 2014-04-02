@@ -1,7 +1,10 @@
 package programmateurs.beans;
 
 import java.util.ArrayList;
-
+/**
+ *
+ * @author Currell Probably
+ */
 public class User {
     private long userID;
     private String username;
@@ -23,34 +26,58 @@ public class User {
         categories = new ArrayList<Category>();
     }
 
+    /**
+     * @return The User's identification number
+     */
     public final long getUserID() {
         return userID;
     }
 
+    /**
+     * @return The User's username
+     */
     public final String getUsername() {
         return username;
     }
 
+    /**
+     * @param passhash The new passhash
+     */
     public final void setPasshash(final String passhash) {
         this.passhash = passhash;
     }
 
+    /**
+     * @return The passhash
+     */
     public final String getPasshash() {
         return passhash;
     }
 
+    /**
+     * @return The User's first name
+     */
     public final String getFirst() {
         return first;
     }
 
+    /**
+     * @return The User's last name
+     */
     public final String getLast() {
         return last;
     }
 
+    /**
+     * @return the User's email
+     */
     public final String getEmail() {
         return email;
     }
 
+    /**
+     * @param toAdd A new category
+     */
     public final void addCategory(final Category toAdd) {
         categories.add(toAdd);
     }
