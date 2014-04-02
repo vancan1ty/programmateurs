@@ -19,10 +19,12 @@ public abstract class ConfirmDialog extends AlertDialog.Builder implements
     /**
      * Creates new ConfirDialog for given context using provided title and
      * message.
-     * 
      * @param context
+     * @param title
+     * @param message
      */
-    public ConfirmDialog(final Context context, final String title, final String message) {
+    public ConfirmDialog(final Context context, final String title,
+            final String message) {
         super(context);
         setTitle(title);
         setMessage(message);
@@ -34,7 +36,6 @@ public abstract class ConfirmDialog extends AlertDialog.Builder implements
     /**
      * will be called when "cancel" pressed. closes the dialog. can be
      * overridden.
-     * 
      * @param dialog
      */
     public final void onCancelClicked(final DialogInterface dialog) {

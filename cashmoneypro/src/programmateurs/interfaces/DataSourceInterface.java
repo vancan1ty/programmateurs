@@ -15,10 +15,8 @@ public interface DataSourceInterface {
 
     /**
      * opens data source. make sure to open before calling data access methods.
-     * 
-     * @throws SQLException
      */
-    void open() throws SQLException;
+    void open();
 
     /**
      * close data source. make sure to close when you're done with the data
@@ -103,7 +101,7 @@ public interface DataSourceInterface {
             UnsupportedEncodingException;
 
     /**
-     * adds an account with the associated information to the DB, returns an
+     * Adds an account with the associated information to the DB, returns an
      * object representation of it.
      * @param userID
      * @param accountType
@@ -116,8 +114,17 @@ public interface DataSourceInterface {
             double interestRate);
 
     /**
-     * adds transaction with associated information to the DB, returns an object
+     * Adds transaction with associated information to the DB, returns an object
      * representation of it.
+     * @param accountID
+     * @param transactionName
+     * @param transactionType
+     * @param transactionAmount
+     * @param transactionDate
+     * @param transactionComment
+     * @param rolledback
+     * @param category
+     * @return
      */
     Transaction addTransactionToDB(long accountID,
             String transactionName, TRANSACTION_TYPE transactionType,

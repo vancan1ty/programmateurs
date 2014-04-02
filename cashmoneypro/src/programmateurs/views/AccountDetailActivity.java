@@ -100,8 +100,6 @@ public class AccountDetailActivity extends Activity {
             } else if (type == TRANSACTION_TYPE.WITHDRAWAL
                     && !transaction.isRolledback()) {
                 balance -= transaction.getTransactionAmount();
-            } else {
-                // should never get here?
             }
         }
         NumberFormat fmter = NumberFormat.getCurrencyInstance();

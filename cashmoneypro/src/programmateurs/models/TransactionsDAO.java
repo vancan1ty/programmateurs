@@ -115,8 +115,18 @@ public class TransactionsDAO {
     }
 
     /**
-     * adds a transaction with the associated information to the DB, returns an
+     * Adds a transaction with the associated information to the DB, returns an
      * object representation of it.
+     * @param db
+     * @param accountID
+     * @param transactionName
+     * @param transactionType
+     * @param transactionAmount
+     * @param transactionDate
+     * @param transactionComment
+     * @param rolledback
+     * @param category
+     * @return
      */
     public static Transaction addTransactionToDB(final SQLiteDatabase db,
             final long accountID, final String transactionName,

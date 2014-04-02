@@ -34,6 +34,19 @@ public class Transaction {
     private boolean rolledback;
     private Category category;
 
+    /**
+     * Transaction constructor.
+     * @param transactionID
+     * @param accountID
+     * @param transactionName
+     * @param transactionType
+     * @param transactionAmount
+     * @param transactionDate
+     * @param transactionComment
+     * @param timestamp
+     * @param rolledback
+     * @param category
+     */
     public Transaction(final long transactionID, final long accountID,
             final String transactionName, final TRANSACTION_TYPE transactionType,
             final long transactionAmount, final Date transactionDate,

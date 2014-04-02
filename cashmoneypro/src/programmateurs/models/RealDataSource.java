@@ -38,7 +38,7 @@ public class RealDataSource implements DataSourceInterface {
     }
 
     @Override
-    public final void open() throws SQLException {
+    public final void open() {
         db = dbHelper.getWritableDatabase();
         Log.d("RealDataSource", "opened db: " + db);
     }

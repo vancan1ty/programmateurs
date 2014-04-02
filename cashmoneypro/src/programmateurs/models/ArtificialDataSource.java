@@ -209,7 +209,7 @@ public class ArtificialDataSource implements DataSourceInterface {
     }
 
     @Override
-    public void open() throws SQLException {
+    public void open() {
         // do nothing
     }
 
