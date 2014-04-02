@@ -27,7 +27,7 @@ import android.widget.Spinner;
  * @author Justin
  * @version 0.1
  */
-public class CategoryActivity extends Activity implements OnItemSelectedListener{
+public class CategoryActivity extends Activity implements OnItemSelectedListener {
 	private EditText categoryNameField;
 	private Button addButton;
 	private Button deleteButton;
@@ -102,9 +102,9 @@ public class CategoryActivity extends Activity implements OnItemSelectedListener
 	
 	@Override
 	public void onResume(){
+		super.onResume();
 		dbHandler.open();
 		populateSpinner();
-		super.onResume();
 	}
 	
 	@Override
