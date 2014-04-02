@@ -43,13 +43,13 @@ public abstract class ConfirmDialog extends AlertDialog.Builder implements OnCli
   
  @Override  
  public void onClick(DialogInterface dialog, int which) {  
-  if (which == DialogInterface.BUTTON_POSITIVE) {  
-   if (onOkClicked("")) {  
-    dialog.dismiss();  
-   }  
-  } else {  
-   onCancelClicked(dialog);  
-  }  
+	 if (which == DialogInterface.BUTTON_POSITIVE) {  
+		 if (onOkClicked("")) {  
+			 dialog.dismiss();  
+		 }  
+	 } else {  
+		 onCancelClicked(dialog);  
+	 }  
  }  
  
 

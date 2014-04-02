@@ -94,4 +94,4 @@ public class TransactionAdapter extends BaseAdapter {
 	  return position;
   }
 
-} 
+}
