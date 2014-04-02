@@ -21,7 +21,6 @@ import android.widget.Spinner;
 /**
  * CategoryActivity is the screen in which users can add or delete categories.
  * it is accessed through the Options Menu in HomeActivity.
- * 
  * @author Justin
  * @version 0.1
  */
@@ -96,7 +95,6 @@ public class CategoryActivity extends Activity implements
 
     /**
      * Adds a user-defined spending category to the database.
-     * 
      * @param name
      */
     private void addCategory(final String name) {

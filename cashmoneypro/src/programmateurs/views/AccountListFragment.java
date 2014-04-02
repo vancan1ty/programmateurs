@@ -22,7 +22,6 @@ import android.widget.ListView;
 /**
  * Account Fragment class is part of HomeActivity. HomeActivity is an Activity
  * and account fragment makes up the Accounts tab of Home Activity.
- * 
  * @author brent
  * @version 0.0
  */

@@ -62,12 +62,12 @@ public class CategoriesDAO {
 
         Cursor c = db.rawQuery(
                 "SELECT C.categoryID, C.userID, C.category_name "
-                        + "	FROM Transactions as T "
-                        + "	JOIN Transactions_Categories as TC "
-                        + "   JOIN Categories as C "
-                        + "	WHERE T.transactionID = ?"
-                        + "	AND TC.transactionID = T.transactionID"
-                        + "	AND TC.categoryID = C.categoryID;",
+                        + " FROM Transactions as T "
+                        + " JOIN Transactions_Categories as TC "
+                        + " JOIN Categories as C "
+                        + " WHERE T.transactionID = ?"
+                        + " AND TC.transactionID = T.transactionID"
+                        + " AND TC.categoryID = C.categoryID;",
                 new String[] {Long.toString(transactionID) });
         List<Category> outL = new ArrayList<Category>();
 

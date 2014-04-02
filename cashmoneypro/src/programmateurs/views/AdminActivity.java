@@ -95,7 +95,6 @@ public class AdminActivity extends Activity {
      * Creates a random 5-digit password for given user and resets that user's
      * password in the given database, if a user with that username exists.
      * Otherwise, does nothing. To be called after database is opened.
-     * 
      * @param username
      *            Username of user whose password is being reset
      * @param db

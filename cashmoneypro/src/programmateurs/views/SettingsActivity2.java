@@ -68,7 +68,8 @@ public class SettingsActivity2 extends PreferenceActivity {
             // to navigate up one level in the application structure. For
             // more details, see the Navigation pattern on Android Design:
             //
-            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
+            // http://developer.android.com/design/patterns/navigation.
+            // html#up-vs-back
             //
             // TODO: If Settings has multiple levels, Up should navigate up
             // that hierarchy.

@@ -134,11 +134,8 @@ public class TransactionScreen extends Activity {
 
     /**
      * Makes sure the startDate is valid. I hate Date
-     * 
-     * @param year
-     * @param month
-     * @param day
-     * @return
+     * @param cal a calendar
+     * @return whether it worked
      */
     private boolean validDate(final Calendar cal) {
         return true;
@@ -157,7 +154,6 @@ public class TransactionScreen extends Activity {
     }
 
     /**
-     * 
      * @param name
      *            Name of category being searched for
      * @return category with matching name
@@ -170,12 +166,9 @@ public class TransactionScreen extends Activity {
                 return c;
             }
         }
-        throw new RuntimeException("No existing category with name " + name); // only
-                                                                              // executed
-                                                                              // if
-                                                                              // somebody
-                                                                              // done
-                                                                              // goofed.
+        throw new RuntimeException("No existing category with name "
+                + name); // only executed if somebody done goofed.
+
     }
 
     /**

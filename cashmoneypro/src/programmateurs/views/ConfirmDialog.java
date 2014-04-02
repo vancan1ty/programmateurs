@@ -9,7 +9,6 @@ import android.content.DialogInterface.OnClickListener;
  * Helper for creating dialogs that prompt for confirmation. Presents text with
  * "ok" and "cancel" options. (basically stolen content from PromptDialog, but
  * without the EditText)
- * 
  * @author Justin
  * @version 0.1
  */

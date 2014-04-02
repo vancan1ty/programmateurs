@@ -5,7 +5,6 @@ import java.util.Locale;
 /**
  * The Account class represents an account possessed by a User. A single User
  * can have multiple accounts, but each account has only one User
- * 
  * @author Currell
  * @version 0.2
  */
@@ -14,7 +13,6 @@ public class Account {
     /**
      * ACCOUNT_TYPE can be CHECKING or WITHDRAWAL, representing exactly what
      * you'd think. This javadoc is here because checkstyle is excessive.
-     * 
      */
     public enum ACCOUNT_TYPE {
         SAVINGS, CHECKING;
@@ -60,7 +58,6 @@ public class Account {
 
     /**
      * Getter for account ID.
-     * 
      * @return Account ID
      */
     public final long getAccountID() {
@@ -69,7 +66,6 @@ public class Account {
 
     /**
      * Getter for the ID of the user who owns the account.
-     * 
      * @return ID of owner
      */
     public final long getUserID() {
@@ -78,7 +74,6 @@ public class Account {
 
     /**
      * Getter for account type.
-     * 
      * @return Account type
      */
     public final ACCOUNT_TYPE getAccountType() {
@@ -87,7 +82,6 @@ public class Account {
 
     /**
      * Getter for account name.
-     * 
      * @return Account name
      */
     public final String getAccountName() {
@@ -103,7 +97,6 @@ public class Account {
     }
 
     /**
-     * 
      * @return String representation of Account
      */
     @Override

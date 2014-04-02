@@ -9,7 +9,6 @@ import programmateurs.beans.Category;
 import programmateurs.beans.Transaction;
 import programmateurs.beans.Transaction.TRANSACTION_TYPE;
 import programmateurs.beans.User;
-import android.database.SQLException;
 
 public interface DataSourceInterface {
 
@@ -51,7 +50,7 @@ public interface DataSourceInterface {
     /**
      * retrieves an account with the given id, or null if none exists.
      * @param accountID
-     * @return
+     * @return The account corresponding to the ID given
      */
     Account getAccountWithID(long accountID);
 
@@ -80,14 +79,14 @@ public interface DataSourceInterface {
     /**
      * adds a user with the given information to the db, returns the object
      * created.
-     * @param username
-     * @param passhash
-     * @param first
-     * @param last
-     * @param email
-     * @return
-     * @throws UnsupportedEncodingException
-     * @throws NoSuchAlgorithmException
+     * @param username the user's identifying string
+     * @param passhash a has
+     * @param first the user's first name
+     * @param last the user's surname
+     * @param email the user's email
+     * @return a new User
+     * @throws UnsupportedEncodingException when invalid encodings given
+     * @throws NoSuchAlgorithmException nonexistent algorithms given
      */
     User addUserToDB(String username, String passhash, String first,
             String last, String email) throws NoSuchAlgorithmException,
@@ -96,11 +95,11 @@ public interface DataSourceInterface {
     /**
      * Adds an account with the associated information to the DB, returns an
      * object representation of it.
-     * @param userID
-     * @param accountType
-     * @param accountName
-     * @param interestRate
-     * @return
+     * @param userID the ID of the user to whom the account belongeth
+     * @param accountType the type of the account
+     * @param accountName the name of the account
+     * @param interestRate the interest rate of the account
+     * @return the acount just added to the database
      */
     Account addAccountToDB(long userID,
             Account.ACCOUNT_TYPE accountType, String accountName,

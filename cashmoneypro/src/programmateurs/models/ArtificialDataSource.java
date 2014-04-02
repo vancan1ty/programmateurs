@@ -15,7 +15,6 @@ import programmateurs.beans.Transaction.TRANSACTION_TYPE;
 import programmateurs.beans.User;
 import programmateurs.interfaces.DataSourceInterface;
 import programmateurs.util.DateUtility;
-import android.database.SQLException;
 import android.util.Log;
 
 /**

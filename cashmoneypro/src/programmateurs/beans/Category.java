@@ -3,7 +3,6 @@ package programmateurs.beans;
 /**
  * Categories are custom-made "envelopes" that the User uses to separate his/her
  * money according to how he/she plans on spending it.
- * 
  * @author Currell
  * @version 0.0
  */
@@ -15,7 +14,6 @@ public class Category {
 
     /**
      * Constructor for Category.
-     * 
      * @param categoryID
      *            ID of Category
      * @param userID
@@ -32,7 +30,6 @@ public class Category {
 
     /**
      * Getter for the category ID.
-     * 
      * @return ID of category
      */
     public final long getCategoryID() {
@@ -41,7 +38,6 @@ public class Category {
 
     /**
      * Getter for the ID of the user who owns the account.
-     * 
      * @return ID of owner
      */
     public final long getUserID() {
@@ -50,7 +46,6 @@ public class Category {
 
     /**
      * Getter for the user-assigned category name.
-     * 
      * @return Category name
      */
     public final String getCategory_name() {
@@ -58,7 +53,6 @@ public class Category {
     }
 
     /**
-     * 
      * @return String representation of Category
      */
     @Override

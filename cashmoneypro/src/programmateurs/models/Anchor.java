@@ -128,7 +128,6 @@ public final class Anchor {
     /**
      * Opens a dialog in the given activity with a given title and message. Used
      * to present information to the user.
-     * 
      * @param activity
      *            Activity the dialog is to be displayed in
      * @param title
@@ -136,7 +135,8 @@ public final class Anchor {
      * @param message
      *            Dialog message
      */
-    public void showDialog(final Activity activity, final String title, final String message) {
+    public void showDialog(final Activity activity, final String title,
+            final String message) {
 
         activity.runOnUiThread(new ShowDialogPasser(title, message, activity) {
             @Override

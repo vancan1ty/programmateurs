@@ -109,9 +109,6 @@ public class AccountsDAO {
 
     /**
      * Calculates the balance for an account.
-     * 
-     * @param context
-     *            The view from which the method is called
      * @return balance of the account
      */
     public static double getBalance(final DataSourceInterface src, final long accountID) {

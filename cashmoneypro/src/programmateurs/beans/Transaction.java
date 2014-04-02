@@ -150,8 +150,7 @@ public class Transaction {
     /**
      * Not just a standard getter. If the user provided no transaction comment,
      * then this returns "No Comment Provided"
-     * 
-     * @return
+     * @return A comment made by the user on the transaction
      */
     public final String getTransactionComment() {
         if (!transactionComment.equals("")) {
@@ -164,7 +163,6 @@ public class Transaction {
     /**
      * This is currently just a method that formats the transaction info to be
      * displayed to the user.
-     * 
      * @return user-friendly String with transaction data
      */
     public final String formatDetails() {
