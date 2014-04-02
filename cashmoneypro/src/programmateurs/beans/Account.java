@@ -2,11 +2,6 @@ package programmateurs.beans;
 
 import java.util.Locale;
 
-import programmateurs.beans.Transaction.TRANSACTION_TYPE;
-import programmateurs.interfaces.DataSourceInterface;
-import programmateurs.models.RealDataSource;
-
-import android.content.Context;
 
 
 /**
@@ -18,16 +13,23 @@ import android.content.Context;
  * @version 0.2
  */
 public class Account {
-
+	
+	/**
+	 * ACCOUNT_TYPE can be CHECKING or WITHDRAWAL,
+	 * representing exactly what you'd think. This javadoc is
+	 * here because checkstyle is excessive.
+	 *
+	 */
 	public enum ACCOUNT_TYPE {
 		SAVINGS, CHECKING;
 		
 		@Override
-		public String toString(){
+		public String toString() {
 			//Look at this cute block of code. It takes an all-capital toString
 			//and makes everything but the first letter lower case.
 			String type = super.toString();
-			type = type.charAt(0) + type.substring(1,type.length()).toLowerCase(Locale.US);
+			type = type.charAt(0) 
+					+ type.substring(1, type.length()).toLowerCase(Locale.US);
 			return type + " Account";
 		}
 	}
