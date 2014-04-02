@@ -1,6 +1,5 @@
 package programmateurs.views;
 
-
 //Useful example of how to do list adaptors in android... 
 
 //public class QuipsListAdapter extends BaseAdapter {

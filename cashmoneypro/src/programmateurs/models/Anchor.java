@@ -125,6 +125,7 @@ public class Anchor {
             this.parent = parent;
         }
 
+        @Override
         public abstract void run();
     }
 
@@ -142,6 +143,7 @@ public class Anchor {
     public void showDialog(Activity activity, String title, String message) {
 
         activity.runOnUiThread(new ShowDialogPasser(title, message, activity) {
+            @Override
             public void run() {
                 // 1. Instantiate an AlertDialog.Builder with its constructor
                 AlertDialog.Builder builder = new AlertDialog.Builder(parent);

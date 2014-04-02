@@ -63,6 +63,7 @@ public class AccountsAdapter extends BaseAdapter {
         // onClickListener for each view
         // We can change this to go to an Activity when pressed later.
         rowView.setOnClickListener(new OnClickListener() {
+            @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(),
                         AccountDetailActivity.class);

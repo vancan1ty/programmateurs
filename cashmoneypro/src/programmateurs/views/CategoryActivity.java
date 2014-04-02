@@ -62,13 +62,17 @@ public class CategoryActivity extends Activity implements
 
     }
 
+    /**
+     * Fills a spinner with options from user information in the database.
+     */
     private void populateSpinner() {
         categories = dbHandler.getCategoriesForUser(user.getUserID());
         String[] categoryArray = new String[categories.length];
         if (categories != null) {
             for (int i = 0; i < categories.length; i++) {
-                if (categories[i] != null)
+                if (categories[i] != null) {
                     categoryArray[i] = categories[i].getCategory_name();
+                }
             }
         }
         adapter = new ArrayAdapter<String>(this,
@@ -90,6 +94,11 @@ public class CategoryActivity extends Activity implements
         // intentionally empty
     }
 
+    /**
+     * Adds a user-defined spending category to the database.
+     * 
+     * @param name
+     */
     private void addCategory(String name) {
         dbHandler.addCategoryToDB(anchor.getCurrentUser().getUserID(), name);
         anchor.showDialog(this, "Add Category", addButton.getText()
@@ -98,6 +107,9 @@ public class CategoryActivity extends Activity implements
         populateSpinner();
     }
 
+    /**
+     * Removes a user-defined category from the database.
+     */
     private void deleteCategory() {
         // TODO set up a way to remove categories from database AND transactions
     }

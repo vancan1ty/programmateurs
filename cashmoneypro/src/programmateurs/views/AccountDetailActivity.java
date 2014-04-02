@@ -22,6 +22,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
 //for sounds, delete this import if error
 
 public class AccountDetailActivity extends Activity {

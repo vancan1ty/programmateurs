@@ -61,6 +61,7 @@ public class Category {
      * 
      * @return String representation of Category
      */
+    @Override
     public String toString() {
         return "Category [userID=" + userID + " categoryID=" + categoryID
                 + ", category_name=" + category_name + "]";

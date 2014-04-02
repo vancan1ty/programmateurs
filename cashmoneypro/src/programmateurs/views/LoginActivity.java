@@ -86,6 +86,7 @@ public class LoginActivity extends Activity {
      * Forces the back button to take the user back to the welcome screen when
      * pressed during LoginActivity (to prevent weird user-hacks)
      */
+    @Override
     public void onBackPressed() {
         startActivity(new Intent(this, WelcomeActivity.class));
     }

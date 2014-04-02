@@ -69,6 +69,7 @@ public class TransactionAdapter extends BaseAdapter {
         // onClickListener for each view
         // We can change this to go to an Activity when pressed later.
         rowView.setOnClickListener(new OnClickListener() {
+            @Override
             public void onClick(View v) {
                 Anchor.getInstance()
                         .showDialog(activity,

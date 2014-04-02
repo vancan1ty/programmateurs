@@ -120,6 +120,7 @@ public class ArtificialDataSource implements DataSourceInterface {
         return users.toArray(new User[] {});
     }
 
+    @Override
     public User getUser(String username) {
         for (User user : getUsers()) {
             if (user.getUsername().equals(username))

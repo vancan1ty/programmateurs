@@ -40,7 +40,6 @@ public class AdminActivity extends Activity {
      * Displays an editable text field (where admin should input username of
      * user desiring password reset), button to enable reset (creates temporary
      * password, displays that password), and button to logout.
-     * 
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +55,7 @@ public class AdminActivity extends Activity {
 
         // logout button sends user back to splash screen
         logoutButton.setOnClickListener(new OnClickListener() {
+            @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), WelcomeActivity.class);
                 // anchor.setCurrentUser(null);
@@ -64,6 +64,7 @@ public class AdminActivity extends Activity {
         });
 
         resetButton.setOnClickListener(new OnClickListener() {
+            @Override
             public void onClick(View v) {
                 final String username = userField.getText().toString();
 
@@ -72,6 +73,7 @@ public class AdminActivity extends Activity {
                         "Confirm Password Reset",
                         "Are you sure you want to enable password reset for "
                                 + username + " ?") {
+                    @Override
                     public boolean onOkClicked(String input) {
                         String[] message = setTempPassword(username, dbHandler);
                         anchor.showDialog(me, message[0], message[1]);

@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+
 //for sounds, delete this import if error
 
 /**
@@ -97,8 +98,8 @@ public class TransactionScreen extends Activity {
                     long transactionAmountL = Math
                             .round(transactionAmountD * 100);
                     dbHandler.addTransactionToDB(accountID, transactionName,
-                            transactionType, (long) transactionAmountL, cal
-                                    .getTime(), transactionComment, false,
+                            transactionType, transactionAmountL, cal.getTime(),
+                            transactionComment, false,
                             getCategoryByName((String) categorySpinner
                                     .getSelectedItem()));
 
