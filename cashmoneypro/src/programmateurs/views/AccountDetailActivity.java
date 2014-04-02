@@ -29,7 +29,7 @@ import android.support.v4.app.NavUtils;
 import android.media.MediaPlayer; //for sounds, delete this import if error
 
 public class AccountDetailActivity extends Activity {
-	
+
 	DataSourceInterface src;
 	TextView textViewAccountTitle;
 	TextView textViewAccountType;
@@ -40,8 +40,6 @@ public class AccountDetailActivity extends Activity {
 	Button buttonDeposit;
 	Button buttonWithdraw;
 	List<Transaction> transactionList = new ArrayList<Transaction>();
-	
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,76 +47,77 @@ public class AccountDetailActivity extends Activity {
 		setContentView(R.layout.activity_account_detail);
 		// Show the Up button in the action bar.
 		setupActionBar();
-		
+
 		textViewAccountTitle = (TextView) findViewById(R.id.textViewAccountTitle);
 		textViewAccountType = (TextView) findViewById(R.id.textViewAccountType);
 		textViewBalance = (TextView) findViewById(R.id.textViewBalance);
 		listViewTransactions = (ListView) findViewById(R.id.listViewTransactions);
 		buttonDeposit = (Button) findViewById(R.id.button_deposit);
 		buttonWithdraw = (Button) findViewById(R.id.button_withdraw);
-		
-		buttonDeposit.setOnClickListener( new OnClickListener() {
+
+		buttonDeposit.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				gotoTransactionScreen(TRANSACTION_TYPE.DEPOSIT);
 			}
 		});
 
-		buttonWithdraw.setOnClickListener( new OnClickListener() {
+		buttonWithdraw.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				gotoTransactionScreen(TRANSACTION_TYPE.WITHDRAWAL);
 			}
 		});
-		
-		Bundle extras= getIntent().getExtras();
+
+		Bundle extras = getIntent().getExtras();
 		accountID = extras.getLong("accountID");
 		src = new RealDataSource(this);
 	}
-	
+
 	public void gotoTransactionScreen(TRANSACTION_TYPE type) {
-	  			Intent i = new Intent(this, TransactionScreen.class);
-	  			i.putExtra("transaction_type", type);
-	  			i.putExtra("account_id", this.accountID);
-	  			this.startActivity(i);
+		Intent i = new Intent(this, TransactionScreen.class);
+		i.putExtra("transaction_type", type);
+		i.putExtra("account_id", this.accountID);
+		this.startActivity(i);
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
 		src.open();
-		
+
 		account = src.getAccountWithID(accountID);
 		textViewAccountTitle.setText(account.getAccountName());
 		textViewAccountType.setText(account.getAccountType().toString());
-		transactionList = Arrays.asList(src.getTransactionsForAccount(accountID));
-		listViewTransactions.setAdapter(new TransactionAdapter(this, transactionList));
-		
+		transactionList = Arrays.asList(src
+				.getTransactionsForAccount(accountID));
+		listViewTransactions.setAdapter(new TransactionAdapter(this,
+				transactionList));
+
 		int balance = 0;
 		for (Transaction transaction : transactionList) {
 			TRANSACTION_TYPE type = transaction.getTransactionType();
-			if ((type == TRANSACTION_TYPE.DEPOSIT || type == TRANSACTION_TYPE.REBALANCE) 
+			if ((type == TRANSACTION_TYPE.DEPOSIT || type == TRANSACTION_TYPE.REBALANCE)
 					&& transaction.isRolledback() == false) {
 				balance += transaction.getTransactionAmount();
-			} else if (type == TRANSACTION_TYPE.WITHDRAWAL && transaction.isRolledback() == false) {
+			} else if (type == TRANSACTION_TYPE.WITHDRAWAL
+					&& transaction.isRolledback() == false) {
 				balance -= transaction.getTransactionAmount();
 			} else {
-				//should never get here?
+				// should never get here?
 			}
 		}
 		NumberFormat fmter = NumberFormat.getCurrencyInstance();
-		String balanceString = fmter.format(balance/100.0);
+		String balanceString = fmter.format(balance / 100.0);
 		textViewBalance.setText("Balance: " + balanceString);
 
-		
 	};
-	
+
 	@Override
 	protected void onPause() {
 		super.onPause();
 		src.close();
 	};
-
 
 	/**
 	 * Set up the {@link android.app.ActionBar}.

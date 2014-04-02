@@ -32,13 +32,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 /**
- * The class sets up the main screen when the user logs in 
- * It has the SectionsPagerAdapter, which allows the user to scroll to 
- * new tabs
+ * The class sets up the main screen when the user logs in It has the
+ * SectionsPagerAdapter, which allows the user to scroll to new tabs
  * 
  * @author currell
  * @version 0.0
- *
+ * 
  */
 public class HomeActivity extends FragmentActivity {
 
@@ -58,14 +57,13 @@ public class HomeActivity extends FragmentActivity {
 	ViewPager mViewPager;
 	Anchor anchor;
 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
 		anchor = Anchor.getInstance();
 		this.setTitle(anchor.getCurrentUser().getFirst());
-		
+
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
@@ -83,16 +81,18 @@ public class HomeActivity extends FragmentActivity {
 		MenuItem logout = menu.add("Log Out");
 		logout.setIntent(new Intent(this, WelcomeActivity.class));
 		MenuItem categories = menu.add("Edit Categories");
-		categories.setIntent(new Intent(this,CategoryActivity.class));
-		//getMenuInflater().inflate(R.menu.home, menu);
-		return super.onCreateOptionsMenu(menu); 
+		categories.setIntent(new Intent(this, CategoryActivity.class));
+		// getMenuInflater().inflate(R.menu.home, menu);
+		return super.onCreateOptionsMenu(menu);
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		//Log.d("HomeActivity","Title: " + item.getTitle());
+		// Log.d("HomeActivity","Title: " + item.getTitle());
 		if (item.getTitle().equals("Log Out")) {
-//			Anchor.getInstance().setCurrentUser(null);//NOTE THAT SETTING THE USER TO NULL CAUSES THE PROGRAM TO CRASH IF THE USER HITS THE BACK BUTTON AFTER LOGGING OUT
+			// Anchor.getInstance().setCurrentUser(null);//NOTE THAT SETTING THE
+			// USER TO NULL CAUSES THE PROGRAM TO CRASH IF THE USER HITS THE
+			// BACK BUTTON AFTER LOGGING OUT
 		}
 		this.startActivity(item.getIntent());
 		return true;
@@ -120,9 +120,10 @@ public class HomeActivity extends FragmentActivity {
 				fragment = new TransactionHistoryFragment();
 			} else {
 				fragment = new ReportFragment();
-				//Bundle args = new Bundle();
-				//args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-				//fragment.setArguments(args);
+				// Bundle args = new Bundle();
+				// args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position
+				// + 1);
+				// fragment.setArguments(args);
 			}
 			return fragment;
 		}

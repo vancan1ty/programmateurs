@@ -2,33 +2,29 @@ package programmateurs.beans;
 
 import java.util.Locale;
 
-
-
 /**
- * The Account class represents an account possessed by a User.
- * A single User can have multiple accounts, but each account has
- * only one User
+ * The Account class represents an account possessed by a User. A single User
+ * can have multiple accounts, but each account has only one User
  * 
  * @author Currell
  * @version 0.2
  */
 public class Account {
-	
+
 	/**
-	 * ACCOUNT_TYPE can be CHECKING or WITHDRAWAL,
-	 * representing exactly what you'd think. This javadoc is
-	 * here because checkstyle is excessive.
-	 *
+	 * ACCOUNT_TYPE can be CHECKING or WITHDRAWAL, representing exactly what
+	 * you'd think. This javadoc is here because checkstyle is excessive.
+	 * 
 	 */
 	public enum ACCOUNT_TYPE {
 		SAVINGS, CHECKING;
-		
+
 		@Override
 		public String toString() {
-			//Look at this cute block of code. It takes an all-capital toString
-			//and makes everything but the first letter lower case.
+			// Look at this cute block of code. It takes an all-capital toString
+			// and makes everything but the first letter lower case.
 			String type = super.toString();
-			type = type.charAt(0) 
+			type = type.charAt(0)
 					+ type.substring(1, type.length()).toLowerCase(Locale.US);
 			return type + " Account";
 		}
@@ -43,11 +39,16 @@ public class Account {
 	/**
 	 * Constructor for Account class; assigns all appropriate values.
 	 * 
-	 * @param accountID ID of the account
-	 * @param userID ID of owner
-	 * @param accountType Type of account (enum)
-	 * @param accountName Name given to an account 
-	 * @param interestRate Specified as a double
+	 * @param accountID
+	 *            ID of the account
+	 * @param userID
+	 *            ID of owner
+	 * @param accountType
+	 *            Type of account (enum)
+	 * @param accountName
+	 *            Name given to an account
+	 * @param interestRate
+	 *            Specified as a double
 	 */
 	public Account(long accountID, long userID, ACCOUNT_TYPE accountType,
 			String accountName, double interestRate) {
@@ -66,9 +67,7 @@ public class Account {
 	public long getAccountID() {
 		return accountID;
 	}
-	
 
-	
 	/**
 	 * Getter for the ID of the user who owns the account.
 	 * 
@@ -77,7 +76,7 @@ public class Account {
 	public long getUserID() {
 		return userID;
 	}
-	
+
 	/**
 	 * Getter for account type.
 	 * 
@@ -86,7 +85,7 @@ public class Account {
 	public ACCOUNT_TYPE getAccountType() {
 		return accountType;
 	}
-	
+
 	/**
 	 * Getter for account name.
 	 * 
@@ -95,7 +94,7 @@ public class Account {
 	public String getAccountName() {
 		return accountName;
 	}
-	
+
 	/**
 	 * Getter for account interest rate.
 	 * 
@@ -114,7 +113,5 @@ public class Account {
 				+ ", accountType=" + accountType + ", accountName="
 				+ accountName + ", interestRate=" + interestRate + "]";
 	}
-
-
 
 }

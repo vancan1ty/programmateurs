@@ -22,30 +22,30 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
 /**
- * Account Fragment class is part of HomeActivity. HomeActivity is an Activity and account
- * fragment makes up the Accounts tab of Home Activity. 
+ * Account Fragment class is part of HomeActivity. HomeActivity is an Activity
+ * and account fragment makes up the Accounts tab of Home Activity.
  * 
  * @author brent
  * @version 0.0
  */
 public class AccountListFragment extends Fragment {
 	/**
-	 * The fragment argument representing the section number for this
-	 * fragment.
+	 * The fragment argument representing the section number for this fragment.
 	 */
-	
+
 	private static Account[] accountArray;
 	Anchor anchor = Anchor.getInstance();
 	private User user;
-	private RealDataSource dbHandler;	 
+	private RealDataSource dbHandler;
 	private Button newAccount;
 	private ListView accountView;
-	
-	private AccountsAdapter adapter; 
-	
+
+	private AccountsAdapter adapter;
+
 	/**
-	 * The onCreateView method creates the view for the fragment. I have 
+	 * The onCreateView method creates the view for the fragment. I have
 	 * onClickListeners to detect when the button is pressed and perform actions
 	 * based on those events.
 	 */
@@ -54,17 +54,17 @@ public class AccountListFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_account_listing,
 				container, false);
-		
+
 		this.setHasOptionsMenu(true);
 		newAccount = (Button) rootView.findViewById(R.id.newAccount);
 		accountView = (ListView) rootView.findViewById(R.id.listViewAccounts);
-  	
-	  	newAccount.setOnClickListener(new OnClickListener() {
-			
-	  		/**
-	  		 * If the user clicks new account button, the screen transitions 
-	  		 * to NewAccountActivity
-	  		 */
+
+		newAccount.setOnClickListener(new OnClickListener() {
+
+			/**
+			 * If the user clicks new account button, the screen transitions to
+			 * NewAccountActivity
+			 */
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(v.getContext(), NewAccountActivity.class);
@@ -74,44 +74,46 @@ public class AccountListFragment extends Fragment {
 
 		return rootView;
 	}
+
 	@Override
-	public void onCreateOptionsMenu(android.view.Menu menu, android.view.MenuInflater inflater) {
+	public void onCreateOptionsMenu(android.view.Menu menu,
+			android.view.MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
 		inflater.inflate(R.menu.account_list_fragment, menu);
-			
+
 	};
-	
+
 	@Override
 	public boolean onOptionsItemSelected(android.view.MenuItem item) {
-//		if (item.getItemId() == R.id.action_add_acount) {
-//			
-//		}
+		// if (item.getItemId() == R.id.action_add_acount) {
+		//
+		// }
 		super.onOptionsItemSelected(item);
 		return true;
 	};
-	
+
 	/**
-	 * The reason why all the database stuff is in the onResume() method
-	 * is because of the nature of a Fragment's lifecycle. Whenever you use a 
-	 * fragment you must put the database code inside onResume(). 
-	 * Look up a Fragment's lifecycle on Google
+	 * The reason why all the database stuff is in the onResume() method is
+	 * because of the nature of a Fragment's lifecycle. Whenever you use a
+	 * fragment you must put the database code inside onResume(). Look up a
+	 * Fragment's lifecycle on Google
 	 */
 	@Override
 	public void onResume() {
 		dbHandler = new RealDataSource(getActivity());
 		dbHandler.open();
 		user = anchor.getCurrentUser();
-		Log.d("AccountsListFragment","user: " + user);
-		Log.d("AccountsListFragment","dbHandler: " + dbHandler);
-		dbHandler.getAccountsForUser(user.getUserID()); 
-		accountArray = dbHandler.getAccountsForUser(user.getUserID()); 
+		Log.d("AccountsListFragment", "user: " + user);
+		Log.d("AccountsListFragment", "dbHandler: " + dbHandler);
+		dbHandler.getAccountsForUser(user.getUserID());
+		accountArray = dbHandler.getAccountsForUser(user.getUserID());
 		List<Account> accountList = new ArrayList<Account>();
-		for(int i = 0; i<accountArray.length;i++) {
+		for (int i = 0; i < accountArray.length; i++) {
 			accountList.add(accountArray[i]);
 		}
-		adapter = new AccountsAdapter (getActivity(),accountList);
+		adapter = new AccountsAdapter(getActivity(), accountList);
 		accountView.setAdapter(adapter);
-		
+
 		super.onResume();
 	}
 

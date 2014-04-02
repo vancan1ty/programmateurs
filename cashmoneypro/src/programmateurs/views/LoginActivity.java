@@ -32,21 +32,21 @@ import android.widget.Toast;
 //import com.google.android.gms.common.GooglePlayServicesUtil;
 
 /**
- * LoginActivity is the login screen. It does different things based on the 
+ * LoginActivity is the login screen. It does different things based on the
  * username and password
  * 
  * @author currell
  * @verison 0.1
  */
 public class LoginActivity extends Activity {
-	
+
 	EditText usernameField;
 	EditText passwordField;
 	Button buttonLogin;
 	Button buttonLaunchCreateUser;
 	public ProgressDialog progress;
-	private RealDataSource dbHandler; 
-	
+	private RealDataSource dbHandler;
+
 	Anchor anchor = Anchor.getInstance();
 	Activity me = this;
 
@@ -64,43 +64,45 @@ public class LoginActivity extends Activity {
 		passwordField = (EditText) findViewById(R.id.passwordfield);
 		buttonLogin = (Button) findViewById(R.id.buttonlogin);
 		progress = new ProgressDialog(this);
-		
+
 		buttonLogin.setOnClickListener(new OnClickListener() {
 
 			/**
-			 * If the user's name is admin, go to the AdminActivity page
-			 * Else go to the HomeActivity page and set the current user
+			 * If the user's name is admin, go to the AdminActivity page Else go
+			 * to the HomeActivity page and set the current user
 			 */
 			@Override
 			public void onClick(View v) {
 				String username = usernameField.getText().toString();
 				String password = passwordField.getText().toString();
-				Log.d("BERRY","username: " + username + " password: " + password);
-				boolean userExists =  dbHandler.isUserInDB(username, password);
+				Log.d("BERRY", "username: " + username + " password: "
+						+ password);
+				boolean userExists = dbHandler.isUserInDB(username, password);
 				if (userExists) {
 					Intent i;
-					if(username.equals("admin"))
+					if (username.equals("admin"))
 						i = new Intent(v.getContext(), AdminActivity.class);
 					else
 						i = new Intent(v.getContext(), HomeActivity.class);
 					anchor.setCurrentUser(dbHandler.getUser(username));
-					v.getContext().startActivity(i); 
+					v.getContext().startActivity(i);
 				} else {
-					anchor.showDialog(me, "Log in Failure", "couldn't log you in!");
+					anchor.showDialog(me, "Log in Failure",
+							"couldn't log you in!");
 				}
-				
+
 			}
-			
+
 		});
-		
+
 	}
-	
+
 	/**
-	 * Forces the back button to take the user back to the welcome screen
-	 * when pressed during LoginActivity (to prevent weird user-hacks)
+	 * Forces the back button to take the user back to the welcome screen when
+	 * pressed during LoginActivity (to prevent weird user-hacks)
 	 */
-	public void onBackPressed(){
-		startActivity(new Intent(this,WelcomeActivity.class));
+	public void onBackPressed() {
+		startActivity(new Intent(this, WelcomeActivity.class));
 	}
 
 	/**
@@ -123,14 +125,16 @@ public class LoginActivity extends Activity {
 
 	/**
 	 * Return the user's username
+	 * 
 	 * @return string the username
 	 */
 	public String getUsernameEntry() {
 		return usernameField.getText().toString();
 	}
-	
+
 	/**
 	 * Returns the user's password
+	 * 
 	 * @return string the password
 	 */
 	public String getPasswordEntry() {
