@@ -7,7 +7,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.widget.EditText;
 
 /**
- * helper for Prompt-Dialog creation
+ * helper for Prompt-Dialog creation.
  */
 public abstract class PromptDialog extends AlertDialog.Builder implements
         OnClickListener {

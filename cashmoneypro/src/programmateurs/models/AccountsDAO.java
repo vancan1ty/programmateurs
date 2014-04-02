@@ -49,10 +49,8 @@ public class AccountsDAO {
     }
 
     /**
-     * returns a list of all accounts owned by a given user
-     * 
-     * @param db
-     *            a reference to the database
+     * returns a list of all accounts owned by a given user.
+     * @param db a reference to the database
      * @param userID
      * @return list of accounts owned by user
      */
@@ -90,8 +88,7 @@ public class AccountsDAO {
 
     /**
      * adds an account with the associated information to the DB, returns an
-     * object representation of it
-     * 
+     * object representation of it.
      * @param userID
      * @param accountType
      * @param accountName

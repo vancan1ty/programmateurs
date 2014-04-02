@@ -29,8 +29,7 @@ import android.widget.Spinner;
 
 /**
  * The Deposit Activity class It will have a screen to deposit money to the
- * user's account Right now it is just a skeleton
- * 
+ * user's account Right now it is just a skeleton.
  * @author brent
  * @version 0.2
  */
@@ -180,7 +179,7 @@ public class TransactionScreen extends Activity {
     }
 
     /**
-     * Method used when RealDataSource is used
+     * Method used when RealDataSource is used.
      */
     @Override
     protected final void onResume() {
@@ -203,7 +202,7 @@ public class TransactionScreen extends Activity {
     }
 
     /**
-     * Method used when RealDataSource is used
+     * Method used when RealDataSource is used.
      */
     @Override
     protected final void onPause() {

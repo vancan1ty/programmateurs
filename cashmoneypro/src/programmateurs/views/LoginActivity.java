@@ -36,7 +36,7 @@ public class LoginActivity extends Activity {
     Activity me = this;
 
     /**
-     * The onCreate method sets all the objects on the screen
+     * The onCreate method sets all the objects on the screen.
      * 
      */
     @Override
@@ -85,7 +85,7 @@ public class LoginActivity extends Activity {
 
     /**
      * Forces the back button to take the user back to the welcome screen when
-     * pressed during LoginActivity (to prevent weird user-hacks)
+     * pressed during LoginActivity (to prevent weird user-hacks).
      */
     @Override
     public final void onBackPressed() {
@@ -93,7 +93,7 @@ public class LoginActivity extends Activity {
     }
 
     /**
-     * Method used every time RealDataSource is used
+     * Method used every time RealDataSource is used.
      */
     @Override
     protected final void onResume() {
@@ -102,7 +102,7 @@ public class LoginActivity extends Activity {
     }
 
     /**
-     * Method used every time RealDataSource is used
+     * Method used every time RealDataSource is used.
      */
     @Override
     protected final void onPause() {
@@ -111,8 +111,7 @@ public class LoginActivity extends Activity {
     }
 
     /**
-     * Return the user's username
-     * 
+     * Return the user's username.
      * @return string the username
      */
     public final String getUsernameEntry() {
@@ -120,8 +119,7 @@ public class LoginActivity extends Activity {
     }
 
     /**
-     * Returns the user's password
-     * 
+     * Returns the user's password.
      * @return string the password
      */
     public final String getPasswordEntry() {

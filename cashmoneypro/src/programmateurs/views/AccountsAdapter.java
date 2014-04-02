@@ -20,8 +20,7 @@ import android.widget.TextView;
 
 /**
  * I'd ask Currell for more information on how this class works Basically it
- * make the view that fits inside a ListView object
- *
+ * make the view that fits inside a ListView object.
  * @author currell
  * @version 0.0
  */

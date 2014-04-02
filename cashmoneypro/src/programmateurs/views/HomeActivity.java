@@ -20,11 +20,9 @@ import android.widget.TextView;
 
 /**
  * The class sets up the main screen when the user logs in It has the
- * SectionsPagerAdapter, which allows the user to scroll to new tabs
- * 
+ * SectionsPagerAdapter, which allows the user to scroll to new tabs.
  * @author currell
  * @version 0.0
- * 
  */
 public class HomeActivity extends FragmentActivity {
 

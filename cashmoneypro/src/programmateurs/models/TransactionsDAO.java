@@ -80,8 +80,7 @@ public class TransactionsDAO {
     }
 
     /**
-     * returns a list of all accounts owned by a given user
-     * 
+     * returns a list of all accounts owned by a given user.
      * @param userID
      * @return list of accounts owned by user
      */
@@ -117,7 +116,7 @@ public class TransactionsDAO {
 
     /**
      * adds a transaction with the associated information to the DB, returns an
-     * object representation of it
+     * object representation of it.
      */
     public static Transaction addTransactionToDB(final SQLiteDatabase db,
             final long accountID, final String transactionName,
@@ -150,8 +149,7 @@ public class TransactionsDAO {
     }
 
     /**
-     * returns a list of all transactions belonging to a certain user
-     * 
+     * returns a list of all transactions belonging to a certain user.
      * @param userID
      * @return list of accounts owned by user
      * @author Pavel

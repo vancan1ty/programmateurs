@@ -36,8 +36,7 @@ public class CategoriesDAO {
     }
 
     /**
-     * returns a list of all categories owned by a given user
-     * 
+     * returns a list of all categories owned by a given user.
      * @param userID
      * @return list of categories owned by user
      */
@@ -85,7 +84,7 @@ public class CategoriesDAO {
 
     /**
      * adds a category with the associated information to the DB, returns an
-     * object representation of it
+     * object representation of it.
      */
     public static Category addCategoryForDB(final SQLiteDatabase db, final long userID,
             final String categoryName) {

@@ -20,10 +20,8 @@ import android.util.Log;
 
 /**
  * This class provides sample data to support UI development before we get the
- * DB working completely
- * 
+ * DB working completely.
  * @author vancan1ty
- * 
  */
 public class ArtificialDataSource implements DataSourceInterface {
 

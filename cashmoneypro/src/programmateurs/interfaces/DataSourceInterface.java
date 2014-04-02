@@ -62,8 +62,7 @@ public interface DataSourceInterface {
     Account getAccountWithID(long accountID);
 
     /**
-     * returns a list of all accounts owned by a given user
-     * 
+     * returns a list of all accounts owned by a given user.
      * @param userID
      * @return list of accounts owned by user
      */
@@ -105,8 +104,7 @@ public interface DataSourceInterface {
 
     /**
      * adds an account with the associated information to the DB, returns an
-     * object representation of it
-     * 
+     * object representation of it.
      * @param userID
      * @param accountType
      * @param accountName

@@ -43,7 +43,7 @@ public class NewAccountActivity extends Activity {
     Spinner spinner;
 
     /**
-     * Creates the objects on the screen
+     * Creates the objects on the screen.
      */
     @Override
     protected final void onCreate(final Bundle savedInstanceState) {
@@ -120,7 +120,7 @@ public class NewAccountActivity extends Activity {
     }
 
     /**
-     * Creates the menu
+     * Creates the menu.
      */
     @Override
     public final boolean onCreateOptionsMenu(final Menu menu) {
@@ -130,7 +130,7 @@ public class NewAccountActivity extends Activity {
     }
 
     /**
-     * Method used when RealDataSource is used
+     * Method used when RealDataSource is used.
      */
     @Override
     protected final void onResume() {
@@ -139,7 +139,7 @@ public class NewAccountActivity extends Activity {
     }
 
     /**
-     * Method used when RealDataSource is used
+     * Method used when RealDataSource is used.
      */
     @Override
     protected final void onPause() {

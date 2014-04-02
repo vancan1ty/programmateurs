@@ -109,7 +109,7 @@ public class ReportFragment extends Fragment {
     }
 
     /**
-     * The method need each time RealDataSource is used in a class
+     * The method need each time RealDataSource is used in a class.
      */
     @Override
     public final void onPause() {

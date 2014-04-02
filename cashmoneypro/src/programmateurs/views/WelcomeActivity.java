@@ -14,8 +14,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 /**
- * The main screen that is loaded when you click the app icon
- * 
+ * The main screen that is loaded when you click the app icon.
  * @author currell?
  * @version 0.0
  */
