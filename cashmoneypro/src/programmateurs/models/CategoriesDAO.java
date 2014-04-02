@@ -43,7 +43,7 @@ public class CategoriesDAO {
     public static Category[] getCategoriesForUser(final SQLiteDatabase db, final long userID) {
 
         Cursor c = db.rawQuery("SELECT * FROM categories WHERE userid = ?;",
-                new String[] { Long.toString(userID) });
+                new String[] {Long.toString(userID) });
         List<Category> outL = new ArrayList<Category>();
 
         c.moveToFirst();
@@ -68,7 +68,7 @@ public class CategoriesDAO {
                         + "	WHERE T.transactionID = ?"
                         + "	AND TC.transactionID = T.transactionID"
                         + "	AND TC.categoryID = C.categoryID;",
-                new String[] { Long.toString(transactionID) });
+                new String[] {Long.toString(transactionID) });
         List<Category> outL = new ArrayList<Category>();
 
         c.moveToFirst();

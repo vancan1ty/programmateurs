@@ -95,10 +95,10 @@ public class AccountDetailActivity extends Activity {
         for (Transaction transaction : transactionList) {
             TRANSACTION_TYPE type = transaction.getTransactionType();
             if ((type == TRANSACTION_TYPE.DEPOSIT || type == TRANSACTION_TYPE.REBALANCE)
-                    && transaction.isRolledback() == false) {
+                    && !transaction.isRolledback()) {
                 balance += transaction.getTransactionAmount();
             } else if (type == TRANSACTION_TYPE.WITHDRAWAL
-                    && transaction.isRolledback() == false) {
+                    && !transaction.isRolledback()) {
                 balance -= transaction.getTransactionAmount();
             } else {
                 // should never get here?

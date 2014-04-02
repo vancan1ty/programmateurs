@@ -97,7 +97,7 @@ public class RealDataSource implements DataSourceInterface {
     }
 
     @Override
-    public final Transaction[] getTransactionsForUser(final long userID) {// Pavel
+    public final Transaction[] getTransactionsForUser(final long userID) {
         return TransactionsDAO.getTransactionsForUser(db, userID);
     }
 

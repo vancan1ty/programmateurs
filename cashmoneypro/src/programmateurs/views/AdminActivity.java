@@ -113,10 +113,10 @@ public class AdminActivity extends Activity {
             }
             user.setPasshash(temp);
             db.updateUser(user);
-            return new String[] { "Password Reset",
+            return new String[] {"Password Reset",
                     "Password for " + username + " temporarily set to " + temp };
         } else {
-            return new String[] { "Password Reset Error",
+            return new String[] {"Password Reset Error",
                     "Given user does not exist." };
         }
     }

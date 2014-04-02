@@ -59,7 +59,7 @@ public class AccountsDAO {
 
         Log.d("AccountsDAO", "db + " + db);
         Cursor c = db.rawQuery("SELECT * FROM Accounts WHERE userid = ?;",
-                new String[] { Long.toString(userID) });
+                new String[] {Long.toString(userID) });
         List<Account> outL = new ArrayList<Account>();
 
         c.moveToFirst();
@@ -77,7 +77,7 @@ public class AccountsDAO {
 
         Log.d("AccountsDAO", "db + " + db);
         Cursor c = db.rawQuery("SELECT * FROM Accounts WHERE accountid = ?;",
-                new String[] { Long.toString(accountID) });
+                new String[] {Long.toString(accountID) });
 
         c.moveToFirst();
         Account acct = cursorToAccount(c);
@@ -122,10 +122,10 @@ public class AccountsDAO {
         for (Transaction transaction : src.getTransactionsForAccount(accountID)) {
             TRANSACTION_TYPE type = transaction.getTransactionType();
             if ((type == TRANSACTION_TYPE.DEPOSIT || type == TRANSACTION_TYPE.REBALANCE)
-                    && transaction.isRolledback() == false) {
+                    && !transaction.isRolledback()) {
                 balance += transaction.getTransactionAmountAsDouble();
             } else if (type == TRANSACTION_TYPE.WITHDRAWAL
-                    && transaction.isRolledback() == false) {
+                    && !transaction.isRolledback()) {
                 balance -= transaction.getTransactionAmountAsDouble();
             }
         }

@@ -5,10 +5,8 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * 
  * @author Somebody who wasn't paying attention during the "Please Javadoc"
  *         talk.
- * @comment ^Hi Justin (this is currell)^
  * @version 0.1
  */
 public class Transaction {

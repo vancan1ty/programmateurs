@@ -71,7 +71,7 @@ public class ArtificialDataSource implements DataSourceInterface {
     List<Category> categories;
 
     public ArtificialDataSource() {
-        users = new ArrayList<User>(Arrays.asList(new User[] { user0, user1,
+        users = new ArrayList<User>(Arrays.asList(new User[] {user0, user1,
                 user2, user3, user4, user5 }));
         accounts = new ArrayList<Account>(Arrays.asList(new Account[] {
                 account0, account1, account2, account3, account4, account5 }));
@@ -104,7 +104,7 @@ public class ArtificialDataSource implements DataSourceInterface {
         }
 
         transactions = new ArrayList<Transaction>(
-                Arrays.asList(new Transaction[] { transaction0, transaction1,
+                Arrays.asList(new Transaction[] {transaction0, transaction1,
                         transaction2, transaction3, transaction4 }));
     }
 
@@ -225,7 +225,7 @@ public class ArtificialDataSource implements DataSourceInterface {
     }
 
     @Override
-    public final Transaction[] getTransactionsForUser(final long userID) {// Pavel
+    public final Transaction[] getTransactionsForUser(final long userID) {
         return null;
     }
 

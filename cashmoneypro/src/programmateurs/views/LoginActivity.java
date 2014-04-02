@@ -21,7 +21,7 @@ import android.widget.EditText;
  * username and password
  * 
  * @author currell
- * @verison 0.1
+ * @version 0.1
  */
 public class LoginActivity extends Activity {
 

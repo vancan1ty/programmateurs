@@ -93,7 +93,7 @@ public class TransactionsDAO {
                                 + "FROM transactions AS T "
                                 + "JOIN Accounts AS A ON T.accountID = ? AND T.accountID = A.accountID "
                                 + "LEFT JOIN Categories AS C ON T.categoryID = C.categoryID;",
-                        new String[] { Long.toString(accountID) });
+                        new String[] {Long.toString(accountID) });
         List<Transaction> outL = new ArrayList<Transaction>();
 
         c.moveToFirst();
@@ -166,7 +166,7 @@ public class TransactionsDAO {
                                 + "JOIN Accounts AS A ON A.userID = ? AND T.accountID = A.accountID "
                                 + "LEFT JOIN Categories AS C ON T.categoryID = C.categoryID;",
 
-                        new String[] { Long.toString(userID) });
+                        new String[] {Long.toString(userID) });
         List<Transaction> outL = new ArrayList<Transaction>();
 
         c.moveToFirst();
@@ -199,7 +199,7 @@ public class TransactionsDAO {
                                 + "FROM transactions AS T "
                                 + "JOIN Accounts AS A ON T.transactionID = ? AND T.accountID = A.accountID "
                                 + "LEFT JOIN Categories as C ON T.categoryID = C.categoryID;",
-                        new String[] { Long.toString(transactionID) });
+                        new String[] {Long.toString(transactionID) });
 
         c.moveToFirst();
         Transaction out;

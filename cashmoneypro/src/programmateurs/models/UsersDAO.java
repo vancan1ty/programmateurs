@@ -47,7 +47,7 @@ public class UsersDAO {
 
     public static User getUser(final SQLiteDatabase db, final long userID) {
         Cursor c = db.rawQuery("SELECT * FROM users WHERE userID = ?;",
-                new String[] { Long.toString(userID) });
+                new String[] {Long.toString(userID) });
         List<User> outL = new ArrayList<User>();
 
         c.moveToFirst();
@@ -61,7 +61,7 @@ public class UsersDAO {
         Cursor c;
         c = db.rawQuery(
                 "SELECT * FROM users WHERE username = ? AND passhash = ?",
-                new String[] { username, hashPassword(password) });
+                new String[] {username, hashPassword(password) });
         return c.getCount() == 1;
     }
 
@@ -134,7 +134,7 @@ public class UsersDAO {
         toSet.put("last", user.getLast());
         toSet.put("email", user.getEmail());
         db.update("Users", toSet, "userid=?",
-                new String[] { Long.toString(user.getUserID()) });
+                new String[] {Long.toString(user.getUserID()) });
         return getUser(db, user.getUserID());
     }
 
