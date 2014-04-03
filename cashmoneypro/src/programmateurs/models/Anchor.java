@@ -1,62 +1,50 @@
 package programmateurs.models;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-import org.codehaus.jackson.JsonFactory;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
-
-import programmateurs.beans.SessionStatusObject;
-import programmateurs.views.LoginActivity;
 import programmateurs.beans.User;
-
-import android.accounts.AuthenticatorException;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.AsyncTask;
 
 /**
  * This class is called Anchor, because it's intended to provide a central place
  * to store data accessible from everywhere in the app. Notice that it uses the
  * singleton pattern, so only one instance of this class can be instantiated
  * during a given runtime.
- * 
+ *
  * @author vancan1ty
  * @version 0.0
  */
-public class Anchor {
+public final class Anchor {
+    /**
+     * the private instance of the class.
+     */
     private static Anchor instance;
+    /**
+     * once the user is logged in, this represents the current user.
+     */
     private User currentUser;
+    /**
+     * if the app is in test mode, the app will automatically log you in as the
+     * test user.
+     */
     public static final boolean TEST_MODE = false;
 
     /**
      * Acts as a selective constructor for Anchor class. If no instance of
      * Anchor exists, instantiates Anchor and returns that instance. Otherwise
      * it just returns the already-existing instance.
-     * 
+     *
      * @return Current Anchor instance
      */
     public static Anchor getInstance() {
-	if (instance == null) {
-	    instance = new Anchor();
-	}
-	return instance;
+        if (instance == null) {
+            instance = new Anchor();
+        }
+        return instance;
     }
 
+    /**
+     * hidden constructor.
+     */
     private Anchor() {
 
     }
@@ -116,47 +104,64 @@ public class Anchor {
 
     /**
      * Getter for the User that is currently logged in.
-     * 
+     *
      * @return User currently logged in
      */
     public User getCurrentUser() {
-	return currentUser;
-    }
-
-    public void setCurrentUser(User user) {
-	currentUser = user;
+        return currentUser;
     }
 
     /**
-     * Unsure what this method does..
-     * 
-     * @param in
-     *            The input stream to read
-     * @return
+     * sets the current user for the app.
+     *
+     * @param user nah.
      */
-    public static String readInputStream(java.io.InputStream in) {
-	java.util.Scanner s = new java.util.Scanner(in).useDelimiter("\\A");
-	return s.hasNext() ? s.next() : "";
+    public void setCurrentUser(final User user) {
+        currentUser = user;
     }
 
+    /**
+     * this helps us show dialogs!
+     * @author vancan1ty
+     *
+     */
     private abstract class ShowDialogPasser implements Runnable {
-	protected String title;
-	protected String message;
-	protected Activity parent;
+        /**
+         * nah.
+         */
+        protected final String title;
+        /**
+         * nah.
+         */
+        protected final String message;
+        /**
+         * nah.
+         */
+        protected final Activity parent;
 
-	public ShowDialogPasser(String title, String message, Activity parent) {
-	    this.title = title;
-	    this.message = message;
-	    this.parent = parent;
-	}
+        /**
+         * shows a dialog with the given parameters.
+         * @param otitle the title.
+         * @param omessage the message.
+         * @param oparent context activity.
+         */
+        public ShowDialogPasser(final String otitle, final String omessage,
+                final Activity oparent) {
+            this.title = otitle;
+            this.message = omessage;
+            this.parent = oparent;
+        }
 
-	public abstract void run();
+        /**
+         * runs the dialog thingie.
+         */
+        public abstract void run();
     }
 
     /**
      * Opens a dialog in the given activity with a given title and message. Used
      * to present information to the user.
-     * 
+     *
      * @param activity
      *            Activity the dialog is to be displayed in
      * @param title
@@ -164,23 +169,24 @@ public class Anchor {
      * @param message
      *            Dialog message
      */
-    public void showDialog(Activity activity, String title, String message) {
+    public void showDialog(final Activity activity, final String title,
+            final String message) {
 
-	activity.runOnUiThread(new ShowDialogPasser(title, message, activity) {
-	    public void run() {
-		// 1. Instantiate an AlertDialog.Builder with its constructor
-		AlertDialog.Builder builder = new AlertDialog.Builder(parent);
+        activity.runOnUiThread(new ShowDialogPasser(title, message, activity) {
+            public void run() {
+                // 1. Instantiate an AlertDialog.Builder with its constructor
+                AlertDialog.Builder builder = new AlertDialog.Builder(parent);
 
-		// 2. Chain together various setter methods to set the dialog
-		// characteristics
-		builder.setMessage(message).setTitle(title);
+                // 2. Chain together various setter methods to set the dialog
+                // characteristics
+                builder.setMessage(message).setTitle(title);
 
-		// 3. Get the AlertDialog from create()
-		AlertDialog dialog = builder.create();
+                // 3. Get the AlertDialog from create()
+                AlertDialog dialog = builder.create();
 
-		dialog.show();
-	    }
-	});
+                dialog.show();
+            }
+        });
     }
 
 }

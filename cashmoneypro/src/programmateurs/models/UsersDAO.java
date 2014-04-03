@@ -4,77 +4,129 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
-
 import programmateurs.beans.User;
-
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+/**
+ * manages access to user data in the db.
+ * @author vancan1ty
+ *
+ */
+public final class UsersDAO {
 
-public class UsersDAO {
+    /**
+     * Dave, I'm afraid I can't do that.
+     */
+    private UsersDAO() {
 
+    }
+
+    /**
+     * what do you think this query does?
+     */
     public static final String CREATE_USERS_TABLE = "CREATE TABLE Users"
-	    + " (userID INTEGER PRIMARY KEY AUTOINCREMENT, "
-	    + " username TEXT NOT NULL COLLATE NOCASE, "
-	    + " passhash TEXT NOT NULL," + " first TEXT DEFAULT '',"
-	    + " last TEXT DEFAULT ''," + " email TEXT DEFAULT ''" + ");";
-
-    public static User cursorToUser(Cursor c) {
-	long userID = c.getInt(0);
-	String username = c.getString(1);
-	String passhash = c.getString(2);
-	String first = c.getString(3);
-	String last = c.getString(4);
-	String email = c.getString(5);
-	return new User(userID, username, passhash, first, last, email);
+            + " (userID INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + " username TEXT NOT NULL COLLATE NOCASE, "
+            + " passhash TEXT NOT NULL," + " first TEXT DEFAULT '',"
+            + " last TEXT DEFAULT ''," + " email TEXT DEFAULT ''" + ");";
+/**
+ * 1.
+ */
+public static final int ONE = 1;
+/**
+ * 2.
+ */
+public static final int TWO = 2;
+/**
+ * 3.
+ */
+public static final int THREE = 3;
+/**
+ * 4.
+ */
+public static final int FOUR = 4;
+/**
+ * 5.
+ */
+public static final int FIVE = 5;
+/**
+ * 6.
+ */
+public static final int SIX = 6;
+/**
+ * 7.
+ */
+public static final int SEVEN = 7;
+/**
+ * converts a db cursor to a user.
+ * @param c nah
+ * @return freedooooom!
+ */
+    public static User cursorToUser(final Cursor c) {
+        long userID = c.getInt(0);
+        String username = c.getString(1);
+        String passhash = c.getString(TWO);
+        String first = c.getString(THREE);
+        String last = c.getString(FOUR);
+        String email = c.getString(FIVE);
+        return new User(userID, username, passhash, first, last, email);
     }
 
-    public static User[] getUsers(SQLiteDatabase db) {
-	Cursor c = db.rawQuery("SELECT * FROM users;", new String[] {});
-	List<User> outL = new ArrayList<User>();
+    /**
+     * gets all the users in the db.
+     * @param db nah
+     * @return nah
+     */
+    public static User[] getUsers(final SQLiteDatabase db) {
+        Cursor c = db.rawQuery("SELECT * FROM users;", new String[] {});
+        List<User> outL = new ArrayList<User>();
 
-	c.moveToFirst();
-	while (!c.isAfterLast()) {
-	    User user = cursorToUser(c);
-	    outL.add(user);
-	    c.moveToNext();
-	}
-	// make sure to close the cursor
-	c.close();
-	return outL.toArray(new User[0]);
+        c.moveToFirst();
+        while (!c.isAfterLast()) {
+            User user = cursorToUser(c);
+            outL.add(user);
+            c.moveToNext();
+        }
+        // make sure to close the cursor
+        c.close();
+        return outL.toArray(new User[0]);
     }
 
-    public static User getUser(SQLiteDatabase db, long userID) {
-	Cursor c = db.rawQuery("SELECT * FROM users WHERE userID = ?;",
-		new String[] { Long.toString(userID) });
-	List<User> outL = new ArrayList<User>();
+    /**
+     * gets a user with a given userID.
+     * @param db nah
+     * @param userID nah
+     * @return nah
+     */
+    public static User getUser(final SQLiteDatabase db, final long userID) {
+        Cursor c = db.rawQuery("SELECT * FROM users WHERE userID = ?;",
+                new String[] {Long.toString(userID)});
+//        List<User> outL = new ArrayList<User>();
 
-	c.moveToFirst();
-	User user = cursorToUser(c);
+        c.moveToFirst();
+        User user = cursorToUser(c);
 
-	return user;
+        return user;
     }
 
-    public static boolean isUserInDB(SQLiteDatabase db, String username,
-	    String password) {
-	Cursor c;
-	c = db.rawQuery(
-		"SELECT * FROM users WHERE username = ? AND passhash = ?",
-		new String[] { username, hashPassword(password) });
-	if (c.getCount() == 1) {
-	    return true;
-	} else {
-	    return false;
-	}
+    /**
+     * What rhymes with green?
+     * @param db nah
+     * @param username nah
+     * @param password nah
+     * @return nah
+     */
+    public static boolean isUserInDB(final SQLiteDatabase db,
+            final String username, final String password) {
+        Cursor c;
+        c = db.rawQuery(
+                "SELECT * FROM users WHERE username = ? AND passhash = ?",
+                new String[] {username, hashPassword(password)});
+        return c.getCount() == 1;
     }
 
     // public String hashPassword(String password) throws
@@ -88,84 +140,104 @@ public class UsersDAO {
     // }
     //
 
-    public static void addUserToDB(SQLiteDatabase db, String username,
-	    String password) {
-	// String passHash = hashPassword(password);
-	ContentValues toInsert = new ContentValues();
-	toInsert.put("username", username);
-	toInsert.put("passhash", hashPassword(password));
-	db.insert("users", null, toInsert);
+    /**
+     * adds the user to the db.  no shit!
+     * @param db db
+     * @param username username
+     * @param password password
+     */
+    public static void addUserToDB(final SQLiteDatabase db,
+            final String username, final String password) {
+        // String passHash = hashPassword(password);
+        ContentValues toInsert = new ContentValues();
+        toInsert.put("username", username);
+        toInsert.put("passhash", hashPassword(password));
+        db.insert("users", null, toInsert);
     }
 
+    /**
+     * not the best way to do hashing but it's better than nothing.
+     */
     public static final String HASH = "ludicrousHash";
 
-    public static String hashPassword(String password) {
-	MessageDigest md;
-	try {
-	    md = MessageDigest.getInstance("SHA-256");
-	} catch (NoSuchAlgorithmException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	    return "nosuchalgorithm";
-	}
-	try {
-	    md.update((password + HASH).getBytes("UTF-8")); // Change this to
-							    // "UTF-16" if
-							    // needed
-	} catch (UnsupportedEncodingException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	    return "unsupportedencoding";
-	}
-	byte[] digest = md.digest();
-	BigInteger bigInt = new BigInteger(1, digest);
-	String output = bigInt.toString(16);
-	return output;
+    /**
+     * hashes a password.
+     * @param password password
+     * @return the hashed password
+     */
+    public static String hashPassword(final String password) {
+        MessageDigest md;
+        try {
+            md = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return "nosuchalgorithm";
+        }
+        try {
+            md.update((password + HASH).getBytes("UTF-8")); // Change this to
+                                                            // "UTF-16" if
+                                                            // needed
+        } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return "unsupportedencoding";
+        }
+        byte[] digest = md.digest();
+        BigInteger bigInt = new BigInteger(1, digest);
+        String output = bigInt.toString(SIXTEEN);
+        return output;
     }
+    /**
+     * 16.
+     */
+    public static final int SIXTEEN = 16;
 
-    public static boolean passwordEquals(String password, String passhash)
-	    throws NoSuchAlgorithmException, UnsupportedEncodingException {
-	String npasshash = hashPassword(password);
-	if (passhash.equals(npasshash)) {
-	    return true;
-	} else {
-	    return false;
-	}
-    }
 
     /**
      * updates the user matching the parameter user in the db with whatever
      * information the user parameter contains, returns the user read back from
      * the database.
-     * 
-     * @param db
-     * @param user
+     *
+     * @param db db connection.
+     * @param user nah
      * @return reading the results of the operation back from the db
      */
-    public static User updateUser(SQLiteDatabase db, User user) {
-	ContentValues toSet = new ContentValues();
-	toSet.put("username", user.getUsername());
-	toSet.put("passhash", user.getPasshash());
-	toSet.put("first", user.getFirst());
-	toSet.put("last", user.getLast());
-	toSet.put("email", user.getEmail());
-	db.update("Users", toSet, "userid=?",
-		new String[] { Long.toString(user.getUserID()) });
-	return getUser(db, user.getUserID());
+    public static User updateUser(final SQLiteDatabase db, final User user) {
+        ContentValues toSet = new ContentValues();
+        toSet.put("username", user.getUsername());
+        toSet.put("passhash", user.getPasshash());
+        toSet.put("first", user.getFirst());
+        toSet.put("last", user.getLast());
+        toSet.put("email", user.getEmail());
+        db.update("Users", toSet, "userid=?",
+                new String[] {Long.toString(user.getUserID())});
+        return getUser(db, user.getUserID());
     }
 
-    public static User addUserToDB(SQLiteDatabase db, String username,
-	    String password, String first, String last, String email) {
-	// String passHash = hashPassword(password);
-	ContentValues toInsert = new ContentValues();
-	toInsert.put("username", username);
-	toInsert.put("passhash", hashPassword(password));
-	toInsert.put("first", first);
-	toInsert.put("last", last);
-	toInsert.put("email", email);
-	long userid = db.insert("users", null, toInsert);
-	User user = new User(userid, username, password, first, last, email);
-	return user;
+    /**
+     * adds a user to the db.
+     * @param db nah
+     * @param username nah.
+     * @param password nah.
+     * @param first nah.
+     * @param last nah.
+     * @param email nah.
+     * @return nah.
+     */
+    public static User addUserToDB(final SQLiteDatabase db,
+            final String username, final String password, final String first,
+            final String last, final String email) {
+        // String passHash = hashPassword(password);
+        ContentValues toInsert = new ContentValues();
+        toInsert.put("username", username);
+        toInsert.put("passhash", hashPassword(password));
+        toInsert.put("first", first);
+        toInsert.put("last", last);
+        toInsert.put("email", email);
+        long userid = db.insert("users", null, toInsert);
+        User user = new User(userid, username, password, first, last, email);
+        return user;
     }
 
 }

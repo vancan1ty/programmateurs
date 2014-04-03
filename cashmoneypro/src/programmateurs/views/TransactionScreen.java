@@ -14,7 +14,6 @@ import programmateurs.interfaces.DataSourceInterface;
 import programmateurs.models.AccountsDAO;
 import programmateurs.models.Anchor;
 import programmateurs.models.RealDataSource;
-import programmateurs.models.ArtificialDataSource;
 import net.programmateurs.R;
 import net.programmateurs.R.layout;
 import net.programmateurs.R.menu;
