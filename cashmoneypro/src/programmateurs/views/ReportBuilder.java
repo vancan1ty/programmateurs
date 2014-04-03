@@ -2,16 +2,9 @@ package programmateurs.views;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 import net.programmateurs.R;
-import net.programmateurs.R.id;
-import net.programmateurs.R.layout;
-import net.programmateurs.R.menu;
-
-import org.codehaus.jackson.map.module.SimpleAbstractTypeResolver;
-
 import programmateurs.beans.Transaction;
 
 import android.os.Bundle;
@@ -25,106 +18,118 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+/**
+ * Report builder.
+ * 
+ * @author programmateurs
+ *
+ */
 public class ReportBuilder extends Activity {
 
+	//CHECKSTYLE:OFF
 	EditText textStartDate;
 	EditText textEndDate;
 	Calendar startCalendar = Calendar.getInstance();
 	Calendar endCalendar = Calendar.getInstance();
 	Button buttonGenerateReport;
+	String reportType0 = "reportType";
 
 	Transaction.TRANSACTION_TYPE reportType;
+	//CHECKSTYLE:ON
 
-	DatePickerDialog.OnDateSetListener startDate = new DatePickerDialog.OnDateSetListener() {
+	/**
+	 * On date listener.
+	 */
+    DatePickerDialog.OnDateSetListener startDate = new DatePickerDialog.OnDateSetListener() {
 
-		@Override
-		public void onDateSet(DatePicker view, int year, int monthOfYear,
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
 				int dayOfMonth) {
-			// TODO Auto-generated method stub
-			startCalendar.set(Calendar.YEAR, year);
-			startCalendar.set(Calendar.MONTH, monthOfYear);
-			startCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-			updateLabel(textStartDate, startCalendar);
-		}
+            startCalendar.set(Calendar.YEAR, year);
+            startCalendar.set(Calendar.MONTH, monthOfYear);
+            startCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateLabel(textStartDate, startCalendar);
+        }
+    };
 
+    /**
+     * On date listener.
+     */
+    DatePickerDialog.OnDateSetListener endDate = new DatePickerDialog.OnDateSetListener() {
+    //CHECKSTYLE:OFF
+    	@Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+				int dayOfMonth) {
+            endCalendar.set(Calendar.YEAR, year);
+            endCalendar.set(Calendar.MONTH, monthOfYear);
+            endCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateLabel(textEndDate, endCalendar);
+        }
+    //CHECKSTYLE:ON
 	};
 
-	DatePickerDialog.OnDateSetListener endDate = new DatePickerDialog.OnDateSetListener() {
+	/**
+	 * Update Label.
+	 * 
+	 * @param toSet to set
+	 * @param cal calendar
+	 */
+    private void updateLabel(EditText toSet, Calendar cal) {
+        String myFormat = "MM/dd/yy";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        toSet.setText(sdf.format(cal.getTime()));
+    }
 
-		@Override
-		public void onDateSet(DatePicker view, int year, int monthOfYear,
-				int dayOfMonth) {
-			// TODO Auto-generated method stub
-			endCalendar.set(Calendar.YEAR, year);
-			endCalendar.set(Calendar.MONTH, monthOfYear);
-			endCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-			updateLabel(textEndDate, endCalendar);
-		}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_report_builder);
+        Bundle extras = getIntent().getExtras();
+        reportType = (Transaction.TRANSACTION_TYPE) extras.getSerializable(reportType0);
+        textStartDate = (EditText) findViewById(R.id.text_start_date);
+        textEndDate = (EditText) findViewById(R.id.text_end_date);
+        buttonGenerateReport = (Button) findViewById(R.id.button_generate_report);
 
-	};
+        textStartDate.setOnClickListener(new OnClickListener() {
 
-	private void updateLabel(EditText toSet, Calendar cal) {
-		String myFormat = "MM/dd/yy";
-		SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-		toSet.setText(sdf.format(cal.getTime()));
-	}
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_report_builder);
-		Bundle extras = getIntent().getExtras();
-		reportType = (Transaction.TRANSACTION_TYPE) extras
-				.getSerializable("reportType");
-		textStartDate = (EditText) findViewById(R.id.text_start_date);
-		textEndDate = (EditText) findViewById(R.id.text_end_date);
-		buttonGenerateReport = (Button) findViewById(R.id.button_generate_report);
-
-		textStartDate.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				new DatePickerDialog(ReportBuilder.this, startDate,
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(ReportBuilder.this, startDate,
 						startCalendar.get(Calendar.YEAR), startCalendar
 								.get(Calendar.MONTH), startCalendar
 								.get(Calendar.DAY_OF_MONTH)).show();
-			}
-		});
+            }
+        });
 
-		textEndDate.setOnClickListener(new OnClickListener() {
+        textEndDate.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				new DatePickerDialog(ReportBuilder.this, endDate, endCalendar
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(ReportBuilder.this, endDate, endCalendar
 						.get(Calendar.YEAR), endCalendar.get(Calendar.MONTH),
 						endCalendar.get(Calendar.DAY_OF_MONTH)).show();
-			}
-		});
+            }
+        });
 
-		buttonGenerateReport.setOnClickListener(new OnClickListener() {
+        buttonGenerateReport.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent i = new Intent(v.getContext(),
-						CategoryReportActivity.class);
-				i.putExtra("startCalendar", startCalendar);
-				i.putExtra("endCalendar", endCalendar);
-				i.putExtra("reportType", reportType);
-				v.getContext().startActivity(i);
+            @Override
+            public void onClick(View v) {
+            	Intent i = new Intent(v.getContext(), CategoryReportActivity.class);
+                i.putExtra("startCalendar", startCalendar);
+                i.putExtra("endCalendar", endCalendar);
+                i.putExtra(reportType0, reportType);
+                v.getContext().startActivity(i);
+            }
+        });
 
-			}
-		});
+    }
 
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.report_builder, menu);
-		return true;
-	}
+        getMenuInflater().inflate(R.menu.report_builder, menu);
+        return true;
+    }
 
 }

@@ -1,5 +1,5 @@
 package programmateurs.views;
-
+/*
 import java.util.List;
 
 import programmateurs.models.Anchor;
@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.TextView;*/
 
 //Useful example of how to do list adaptors in android... 
 
