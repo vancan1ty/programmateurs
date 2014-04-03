@@ -13,8 +13,10 @@ import android.content.DialogInterface.OnClickListener;
  * @author Justin
  * @version 0.1
  */
+//CHECKSTYLE:OFF
 public abstract class ConfirmDialog extends AlertDialog.Builder implements
     OnClickListener {
+//CHECKSTYLE:ON
 
 	/**
 	 * Creates new ConfirDialog for given context using provided title and

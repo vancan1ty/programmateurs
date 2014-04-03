@@ -9,9 +9,10 @@ import android.widget.EditText;
 /**
  * helper for Prompt-Dialog creation.
  */
+//CHECKSTYLE:OFF
 public abstract class PromptDialog extends AlertDialog.Builder implements
 		OnClickListener {
-	//CHECKSTYLE:OFF
+	
     public final EditText input;
     //CHECKSTYLE:ON
 
