@@ -8,16 +8,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import programmateurs.beans.Account;
+import static programmateurs.util.DButil.longFromCursor;
+import static programmateurs.util.DButil.stringFromCursor;
 import programmateurs.beans.Category;
 import programmateurs.beans.Transaction;
 import programmateurs.util.DateUtility;
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.text.format.DateUtils;
 import android.util.Log;
 
 /**
@@ -51,33 +49,6 @@ public final class TransactionsDAO {
             + " timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, "
             + " rolledback BOOLEAN NOT NULL " + ");";
 
-    /**
-     * returns a "long" value associated with the given column name. convenience
-     * method.
-     *
-     * @param c
-     *            the db cursor.
-     * @param columnName
-     *            the name of the column which contains a long.
-     * @return the long parsed from the db field.
-     */
-    private static long gcl(final Cursor c, final String columnName) {
-        return c.getLong(c.getColumnIndexOrThrow(columnName));
-    }
-
-    /**
-     * returns a "String" value associated with the given column name.
-     * convenience method.
-     *
-     * @param c
-     *            the db cursor.
-     * @param columnName
-     *            the name of the column which contains a String.
-     * @return the String parsed from the db field.
-     */
-    private static String gcs(final Cursor c, final String columnName) {
-        return c.getString(c.getColumnIndexOrThrow(columnName));
-    }
 
     /**
      * converts a db cursor to a transaction.
@@ -88,24 +59,28 @@ public final class TransactionsDAO {
      */
     private static Transaction cursorToTransaction(final Cursor c,
             final SQLiteDatabase db) throws ParseException {
-        long transactionID = gcl(c, "transactionID");
-        long accountID = gcl(c, "accountID");
-        long userID = gcl(c, "userID");
-        long categoryID = gcl(c, "categoryID");
-        String transactionName = gcs(c, "transaction_name");
+        long transactionID = longFromCursor(c, "transactionID");
+        long accountID = longFromCursor(c, "accountID");
+        long userID = longFromCursor(c, "userID");
+        long categoryID = longFromCursor(c, "categoryID");
+        String transactionName = stringFromCursor(c, "transaction_name");
         Transaction.TRANSACTION_TYPE transactionType
         = Transaction.TRANSACTION_TYPE
-                .valueOf(gcs(c, "transaction_type"));
-        long transactionAmount = gcl(c, "transaction_amount");
+                .valueOf(stringFromCursor(c, "transaction_type"));
+        long transactionAmount = longFromCursor(c, "transaction_amount");
         Date transactionDate = DateUtility.getCalendarFromFormattedLong(
-                gcl(c, "transaction_date")).getTime();
-        String transactionComment = gcs(c, "transaction_comment");
+                longFromCursor(c, "transaction_date")).getTime();
+        String transactionComment = stringFromCursor(c, "transaction_comment");
         Date timestamp = DateUtility.getCalendarFromFormattedLong(
-                gcl(c, "timestamp")).getTime();
-        boolean rolledback = (gcl(c, "rolledback") == 1) ? true : false;
+                longFromCursor(c, "timestamp")).getTime();
+        long rolledbackL = longFromCursor(c, "rolledback");
+        boolean rolledback = false;
+        if (rolledbackL == 1) {
+            rolledback = true;
+        }
 
         Category category = null;
-        String categoryName = gcs(c, "category_name");
+        String categoryName = stringFromCursor(c, "category_name");
         if (categoryName != null) {
             category = new Category(categoryID, userID, categoryName);
         }
@@ -193,7 +168,11 @@ public final class TransactionsDAO {
         toInsert.put("transaction_date",
                 DateUtility.formatDateAsLong(transactionDate));
         toInsert.put("transaction_comment", transactionComment);
-        toInsert.put("rolledback", rolledback ? 1 : 0);
+        if (rolledback) {
+         toInsert.put("rolledback", true);
+        } else {
+         toInsert.put("rolledback", false);
+        }
         long transactionID = db.insert("transactions", null, toInsert);
         Transaction thetrans = getTransactionWithID(db, transactionID);
         // Transaction thetrans = new Transaction(transactionID, accountID,
@@ -279,10 +258,9 @@ public final class TransactionsDAO {
 
 
     /**
-     * Hey, hey, Checkstyle, said the way you move, gonna make you sweat, 
-     * gonna make you groove. 
+     * contains the number of cents in a dollar.
      */
-    public static final double ONEHUNDRED = 100.0;
+    public static final double CENTS_IN_DOLLAR_DOUBLE = 100.0;
     /**
      * returns a category report.
      * @param db nah
@@ -335,8 +313,10 @@ public final class TransactionsDAO {
         out.append(String.format("%-15s %s\n", "Category", "Amount"));
         NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);
         while (!c.isAfterLast()) {
-            out.append(String.format("%-15s %s\n", gcs(c, "category_name"),
-                    nf.format(gcl(c, "transaction_amount") / ONEHUNDRED)));
+            out.append(String.format("%-15s %s\n",
+                stringFromCursor(c, "category_name"),
+                  nf.format(longFromCursor(c, "transaction_amount")
+                       / CENTS_IN_DOLLAR_DOUBLE)));
 
             c.moveToNext();
         }
