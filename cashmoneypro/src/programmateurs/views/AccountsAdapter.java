@@ -33,7 +33,7 @@ public class AccountsAdapter extends BaseAdapter {
 	//CHECKSTYLE:OFF
 	private final Activity activity;
 	List<Account> accounts;
-	//CHECKSTYLE:ON
+	
 
 	/**
 	 * Accounts adaptor.
@@ -45,6 +45,7 @@ public class AccountsAdapter extends BaseAdapter {
         this.activity = activity;
         this.accounts = accounts;
     }
+    //CHECKSTYLE:ON
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
