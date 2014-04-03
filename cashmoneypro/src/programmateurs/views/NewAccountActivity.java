@@ -1,8 +1,6 @@
 package programmateurs.views;
 
 import net.programmateurs.R;
-import net.programmateurs.R.layout;
-import net.programmateurs.R.menu;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -20,7 +18,6 @@ import programmateurs.beans.Account.ACCOUNT_TYPE;
 import programmateurs.beans.User;
 import programmateurs.models.Anchor;
 import programmateurs.models.RealDataSource;
-import programmateurs.beans.Account;
 
 /**
  * <<<<<<< HEAD NewAccountActivity allows the user to create a
@@ -34,6 +31,7 @@ import programmateurs.beans.Account;
  */
 public class NewAccountActivity extends Activity {
 
+	//CHECKSTYLE:OFF
 	private User user;
 	private RealDataSource dbHandler;
 	Activity me = this;
@@ -45,110 +43,113 @@ public class NewAccountActivity extends Activity {
 	Button createAccount;
 	Random rand;
 	Spinner spinner;
+	String checking = "Checking";
+	String savings = "Savings";
+	//CHECKSTYLE:ON
 
 	/**
-	 * Creates the objects on the screen
+	 * Creates the objects on the screen.
+	 * 
+	 * @param savedInstanceState the saved instance state
 	 */
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_new_account);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_new_account);
 
-		dbHandler = new RealDataSource(this);
-		user = anchor.getCurrentUser();
+        dbHandler = new RealDataSource(this);
+        user = anchor.getCurrentUser();
 
-		accountField = (EditText) findViewById(R.id.accountName);
-		interestRate = (EditText) findViewById(R.id.interestRate);
-		createAccount = (Button) findViewById(R.id.createAccount);
+        accountField = (EditText) findViewById(R.id.accountName);
+        interestRate = (EditText) findViewById(R.id.interestRate);
+        createAccount = (Button) findViewById(R.id.createAccount);
 
-		spinner = (Spinner) findViewById(R.id.spinnerNewAccount);
+        spinner = (Spinner) findViewById(R.id.spinnerNewAccount);
 		// Create an ArrayAdapter using the string array and a default spinner
 		// layout
-		ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
 				this, android.R.layout.simple_spinner_item);
 		// Specify the layout to use when the list of choices appears
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 		// FIXME //Just leave this tag here. I might fix this
-		adapter.add("Checking");
-		adapter.add("Savings");
-		spinner.setAdapter(adapter);
+        adapter.add(checking);
+        adapter.add(savings);
+        spinner.setAdapter(adapter);
 
-		createAccount.setOnClickListener(new OnClickListener() {
+        createAccount.setOnClickListener(new OnClickListener() {
 
+        	//CHECKSTYLE:OFF
 			/**
 			 * Boolean logic to detect if the interest rate and account name are
 			 * valid entries
 			 */
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(v.getContext(), HomeActivity.class);
-				String account = accountField.getText().toString();
-				boolean validAccount = false;
-				if (account.equals("")) {
-					anchor.showDialog(me, "Invalid Account Name",
+            @Override
+            //CHECKSTYLE:ON
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), HomeActivity.class);
+                String account = accountField.getText().toString();
+                boolean validAccount = false;
+                if (account.equals("")) {
+                    anchor.showDialog(me, "Invalid Account Name",
 							"Please enter an account name");
-				}
-				String interestString = interestRate.getText().toString();
-				double interestNum = -1.0;
-				if (!interestString.equals("")) {
-					interestNum = Double.parseDouble(interestString);
-				}
+                }
+                String interestString = interestRate.getText().toString();
+                double interestNum = -1.0;
+                if (!interestString.equals("")) {
+                    interestNum = Double.parseDouble(interestString);
+                }
 
-				if (interestNum < 0 || interestNum > 100) {
-					anchor.showDialog(me, "Invalid Interst Rate",
+                if (interestNum < 0 || interestNum > 100) {
+                    anchor.showDialog(me, "Invalid Interst Rate",
 							"Please enter an interest rate between 0 and 100");
-				}
+                }
 
-				validAccount = (interestNum <= 100 && interestNum >= 0 && !account
-						.equals(""));
+                validAccount = (interestNum <= 100 && interestNum >= 0 && !account.equals(""));
 
-				if (spinner.getSelectedItem().toString().equals("Checking")
-						&& validAccount) {
-					accountType = ACCOUNT_TYPE.CHECKING;
-					dbHandler.addAccountToDB(user.getUserID(), accountType,
-							account, interestNum);
-					v.getContext().startActivity(i);
-				} else if (spinner.getSelectedItem().toString()
-						.equals("Savings")
-						&& validAccount) {
-					accountType = ACCOUNT_TYPE.SAVINGS;
-					dbHandler.addAccountToDB(user.getUserID(), accountType,
-							account, interestNum);
-					v.getContext().startActivity(i);
-				}
-			}
-
-		});
-
-	}
+                if (spinner.getSelectedItem().toString().equals(checking) && validAccount) {
+                    accountType = ACCOUNT_TYPE.CHECKING;
+                    dbHandler.addAccountToDB(user.getUserID(), accountType, account, interestNum);
+                    v.getContext().startActivity(i);
+                }
+                else if (spinner.getSelectedItem().toString().equals(savings) && validAccount) {
+                    accountType = ACCOUNT_TYPE.SAVINGS;
+                    dbHandler.addAccountToDB(user.getUserID(), accountType, account, interestNum);
+                    v.getContext().startActivity(i);
+                }
+            }
+        });
+    }
 
 	/**
-	 * Creates the menu
+	 * Creates the menu.
+	 * 
+	 * @param menu the menu
+	 * @return boolean true
 	 */
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.new_account, menu);
-		return true;
-	}
+        getMenuInflater().inflate(R.menu.new_account, menu);
+        return true;
+    }
 
 	/**
-	 * Method used when RealDataSource is used
+	 * Method used when RealDataSource is used.
 	 */
-	@Override
-	protected void onResume() {
-		dbHandler.open();
-		super.onResume();
-	}
+    @Override
+    protected void onResume() {
+        dbHandler.open();
+        super.onResume();
+    }
 
 	/**
-	 * Method used when RealDataSource is used
+	 * Method used when RealDataSource is used.
 	 */
-	@Override
-	protected void onPause() {
-		dbHandler.close();
-		super.onPause();
-	}
+    @Override
+    protected void onPause() {
+        dbHandler.close();
+        super.onPause();
+    }
 
 }
