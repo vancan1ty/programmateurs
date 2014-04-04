@@ -133,18 +133,19 @@ public final class TransactionsDAO {
         return outL.toArray(new Transaction[0]);
     }
 
+    // CHECKSTYLE:OFF this method needs a bunch of parameters sorry.
     /**
      * adds a transaction with the associated information to the DB, returns an
      * object representation of it.
-     * @param db nah
-     * @param accountID nah
-     * @param transactionName nah
-     * @param transactionType nah
-     * @param transactionAmount nah
-     * @param transactionDate nah
-     * @param transactionComment nah
-     * @param rolledback nah
-     * @param category CheckStyle, wheeere arreee yooouuuu?
+     * @param db an open db connection
+     * @param accountID the id of the account to add the transaction to
+     * @param transactionName the name of the transaction
+     * @param transactionType the type (deposit or withdraw currently).
+     * @param transactionAmount the amount of the transaction.
+     * @param transactionDate the date of the transaction.
+     * @param transactionComment an optional comment on the transaction.
+     * @param rolledback whether or not the transaction has been rolled back.
+     * @param category the category of the transaction.
      * @return nah
      */
     public static Transaction addTransactionToDB(final SQLiteDatabase db,
@@ -153,6 +154,7 @@ public final class TransactionsDAO {
             final long transactionAmount, final Date transactionDate,
             final String transactionComment, final boolean rolledback,
             final Category category) {
+            // CHECKSTYLE:ON
         ContentValues toInsert = new ContentValues();
         toInsert.put("accountID", accountID);
         if (category != null) {

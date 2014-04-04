@@ -139,6 +139,7 @@ public class RealDataSource implements DataSourceInterface {
                 interestRate);
     }
 
+    //CHECKSTYLE:OFF I need more than 7 parameters.
     @Override
     public final Transaction addTransactionToDB(final long accountID,
             final String transactionName,
@@ -146,10 +147,12 @@ public class RealDataSource implements DataSourceInterface {
             final long transactionAmount, final Date transactionDate,
             final String transactionComment, final boolean rolledback,
             final Category category) {
+    //CHECKSTYLE:ON
         return TransactionsDAO.addTransactionToDB(db, accountID,
                 transactionName, transactionType, transactionAmount,
                 transactionDate, transactionComment, rolledback, category);
     }
+
 
     /**
      * returns a "category report" for the app, as specified in the 2340
