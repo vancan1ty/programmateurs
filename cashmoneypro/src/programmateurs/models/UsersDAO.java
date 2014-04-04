@@ -7,6 +7,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static programmateurs.util.DButil.longFromCursor;
+import static programmateurs.util.DButil.stringFromCursor;
 import programmateurs.beans.User;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -19,60 +21,35 @@ import android.database.sqlite.SQLiteDatabase;
 public final class UsersDAO {
 
     /**
-     * Dave, I'm afraid I can't do that.
+     * silences checkstyle.
      */
     private UsersDAO() {
 
     }
 
     /**
-     * what do you think this query does?
+     * sql query which creates the users table in the database.
      */
     public static final String CREATE_USERS_TABLE = "CREATE TABLE Users"
             + " (userID INTEGER PRIMARY KEY AUTOINCREMENT, "
             + " username TEXT NOT NULL COLLATE NOCASE, "
-            + " passhash TEXT NOT NULL," + " first TEXT DEFAULT '',"
-            + " last TEXT DEFAULT ''," + " email TEXT DEFAULT ''" + ");";
-/**
- * 1.
- */
-public static final int ONE = 1;
-/**
- * 2.
- */
-public static final int TWO = 2;
-/**
- * 3.
- */
-public static final int THREE = 3;
-/**
- * 4.
- */
-public static final int FOUR = 4;
-/**
- * 5.
- */
-public static final int FIVE = 5;
-/**
- * 6.
- */
-public static final int SIX = 6;
-/**
- * 7.
- */
-public static final int SEVEN = 7;
+            + " passhash TEXT NOT NULL,"
+            + " first TEXT DEFAULT '',"
+            + " last TEXT DEFAULT '',"
+            + " email TEXT DEFAULT ''" + ");";
+
 /**
  * converts a db cursor to a user.
- * @param c nah
- * @return freedooooom!
+ * @param c the properly generated db cursor.
+ * @return a User object extracted from the cursor.
  */
     public static User cursorToUser(final Cursor c) {
-        long userID = c.getInt(0);
-        String username = c.getString(1);
-        String passhash = c.getString(TWO);
-        String first = c.getString(THREE);
-        String last = c.getString(FOUR);
-        String email = c.getString(FIVE);
+        long userID = longFromCursor(c, "userID");
+        String username = stringFromCursor(c, "username");
+        String passhash = stringFromCursor(c, "passhash");
+        String first = stringFromCursor(c, "first");
+        String last = stringFromCursor(c, "last");
+        String email = stringFromCursor(c, "email");
         return new User(userID, username, passhash, first, last, email);
     }
 
@@ -217,13 +194,13 @@ public static final int SEVEN = 7;
 
     /**
      * adds a user to the db.
-     * @param db nah
-     * @param username nah.
-     * @param password nah.
-     * @param first nah.
-     * @param last nah.
-     * @param email nah.
-     * @return nah.
+     * @param db an open db connection.
+     * @param username the username for the user.
+     * @param password the password for the user.
+     * @param first the user's first name.
+     * @param last the user's last name.
+     * @param email the user's email address.
+     * @return a user object like the one created in the database.
      */
     public static User addUserToDB(final SQLiteDatabase db,
             final String username, final String password, final String first,

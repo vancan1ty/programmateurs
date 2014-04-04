@@ -7,10 +7,9 @@ import programmateurs.beans.Account;
 import programmateurs.beans.Transaction;
 import programmateurs.beans.Transaction.TRANSACTION_TYPE;
 import programmateurs.interfaces.DataSourceInterface;
+import programmateurs.util.DButil;
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -49,21 +48,21 @@ public final class AccountsDAO {
     private static Account cursorToAccount(final Cursor cursor) {
         long accountID = cursor.getInt(0);
         long userID = cursor.getInt(1);
-        Account.ACCOUNT_TYPE accountType = Account.ACCOUNT_TYPE.valueOf(cursor
-                .getString(2));
-        String accountName = cursor.getString(3);
-        double interestRate = cursor.getDouble(4);
+        Account.ACCOUNT_TYPE accountType = Account.ACCOUNT_TYPE.valueOf(
+               DButil.stringFromCursor(cursor, "account_type"));
+        String accountName = DButil.stringFromCursor(cursor, "account_name");
+        double interestRate = DButil.doubleFromCursor(cursor, "interest_rate");
         Log.d("uponpullfromdb", Double.toString(interestRate));
         return new Account(accountID, userID, accountType, accountName,
                 interestRate);
     }
 
     /**
-     * returns a list of all accounts owned by a given user
-     * 
+     * returns a list of all accounts owned by a given user.
+     *
      * @param db
      *            a reference to the database
-     * @param userID
+     * @param userID the user id for the user.
      * @return list of accounts owned by user
      */
     public static Account[] getAccountsForUser(final SQLiteDatabase db,
@@ -71,7 +70,7 @@ public final class AccountsDAO {
 
         Log.d("AccountsDAO", "db + " + db);
         Cursor c = db.rawQuery("SELECT * FROM Accounts WHERE userid = ?;",
-                new String[] { Long.toString(userID) });
+                new String[] {Long.toString(userID)});
         List<Account> outL = new ArrayList<Account>();
 
         c.moveToFirst();
@@ -87,7 +86,7 @@ public final class AccountsDAO {
 
     /**
      * gets an account with a given id.
-     * 
+     *
      * @param db
      *            a database reference
      * @param accountID
@@ -99,7 +98,7 @@ public final class AccountsDAO {
 
         Log.d("AccountsDAO", "db + " + db);
         Cursor c = db.rawQuery("SELECT * FROM Accounts WHERE accountid = ?;",
-                new String[] { Long.toString(accountID) });
+                new String[] {Long.toString(accountID)});
 
         c.moveToFirst();
         Account acct = cursorToAccount(c);
@@ -111,12 +110,13 @@ public final class AccountsDAO {
     /**
      * adds an account with the associated information to the DB, returns an
      * object representation of it.
-     * 
-     * @param userID
-     * @param accountType
-     * @param accountName
-     * @param interestRate
-     * @return
+     *
+     * @param db an open db connection.
+     * @param userID the id of the user in the db.
+     * @param accountType the type of the account (from ACCOUNT_TYPE enum)
+     * @param accountName the string name of the account.
+     * @param interestRate the interest rate on the account.
+     * @return an account object with the data that was just put in the db.
      */
     public static Account addAccountToDB(final SQLiteDatabase db,
             final long userID, final Account.ACCOUNT_TYPE accountType,

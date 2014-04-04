@@ -120,43 +120,6 @@ public final class Anchor {
         currentUser = user;
     }
 
-    /**
-     * this helps us show dialogs!
-     * @author vancan1ty
-     *
-     */
-    private abstract class ShowDialogPasser implements Runnable {
-        /**
-         * nah.
-         */
-        protected final String title;
-        /**
-         * nah.
-         */
-        protected final String message;
-        /**
-         * nah.
-         */
-        protected final Activity parent;
-
-        /**
-         * shows a dialog with the given parameters.
-         * @param otitle the title.
-         * @param omessage the message.
-         * @param oparent context activity.
-         */
-        public ShowDialogPasser(final String otitle, final String omessage,
-                final Activity oparent) {
-            this.title = otitle;
-            this.message = omessage;
-            this.parent = oparent;
-        }
-
-        /**
-         * runs the dialog thingie.
-         */
-        public abstract void run();
-    }
 
     /**
      * Opens a dialog in the given activity with a given title and message. Used
@@ -172,10 +135,10 @@ public final class Anchor {
     public void showDialog(final Activity activity, final String title,
             final String message) {
 
-        activity.runOnUiThread(new ShowDialogPasser(title, message, activity) {
+        activity.runOnUiThread(new Runnable() {
             public void run() {
-                // 1. Instantiate an AlertDialog.Builder with its constructor
-                AlertDialog.Builder builder = new AlertDialog.Builder(parent);
+        // 1. Instantiate an AlertDialog.Builder with its constructor
+                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
                 // 2. Chain together various setter methods to set the dialog
                 // characteristics
@@ -185,8 +148,7 @@ public final class Anchor {
                 AlertDialog dialog = builder.create();
 
                 dialog.show();
-            }
-        });
+        } });
     }
 
 }
