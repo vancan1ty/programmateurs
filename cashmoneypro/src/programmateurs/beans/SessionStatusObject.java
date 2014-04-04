@@ -1,95 +1,218 @@
 package programmateurs.beans;
 
+/**
+ * To be honest, I'm not really sure why this class exists or if we even use it
+ * ever. Be patient with the comments; this file had no documentation when I 
+ * found it.
+ * 
+ * From the name, I'm guessing it's just meant to keep track of the current
+ * session, but Anchor sort of fills that role already.  
+ * 
+ * @author Currell
+ * @version 0.0c
+ *
+ */
 public class SessionStatusObject {
 
-	private Integer userID;
-	private Integer checkinID;
-	private String user_first;
-	private String user_last;
-	private String email;
-	private String password;
-	private String imagepath;
-	private Double latitude;
-	private Double longitude;
+    //CHECKSTYLE:OFF	Variables defined in class javadoc
+    private Integer userID;
+    private Integer checkinID;
+    private String userFirst;
+    private String userLast;
+    private String email;
+    private String password;
+    private String imagepath;
+    private Double latitude;
+    private Double longitude;
+    //CHECKSTYLE:ON
+    
+    /**
+     * Getter for ID of current user.
+     * 
+     * @return ID of user currently logged in
+     */
+    public int getUserID() {
+        return userID;
+    }
 
-	public int getUserID() {
-		return userID;
-	}
+    /**
+     * Setter for current user ID.
+     * 
+     * @param userID ID of user currently logged in
+     */
+    //CHECKSTYLE:OFF	No ambiguity about variable when "this" is used.
+    public void setUserID(Integer userID) {
+    //CHECKSTYLE:ON
+        this.userID = userID;
+    }
 
-	public void setUserID(Integer userID) {
-		this.userID = userID;
-	}
+    /**
+     * Getter for checkinID.
+     * 
+     * @return ID for current session
+     */
+    //CHECKSTYLE:OFF	No ambiguity about variable when "this" is used.
+    public int getCheckinID() {
+        return checkinID;
+    }
 
-	public int getCheckinID() {
-		return checkinID;
-	}
+    /**
+     * Setter for checkinID
+     * 
+     * @param checkinID for current session
+     */
+    //CHECKSTYLE:OFF	No ambiguity about variable when "this" is used.
+    public void setCheckinID(Integer checkinID) {
+    //CHECKSTYLE:ON
+        this.checkinID = checkinID;
+    }
 
-	public void setCheckinID(Integer checkinID) {
-		this.checkinID = checkinID;
-	}
+    /**
+     * Getter for user's first name.
+     * 
+     * @return first name of user
+     */
+    public String getUserFirst() {
+	return userFirst;
+    }
 
-	public String getUser_first() {
-		return user_first;
-	}
+    /**
+     * Setter for user's first name.
+     * 
+     * @param userFirst first name of user
+     */
+    //CHECKSTYLE:OFF	No ambiguity about variable when "this" is used.
+    public void setUserFirst(String userFirst) {
+    //CHECKSTYLE:ON
+        this.userFirst = userFirst;
+    }
 
-	public void setUser_first(String user_first) {
-		this.user_first = user_first;
-	}
+    /**
+     * Getter for user's last name.
+     * 
+     * @return last name of user
+     */
+    public String getuserLast() {
+        return userLast;
+    }
 
-	public String getUser_last() {
-		return user_last;
-	}
+    /**
+     * Setter for last name of user.
+     * 
+     * @param userLast user's last name
+     */
+    //CHECKSTYLE:OFF	No ambiguity about variable when "this" is used.
+    public void setUserLast(String userLast) {
+    //CHECKSTYLE:ON
+        this.userLast = userLast;
+    }
 
-	public void setUser_last(String user_last) {
-		this.user_last = user_last;
-	}
+    /**
+     * Getter for user's email.
+     * 
+     * @return email of current user
+     */
+    public String getEmail() {
+        return email;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    /**
+     * Setter for user's email.
+     * 
+     * @param email current user's email
+     */
+    //CHECKSTYLE:OFF	No ambiguity about variable when "this" is used.
+    public void setEmail(String email) {
+    //CHECKSTYLE:ON
+        this.email = email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    /**
+     * Getter for user's password.
+     * 
+     * @return current user's password
+     */
+    public String getPassword() {
+        return password;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    /**
+     * Setter for user's password.
+     * 
+     * @param password current user's password
+     */
+    //CHECKSTYLE:OFF	No ambiguity about variable when "this" is used.
+    public void setPassword(String password) {
+    //CHECKSTYLE:ON
+        this.password = password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    /**
+     * Getter for imagepath.
+     * 
+     * @return imagepath
+     */
+    public String getImagepath() {
+        return imagepath;
+    }
 
-	public String getImagepath() {
-		return imagepath;
-	}
+    /**
+     * Setter for imagepath.
+     * 
+     * @param imagepath
+     */
+    //CHECKSTYLE:OFF	No ambiguity about variable when "this" is used.
+    public void setImagepath(String imagepath) {
+    //CHECKSTYLE:ON
+        this.imagepath = imagepath;
+    }
 
-	public void setImagepath(String imagepath) {
-		this.imagepath = imagepath;
-	}
+    /**
+     * Getter for lattitude.
+     * 
+     * @return latitude
+     */
+    public double getLatitude() {
+        return latitude;
+    }
 
-	public double getLatitude() {
-		return latitude;
-	}
+    /**
+     * Setter for latitude.
+     * 
+     * @param latitude
+     */
+    //CHECKSTYLE:OFF	No ambiguity about variable when "this" is used.
+    public void setLatitude(Double latitude) {
+    //CHECKSTYLE:ON
+        this.latitude = latitude;
+    }
 
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
-	}
+    /**
+     * Getter for longitude.
+     * 
+     * @return longitude
+     */
+    public double getLongitude() {
+        return longitude;
+    }
 
-	public double getLongitude() {
-		return longitude;
-	}
+    /**
+     * Setter for latitude.
+     * 
+     * @param longitude
+     */
+    //CHECKSTYLE:OFF	No ambiguity about variable when "this" is used.
+    public void setLongitude(Double longitude) {
+    //CHECKSTYLE:ON
+        this.longitude = longitude;
+    }
 
-	public void setLongitude(Double longitude) {
-		this.longitude = longitude;
-	}
-
-	@Override
-	public String toString() {
-		return "SessionStatusObject [userID=" + userID + ", checkinID="
-				+ checkinID + ", currentBuilding=" + ", user_first="
-				+ user_first + ", user_last=" + user_last + ", email=" + email
-				+ ", password=" + password + ", imagepath=" + imagepath
-				+ ", latitude=" + latitude + ", longitude=" + longitude + "]";
-	}
+    @Override
+    public String toString() {
+        return "SessionStatusObject [userID=" + userID + ", checkinID="
+                + checkinID + ", currentBuilding=" + ", userFirst="
+                + userFirst + ", userLast=" + userLast + ", email=" + email
+                + ", password=" + password + ", imagepath=" + imagepath
+                + ", latitude=" + latitude + ", longitude=" + longitude + "]";
+    }
 }
