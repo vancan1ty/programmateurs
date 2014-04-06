@@ -9,22 +9,26 @@ import android.widget.EditText;
 /**
  * helper for Prompt-Dialog creation.
  */
-//CHECKSTYLE:OFF
+// CHECKSTYLE:OFF
 public abstract class PromptDialog extends AlertDialog.Builder implements
-		OnClickListener {
-	
-    public final EditText input;
-    //CHECKSTYLE:ON
+        OnClickListener {
 
-	/**
-	 * Prompt Dialog.
-	 * 
-	 * @param context context
-	 * @param title title
-	 * @param message message
-	 */
+    public final EditText input;
+
+    // CHECKSTYLE:ON
+
+    /**
+     * Prompt Dialog.
+     * 
+     * @param context
+     *            context
+     * @param title
+     *            title
+     * @param message
+     *            message
+     */
     public PromptDialog(Context context, String title, String message) {
-		super(context);
+        super(context);
         setTitle(title);
         setMessage(message);
 
@@ -35,12 +39,13 @@ public abstract class PromptDialog extends AlertDialog.Builder implements
         setNegativeButton("cancel", this);
     }
 
-	/**
-	 * will be called when "cancel" pressed. closes the dialog. can be
-	 * overridden.
-	 * 
-	 * @param dialog dialog
-	 */
+    /**
+     * will be called when "cancel" pressed. closes the dialog. can be
+     * overridden.
+     * 
+     * @param dialog
+     *            dialog
+     */
     public void onCancelClicked(DialogInterface dialog) {
         dialog.dismiss();
     }
@@ -51,8 +56,7 @@ public abstract class PromptDialog extends AlertDialog.Builder implements
             if (onOkClicked(input.getText().toString())) {
                 dialog.dismiss();
             }
-        }
-        else {
+        } else {
             onCancelClicked(dialog);
         }
     }
@@ -66,13 +70,14 @@ public abstract class PromptDialog extends AlertDialog.Builder implements
         return input.getText().toString();
     }
 
-	/**
-	 * called when "ok" pressed.
-	 * 
-	 * @param input input
-	 * @return true, if the dialog should be closed. false, if not.
-	 */
-    //CHECKSTYLE:OFF
+    /**
+     * called when "ok" pressed.
+     * 
+     * @param input
+     *            input
+     * @return true, if the dialog should be closed. false, if not.
+     */
+    // CHECKSTYLE:OFF
     public abstract boolean onOkClicked(String input);
-    //CHECKSTYLE:ON
+    // CHECKSTYLE:ON
 }

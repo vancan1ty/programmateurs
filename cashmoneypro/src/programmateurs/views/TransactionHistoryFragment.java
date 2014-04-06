@@ -25,46 +25,50 @@ import android.widget.ListView;
  */
 public class TransactionHistoryFragment extends Fragment {
 
-	/**
-	 * The fragment argument representing the section number for this fragment.
-	 */
-	//CHECKSTYLE:OFF
+    /**
+     * The fragment argument representing the section number for this fragment.
+     */
+    // CHECKSTYLE:OFF
     private static Transaction[] transactionArray;
-	Anchor anchor = Anchor.getInstance();
-	private User user;
-	private RealDataSource dbHandler;
-	private ListView accountView;
+    Anchor anchor = Anchor.getInstance();
+    private User user;
+    private RealDataSource dbHandler;
+    private ListView accountView;
 
-	private TransactionAdapter adapter;
-	//CHECKSTYLE:ON
+    private TransactionAdapter adapter;
 
-	/**
-	 * The onCreateView method creates the view for the fragment. I have
-	 * onClickListeners to detect when the button is pressed and perform actions
-	 * based on those events.
-	 * 
-	 * @param inflater inflater
-	 * @param container container
-	 * @param savedInstanceState saved instance state
-	 * @return rootView root view
-	 */
+    // CHECKSTYLE:ON
+
+    /**
+     * The onCreateView method creates the view for the fragment. I have
+     * onClickListeners to detect when the button is pressed and perform actions
+     * based on those events.
+     * 
+     * @param inflater
+     *            inflater
+     * @param container
+     *            container
+     * @param savedInstanceState
+     *            saved instance state
+     * @return rootView root view
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_global_feed,
-				container, false);
+                container, false);
 
         accountView = (ListView) rootView.findViewById(R.id.listViewAccounts);
 
         return rootView;
     }
 
-	/**
-	 * The reason why all the database stuff is in the onResume() method is
-	 * because of the nature of a Fragment's lifecycle. Whenever you use a
-	 * fragment you must put the database code inside onResume(). Look up a
-	 * Fragment's lifecycle on Google
-	 */
+    /**
+     * The reason why all the database stuff is in the onResume() method is
+     * because of the nature of a Fragment's lifecycle. Whenever you use a
+     * fragment you must put the database code inside onResume(). Look up a
+     * Fragment's lifecycle on Google
+     */
     @Override
     public void onResume() {
         dbHandler = new RealDataSource(getActivity());
@@ -76,16 +80,17 @@ public class TransactionHistoryFragment extends Fragment {
         for (int i = 0; i < transactionArray.length; i++) {
             transactionList.add(transactionArray[i]);
         }
-		//Log.d("TransactionsHistoryScreen", "transactions: " + transactionArray);
+        // Log.d("TransactionsHistoryScreen", "transactions: " +
+        // transactionArray);
         adapter = new TransactionAdapter(getActivity(), transactionList);
         accountView.setAdapter(adapter);
 
         super.onResume();
     }
 
-	/**
-	 * The method need each time RealDataSource is used in a class.
-	 */
+    /**
+     * The method need each time RealDataSource is used in a class.
+     */
     @Override
     public void onPause() {
         dbHandler.close();

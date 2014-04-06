@@ -16,18 +16,19 @@ import android.widget.TextView;
 /**
  * 
  * @author programmateurs
- *
+ * 
  */
 public class CategoryReportActivity extends Activity {
 
-	//CHECKSTYLE:OFF
-	private RealDataSource src;
-	TextView textReport;
-	Calendar startCalendar;
-	Calendar endCalendar;
-	Transaction.TRANSACTION_TYPE reportType;
-	Anchor anchor;
-	//CHECKSTYLE:ON
+    // CHECKSTYLE:OFF
+    private RealDataSource src;
+    TextView textReport;
+    Calendar startCalendar;
+    Calendar endCalendar;
+    Transaction.TRANSACTION_TYPE reportType;
+    Anchor anchor;
+
+    // CHECKSTYLE:ON
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class CategoryReportActivity extends Activity {
 
         src.open();
         textReport.setText(src.getCategoryReport(startCalendar, endCalendar,
-				reportType, anchor.getCurrentUser().getUserID()));
+                reportType, anchor.getCurrentUser().getUserID()));
     }
 
     @Override
@@ -62,7 +63,7 @@ public class CategoryReportActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.category_report, menu);
         return true;
     }

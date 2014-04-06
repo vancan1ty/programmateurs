@@ -4,6 +4,7 @@ import android.database.Cursor;
 
 /**
  * This class contains utility methods for interacting with the database.
+ * 
  * @author vancan1ty
  */
 public final class DButil {
@@ -18,7 +19,7 @@ public final class DButil {
     /**
      * returns a "long" value associated with the given column name. convenience
      * method.
-     *
+     * 
      * @param c
      *            the db cursor.
      * @param columnName
@@ -32,7 +33,7 @@ public final class DButil {
     /**
      * returns a "double" value associated with the given column name in the
      * cursor. convenience method.
-     *
+     * 
      * @param c
      *            the db cursor.
      * @param columnName
@@ -40,15 +41,14 @@ public final class DButil {
      * @return the double parsed from the db field.
      */
     public static double doubleFromCursor(final Cursor c,
-        final String columnName) {
+            final String columnName) {
         return c.getLong(c.getColumnIndexOrThrow(columnName));
     }
-
 
     /**
      * returns a "String" value associated with the given column name.
      * convenience method.
-     *
+     * 
      * @param c
      *            the db cursor.
      * @param columnName

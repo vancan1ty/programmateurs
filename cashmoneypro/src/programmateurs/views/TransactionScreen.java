@@ -34,27 +34,27 @@ import android.media.MediaPlayer; //for sounds, delete this import if error
  * @author Brent
  * @version 0.2
  */
-//CHECKSTYLE:OFF
+// CHECKSTYLE:OFF
 public class TransactionScreen extends Activity {
 
-	private EditText amountText, textViewName, textViewComment;
-	private DatePicker picker;
-	private Button buttonTransaction;
-	private Spinner categorySpinner;
-	private Calendar cal = Calendar.getInstance();
-	@SuppressLint("SimpleDateFormat")
-	DateFormat sdf = new SimpleDateFormat();
-	Anchor anchor = Anchor.getInstance();
-	DataSourceInterface dbHandler = new RealDataSource(this);
+    private EditText amountText, textViewName, textViewComment;
+    private DatePicker picker;
+    private Button buttonTransaction;
+    private Spinner categorySpinner;
+    private Calendar cal = Calendar.getInstance();
+    @SuppressLint("SimpleDateFormat")
+    DateFormat sdf = new SimpleDateFormat();
+    Anchor anchor = Anchor.getInstance();
+    DataSourceInterface dbHandler = new RealDataSource(this);
 
-	Activity me = this;
-	
+    Activity me = this;
 
     Date currentDate = new Date(System.currentTimeMillis());
     long accountID;
-	TRANSACTION_TYPE transactionType;
-	//CHECKSTYLE:ON
-	
+    TRANSACTION_TYPE transactionType;
+
+    // CHECKSTYLE:ON
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +62,8 @@ public class TransactionScreen extends Activity {
 
         Bundle extras = getIntent().getExtras();
         this.accountID = extras.getLong("account_id");
-        this.transactionType = (TRANSACTION_TYPE) extras.getSerializable("transaction_type");
+        this.transactionType = (TRANSACTION_TYPE) extras
+                .getSerializable("transaction_type");
 
         amountText = (EditText) findViewById(R.id.amountNumber);
         textViewName = (EditText) findViewById(R.id.textViewName);
@@ -72,40 +73,43 @@ public class TransactionScreen extends Activity {
         buttonTransaction = (Button) findViewById(R.id.buttonTransaction);
         categorySpinner = (Spinner) findViewById(R.id.transaction_category_spinner);
 
-		// stuff for sound so it's not created in line with the button
-        final MediaPlayer depositSound = MediaPlayer.create(this, R.raw.caching);
+        // stuff for sound so it's not created in line with the button
+        final MediaPlayer depositSound = MediaPlayer
+                .create(this, R.raw.caching);
 
         buttonTransaction.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 @SuppressWarnings("unused")
-				Intent i = new Intent(v.getContext(), HomeActivity.class);
+                Intent i = new Intent(v.getContext(), HomeActivity.class);
                 String transactionName = textViewName.getText().toString();
-                String transactionComment = textViewComment.getText().toString();
+                String transactionComment = textViewComment.getText()
+                        .toString();
                 String money = amountText.getText().toString();
                 int day = picker.getDayOfMonth();
                 int month = picker.getMonth();
                 int year = picker.getYear();
                 cal.set(year, month, day);
                 Double amount = Double.parseDouble(money);
-                if (validTransactionAmount(money) && validDate(cal)
-						&& !AccountsDAO.overdrawn(dbHandler, accountID, amount,
-						        transactionType)) {
+                if (validTransactionAmount(money)
+                        && validDate(cal)
+                        && !AccountsDAO.overdrawn(dbHandler, accountID, amount,
+                                transactionType)) {
                     double transactionAmountD = Double.parseDouble(money);
-                    long transactionAmountL = Math.round(transactionAmountD * 100);
+                    long transactionAmountL = Math
+                            .round(transactionAmountD * 100);
                     dbHandler.addTransactionToDB(accountID, transactionName,
-							transactionType, (long) transactionAmountL, cal
-									.getTime(), transactionComment, false,
-							getCategoryByName((String) categorySpinner
-									.getSelectedItem()));
+                            transactionType, (long) transactionAmountL, cal
+                                    .getTime(), transactionComment, false,
+                            getCategoryByName((String) categorySpinner
+                                    .getSelectedItem()));
 
-					// $$.mp3 sound goes here:
+                    // $$.mp3 sound goes here:
                     depositSound.start();
-					// end sound
+                    // end sound
                     me.onBackPressed();
-                }
-                else {
+                } else {
                     String errorMessage = "Please resolve the following errors:\n";
                     if (!validTransactionAmount(money)) {
                         errorMessage += "\n- Enter an amount greater than 0.";
@@ -113,19 +117,22 @@ public class TransactionScreen extends Activity {
                     if (!validDate(cal)) {
                         errorMessage += "\n- Enter a valid startDate.";
                     }
-                    if (AccountsDAO.overdrawn(dbHandler, accountID, amount, transactionType)) {
+                    if (AccountsDAO.overdrawn(dbHandler, accountID, amount,
+                            transactionType)) {
                         errorMessage += "\n- You have insufficient funds to complete this transaction.";
                     }
                     anchor.showDialog(me, "Transaction Error(s)", errorMessage);
                 }
             }
         });
-		// System.out.println(artificialSource.getTransactionsForAccount(0));
+        // System.out.println(artificialSource.getTransactionsForAccount(0));
     }
 
     /**
      * validTransactionAmount.
-     * @param money money
+     * 
+     * @param money
+     *            money
      * @return boolean true false
      */
     private boolean validTransactionAmount(String money) {
@@ -135,51 +142,54 @@ public class TransactionScreen extends Activity {
         return false;
     }
 
-	/**
-	 * Makes sure the startDate is valid. I hate Date.
-	 * 
-	 * @param cal calendar
-	 * @return boolean boolean
-	 */
-    //CHECKSTYLE:OFF
+    /**
+     * Makes sure the startDate is valid. I hate Date.
+     * 
+     * @param cal
+     *            calendar
+     * @return boolean boolean
+     */
+    // CHECKSTYLE:OFF
     private boolean validDate(Calendar cal) {
         return true;
     }
-    //CHECKSTYLE:ON
+
+    // CHECKSTYLE:ON
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.deposit, menu);
         return true;
     }
 
-	/**
-	 * 
-	 * @param name
-	 *            Name of category being searched for
-	 * @return category with matching name
-	 */
+    /**
+     * 
+     * @param name
+     *            Name of category being searched for
+     * @return category with matching name
+     */
     public Category getCategoryByName(String name) {
         Category[] categories = dbHandler.getCategoriesForUser(anchor
-				.getCurrentUser().getUserID());
+                .getCurrentUser().getUserID());
         for (Category c : categories) {
             if (c.getCategory_name().equals(name)) {
                 return c;
             }
         }
-        throw new RuntimeException("No existing category with name " + name); 
+        throw new RuntimeException("No existing category with name " + name);
         // only executed if somebody dun goofed.
     }
 
-	/**
-	 * Method used when RealDataSource is used.
-	 */
+    /**
+     * Method used when RealDataSource is used.
+     */
     @Override
     protected void onResume() {
         dbHandler.open();
         super.onResume();
-        Category[] categories = dbHandler.getCategoriesForUser(anchor.getCurrentUser().getUserID());
+        Category[] categories = dbHandler.getCategoriesForUser(anchor
+                .getCurrentUser().getUserID());
         String[] stringArray = new String[categories.length];
         if (categories != null) {
             for (int i = 0; i < categories.length; i++) {
@@ -190,13 +200,13 @@ public class TransactionScreen extends Activity {
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, stringArray);
+                android.R.layout.simple_list_item_1, stringArray);
         categorySpinner.setAdapter(adapter);
     }
 
-	/**
-	 * Method used when RealDataSource is used.
-	 */
+    /**
+     * Method used when RealDataSource is used.
+     */
     @Override
     protected void onPause() {
         dbHandler.close();

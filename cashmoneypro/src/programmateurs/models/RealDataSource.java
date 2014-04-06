@@ -16,13 +16,13 @@ import android.util.Log;
 
 /**
  * Usage of RealDataSource
- *
+ * 
  * **IMPORTANT, READ THESE DIRECTIONS** in any activity that uses RealDataSource
  * put a call to open() in onResume and a call to close() in onPause.
  * RealDataSource will manage the DB connection otherwise. thanks!
- *
+ * 
  * @author vancan1ty
- *
+ * 
  */
 public class RealDataSource implements DataSourceInterface {
 
@@ -40,7 +40,7 @@ public class RealDataSource implements DataSourceInterface {
 
     /**
      * build the datasource from the android context.
-     *
+     * 
      * @param context
      *            the android context for the application.
      */
@@ -77,8 +77,7 @@ public class RealDataSource implements DataSourceInterface {
     }
 
     @Override
-    public final boolean isUserInDB(final String username,
-           final String password) {
+    public final boolean isUserInDB(final String username, final String password) {
         return UsersDAO.isUserInDB(db, username, password);
     }
 
@@ -121,10 +120,13 @@ public class RealDataSource implements DataSourceInterface {
 
     /**
      * adds a user to the database without having to worry about all the
-     * ancillary user data fields.  useful for setting up test users,
-     * for example.
-     * @param username the username for the user.
-     * @param password the password for the user.
+     * ancillary user data fields. useful for setting up test users, for
+     * example.
+     * 
+     * @param username
+     *            the username for the user.
+     * @param password
+     *            the password for the user.
      */
     public final void cheapAddUserToDB(final String username,
             final String password) {
@@ -139,7 +141,7 @@ public class RealDataSource implements DataSourceInterface {
                 interestRate);
     }
 
-    //CHECKSTYLE:OFF I need more than 7 parameters.
+    // CHECKSTYLE:OFF I need more than 7 parameters.
     @Override
     public final Transaction addTransactionToDB(final long accountID,
             final String transactionName,
@@ -147,21 +149,25 @@ public class RealDataSource implements DataSourceInterface {
             final long transactionAmount, final Date transactionDate,
             final String transactionComment, final boolean rolledback,
             final Category category) {
-    //CHECKSTYLE:ON
+        // CHECKSTYLE:ON
         return TransactionsDAO.addTransactionToDB(db, accountID,
                 transactionName, transactionType, transactionAmount,
                 transactionDate, transactionComment, rolledback, category);
     }
 
-
     /**
-     * returns a "category report" for the app, as specified in the 2340
-     * app directions.
-     * @param dateStart the start date for the report.
-     * @param dateEnd the end date.
-     * @param type the type of the report (either spending category
-     *             or income source)
-     * @param userID the id of the user to run the report on
+     * returns a "category report" for the app, as specified in the 2340 app
+     * directions.
+     * 
+     * @param dateStart
+     *            the start date for the report.
+     * @param dateEnd
+     *            the end date.
+     * @param type
+     *            the type of the report (either spending category or income
+     *            source)
+     * @param userID
+     *            the id of the user to run the report on
      * @return a string representing the category report.
      */
     public final String getCategoryReport(final Calendar dateStart,

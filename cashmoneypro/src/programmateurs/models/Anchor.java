@@ -9,7 +9,7 @@ import android.app.AlertDialog;
  * to store data accessible from everywhere in the app. Notice that it uses the
  * singleton pattern, so only one instance of this class can be instantiated
  * during a given runtime.
- *
+ * 
  * @author vancan1ty
  * @version 0.0
  */
@@ -32,7 +32,7 @@ public final class Anchor {
      * Acts as a selective constructor for Anchor class. If no instance of
      * Anchor exists, instantiates Anchor and returns that instance. Otherwise
      * it just returns the already-existing instance.
-     *
+     * 
      * @return Current Anchor instance
      */
     public static Anchor getInstance() {
@@ -104,7 +104,7 @@ public final class Anchor {
 
     /**
      * Getter for the User that is currently logged in.
-     *
+     * 
      * @return User currently logged in
      */
     public User getCurrentUser() {
@@ -113,18 +113,18 @@ public final class Anchor {
 
     /**
      * sets the current user for the app.
-     *
-     * @param user nah.
+     * 
+     * @param user
+     *            nah.
      */
     public void setCurrentUser(final User user) {
         currentUser = user;
     }
 
-
     /**
      * Opens a dialog in the given activity with a given title and message. Used
      * to present information to the user.
-     *
+     * 
      * @param activity
      *            Activity the dialog is to be displayed in
      * @param title
@@ -137,10 +137,12 @@ public final class Anchor {
 
         activity.runOnUiThread(new Runnable() {
             public void run() {
-        // 1. Instantiate an AlertDialog.Builder with its constructor
+                // 1. Instantiate an AlertDialog.Builder with
+                // its constructor
                 AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
-                // 2. Chain together various setter methods to set the dialog
+                // 2. Chain together various setter methods to
+                // set the dialog
                 // characteristics
                 builder.setMessage(message).setTitle(title);
 
@@ -148,7 +150,8 @@ public final class Anchor {
                 AlertDialog dialog = builder.create();
 
                 dialog.show();
-        } });
+            }
+        });
     }
 
 }

@@ -4,10 +4,9 @@ import java.util.Locale;
 
 /**
  * The Account class represents an account possessed by a User. A single User
- * can have multiple accounts, but each account has only one User. Each
- * account has an ID for database retrieval, a reference to the ID of the
- * user who owns it. An enumerated type (withdrawal or deposit), a name, and
- * an interest rate.
+ * can have multiple accounts, but each account has only one User. Each account
+ * has an ID for database retrieval, a reference to the ID of the user who owns
+ * it. An enumerated type (withdrawal or deposit), a name, and an interest rate.
  * 
  * @author Currell
  * @version 0.3
@@ -19,11 +18,11 @@ public class Account {
      * you'd think. This javadoc is here because checkstyle is excessive.
      * 
      */
-	//CHECKSTYLE:OFF	Enumerated types defined in enum javadoc.
+    // CHECKSTYLE:OFF Enumerated types defined in enum javadoc.
     public enum ACCOUNT_TYPE {
         SAVINGS, CHECKING;
-        //CHECKSTYLE:ON
-        
+        // CHECKSTYLE:ON
+
         @Override
         public String toString() {
             // Look at this cute block of code. It takes an all-capital toString
@@ -35,13 +34,14 @@ public class Account {
         }
     }
 
-    //CHECKSTYLE:OFF	Variables defined in class javadoc.
+    // CHECKSTYLE:OFF Variables defined in class javadoc.
     private long accountID;
     private long userID;
     private ACCOUNT_TYPE accountType;
     private String accountName;
     private double interestRate;
-    //CHECKSTYLE:ON
+
+    // CHECKSTYLE:ON
 
     /**
      * Constructor for Account class; assigns all appropriate values.
@@ -57,11 +57,11 @@ public class Account {
      * @param interestRate
      *            Specified as a double
      */
-    //CHECKSTYLE:OFF	No ambiguity about variables when "this" is used.
+    // CHECKSTYLE:OFF No ambiguity about variables when "this" is used.
     public Account(long accountID, long userID, ACCOUNT_TYPE accountType,
             String accountName, double interestRate) {
-    	//CHECKSTYLE:ON
-    	
+        // CHECKSTYLE:ON
+
         this.accountID = accountID;
         this.userID = userID;
         this.accountType = accountType;

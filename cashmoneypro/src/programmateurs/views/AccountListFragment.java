@@ -26,44 +26,50 @@ import android.widget.ListView;
  * @version 0.0
  */
 public class AccountListFragment extends Fragment {
-	/**
-	 * The fragment argument representing the section number for this fragment.
-	 */
+    /**
+     * The fragment argument representing the section number for this fragment.
+     */
 
-	//CHECKSTYLE:OFF
-	private static Account[] accountArray;
-	Anchor anchor = Anchor.getInstance();
-	private User user;
-	private RealDataSource dbHandler;
-	private Button newAccount;
-	private ListView accountView;
-	private AccountsAdapter adapter;
-	//CHECKSTYLE:ON
-	
-	/**
-	 * The onCreateView method creates the view for the fragment. I have
-	 * onClickListeners to detect when the button is pressed and perform actions
-	 * based on those events.
-	 * 
-	 * @param inflater inflater
-	 * @param container container
-	 * @param savedInstanceState saved instance state
-	 * @return rootView is something
-	 */
+    // CHECKSTYLE:OFF
+    private static Account[] accountArray;
+    Anchor anchor = Anchor.getInstance();
+    private User user;
+    private RealDataSource dbHandler;
+    private Button newAccount;
+    private ListView accountView;
+    private AccountsAdapter adapter;
+
+    // CHECKSTYLE:ON
+
+    /**
+     * The onCreateView method creates the view for the fragment. I have
+     * onClickListeners to detect when the button is pressed and perform actions
+     * based on those events.
+     * 
+     * @param inflater
+     *            inflater
+     * @param container
+     *            container
+     * @param savedInstanceState
+     *            saved instance state
+     * @return rootView is something
+     */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        
-    	View rootView = inflater.inflate(R.layout.fragment_account_listing, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+
+        View rootView = inflater.inflate(R.layout.fragment_account_listing,
+                container, false);
         this.setHasOptionsMenu(true);
-        
+
         newAccount = (Button) rootView.findViewById(R.id.newAccount);
         accountView = (ListView) rootView.findViewById(R.id.listViewAccounts);
         newAccount.setOnClickListener(new OnClickListener() {
 
-			/**
-			 * If the user clicks new account button, the screen transitions to
-			 * NewAccountActivity
-			 */
+            /**
+             * If the user clicks new account button, the screen transitions to
+             * NewAccountActivity
+             */
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), NewAccountActivity.class);
@@ -75,33 +81,34 @@ public class AccountListFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(android.view.Menu menu, android.view.MenuInflater inflater) {
+    public void onCreateOptionsMenu(android.view.Menu menu,
+            android.view.MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.account_list_fragment, menu);
     };
 
     @Override
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
-		// if (item.getItemId() == R.id.action_add_acount) {
-		//
-		// }
+        // if (item.getItemId() == R.id.action_add_acount) {
+        //
+        // }
         super.onOptionsItemSelected(item);
         return true;
     };
 
-	/**
-	 * The reason why all the database stuff is in the onResume() method is
-	 * because of the nature of a Fragment's lifecycle. Whenever you use a
-	 * fragment you must put the database code inside onResume(). Look up a
-	 * Fragment's lifecycle on Google
-	 */
+    /**
+     * The reason why all the database stuff is in the onResume() method is
+     * because of the nature of a Fragment's lifecycle. Whenever you use a
+     * fragment you must put the database code inside onResume(). Look up a
+     * Fragment's lifecycle on Google
+     */
     @Override
     public void onResume() {
         dbHandler = new RealDataSource(getActivity());
         dbHandler.open();
         user = anchor.getCurrentUser();
-        //Log.d("AccountsListFragment", "user: " + user);
-        //Log.d("AccountsListFragment", "dbHandler: " + dbHandler);
+        // Log.d("AccountsListFragment", "user: " + user);
+        // Log.d("AccountsListFragment", "dbHandler: " + dbHandler);
         dbHandler.getAccountsForUser(user.getUserID());
         accountArray = dbHandler.getAccountsForUser(user.getUserID());
         List<Account> accountList = new ArrayList<Account>();
@@ -114,9 +121,9 @@ public class AccountListFragment extends Fragment {
         super.onResume();
     }
 
-	/**
-	 * The method need each time RealDataSource is used in a class.
-	 */
+    /**
+     * The method need each time RealDataSource is used in a class.
+     */
     @Override
     public void onPause() {
         dbHandler.close();

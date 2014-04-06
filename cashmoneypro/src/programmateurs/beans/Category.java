@@ -2,18 +2,19 @@ package programmateurs.beans;
 
 /**
  * Categories are custom-made "envelopes" that the User uses to separate his/her
- * money according to how he/she plans on spending it. Each category has an
- * ID, a reference to the ID of the user who made the category, and a name.
+ * money according to how he/she plans on spending it. Each category has an ID,
+ * a reference to the ID of the user who made the category, and a name.
  * 
  * @author Currell
  * @version 0.0
  */
 public class Category {
-	//CHECKSTYLE:OFF	Variables defined in class javadoc.
+    // CHECKSTYLE:OFF Variables defined in class javadoc.
     private long categoryID;
     private long userID;
     private String category_name;
-    //CHECKSTYLE:ON
+
+    // CHECKSTYLE:ON
     /**
      * Constructor for Category.
      * 
@@ -24,9 +25,9 @@ public class Category {
      * @param category_name
      *            User-assigned name of category
      */
-    //CHECKSTYLE:OFF	category_name is a part of JQueries, too late to change
+    // CHECKSTYLE:OFF category_name is a part of JQueries, too late to change
     public Category(long categoryID, long userID, String category_name) {
-    //CHECKSTYLE:ON
+        // CHECKSTYLE:ON
         super();
         this.categoryID = categoryID;
         this.userID = userID;
@@ -56,9 +57,9 @@ public class Category {
      * 
      * @return Category name
      */
-    //CHECKSTYLE:OFF	category_name is a part of JQueries, too late to change
+    // CHECKSTYLE:OFF category_name is a part of JQueries, too late to change
     public String getCategory_name() {
-    //CHECKSTYLE:ON
+        // CHECKSTYLE:ON
         return category_name;
     }
 

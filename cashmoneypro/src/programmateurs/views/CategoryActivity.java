@@ -26,22 +26,23 @@ import android.widget.Spinner;
  * @version 0.1
  */
 public class CategoryActivity extends Activity implements
-		OnItemSelectedListener {
-	
-	//CHECKSTYLE:OFF
-	private EditText categoryNameField;
-	private Button addButton;
-	@SuppressWarnings("unused")
-	private Button deleteButton;
-	private Spinner categorySpinner;
-	private DataSourceInterface dbHandler;
-	private Anchor anchor;
-	private ArrayAdapter<String> adapter;
-	private User user;
-	private Category[] categories;
-	@SuppressWarnings("unused")
-	private Category toDelete;
-	//CHECKSTYLE:ON
+        OnItemSelectedListener {
+
+    // CHECKSTYLE:OFF
+    private EditText categoryNameField;
+    private Button addButton;
+    @SuppressWarnings("unused")
+    private Button deleteButton;
+    private Spinner categorySpinner;
+    private DataSourceInterface dbHandler;
+    private Anchor anchor;
+    private ArrayAdapter<String> adapter;
+    private User user;
+    private Category[] categories;
+    @SuppressWarnings("unused")
+    private Category toDelete;
+
+    // CHECKSTYLE:ON
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +81,8 @@ public class CategoryActivity extends Activity implements
                 }
             }
         }
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoryArray);
+        adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, categoryArray);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(adapter);
@@ -88,34 +90,37 @@ public class CategoryActivity extends Activity implements
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos,
-			long id) {
-		// toDelete = (Category) parent.getItemAtPosition(pos); //THIS METHOD
-		// DOES NOT WORK YET. Will come back later.
+            long id) {
+        // toDelete = (Category) parent.getItemAtPosition(pos); //THIS METHOD
+        // DOES NOT WORK YET. Will come back later.
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-		// intentionally empty
+        // intentionally empty
     }
 
     /**
      * Adds a category to the database.
-     * @param name name of category?
+     * 
+     * @param name
+     *            name of category?
      */
     private void addCategory(String name) {
         dbHandler.addCategoryToDB(anchor.getCurrentUser().getUserID(), name);
         anchor.showDialog(this, "Add Category", addButton.getText()
-        		+ " was added to categories!");
+                + " was added to categories!");
         categoryNameField.setText("");
         populateSpinner();
     }
 
     /**
-     * Needs to be done. A way to remove categories from database and transactions.
+     * Needs to be done. A way to remove categories from database and
+     * transactions.
      */
     @SuppressWarnings("unused")
     private void deleteCategory() {
-		// TODO set up a way to remove categories from database AND transactions
+        // TODO set up a way to remove categories from database AND transactions
     }
 
     @Override
@@ -133,7 +138,7 @@ public class CategoryActivity extends Activity implements
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.category, menu);
         return true;
     }

@@ -13,10 +13,12 @@ import programmateurs.beans.User;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 /**
  * manages access to user data in the db.
+ * 
  * @author vancan1ty
- *
+ * 
  */
 public final class UsersDAO {
 
@@ -33,16 +35,16 @@ public final class UsersDAO {
     public static final String CREATE_USERS_TABLE = "CREATE TABLE Users"
             + " (userID INTEGER PRIMARY KEY AUTOINCREMENT, "
             + " username TEXT NOT NULL COLLATE NOCASE, "
-            + " passhash TEXT NOT NULL,"
-            + " first TEXT DEFAULT '',"
-            + " last TEXT DEFAULT '',"
-            + " email TEXT DEFAULT ''" + ");";
+            + " passhash TEXT NOT NULL," + " first TEXT DEFAULT '',"
+            + " last TEXT DEFAULT ''," + " email TEXT DEFAULT ''" + ");";
 
-/**
- * converts a db cursor to a user.
- * @param c the properly generated db cursor.
- * @return a User object extracted from the cursor.
- */
+    /**
+     * converts a db cursor to a user.
+     * 
+     * @param c
+     *            the properly generated db cursor.
+     * @return a User object extracted from the cursor.
+     */
     public static User cursorToUser(final Cursor c) {
         long userID = longFromCursor(c, "userID");
         String username = stringFromCursor(c, "username");
@@ -55,7 +57,9 @@ public final class UsersDAO {
 
     /**
      * gets all the users in the db.
-     * @param db nah
+     * 
+     * @param db
+     *            nah
      * @return nah
      */
     public static User[] getUsers(final SQLiteDatabase db) {
@@ -75,14 +79,17 @@ public final class UsersDAO {
 
     /**
      * gets a user with a given userID.
-     * @param db nah
-     * @param userID nah
+     * 
+     * @param db
+     *            nah
+     * @param userID
+     *            nah
      * @return nah
      */
     public static User getUser(final SQLiteDatabase db, final long userID) {
         Cursor c = db.rawQuery("SELECT * FROM users WHERE userID = ?;",
-                new String[] {Long.toString(userID)});
-//        List<User> outL = new ArrayList<User>();
+                new String[] { Long.toString(userID) });
+        // List<User> outL = new ArrayList<User>();
 
         c.moveToFirst();
         User user = cursorToUser(c);
@@ -92,9 +99,13 @@ public final class UsersDAO {
 
     /**
      * What rhymes with green?
-     * @param db nah
-     * @param username nah
-     * @param password nah
+     * 
+     * @param db
+     *            nah
+     * @param username
+     *            nah
+     * @param password
+     *            nah
      * @return nah
      */
     public static boolean isUserInDB(final SQLiteDatabase db,
@@ -102,7 +113,7 @@ public final class UsersDAO {
         Cursor c;
         c = db.rawQuery(
                 "SELECT * FROM users WHERE username = ? AND passhash = ?",
-                new String[] {username, hashPassword(password)});
+                new String[] { username, hashPassword(password) });
         return c.getCount() == 1;
     }
 
@@ -111,17 +122,22 @@ public final class UsersDAO {
     // byte[] salt = new byte[16]; // no salt for now
     // KeySpec spec = new PBEKeySpec("password".toCharArray(), salt, 65536,
     // 128);
-    // SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+    // SecretKeyFactory f =
+    // SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
     // byte[] hash = f.generateSecret(spec).getEncoded();
     // return new BigInteger(1, hash).toString(16);
     // }
     //
 
     /**
-     * adds the user to the db.  no shit!
-     * @param db db
-     * @param username username
-     * @param password password
+     * adds the user to the db. no shit!
+     * 
+     * @param db
+     *            db
+     * @param username
+     *            username
+     * @param password
+     *            password
      */
     public static void addUserToDB(final SQLiteDatabase db,
             final String username, final String password) {
@@ -139,7 +155,9 @@ public final class UsersDAO {
 
     /**
      * hashes a password.
-     * @param password password
+     * 
+     * @param password
+     *            password
      * @return the hashed password
      */
     public static String hashPassword(final String password) {
@@ -152,9 +170,12 @@ public final class UsersDAO {
             return "nosuchalgorithm";
         }
         try {
-            md.update((password + HASH).getBytes("UTF-8")); // Change this to
-                                                            // "UTF-16" if
-                                                            // needed
+            md.update((password + HASH).getBytes("UTF-8")); // Change
+            // this
+            // to
+            // "UTF-16"
+            // if
+            // needed
         } catch (UnsupportedEncodingException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -165,19 +186,21 @@ public final class UsersDAO {
         String output = bigInt.toString(SIXTEEN);
         return output;
     }
+
     /**
      * 16.
      */
     public static final int SIXTEEN = 16;
 
-
     /**
      * updates the user matching the parameter user in the db with whatever
      * information the user parameter contains, returns the user read back from
      * the database.
-     *
-     * @param db db connection.
-     * @param user nah
+     * 
+     * @param db
+     *            db connection.
+     * @param user
+     *            nah
      * @return reading the results of the operation back from the db
      */
     public static User updateUser(final SQLiteDatabase db, final User user) {
@@ -188,18 +211,25 @@ public final class UsersDAO {
         toSet.put("last", user.getLast());
         toSet.put("email", user.getEmail());
         db.update("Users", toSet, "userid=?",
-                new String[] {Long.toString(user.getUserID())});
+                new String[] { Long.toString(user.getUserID()) });
         return getUser(db, user.getUserID());
     }
 
     /**
      * adds a user to the db.
-     * @param db an open db connection.
-     * @param username the username for the user.
-     * @param password the password for the user.
-     * @param first the user's first name.
-     * @param last the user's last name.
-     * @param email the user's email address.
+     * 
+     * @param db
+     *            an open db connection.
+     * @param username
+     *            the username for the user.
+     * @param password
+     *            the password for the user.
+     * @param first
+     *            the user's first name.
+     * @param last
+     *            the user's last name.
+     * @param email
+     *            the user's email address.
      * @return a user object like the one created in the database.
      */
     public static User addUserToDB(final SQLiteDatabase db,

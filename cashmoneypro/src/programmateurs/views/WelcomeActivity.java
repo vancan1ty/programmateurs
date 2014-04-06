@@ -20,19 +20,20 @@ import android.widget.Button;
  * @version 0.0
  */
 public class WelcomeActivity extends Activity {
-	
-	//CHECKSTYLE:OFF
-	Button buttonLogin;
-	Button buttonRegister;
-	private Anchor anchor = Anchor.getInstance();
-	private RealDataSource src;
-	//CHECKSTYLE:ON
+
+    // CHECKSTYLE:OFF
+    Button buttonLogin;
+    Button buttonRegister;
+    private Anchor anchor = Anchor.getInstance();
+    private RealDataSource src;
+
+    // CHECKSTYLE:ON
 
     @Override
     public void onBackPressed() {
-		// This method intentionally does nothing. Overridden to prevent user
-		// from doing something stupid like hitting back after logging out and
-		// breaking our code.
+        // This method intentionally does nothing. Overridden to prevent user
+        // from doing something stupid like hitting back after logging out and
+        // breaking our code.
     }
 
     @Override
@@ -66,7 +67,7 @@ public class WelcomeActivity extends Activity {
         src = new RealDataSource(this);
         src.open();
 
-		// This code allows us to bypass login while testing
+        // This code allows us to bypass login while testing
         if (Anchor.TEST_MODE) {
             Intent i = new Intent(this, HomeActivity.class);
             anchor.setCurrentUser(src.getUser("test"));
@@ -82,24 +83,24 @@ public class WelcomeActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.welcome, menu);
         return true;
     }
 
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
-		//Log.d("WelcomeActivity", "featureID" + featureId);
+        // Log.d("WelcomeActivity", "featureID" + featureId);
         if (item.getItemId() == R.id.about_us) {
             anchor.showDialog(
-					this,
-					"About the Creators",
-					"This superb specimen of software engineering.\n\n"
-							+ "Which you are fortunate to have the opportunity to use.\n\n"
-							+ "Was made by:\n" + "Currell Berry,\n"
-							+ "Sara Cagle,\n" + "Pavel Komarov,\n"
-							+ "Brent McCorvey,\n" + "Justin Nieto.\n\n"
-							+ "for our GT CS 2340 team project.");
+                    this,
+                    "About the Creators",
+                    "This superb specimen of software engineering.\n\n"
+                            + "Which you are fortunate to have the opportunity to use.\n\n"
+                            + "Was made by:\n" + "Currell Berry,\n"
+                            + "Sara Cagle,\n" + "Pavel Komarov,\n"
+                            + "Brent McCorvey,\n" + "Justin Nieto.\n\n"
+                            + "for our GT CS 2340 team project.");
         }
         return super.onMenuItemSelected(featureId, item);
     }

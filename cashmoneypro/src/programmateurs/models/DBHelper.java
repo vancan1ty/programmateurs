@@ -9,11 +9,11 @@ import android.util.Log;
 /**
  * This class manages creating and updating the database schema on your android
  * device.
- *
+ * 
  * Note: Sqlite "Integer" corresponds to long in java, apparently.
- *
+ * 
  * @author vancan1ty
- *
+ * 
  */
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -22,15 +22,17 @@ public class DBHelper extends SQLiteOpenHelper {
     // public static final String COLUMN_COMMENT = "comment";
 
     /**
-     * this tells android the version of the database.  when this number
-     * changes, android rebuilds the database on the device using the methods
-     * in this class.
+     * this tells android the version of the database. when this number changes,
+     * android rebuilds the database on the device using the methods in this
+     * class.
      */
     private static final int DATABASE_VERSION = 21;
 
     /**
      * initialize the DBHelper using the android context.
-     * @param context android context instance
+     * 
+     * @param context
+     *            android context instance
      */
     public DBHelper(final Context context) {
         super(context, "programmateurs", null, DATABASE_VERSION);
@@ -58,8 +60,8 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public final void onUpgrade(final SQLiteDatabase db,
-           final int oldVersion, final int newVersion) {
+    public final void onUpgrade(final SQLiteDatabase db, final int oldVersion,
+            final int newVersion) {
         Log.w(DBHelper.class.getName(), "Upgrading database from version "
                 + oldVersion + " to " + newVersion
                 + ", which will destroy all old data");

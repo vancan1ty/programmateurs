@@ -25,24 +25,25 @@ import android.widget.EditText;
  */
 public class LoginActivity extends Activity {
 
-	//CHECKSTYLE:OFF
-	EditText usernameField;
-	EditText passwordField;
-	Button buttonLogin;
-	Button buttonLaunchCreateUser;
-	public ProgressDialog progress;
-	private RealDataSource dbHandler;
-	
+    // CHECKSTYLE:OFF
+    EditText usernameField;
+    EditText passwordField;
+    Button buttonLogin;
+    Button buttonLaunchCreateUser;
+    public ProgressDialog progress;
+    private RealDataSource dbHandler;
 
     Anchor anchor = Anchor.getInstance();
     Activity me = this;
-    //CHECKSTYLE:ON
 
-	/**
-	 * The onCreate method sets all the objects on the screen.
-	 * 
-	 * @param savedInstanceState the saved instance state
-	 */
+    // CHECKSTYLE:ON
+
+    /**
+     * The onCreate method sets all the objects on the screen.
+     * 
+     * @param savedInstanceState
+     *            the saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,46 +57,45 @@ public class LoginActivity extends Activity {
 
         buttonLogin.setOnClickListener(new OnClickListener() {
 
-			/**
-			 * If the user's name is admin, go to the AdminActivity page Else go
-			 * to the HomeActivity page and set the current user
-			 */
+            /**
+             * If the user's name is admin, go to the AdminActivity page Else go
+             * to the HomeActivity page and set the current user
+             */
             @Override
             public void onClick(View v) {
                 String username = usernameField.getText().toString();
                 String password = passwordField.getText().toString();
-				//Log.d("BERRY", "username: " + username + " password: " + password);
+                // Log.d("BERRY", "username: " + username + " password: " +
+                // password);
                 boolean userExists = dbHandler.isUserInDB(username, password);
                 if (userExists) {
                     Intent i;
                     if (username.equals("admin")) {
                         i = new Intent(v.getContext(), AdminActivity.class);
-                    }
-                    else {
+                    } else {
                         i = new Intent(v.getContext(), HomeActivity.class);
                     }
                     anchor.setCurrentUser(dbHandler.getUser(username));
                     v.getContext().startActivity(i);
-                }
-                else {
+                } else {
                     anchor.showDialog(me, "Log in Failure",
-							"couldn't log you in!");
+                            "couldn't log you in!");
                 }
             }
         });
     }
 
-	/**
-	 * Forces the back button to take the user back to the welcome screen when
-	 * pressed during LoginActivity (to prevent weird user-hacks).
-	 */
+    /**
+     * Forces the back button to take the user back to the welcome screen when
+     * pressed during LoginActivity (to prevent weird user-hacks).
+     */
     public void onBackPressed() {
         startActivity(new Intent(this, WelcomeActivity.class));
     }
 
-	/**
-	 * Method used every time RealDataSource is used.
-	 */
+    /**
+     * Method used every time RealDataSource is used.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -103,28 +103,28 @@ public class LoginActivity extends Activity {
     }
 
     /**
-	 * Method used every time RealDataSource is used.
-	 */
+     * Method used every time RealDataSource is used.
+     */
     @Override
     protected void onPause() {
         dbHandler.close();
         super.onPause();
     }
 
-	/**
-	 * Return the user's username.
-	 * 
-	 * @return string the username
-	 */
+    /**
+     * Return the user's username.
+     * 
+     * @return string the username
+     */
     public String getUsernameEntry() {
         return usernameField.getText().toString();
     }
 
-	/**
-	 * Returns the user's password.
-	 * 
-	 * @return string the password
-	 */
+    /**
+     * Returns the user's password.
+     * 
+     * @return string the password
+     */
     public String getPasswordEntry() {
         return passwordField.getText().toString();
     }

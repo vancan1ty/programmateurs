@@ -13,19 +13,22 @@ import android.content.DialogInterface.OnClickListener;
  * @author Justin
  * @version 0.1
  */
-//CHECKSTYLE:OFF
+// CHECKSTYLE:OFF
 public abstract class ConfirmDialog extends AlertDialog.Builder implements
-    OnClickListener {
-//CHECKSTYLE:ON
+        OnClickListener {
+    // CHECKSTYLE:ON
 
-	/**
-	 * Creates new ConfirDialog for given context using provided title and
-	 * message.
-	 * 
-	 * @param context context
-	 * @param message message
-	 * @param title title
-	 */
+    /**
+     * Creates new ConfirDialog for given context using provided title and
+     * message.
+     * 
+     * @param context
+     *            context
+     * @param message
+     *            message
+     * @param title
+     *            title
+     */
     public ConfirmDialog(Context context, String title, String message) {
         super(context);
         setTitle(title);
@@ -35,12 +38,13 @@ public abstract class ConfirmDialog extends AlertDialog.Builder implements
         setNegativeButton("cancel", this);
     }
 
-	/**
-	 * will be called when "cancel" pressed. closes the dialog. can be
-	 * overridden.
-	 * 
-	 * @param dialog dialog
-	 */
+    /**
+     * will be called when "cancel" pressed. closes the dialog. can be
+     * overridden.
+     * 
+     * @param dialog
+     *            dialog
+     */
     public void onCancelClicked(DialogInterface dialog) {
         dialog.dismiss();
     }
@@ -51,17 +55,17 @@ public abstract class ConfirmDialog extends AlertDialog.Builder implements
             if (onOkClicked("")) {
                 dialog.dismiss();
             }
-        }
-        else {
+        } else {
             onCancelClicked(dialog);
         }
     }
 
-	/**
-	 * called when "ok" pressed.
-	 * 
-	 * @param input input
-	 * @return true, if the dialog should be closed. false, if not.
-	 */
+    /**
+     * called when "ok" pressed.
+     * 
+     * @param input
+     *            input
+     * @return true, if the dialog should be closed. false, if not.
+     */
     public abstract boolean onOkClicked(String input);
 }

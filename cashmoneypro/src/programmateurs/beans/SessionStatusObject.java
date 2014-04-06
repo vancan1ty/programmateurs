@@ -2,19 +2,19 @@ package programmateurs.beans;
 
 /**
  * To be honest, I'm not really sure why this class exists or if we even use it
- * ever. Be patient with the comments; this file had no documentation when I 
+ * ever. Be patient with the comments; this file had no documentation when I
  * found it.
  * 
  * From the name, I'm guessing it's just meant to keep track of the current
- * session, but Anchor sort of fills that role already.  
+ * session, but Anchor sort of fills that role already.
  * 
  * @author Currell
  * @version 0.0c
- *
+ * 
  */
 public class SessionStatusObject {
 
-    //CHECKSTYLE:OFF	Variables defined in class javadoc
+    // CHECKSTYLE:OFF Variables defined in class javadoc
     private Integer userID;
     private Integer checkinID;
     private String userFirst;
@@ -24,8 +24,9 @@ public class SessionStatusObject {
     private String imagepath;
     private Double latitude;
     private Double longitude;
-    //CHECKSTYLE:ON
-    
+
+    // CHECKSTYLE:ON
+
     /**
      * Getter for ID of current user.
      * 
@@ -38,11 +39,12 @@ public class SessionStatusObject {
     /**
      * Setter for current user ID.
      * 
-     * @param userID ID of user currently logged in
+     * @param userID
+     *            ID of user currently logged in
      */
-    //CHECKSTYLE:OFF	No ambiguity about variable when "this" is used.
+    // CHECKSTYLE:OFF No ambiguity about variable when "this" is used.
     public void setUserID(Integer userID) {
-    //CHECKSTYLE:ON
+        // CHECKSTYLE:ON
         this.userID = userID;
     }
 
@@ -51,7 +53,7 @@ public class SessionStatusObject {
      * 
      * @return ID for current session
      */
-    //CHECKSTYLE:OFF	No ambiguity about variable when "this" is used.
+    // CHECKSTYLE:OFF No ambiguity about variable when "this" is used.
     public int getCheckinID() {
         return checkinID;
     }
@@ -59,11 +61,12 @@ public class SessionStatusObject {
     /**
      * Setter for checkinID
      * 
-     * @param checkinID for current session
+     * @param checkinID
+     *            for current session
      */
-    //CHECKSTYLE:OFF	No ambiguity about variable when "this" is used.
+    // CHECKSTYLE:OFF No ambiguity about variable when "this" is used.
     public void setCheckinID(Integer checkinID) {
-    //CHECKSTYLE:ON
+        // CHECKSTYLE:ON
         this.checkinID = checkinID;
     }
 
@@ -73,17 +76,18 @@ public class SessionStatusObject {
      * @return first name of user
      */
     public String getUserFirst() {
-	return userFirst;
+        return userFirst;
     }
 
     /**
      * Setter for user's first name.
      * 
-     * @param userFirst first name of user
+     * @param userFirst
+     *            first name of user
      */
-    //CHECKSTYLE:OFF	No ambiguity about variable when "this" is used.
+    // CHECKSTYLE:OFF No ambiguity about variable when "this" is used.
     public void setUserFirst(String userFirst) {
-    //CHECKSTYLE:ON
+        // CHECKSTYLE:ON
         this.userFirst = userFirst;
     }
 
@@ -99,11 +103,12 @@ public class SessionStatusObject {
     /**
      * Setter for last name of user.
      * 
-     * @param userLast user's last name
+     * @param userLast
+     *            user's last name
      */
-    //CHECKSTYLE:OFF	No ambiguity about variable when "this" is used.
+    // CHECKSTYLE:OFF No ambiguity about variable when "this" is used.
     public void setUserLast(String userLast) {
-    //CHECKSTYLE:ON
+        // CHECKSTYLE:ON
         this.userLast = userLast;
     }
 
@@ -119,11 +124,12 @@ public class SessionStatusObject {
     /**
      * Setter for user's email.
      * 
-     * @param email current user's email
+     * @param email
+     *            current user's email
      */
-    //CHECKSTYLE:OFF	No ambiguity about variable when "this" is used.
+    // CHECKSTYLE:OFF No ambiguity about variable when "this" is used.
     public void setEmail(String email) {
-    //CHECKSTYLE:ON
+        // CHECKSTYLE:ON
         this.email = email;
     }
 
@@ -139,11 +145,12 @@ public class SessionStatusObject {
     /**
      * Setter for user's password.
      * 
-     * @param password current user's password
+     * @param password
+     *            current user's password
      */
-    //CHECKSTYLE:OFF	No ambiguity about variable when "this" is used.
+    // CHECKSTYLE:OFF No ambiguity about variable when "this" is used.
     public void setPassword(String password) {
-    //CHECKSTYLE:ON
+        // CHECKSTYLE:ON
         this.password = password;
     }
 
@@ -161,9 +168,9 @@ public class SessionStatusObject {
      * 
      * @param imagepath
      */
-    //CHECKSTYLE:OFF	No ambiguity about variable when "this" is used.
+    // CHECKSTYLE:OFF No ambiguity about variable when "this" is used.
     public void setImagepath(String imagepath) {
-    //CHECKSTYLE:ON
+        // CHECKSTYLE:ON
         this.imagepath = imagepath;
     }
 
@@ -181,9 +188,9 @@ public class SessionStatusObject {
      * 
      * @param latitude
      */
-    //CHECKSTYLE:OFF	No ambiguity about variable when "this" is used.
+    // CHECKSTYLE:OFF No ambiguity about variable when "this" is used.
     public void setLatitude(Double latitude) {
-    //CHECKSTYLE:ON
+        // CHECKSTYLE:ON
         this.latitude = latitude;
     }
 
@@ -201,18 +208,18 @@ public class SessionStatusObject {
      * 
      * @param longitude
      */
-    //CHECKSTYLE:OFF	No ambiguity about variable when "this" is used.
+    // CHECKSTYLE:OFF No ambiguity about variable when "this" is used.
     public void setLongitude(Double longitude) {
-    //CHECKSTYLE:ON
+        // CHECKSTYLE:ON
         this.longitude = longitude;
     }
 
     @Override
     public String toString() {
         return "SessionStatusObject [userID=" + userID + ", checkinID="
-                + checkinID + ", currentBuilding=" + ", userFirst="
-                + userFirst + ", userLast=" + userLast + ", email=" + email
-                + ", password=" + password + ", imagepath=" + imagepath
-                + ", latitude=" + latitude + ", longitude=" + longitude + "]";
+                + checkinID + ", currentBuilding=" + ", userFirst=" + userFirst
+                + ", userLast=" + userLast + ", email=" + email + ", password="
+                + password + ", imagepath=" + imagepath + ", latitude="
+                + latitude + ", longitude=" + longitude + "]";
     }
 }

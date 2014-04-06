@@ -31,27 +31,29 @@ import programmateurs.models.RealDataSource;
  */
 public class NewAccountActivity extends Activity {
 
-	//CHECKSTYLE:OFF
-	private User user;
-	private RealDataSource dbHandler;
-	Activity me = this;
-	Anchor anchor = Anchor.getInstance();
-	ACCOUNT_TYPE accountType;
+    // CHECKSTYLE:OFF
+    private User user;
+    private RealDataSource dbHandler;
+    Activity me = this;
+    Anchor anchor = Anchor.getInstance();
+    ACCOUNT_TYPE accountType;
 
-	EditText accountField;
-	EditText interestRate;
-	Button createAccount;
-	Random rand;
-	Spinner spinner;
-	String checking = "Checking";
-	String savings = "Savings";
-	//CHECKSTYLE:ON
+    EditText accountField;
+    EditText interestRate;
+    Button createAccount;
+    Random rand;
+    Spinner spinner;
+    String checking = "Checking";
+    String savings = "Savings";
 
-	/**
-	 * Creates the objects on the screen.
-	 * 
-	 * @param savedInstanceState the saved instance state
-	 */
+    // CHECKSTYLE:ON
+
+    /**
+     * Creates the objects on the screen.
+     * 
+     * @param savedInstanceState
+     *            the saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,34 +67,34 @@ public class NewAccountActivity extends Activity {
         createAccount = (Button) findViewById(R.id.createAccount);
 
         spinner = (Spinner) findViewById(R.id.spinnerNewAccount);
-		// Create an ArrayAdapter using the string array and a default spinner
-		// layout
+        // Create an ArrayAdapter using the string array and a default spinner
+        // layout
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
-				this, android.R.layout.simple_spinner_item);
-		// Specify the layout to use when the list of choices appears
+                this, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-		// FIXME //Just leave this tag here. I might fix this
+        // FIXME //Just leave this tag here. I might fix this
         adapter.add(checking);
         adapter.add(savings);
         spinner.setAdapter(adapter);
 
         createAccount.setOnClickListener(new OnClickListener() {
 
-        	//CHECKSTYLE:OFF
-			/**
-			 * Boolean logic to detect if the interest rate and account name are
-			 * valid entries
-			 */
+            // CHECKSTYLE:OFF
+            /**
+             * Boolean logic to detect if the interest rate and account name are
+             * valid entries
+             */
             @Override
-            //CHECKSTYLE:ON
+            // CHECKSTYLE:ON
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), HomeActivity.class);
                 String account = accountField.getText().toString();
                 boolean validAccount = false;
                 if (account.equals("")) {
                     anchor.showDialog(me, "Invalid Account Name",
-							"Please enter an account name");
+                            "Please enter an account name");
                 }
                 String interestString = interestRate.getText().toString();
                 double interestNum = -1.0;
@@ -102,50 +104,55 @@ public class NewAccountActivity extends Activity {
 
                 if (interestNum < 0 || interestNum > 100) {
                     anchor.showDialog(me, "Invalid Interst Rate",
-							"Please enter an interest rate between 0 and 100");
+                            "Please enter an interest rate between 0 and 100");
                 }
 
-                validAccount = (interestNum <= 100 && interestNum >= 0 && !account.equals(""));
+                validAccount = (interestNum <= 100 && interestNum >= 0 && !account
+                        .equals(""));
 
-                if (spinner.getSelectedItem().toString().equals(checking) && validAccount) {
+                if (spinner.getSelectedItem().toString().equals(checking)
+                        && validAccount) {
                     accountType = ACCOUNT_TYPE.CHECKING;
-                    dbHandler.addAccountToDB(user.getUserID(), accountType, account, interestNum);
+                    dbHandler.addAccountToDB(user.getUserID(), accountType,
+                            account, interestNum);
                     v.getContext().startActivity(i);
-                }
-                else if (spinner.getSelectedItem().toString().equals(savings) && validAccount) {
+                } else if (spinner.getSelectedItem().toString().equals(savings)
+                        && validAccount) {
                     accountType = ACCOUNT_TYPE.SAVINGS;
-                    dbHandler.addAccountToDB(user.getUserID(), accountType, account, interestNum);
+                    dbHandler.addAccountToDB(user.getUserID(), accountType,
+                            account, interestNum);
                     v.getContext().startActivity(i);
                 }
             }
         });
     }
 
-	/**
-	 * Creates the menu.
-	 * 
-	 * @param menu the menu
-	 * @return boolean true
-	 */
+    /**
+     * Creates the menu.
+     * 
+     * @param menu
+     *            the menu
+     * @return boolean true
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.new_account, menu);
         return true;
     }
 
-	/**
-	 * Method used when RealDataSource is used.
-	 */
+    /**
+     * Method used when RealDataSource is used.
+     */
     @Override
     protected void onResume() {
         dbHandler.open();
         super.onResume();
     }
 
-	/**
-	 * Method used when RealDataSource is used.
-	 */
+    /**
+     * Method used when RealDataSource is used.
+     */
     @Override
     protected void onPause() {
         dbHandler.close();

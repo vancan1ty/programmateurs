@@ -30,29 +30,32 @@ import android.widget.TextView;
  */
 public class AccountsAdapter extends BaseAdapter {
 
-	//CHECKSTYLE:OFF
-	private final Activity activity;
-	List<Account> accounts;
-	
+    // CHECKSTYLE:OFF
+    private final Activity activity;
+    List<Account> accounts;
 
-	/**
-	 * Accounts adaptor.
-	 * 
-	 * @param activity the activity
-	 * @param accounts the accounts
-	 */
+    /**
+     * Accounts adaptor.
+     * 
+     * @param activity
+     *            the activity
+     * @param accounts
+     *            the accounts
+     */
     public AccountsAdapter(Activity activity, List<Account> accounts) {
         this.activity = activity;
         this.accounts = accounts;
     }
-    //CHECKSTYLE:ON
+
+    // CHECKSTYLE:ON
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) activity
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.unused_corqitemlayout, parent,
-				false);
+                false);
         TextView header = (TextView) rowView.findViewById(R.id.corqHeader);
         TextView body = (TextView) rowView.findViewById(R.id.corqText);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.corqImage);
@@ -60,21 +63,22 @@ public class AccountsAdapter extends BaseAdapter {
         String headerText = q.getAccountName();
 
         header.setText(headerText);
-        body.setText("\nType: " + q.getAccountType() + "\nInterest rate: " + q.getInterestRate() + "%");
+        body.setText("\nType: " + q.getAccountType() + "\nInterest rate: "
+                + q.getInterestRate() + "%");
 
         ACCOUNT_TYPE type = q.getAccountType();
         if (type == ACCOUNT_TYPE.SAVINGS) {
             imageView.setImageResource(R.drawable.social_person);
-        }
-        else {
+        } else {
             imageView.setImageResource(R.drawable.person_dark);
         }
 
-		// onClickListener for each view
-		// We can change this to go to an Activity when pressed later.
+        // onClickListener for each view
+        // We can change this to go to an Activity when pressed later.
         rowView.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), AccountDetailActivity.class);
+                Intent i = new Intent(v.getContext(),
+                        AccountDetailActivity.class);
                 i.putExtra("accountID", q.getAccountID());
                 v.getContext().startActivity(i);
             }

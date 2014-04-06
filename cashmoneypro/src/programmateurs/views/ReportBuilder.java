@@ -22,29 +22,29 @@ import android.widget.EditText;
  * Report builder.
  * 
  * @author programmateurs
- *
+ * 
  */
 public class ReportBuilder extends Activity {
 
-	//CHECKSTYLE:OFF
-	EditText textStartDate;
-	EditText textEndDate;
-	Calendar startCalendar = Calendar.getInstance();
-	Calendar endCalendar = Calendar.getInstance();
-	Button buttonGenerateReport;
-	String reportType0 = "reportType";
+    // CHECKSTYLE:OFF
+    EditText textStartDate;
+    EditText textEndDate;
+    Calendar startCalendar = Calendar.getInstance();
+    Calendar endCalendar = Calendar.getInstance();
+    Button buttonGenerateReport;
+    String reportType0 = "reportType";
 
-	Transaction.TRANSACTION_TYPE reportType;
-	//CHECKSTYLE:ON
+    Transaction.TRANSACTION_TYPE reportType;
+    // CHECKSTYLE:ON
 
-	/**
-	 * On date listener.
-	 */
+    /**
+     * On date listener.
+     */
     DatePickerDialog.OnDateSetListener startDate = new DatePickerDialog.OnDateSetListener() {
 
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear,
-				int dayOfMonth) {
+                int dayOfMonth) {
             startCalendar.set(Calendar.YEAR, year);
             startCalendar.set(Calendar.MONTH, monthOfYear);
             startCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -56,24 +56,26 @@ public class ReportBuilder extends Activity {
      * On date listener.
      */
     DatePickerDialog.OnDateSetListener endDate = new DatePickerDialog.OnDateSetListener() {
-    //CHECKSTYLE:OFF
-    	@Override
+        // CHECKSTYLE:OFF
+        @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear,
-				int dayOfMonth) {
+                int dayOfMonth) {
             endCalendar.set(Calendar.YEAR, year);
             endCalendar.set(Calendar.MONTH, monthOfYear);
             endCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             updateLabel(textEndDate, endCalendar);
         }
-    //CHECKSTYLE:ON
-	};
+        // CHECKSTYLE:ON
+    };
 
-	/**
-	 * Update Label.
-	 * 
-	 * @param toSet to set
-	 * @param cal calendar
-	 */
+    /**
+     * Update Label.
+     * 
+     * @param toSet
+     *            to set
+     * @param cal
+     *            calendar
+     */
     private void updateLabel(EditText toSet, Calendar cal) {
         String myFormat = "MM/dd/yy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
@@ -85,7 +87,8 @@ public class ReportBuilder extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_builder);
         Bundle extras = getIntent().getExtras();
-        reportType = (Transaction.TRANSACTION_TYPE) extras.getSerializable(reportType0);
+        reportType = (Transaction.TRANSACTION_TYPE) extras
+                .getSerializable(reportType0);
         textStartDate = (EditText) findViewById(R.id.text_start_date);
         textEndDate = (EditText) findViewById(R.id.text_end_date);
         buttonGenerateReport = (Button) findViewById(R.id.button_generate_report);
@@ -95,9 +98,9 @@ public class ReportBuilder extends Activity {
             @Override
             public void onClick(View v) {
                 new DatePickerDialog(ReportBuilder.this, startDate,
-						startCalendar.get(Calendar.YEAR), startCalendar
-								.get(Calendar.MONTH), startCalendar
-								.get(Calendar.DAY_OF_MONTH)).show();
+                        startCalendar.get(Calendar.YEAR), startCalendar
+                                .get(Calendar.MONTH), startCalendar
+                                .get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
@@ -106,8 +109,8 @@ public class ReportBuilder extends Activity {
             @Override
             public void onClick(View v) {
                 new DatePickerDialog(ReportBuilder.this, endDate, endCalendar
-						.get(Calendar.YEAR), endCalendar.get(Calendar.MONTH),
-						endCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                        .get(Calendar.YEAR), endCalendar.get(Calendar.MONTH),
+                        endCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
@@ -115,7 +118,8 @@ public class ReportBuilder extends Activity {
 
             @Override
             public void onClick(View v) {
-            	Intent i = new Intent(v.getContext(), CategoryReportActivity.class);
+                Intent i = new Intent(v.getContext(),
+                        CategoryReportActivity.class);
                 i.putExtra("startCalendar", startCalendar);
                 i.putExtra("endCalendar", endCalendar);
                 i.putExtra(reportType0, reportType);
@@ -127,7 +131,7 @@ public class ReportBuilder extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.report_builder, menu);
         return true;
     }

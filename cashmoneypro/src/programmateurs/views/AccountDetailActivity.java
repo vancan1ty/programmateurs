@@ -26,29 +26,29 @@ import android.support.v4.app.NavUtils;
 /**
  * 
  * @author programmateurs
- *
+ * 
  */
 public class AccountDetailActivity extends Activity {
 
-	//CHECKSTYLE:OFF
-	DataSourceInterface src;
-	TextView textViewAccountTitle;
-	TextView textViewAccountType;
-	TextView textViewBalance;
-	ListView listViewTransactions;
-	long accountID;
-	Account account;
-	Button buttonDeposit;
-	Button buttonWithdraw;
-	List<Transaction> transactionList = new ArrayList<Transaction>();
-	//CHECKSTYLE:ON
-	
-	
+    // CHECKSTYLE:OFF
+    DataSourceInterface src;
+    TextView textViewAccountTitle;
+    TextView textViewAccountType;
+    TextView textViewBalance;
+    ListView listViewTransactions;
+    long accountID;
+    Account account;
+    Button buttonDeposit;
+    Button buttonWithdraw;
+    List<Transaction> transactionList = new ArrayList<Transaction>();
+
+    // CHECKSTYLE:ON
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_detail);
-		// Show the Up button in the action bar.
+        // Show the Up button in the action bar.
         setupActionBar();
 
         textViewAccountTitle = (TextView) findViewById(R.id.textViewAccountTitle);
@@ -80,7 +80,8 @@ public class AccountDetailActivity extends Activity {
     /**
      * Go to transaction screen.
      * 
-     * @param type deposit/withdraw
+     * @param type
+     *            deposit/withdraw
      */
     public void gotoTransactionScreen(TRANSACTION_TYPE type) {
         Intent i = new Intent(this, TransactionScreen.class);
@@ -97,20 +98,22 @@ public class AccountDetailActivity extends Activity {
         account = src.getAccountWithID(accountID);
         textViewAccountTitle.setText(account.getAccountName());
         textViewAccountType.setText(account.getAccountType().toString());
-        transactionList = Arrays.asList(src.getTransactionsForAccount(accountID));
-        listViewTransactions.setAdapter(new TransactionAdapter(this, transactionList));
+        transactionList = Arrays.asList(src
+                .getTransactionsForAccount(accountID));
+        listViewTransactions.setAdapter(new TransactionAdapter(this,
+                transactionList));
 
         int balance = 0;
         for (Transaction transaction : transactionList) {
             TRANSACTION_TYPE type = transaction.getTransactionType();
-            if ((type == TRANSACTION_TYPE.DEPOSIT || type == TRANSACTION_TYPE.REBALANCE) && !transaction.isRolledback() /*== false*/) {
+            if ((type == TRANSACTION_TYPE.DEPOSIT || type == TRANSACTION_TYPE.REBALANCE)
+                    && !transaction.isRolledback() /* == false */) {
                 balance += transaction.getTransactionAmount();
-            }
-            else if (type == TRANSACTION_TYPE.WITHDRAWAL && !transaction.isRolledback()/* == false*/) {
+            } else if (type == TRANSACTION_TYPE.WITHDRAWAL
+                    && !transaction.isRolledback()/* == false */) {
                 balance -= transaction.getTransactionAmount();
-            }
-            else {
-				// should never get here?
+            } else {
+                // should never get here?
             }
         }
         NumberFormat fmter = NumberFormat.getCurrencyInstance();
@@ -125,16 +128,16 @@ public class AccountDetailActivity extends Activity {
         src.close();
     };
 
-	/**
-	 * Set up the {@link android.app.ActionBar}.
-	 */
+    /**
+     * Set up the {@link android.app.ActionBar}.
+     */
     private void setupActionBar() {
         getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.account_detail, menu);
         return super.onCreateOptionsMenu(menu);
     }
@@ -142,16 +145,16 @@ public class AccountDetailActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-			// This ID represents the Home or Up button. In the case of this
-			// activity, the Up button is shown. Use NavUtils to allow users
-			// to navigate up one level in the application structure. For
-			// more details, see the Navigation pattern on Android Design:
-			//
-			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
+        case android.R.id.home:
+            // This ID represents the Home or Up button. In the case of this
+            // activity, the Up button is shown. Use NavUtils to allow users
+            // to navigate up one level in the application structure. For
+            // more details, see the Navigation pattern on Android Design:
+            //
+            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
+            //
+            NavUtils.navigateUpFromSameTask(this);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
