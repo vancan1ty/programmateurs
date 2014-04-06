@@ -6,7 +6,7 @@
  *               a top level screen)
  * Adapters -- classes which bind data between objects and gui components
  * 
- * and miscellaneous classes providing other ui functionalitysuch as dialogs.
+ * and miscellaneous classes providing other ui functionality
  * 
  */
 package programmateurs.views;
