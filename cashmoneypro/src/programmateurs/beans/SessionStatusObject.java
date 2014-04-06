@@ -55,6 +55,7 @@ public class SessionStatusObject {
      */
     // CHECKSTYLE:OFF No ambiguity about variable when "this" is used.
     public int getCheckinID() {
+    //CHECKSTYLE:ON
         return checkinID;
     }
 
