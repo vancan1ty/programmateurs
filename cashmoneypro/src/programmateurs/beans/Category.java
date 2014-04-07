@@ -39,9 +39,11 @@ public class Category {
      * 
      * @return ID of category
      */
+    //CHECKSTYLE:OFF    Category has its own method for this, as it should.
     public long getCategoryID() {
         return categoryID;
     }
+    //CHECKSTYLE:ON
 
     /**
      * Getter for the ID of the user who owns the account.
