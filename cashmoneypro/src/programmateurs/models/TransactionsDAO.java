@@ -59,6 +59,7 @@ public final class TransactionsDAO {
      * @throws ParseException
      *             if something goes awry
      */
+    //CHECKSTYLE:OFF    Duplicates necessary for JQuery
     private static Transaction cursorToTransaction(final Cursor c,
             final SQLiteDatabase db) throws ParseException {
         long transactionID = longFromCursor(c, "transactionID");
@@ -135,8 +136,10 @@ public final class TransactionsDAO {
         c.close();
         return outL.toArray(new Transaction[0]);
     }
+    //CHECKSTYLE:ON
 
     // CHECKSTYLE:OFF this method needs a bunch of parameters sorry.
+    // JQuery requires duplicate literal.
     /**
      * adds a transaction with the associated information to the DB, returns an
      * object representation of it.
@@ -167,7 +170,6 @@ public final class TransactionsDAO {
             final long transactionAmount, final Date transactionDate,
             final String transactionComment, final boolean rolledback,
             final Category category) {
-        // CHECKSTYLE:ON
         ContentValues toInsert = new ContentValues();
         toInsert.put("accountID", accountID);
         if (category != null) {
@@ -198,6 +200,7 @@ public final class TransactionsDAO {
         // rolledback, category);
         return thetrans;
     }
+    // CHECKSTYLE:ON
 
     /**
      * returns a list of all transactions belonging to a certain user.
@@ -300,6 +303,7 @@ public final class TransactionsDAO {
      *            nah
      * @return nah
      */
+    //CHECKSTYLE:OFF
     public static String getCategoryReport(final SQLiteDatabase db,
             final Calendar dateStart, final Calendar dateEnd,
             final Transaction.TRANSACTION_TYPE transactionType,
@@ -355,5 +359,6 @@ public final class TransactionsDAO {
         c.close();
         return out.toString();
     }
+
 
 }
