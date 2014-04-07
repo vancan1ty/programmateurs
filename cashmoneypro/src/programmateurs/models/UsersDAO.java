@@ -99,15 +99,15 @@ public final class UsersDAO {
     }
 
     /**
-     * What rhymes with green?
+     * Finds whether a User exists already in the database
      * 
      * @param db
-     *            nah
+     *            the database
      * @param username
-     *            nah
+     *            the name of the user
      * @param password
-     *            nah
-     * @return nah
+     *            the user's password
+     * @return a boolean which specifies whether the user is in the database
      */
     public static boolean isUserInDB(final SQLiteDatabase db,
             final String username, final String password) {
