@@ -138,12 +138,12 @@ public class HomeActivity extends FragmentActivity {
         public CharSequence getPageTitle(int position) {
             Locale l = Locale.getDefault();
             switch (position) {
-            case 0:
-                return getString(R.string.title_accounts).toUpperCase(l);
-            case 1:
-                return getString(R.string.title_history).toUpperCase(l);
-            case 2:
-                return getString(R.string.title_reports).toUpperCase(l);
+                case 0:
+                    return getString(R.string.title_accounts).toUpperCase(l);
+                case 1:
+                    return getString(R.string.title_history).toUpperCase(l);
+                case 2:
+                    return getString(R.string.title_reports).toUpperCase(l);
             }
             return null;
         }
