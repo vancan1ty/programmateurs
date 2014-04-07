@@ -60,7 +60,7 @@ public class SessionStatusObject {
     }
 
     /**
-     * Setter for checkinID
+     * This is the setter for checkinID.
      * 
      * @param checkinID
      *            for current session

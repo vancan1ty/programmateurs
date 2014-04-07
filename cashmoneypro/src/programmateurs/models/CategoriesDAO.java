@@ -71,7 +71,7 @@ public final class CategoriesDAO {
             final long userID) {
 
         Cursor c = db.rawQuery("SELECT * FROM categories WHERE userid = ?;",
-                new String[] { Long.toString(userID) });
+                new String[] {Long.toString(userID)});
         List<Category> outL = new ArrayList<Category>();
 
         c.moveToFirst();
@@ -104,7 +104,7 @@ public final class CategoriesDAO {
                         + "JOIN Categories as C " + "WHERE T.transactionID = ?"
                         + "AND TC.transactionID = T.transactionID"
                         + "AND TC.categoryID = C.categoryID;",
-                new String[] { Long.toString(transactionID) });
+                new String[] {Long.toString(transactionID)});
         List<Category> outL = new ArrayList<Category>();
 
         c.moveToFirst();

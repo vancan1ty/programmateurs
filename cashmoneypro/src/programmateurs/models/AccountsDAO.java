@@ -71,7 +71,7 @@ public final class AccountsDAO {
 
         Log.d("AccountsDAO", "db + " + db);
         Cursor c = db.rawQuery("SELECT * FROM Accounts WHERE userid = ?;",
-                new String[] { Long.toString(userID) });
+                new String[] {Long.toString(userID)});
         List<Account> outL = new ArrayList<Account>();
 
         c.moveToFirst();
@@ -99,7 +99,7 @@ public final class AccountsDAO {
 
         Log.d("AccountsDAO", "db + " + db);
         Cursor c = db.rawQuery("SELECT * FROM Accounts WHERE accountid = ?;",
-                new String[] { Long.toString(accountID) });
+                new String[] {Long.toString(accountID)});
 
         c.moveToFirst();
         Account acct = cursorToAccount(c);

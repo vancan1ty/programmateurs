@@ -2,7 +2,6 @@ package programmateurs.interfaces;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Timestamp;
 import java.util.Date;
 
 import android.database.SQLException;
@@ -154,6 +153,11 @@ public interface DataSourceInterface {
      */
     public Category addCategoryToDB(long userID, String categoryName);
 
+    /**
+     * updates a user in the db with new information.
+     * @param user the user to update
+     * @return a copy of the modified user
+     */
     User updateUser(User user);
 
     /**
