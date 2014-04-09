@@ -82,12 +82,6 @@ public class HomeActivity extends FragmentActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Log.d("HomeActivity","Title: " + item.getTitle());
-        if (item.getTitle().equals(logout0)) {
-            // Anchor.getInstance().setCurrentUser(null);//NOTE THAT SETTING THE
-            // USER TO NULL CAUSES THE PROGRAM TO CRASH IF THE USER HITS THE
-            // BACK BUTTON AFTER LOGGING OUT
-        }
         this.startActivity(item.getIntent());
         return true;
     }
@@ -138,12 +132,12 @@ public class HomeActivity extends FragmentActivity {
         public CharSequence getPageTitle(int position) {
             Locale l = Locale.getDefault();
             switch (position) {
-            case 0:
-                return getString(R.string.title_accounts).toUpperCase(l);
-            case 1:
-                return getString(R.string.title_history).toUpperCase(l);
-            case 2:
-                return getString(R.string.title_reports).toUpperCase(l);
+                case 0:
+                    return getString(R.string.title_accounts).toUpperCase(l);
+                case 1:
+                    return getString(R.string.title_history).toUpperCase(l);
+                case 2:
+                    return getString(R.string.title_reports).toUpperCase(l);
             }
             return null;
         }

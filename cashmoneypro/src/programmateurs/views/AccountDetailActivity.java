@@ -41,6 +41,7 @@ public class AccountDetailActivity extends Activity {
     Button buttonDeposit;
     Button buttonWithdraw;
     List<Transaction> transactionList = new ArrayList<Transaction>();
+    String rebalance = "Rebalance Account";
 
     // CHECKSTYLE:ON
 
@@ -137,26 +138,26 @@ public class AccountDetailActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.account_detail, menu);
+        //MenuItem settings = menu.add("Settings");
+        //settings.setIntent(new Intent(this, SettingsActivity2.class));
+
+        MenuItem reequilibrate = menu.add(rebalance);
+        reequilibrate.setIntent(new Intent(this, WelcomeActivity.class));
+        MenuItem categories = menu.add("Edit Categories");
+        categories.setIntent(new Intent(this, CategoryActivity.class));
+        // getMenuInflater().inflate(R.menu.home, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        case android.R.id.home:
-            // This ID represents the Home or Up button. In the case of this
-            // activity, the Up button is shown. Use NavUtils to allow users
-            // to navigate up one level in the application structure. For
-            // more details, see the Navigation pattern on Android Design:
-            //
-            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
-            //
+        if (item.getItemId()==android.R.id.home) {
             NavUtils.navigateUpFromSameTask(this);
             return true;
         }
-        return super.onOptionsItemSelected(item);
+        this.startActivity(item.getIntent());
+        return true;
     }
+    
 
 }

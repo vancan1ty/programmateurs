@@ -37,7 +37,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public DBHelper(final Context context) {
         super(context, "programmateurs", null, DATABASE_VERSION);
     }
-
+    
+    //CHECKSTYLE:OFF    Duplicate literals necessary.
     @Override
     public final void onCreate(final SQLiteDatabase database) {
         database.execSQL(UsersDAO.CREATE_USERS_TABLE);
@@ -58,6 +59,7 @@ public class DBHelper extends SQLiteOpenHelper {
         database.insert("users", null, toInsert2);
 
     }
+    //CHECKSTYLE:ON
 
     @Override
     public final void onUpgrade(final SQLiteDatabase db, final int oldVersion,

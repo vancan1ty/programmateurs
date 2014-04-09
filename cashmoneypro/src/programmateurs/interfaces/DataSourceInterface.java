@@ -25,20 +25,20 @@ public interface DataSourceInterface {
      * 
      * @throws SQLException if the db connection can't be opened.
      */
-    public void open() throws SQLException;
+    void open() throws SQLException;
 
     /**
      * close data source. make sure to close when you're done with the data
      * source!
      */
-    public void close();
+    void close();
 
     /**
      * returns all users in the system. useful for admin screen.
      * 
      * @return users in system
      */
-    public User[] getUsers();
+    User[] getUsers();
 
     /**
      * returns user in system corresponding to given username. returns null if
@@ -47,7 +47,7 @@ public interface DataSourceInterface {
      * @param username the username of the user
      * @return user in system, null if no user in system
      */
-    public User getUser(String username);
+    User getUser(String username);
 
     /**
      * Verifies that given password is the password in the database for the
@@ -58,7 +58,7 @@ public interface DataSourceInterface {
      * @return true if given username/password combination corresponds to
      *         database
      */
-    public boolean isUserInDB(String username, String password);
+    boolean isUserInDB(String username, String password);
 
     /**
      * retrieves an account with the given id, or null if none exists.
@@ -66,7 +66,7 @@ public interface DataSourceInterface {
      * @param accountID the account id of the user
      * @return the Account object representing the account matching the input id
      */
-    public Account getAccountWithID(long accountID);
+    Account getAccountWithID(long accountID);
 
     /**
      * returns a list of all accounts owned by a given user.
@@ -74,7 +74,7 @@ public interface DataSourceInterface {
      * @param userID the id of the user to find the account for.
      * @return list of accounts owned by user
      */
-    public Account[] getAccountsForUser(long userID);
+    Account[] getAccountsForUser(long userID);
 
     /**
      * returns a list of categories for a given user! useful for reports.
@@ -82,7 +82,7 @@ public interface DataSourceInterface {
      * @param userID the id of the user to find the list of categories for
      * @return a list of categories for a given user.
      */
-    public Category[] getCategoriesForUser(long userID);
+    Category[] getCategoriesForUser(long userID);
 
     /**
      * a list of transactions for a given account. need to decide what to do
@@ -91,7 +91,7 @@ public interface DataSourceInterface {
      * @param accountID the id of the account to get transactions for.
      * @return a list of transactions for a given account
      */
-    public Transaction[] getTransactionsForAccount(long accountID);
+    Transaction[] getTransactionsForAccount(long accountID);
 
     /**
      * adds a user with the given information to the db, returns the object
@@ -106,7 +106,7 @@ public interface DataSourceInterface {
      * @throws UnsupportedEncodingException UnsupportedEncodingException
      * @throws NoSuchAlgorithmException NoSuchAlgorithmException
      */
-    public User addUserToDB(String username, String passhash, String first,
+    User addUserToDB(String username, String passhash, String first,
             String last, String email) throws NoSuchAlgorithmException,
             UnsupportedEncodingException;
 
@@ -120,7 +120,7 @@ public interface DataSourceInterface {
      * @param interestRate interestRate
      * @return return
      */
-    public Account addAccountToDB(long userID,
+    Account addAccountToDB(long userID,
             Account.ACCOUNT_TYPE accountType, String accountName,
             double interestRate);
 
@@ -138,7 +138,7 @@ public interface DataSourceInterface {
      * @param category the category of the transaction
      * @return return a transaction object matching the one added to the db
      */
-    public Transaction addTransactionToDB(long accountID,
+    Transaction addTransactionToDB(long accountID,
             String transactionName, TRANSACTION_TYPE transactionType,
             long transactionAmount, Date transactionDate,
             String transactionComment, boolean rolledback, Category category);
@@ -151,7 +151,7 @@ public interface DataSourceInterface {
      * @param categoryName the category to add.
      * @return an object representation of the added category.
      */
-    public Category addCategoryToDB(long userID, String categoryName);
+    Category addCategoryToDB(long userID, String categoryName);
 
     /**
      * updates a user in the db with new information.
@@ -167,6 +167,6 @@ public interface DataSourceInterface {
      * @param userID the id of the user
      * @return a list of transaction associated with him.
      */
-    public Transaction[] getTransactionsForUser(long userID);
+    Transaction[] getTransactionsForUser(long userID);
 
 }

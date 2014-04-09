@@ -45,6 +45,7 @@ public final class UsersDAO {
      *            the properly generated db cursor.
      * @return a User object extracted from the cursor.
      */
+    //CHECKSTYLE:OFF    Repetition necessary for JQuery
     public static User cursorToUser(final Cursor c) {
         long userID = longFromCursor(c, "userID");
         String username = stringFromCursor(c, "username");
@@ -98,15 +99,15 @@ public final class UsersDAO {
     }
 
     /**
-     * What rhymes with green?
+     * Finds whether a User exists already in the database
      * 
      * @param db
-     *            nah
+     *            the database
      * @param username
-     *            nah
+     *            the name of the user
      * @param password
-     *            nah
-     * @return nah
+     *            the user's password
+     * @return a boolean which specifies whether the user is in the database
      */
     public static boolean isUserInDB(final SQLiteDatabase db,
             final String username, final String password) {
@@ -147,6 +148,7 @@ public final class UsersDAO {
         toInsert.put("passhash", hashPassword(password));
         db.insert("users", null, toInsert);
     }
+    //CHECKSTYLE:ON
 
     /**
      * not the best way to do hashing but it's better than nothing.
