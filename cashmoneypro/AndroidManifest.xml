@@ -84,6 +84,10 @@
             android:name="programmateurs.views.ReportBuilder"
             android:label="@string/title_activity_report_builder" >
         </activity>
+        <activity
+            android:name="programmateurs.views.RebalanceActivity"
+            android:label="@string/rebalance">
+        </activity>
     </application>
 
 </manifest>
