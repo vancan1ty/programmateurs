@@ -47,7 +47,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="programmateurs.views.TransactionScreen"
+            android:name="programmateurs.views.NewTransactionActivity"
             android:label="@string/title_activity_deposit"
             android:windowSoftInputMode="stateVisible|adjustResize" >
         </activity>

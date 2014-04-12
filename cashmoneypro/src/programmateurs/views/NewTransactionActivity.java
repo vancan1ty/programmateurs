@@ -35,7 +35,7 @@ import android.media.MediaPlayer; //for sounds, delete this import if error
  * @author Brent
  * @version 0.2
  */
-public class TransactionScreen extends Activity {
+public class NewTransactionActivity extends Activity {
 
     /**
      * the id of the account to add the transaction to!
@@ -190,7 +190,7 @@ public class TransactionScreen extends Activity {
                     return true;
                 }
             } catch (NumberFormatException e) {
-                Log.d("TransactionScreen","caught routine NumberFormatException");
+                Log.d("NewTransactionActivity","caught routine NumberFormatException");
                 e.printStackTrace();
                 //NOTHING NEEDS TO BE DONE HERE
             }
@@ -260,7 +260,7 @@ public class TransactionScreen extends Activity {
                             errorMessage += "\n- You have insufficient funds to complete this transaction.";
                         }
                     } catch (NumberFormatException e) {
-                        Log.d("TransactionScreen","caught routine NumberFormatException");
+                        Log.d("NewTransactionActivity","caught routine NumberFormatException");
                         e.printStackTrace();
                         //no need to do anything just show other error
                         //messages.
