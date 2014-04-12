@@ -143,23 +143,21 @@ public final class AccountsDAO {
     /**
      * Calculates the balance for an account.
      * 
-     * @param src
-     *            a database handle.
-     * @param accountID
-     *            the account to find the balance for.
-     * @return balance of the account
+     * @param src an open db connection.
+     * @param accountID the account to find the balance for.
+     * @return balance of the account in cents.
      */
-    public static double getBalance(final DataSourceInterface src,
+    public static long getBalance(final DataSourceInterface src,
             final long accountID) {
-        double balance = 0;
+        long balance = 0;
         for (Transaction transaction : src.getTransactionsForAccount(accountID)) {
             TRANSACTION_TYPE type = transaction.getTransactionType();
             if ((type == TRANSACTION_TYPE.DEPOSIT || type == TRANSACTION_TYPE.REBALANCE)
                     && !transaction.isRolledback()) {
-                balance += transaction.getTransactionAmountAsDouble();
+                balance += transaction.getTransactionAmount();
             } else if (type == TRANSACTION_TYPE.WITHDRAWAL
                     && !transaction.isRolledback()) {
-                balance -= transaction.getTransactionAmountAsDouble();
+                balance -= transaction.getTransactionAmount();
             }
         }
         return balance;
@@ -169,18 +167,14 @@ public final class AccountsDAO {
      * Checks to see if a potential transaction would result in overdrawing from
      * an account.
      * 
-     * @param src
-     *            database handle
-     * @param accountID
-     *            the id of the account to check.
-     * @param amount
-     *            The amount of the potential transaction
-     * @param type
-     *            The type of the potential transaction
+     * @param src open db connection
+     * @param accountID the id of the account to check.
+     * @param amount The amount of the potential transaction in cents.
+     * @param type The type of the potential transaction
      * @return true if transaction would result in overdrawing from account
      */
     public static boolean overdrawn(final DataSourceInterface src,
-            final long accountID, final Double amount,
+            final long accountID, final long amount,
             final Transaction.TRANSACTION_TYPE type) {
         if (type == Transaction.TRANSACTION_TYPE.WITHDRAWAL) {
             return (getBalance(src, accountID) - amount) < 0;

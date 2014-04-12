@@ -180,18 +180,21 @@ public class Transaction {
     }
 
     /**
-     * Not just a standard getter. If the user provided no transaction comment,
-     * then this returns "No Comment Provided"
+     * returns the comment on the transaction. previously this method added
+     * quotes and handled logic when the comment was blank, but I (vancan1ty)
+     * believe that this should instead return the raw data and let the 
+     * presentation layer choose how to display it.
      * 
-     * @return formatted transaction comment
+     * @return transaction comment
      */
     public String getTransactionComment() {
-        String quote = "\"";
+        return transactionComment;
+/*        String quote = "\"";
         if (!transactionComment.equals("")) {
             return quote + transactionComment + quote;
         } else {
             return "No Comment Provided";
-        }
+        } */
     }
 
     /**

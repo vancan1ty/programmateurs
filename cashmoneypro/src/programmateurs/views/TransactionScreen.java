@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -42,7 +43,7 @@ public class TransactionScreen extends Activity {
     long accountID;
 
     /**
-     * The type of the transaction to add.  Currently either deposit or
+     * The type of the transaction to add. Currently either deposit or
      * withdrawal.
      */
     TRANSACTION_TYPE transactionType;
@@ -57,50 +58,48 @@ public class TransactionScreen extends Activity {
      */
     private EditText amountText; // amount of the transaction
 
-    /** 
-     * lets you enter the name of the transaction 
+    /**
+     * lets you enter the name of the transaction
      */
     private EditText textViewName;
-    
+
     /**
      * lets you enter an optional comment on the transaction.
      */
-    private EditText textViewComment; 
-    
+    private EditText textViewComment;
+
     /**
-     * lets you pick the date on which the transaction occurred. defaults to
-     * the user's current day.
+     * lets you pick the date on which the transaction occurred. defaults to the
+     * user's current day.
      */
-    private DatePicker picker; 
-    
+    private DatePicker picker;
+
     /**
      * lets you pick a category for your transaction.
      */
-    private Spinner categorySpinner; 
-    
+    private Spinner categorySpinner;
+
     /**
      * this button finalizes the transaction.
      */
-    private Button buttonTransaction; 
-    
-    
-    //some date stuff below
+    private Button buttonTransaction;
+
+    // some date stuff below
     private Calendar cal = Calendar.getInstance();
     @SuppressLint("SimpleDateFormat")
     DateFormat sdf = new SimpleDateFormat();
     Date currentDate = new Date(System.currentTimeMillis());
 
     /**
-     * reference to the current activity so that we can get at it within
-     * inner classes.
+     * reference to the current activity so that we can get at it within inner
+     * classes.
      */
     Activity me = this;
 
     /**
      * the anchor point provides some utility functionality.
-     */ 
+     */
     Anchor anchor = Anchor.getInstance();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,46 +132,140 @@ public class TransactionScreen extends Activity {
                 String transactionName = textViewName.getText().toString();
                 String transactionComment = textViewComment.getText()
                         .toString();
-                String money = amountText.getText().toString();
+                String amountString = amountText.getText().toString();
                 int day = picker.getDayOfMonth();
                 int month = picker.getMonth();
                 int year = picker.getYear();
                 cal.set(year, month, day);
-                Double amount = Double.parseDouble(money);
-                if (validTransactionAmount(money)
-                        && validDate(cal)
-                        && !AccountsDAO.overdrawn(src, accountID, amount,
-                                transactionType)) {
-                    double transactionAmountD = Double.parseDouble(money);
-                    long transactionAmountL = Math
-                            .round(transactionAmountD * 100);
+                Category category = getCategoryByName((String) 
+                        categorySpinner.getSelectedItem());
+
+
+                if (checkIfInputsAreValid(transactionName,amountString,cal,
+                        transactionComment,category)) { 
+                    //if all fields validate then go ahead and add the 
+                    //transaction to the db!
+
                     src.addTransactionToDB(accountID, transactionName,
-                            transactionType, (long) transactionAmountL, cal
-                                    .getTime(), transactionComment, false,
-                            getCategoryByName((String) categorySpinner
-                                    .getSelectedItem()));
+                            transactionType, parseStringAsCents(amountString), 
+                            cal.getTime(), transactionComment, false,
+                            category);
 
                     // $$.mp3 sound goes here:
                     depositSound.start();
-                    // end sound
+
+                    //now go back to previous screen.
                     me.onBackPressed();
+                    
                 } else {
-                    String errorMessage = "Please resolve the following errors:\n";
-                    if (!validTransactionAmount(money)) {
+                   String errorMessage = computeErrorMessage(transactionName, 
+                           amountString, cal, transactionComment, category);
+                   anchor.showDialog(me, "Transaction Error(s)", errorMessage);
+                }
+            }
+        });
+    }
+
+    /**
+     * this function is used to check the inputs provided by the user on this
+     * activity.
+     * 
+     * @param transactionName the provided name of the transaction.
+     * @param amountString the provided amount of the transaction.
+     * @param transactionDate the user's provided date.
+     * @param transactionComment the user's optional comment.
+     * @param category the provided category of the transaction.
+     * @return true if all the values check out, false if there is an error.
+     */
+    private boolean checkIfInputsAreValid(String transactionName,
+            String amountString, Calendar transactionDate,
+            String transactionComment, Category category) {
+
+        if (validTransactionAmount(amountString)
+                && validDate(cal)) {
+            try {
+                long cents = parseStringAsCents(amountString);
+                if (!AccountsDAO.overdrawn(src, accountID,  cents, 
+                        transactionType)) {
+                    return true;
+                }
+            } catch (NumberFormatException e) {
+                Log.d("TransactionScreen","caught routine NumberFormatException");
+                e.printStackTrace();
+                //NOTHING NEEDS TO BE DONE HERE
+            }
+        }
+
+        return false;
+    }
+
+
+    /**
+     * attempts to parse a string in the format [dollars].[cents] aka
+     * 22 or
+     * 252.31
+     * and return the number of cents which the string represents.
+     * 
+     * if it can't parse the string, it throws a NumberFormatException. 
+     * 
+     * @param s a string which represents a dollar value.
+     * @return the number of cents in s, or null if the string can't be
+     *         parsed to a long.
+     */
+    private long parseStringAsCents(String moneyString) throws
+        NumberFormatException {
+                double transactionAmountD = Double
+                        .parseDouble(moneyString);
+                /*
+                 * we always represent money values as integers in cents! 
+                 * this eliminates the rounding errors inherent to floating 
+                 * point values.
+                 */
+                long transactionAmountL = Math
+                        .round(transactionAmountD * 100);
+                return transactionAmountL;
+    }
+        
+    
+    
+    /**
+     * computes an error message given the values collected from fields on this
+     * activity.  it is intended that this will be called AFTER we have checked
+     * that there is indeed a problem with the user's inputs.
+     * 
+     * @param transactionName the name of the transaction the user provided.
+     * @param amountString the amount of the transaction the user provided.
+     * @param transactiondate the date of the transaction from the date picker.
+     * @param transactionComment an optional comment on the transaction.
+     * @param category the provided category of the transaction.
+     * @return
+     */
+    private String computeErrorMessage(String transactionName,
+            String amountString, Calendar transactiondate,
+            String transactionComment, Category category) {
+            String errorMessage = "Please resolve the following errors:\n";
+                    if (amountString == null) {
+                        errorMessage += 
+                                "\n- you must enter a transaction amount!";
+                    } else if (!validTransactionAmount(amountString)) {
                         errorMessage += "\n- Enter an amount greater than 0.";
                     }
                     if (!validDate(cal)) {
                         errorMessage += "\n- Enter a valid startDate.";
                     }
-                    if (AccountsDAO.overdrawn(src, accountID, amount,
-                            transactionType)) {
-                        errorMessage += "\n- You have insufficient funds to complete this transaction.";
+                    try {
+                        long cents = parseStringAsCents(amountString); 
+                        if (AccountsDAO.overdrawn(src, accountID, cents,
+                                transactionType)) {
+                            errorMessage += "\n- You have insufficient funds to complete this transaction.";
+                        }
+                    } catch (NumberFormatException e) {
+                        Log.d("TransactionScreen","caught routine NumberFormatException");
+                        e.printStackTrace();
+                        //no need to do anything just show other error
+                        //messages.
                     }
-                    anchor.showDialog(me, "Transaction Error(s)", errorMessage);
-                }
-            }
-        });
-        // System.out.println(artificialSource.getTransactionsForAccount(0));
+                    return errorMessage;
     }
 
     /**
@@ -183,7 +276,8 @@ public class TransactionScreen extends Activity {
      * @return boolean true false
      */
     private boolean validTransactionAmount(String money) {
-        if (money.matches("^0*[1-9][0-9]*(\\.[0-9]+)?|0+\\.[0-9]*[1-9][0-9]*$")) {
+        if (money != null
+                && money.matches("^0*[1-9][0-9]*(\\.[0-9]+)?|0+\\.[0-9]*[1-9][0-9]*$")) {
             return true;
         }
         return false;
