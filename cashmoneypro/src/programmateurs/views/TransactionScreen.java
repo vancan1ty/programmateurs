@@ -34,26 +34,73 @@ import android.media.MediaPlayer; //for sounds, delete this import if error
  * @author Brent
  * @version 0.2
  */
-// CHECKSTYLE:OFF
 public class TransactionScreen extends Activity {
 
-    private EditText amountText, textViewName, textViewComment;
-    private DatePicker picker;
-    private Button buttonTransaction;
-    private Spinner categorySpinner;
+    /**
+     * the id of the account to add the transaction to!
+     */
+    long accountID;
+
+    /**
+     * The type of the transaction to add.  Currently either deposit or
+     * withdrawal.
+     */
+    TRANSACTION_TYPE transactionType;
+
+    /**
+     * data source.
+     */
+    DataSourceInterface src = new RealDataSource(this);
+
+    /**
+     * lets you enter the amount of the transaction.
+     */
+    private EditText amountText; // amount of the transaction
+
+    /** 
+     * lets you enter the name of the transaction 
+     */
+    private EditText textViewName;
+    
+    /**
+     * lets you enter an optional comment on the transaction.
+     */
+    private EditText textViewComment; 
+    
+    /**
+     * lets you pick the date on which the transaction occurred. defaults to
+     * the user's current day.
+     */
+    private DatePicker picker; 
+    
+    /**
+     * lets you pick a category for your transaction.
+     */
+    private Spinner categorySpinner; 
+    
+    /**
+     * this button finalizes the transaction.
+     */
+    private Button buttonTransaction; 
+    
+    
+    //some date stuff below
     private Calendar cal = Calendar.getInstance();
     @SuppressLint("SimpleDateFormat")
     DateFormat sdf = new SimpleDateFormat();
-    Anchor anchor = Anchor.getInstance();
-    DataSourceInterface dbHandler = new RealDataSource(this);
+    Date currentDate = new Date(System.currentTimeMillis());
 
+    /**
+     * reference to the current activity so that we can get at it within
+     * inner classes.
+     */
     Activity me = this;
 
-    Date currentDate = new Date(System.currentTimeMillis());
-    long accountID;
-    TRANSACTION_TYPE transactionType;
+    /**
+     * the anchor point provides some utility functionality.
+     */ 
+    Anchor anchor = Anchor.getInstance();
 
-    // CHECKSTYLE:ON
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,12 +141,12 @@ public class TransactionScreen extends Activity {
                 Double amount = Double.parseDouble(money);
                 if (validTransactionAmount(money)
                         && validDate(cal)
-                        && !AccountsDAO.overdrawn(dbHandler, accountID, amount,
+                        && !AccountsDAO.overdrawn(src, accountID, amount,
                                 transactionType)) {
                     double transactionAmountD = Double.parseDouble(money);
                     long transactionAmountL = Math
                             .round(transactionAmountD * 100);
-                    dbHandler.addTransactionToDB(accountID, transactionName,
+                    src.addTransactionToDB(accountID, transactionName,
                             transactionType, (long) transactionAmountL, cal
                                     .getTime(), transactionComment, false,
                             getCategoryByName((String) categorySpinner
@@ -117,7 +164,7 @@ public class TransactionScreen extends Activity {
                     if (!validDate(cal)) {
                         errorMessage += "\n- Enter a valid startDate.";
                     }
-                    if (AccountsDAO.overdrawn(dbHandler, accountID, amount,
+                    if (AccountsDAO.overdrawn(src, accountID, amount,
                             transactionType)) {
                         errorMessage += "\n- You have insufficient funds to complete this transaction.";
                     }
@@ -170,7 +217,7 @@ public class TransactionScreen extends Activity {
      * @return category with matching name
      */
     public Category getCategoryByName(String name) {
-        Category[] categories = dbHandler.getCategoriesForUser(anchor
+        Category[] categories = src.getCategoriesForUser(anchor
                 .getCurrentUser().getUserID());
         for (Category c : categories) {
             if (c.getCategory_name().equals(name)) {
@@ -186,9 +233,9 @@ public class TransactionScreen extends Activity {
      */
     @Override
     protected void onResume() {
-        dbHandler.open();
+        src.open();
         super.onResume();
-        Category[] categories = dbHandler.getCategoriesForUser(anchor
+        Category[] categories = src.getCategoriesForUser(anchor
                 .getCurrentUser().getUserID());
         String[] stringArray = new String[categories.length];
         if (categories != null) {
@@ -209,7 +256,7 @@ public class TransactionScreen extends Activity {
      */
     @Override
     protected void onPause() {
-        dbHandler.close();
+        src.close();
         super.onPause();
     }
 

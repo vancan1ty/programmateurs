@@ -17,13 +17,6 @@ import android.database.sqlite.SQLiteDatabase;
 public final class CategoriesDAO {
 
     /**
-     * hide the constructor, appease the checkstyle gods!
-     */
-    private CategoriesDAO() {
-
-    }
-
-    /**
      * this is the sql to build the categories table.
      */
     public static final String CREATE_CATEGORIES_TABLE = "CREATE TABLE Categories"
@@ -31,7 +24,14 @@ public final class CategoriesDAO {
             + " userID INTEGER,"
             + " category_name TEXT NOT NULL,"
             + " FOREIGN KEY(userID) REFERENCES Users(userID)" + ");";
-
+    
+    /**
+     * this array contains the initial categories which are added to every user
+     * at the moment when he or she is created.
+     */
+    public static final String[] initialCategories = {"Uncategorized","Food"
+        ,"Gas", "Utilities", "Housing", "Work"};
+    
     // NO LONGER NEEDED BECAUSE ONLY ONE CATEGORY PER TRANSACTION
     /*
      * public static final String CREATE_TRANSACTIONS_CATEGORIES_TABLE =
@@ -61,10 +61,8 @@ public final class CategoriesDAO {
     /**
      * returns a list of all categories owned by a given user.
      * 
-     * @param db
-     *            a db connection to perform the query on.
-     * @param userID
-     *            the id of the user to get categories for.
+     * @param db an open db connection to query. 
+     * @param userID the id of the user to get categories for.
      * @return list of categories owned by user
      */
     public static Category[] getCategoriesForUser(final SQLiteDatabase db,
@@ -88,10 +86,8 @@ public final class CategoriesDAO {
     /**
      * returns all the categories associated with a given transaction.
      * 
-     * @param db
-     *            a db connection to query.
-     * @param transactionID
-     *            the id of the transaction in the db.
+     * @param db an open db connection to query.
+     * @param transactionID the id of the transaction in the db.
      * @return an array of categories.
      */
     public static Category[] getCategoriesForTransaction(
@@ -122,15 +118,12 @@ public final class CategoriesDAO {
      * adds a category with the associated information to the DB, returns an
      * object representation of it.
      * 
-     * @param db
-     *            db connection to query
-     * @param userID
-     *            the user to add the category for
-     * @param categoryName
-     *            the actual name of the category.
+     * @param db db connection to query
+     * @param userID the user to add the category for
+     * @param categoryName the actual name of the category.
      * @return a copy of the category object that was just put in the db.
      */
-    public static Category addCategoryForDB(final SQLiteDatabase db,
+    public static Category addCategoryToDB(final SQLiteDatabase db,
             final long userID, final String categoryName) {
         ContentValues toInsert = new ContentValues();
         toInsert.put("userID", userID);
@@ -138,5 +131,16 @@ public final class CategoriesDAO {
         long categoryID = db.insert("categories", null, toInsert);
         Category cat = new Category(categoryID, userID, categoryName);
         return cat;
+    }
+    
+    public static void initializeCategoriesForNewUser(final SQLiteDatabase db,
+            final long userID) {
+        for (String categoryName : initialCategories) {
+            ContentValues toInsert = new ContentValues();
+            toInsert.put("userID", userID);
+            toInsert.put("category_name", categoryName);
+            db.insert("categories", null, toInsert);
+        }
+        
     }
 }

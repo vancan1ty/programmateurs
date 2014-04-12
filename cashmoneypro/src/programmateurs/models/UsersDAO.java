@@ -22,12 +22,6 @@ import android.database.sqlite.SQLiteDatabase;
  */
 public final class UsersDAO {
 
-    /**
-     * silences checkstyle.
-     */
-    private UsersDAO() {
-
-    }
 
     /**
      * sql query which creates the users table in the database.
@@ -41,11 +35,9 @@ public final class UsersDAO {
     /**
      * converts a db cursor to a user.
      * 
-     * @param c
-     *            the properly generated db cursor.
+     * @param c the properly generated db cursor.
      * @return a User object extracted from the cursor.
      */
-    //CHECKSTYLE:OFF    Repetition necessary for JQuery
     public static User cursorToUser(final Cursor c) {
         long userID = longFromCursor(c, "userID");
         String username = stringFromCursor(c, "username");
@@ -59,9 +51,8 @@ public final class UsersDAO {
     /**
      * gets all the users in the db.
      * 
-     * @param db
-     *            nah
-     * @return nah
+     * @param db an open db connection.
+     * @return an array of all users present in the database.
      */
     public static User[] getUsers(final SQLiteDatabase db) {
         Cursor c = db.rawQuery("SELECT * FROM users;", new String[] {});
@@ -81,11 +72,9 @@ public final class UsersDAO {
     /**
      * gets a user with a given userID.
      * 
-     * @param db
-     *            nah
-     * @param userID
-     *            nah
-     * @return nah
+     * @param db an open db connection.
+     * @param userID the userID to match.
+     * @return the User object associated with the given userID
      */
     public static User getUser(final SQLiteDatabase db, final long userID) {
         Cursor c = db.rawQuery("SELECT * FROM users WHERE userID = ?;",
@@ -101,12 +90,9 @@ public final class UsersDAO {
     /**
      * Finds whether a User exists already in the database
      * 
-     * @param db
-     *            the database
-     * @param username
-     *            the name of the user
-     * @param password
-     *            the user's password
+     * @param db the database
+     * @param username the name of the user
+     * @param password the user's password
      * @return a boolean which specifies whether the user is in the database
      */
     public static boolean isUserInDB(final SQLiteDatabase db,
@@ -131,26 +117,6 @@ public final class UsersDAO {
     //
 
     /**
-     * adds the user to the db. no shit!
-     * 
-     * @param db
-     *            db
-     * @param username
-     *            username
-     * @param password
-     *            password
-     */
-    public static void addUserToDB(final SQLiteDatabase db,
-            final String username, final String password) {
-        // String passHash = hashPassword(password);
-        ContentValues toInsert = new ContentValues();
-        toInsert.put("username", username);
-        toInsert.put("passhash", hashPassword(password));
-        db.insert("users", null, toInsert);
-    }
-    //CHECKSTYLE:ON
-
-    /**
      * not the best way to do hashing but it's better than nothing.
      */
     public static final String HASH = "ludicrousHash";
@@ -158,8 +124,7 @@ public final class UsersDAO {
     /**
      * hashes a password.
      * 
-     * @param password
-     *            password
+     * @param password password in plaintext form
      * @return the hashed password
      */
     public static String hashPassword(final String password) {
@@ -185,24 +150,18 @@ public final class UsersDAO {
         }
         byte[] digest = md.digest();
         BigInteger bigInt = new BigInteger(1, digest);
-        String output = bigInt.toString(SIXTEEN);
+        String output = bigInt.toString(16);
         return output;
     }
 
-    /**
-     * 16.
-     */
-    public static final int SIXTEEN = 16;
 
     /**
      * updates the user matching the parameter user in the db with whatever
      * information the user parameter contains, returns the user read back from
      * the database.
      * 
-     * @param db
-     *            db connection.
-     * @param user
-     *            nah
+     * @param db an open db connection.
+     * @param user the user to update
      * @return reading the results of the operation back from the db
      */
     public static User updateUser(final SQLiteDatabase db, final User user) {
@@ -218,20 +177,16 @@ public final class UsersDAO {
     }
 
     /**
-     * adds a user to the db.
+     * adds a user to the db. also takes care of any other housework that
+     * must be done when creating a new user (creating initial categories,
+     * etc...).
      * 
-     * @param db
-     *            an open db connection.
-     * @param username
-     *            the username for the user.
-     * @param password
-     *            the password for the user.
-     * @param first
-     *            the user's first name.
-     * @param last
-     *            the user's last name.
-     * @param email
-     *            the user's email address.
+     * @param db an open db connection.
+     * @param username the username for the user.
+     * @param password the password for the user.
+     * @param first the user's first name.
+     * @param last the user's last name.
+     * @param email the user's email address.
      * @return a user object like the one created in the database.
      */
     public static User addUserToDB(final SQLiteDatabase db,
@@ -244,8 +199,17 @@ public final class UsersDAO {
         toInsert.put("first", first);
         toInsert.put("last", last);
         toInsert.put("email", email);
-        long userid = db.insert("users", null, toInsert);
-        User user = new User(userid, username, password, first, last, email);
+        long userID = db.insert("users", null, toInsert);
+
+        CategoriesDAO.initializeCategoriesForNewUser(db, userID);
+
+        /*
+         * defensive programming.
+         * we need to actually be able to retrieve the user from the db for this
+         * to have worked properly!
+         */
+        User user = UsersDAO.getUser(db, userID); //
+
         return user;
     }
 

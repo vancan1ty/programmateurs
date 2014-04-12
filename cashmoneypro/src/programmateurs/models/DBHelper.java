@@ -1,6 +1,5 @@
 package programmateurs.models;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -17,16 +16,12 @@ import android.util.Log;
  */
 public class DBHelper extends SQLiteOpenHelper {
 
-    // public static final String TABLE_COMMENTS = "comments";
-    // public static final String COLUMN_ID = "_id";
-    // public static final String COLUMN_COMMENT = "comment";
-
     /**
      * this tells android the version of the database. when this number changes,
      * android rebuilds the database on the device using the methods in this
      * class.
      */
-    private static final int DATABASE_VERSION = 21;
+    private static final int DATABASE_VERSION = 22;
 
     /**
      * initialize the DBHelper using the android context.
@@ -38,28 +33,20 @@ public class DBHelper extends SQLiteOpenHelper {
         super(context, "programmateurs", null, DATABASE_VERSION);
     }
     
-    //CHECKSTYLE:OFF    Duplicate literals necessary.
     @Override
     public final void onCreate(final SQLiteDatabase database) {
         database.execSQL(UsersDAO.CREATE_USERS_TABLE);
         database.execSQL(AccountsDAO.CREATE_ACCOUNTS_TABLE);
         database.execSQL(CategoriesDAO.CREATE_CATEGORIES_TABLE);
         database.execSQL(TransactionsDAO.CREATE_TRANSACTIONS_TABLE);
-        ContentValues toInsert = new ContentValues();
-        toInsert.put("username", "admin");
-        toInsert.put("passhash", UsersDAO.hashPassword("pass123"));
-        database.insert("users", null, toInsert);
+        
+        //add initial users to the db.
+        UsersDAO.addUserToDB(database, "admin", "pass123", "admin", "admin", 
+                "admin@programmateurs.awesome");
 
-        ContentValues toInsert2 = new ContentValues();
-        toInsert2.put("username", "test");
-        toInsert2.put("passhash", UsersDAO.hashPassword("test"));
-        toInsert2.put("first", "tfirst");
-        toInsert2.put("last", "tlast");
-        toInsert2.put("email", "test@test.com");
-        database.insert("users", null, toInsert2);
+        UsersDAO.addUserToDB(database, "test", "test", "tfirst", "tlast", "test@test.com");
 
     }
-    //CHECKSTYLE:ON
 
     @Override
     public final void onUpgrade(final SQLiteDatabase db, final int oldVersion,

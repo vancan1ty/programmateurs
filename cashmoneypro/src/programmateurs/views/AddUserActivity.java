@@ -13,8 +13,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-//import com.google.android.gms.common.ConnectionResult;
-//import com.google.android.gms.common.GooglePlayServicesUtil;
 
 /**
  * View that creates a user.

@@ -118,20 +118,6 @@ public class RealDataSource implements DataSourceInterface {
         return UsersDAO.addUserToDB(db, username, passhash, first, last, email);
     }
 
-    /**
-     * adds a user to the database without having to worry about all the
-     * ancillary user data fields. useful for setting up test users, for
-     * example.
-     * 
-     * @param username
-     *            the username for the user.
-     * @param password
-     *            the password for the user.
-     */
-    public final void cheapAddUserToDB(final String username,
-            final String password) {
-        UsersDAO.addUserToDB(db, username, password);
-    }
 
     @Override
     public final Account addAccountToDB(final long userID,
@@ -180,7 +166,7 @@ public class RealDataSource implements DataSourceInterface {
     @Override
     public final Category addCategoryToDB(final long userID,
             final String categoryName) {
-        return CategoriesDAO.addCategoryForDB(db, userID, categoryName);
+        return CategoriesDAO.addCategoryToDB(db, userID, categoryName);
     }
 
     /**
