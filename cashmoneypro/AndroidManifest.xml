@@ -81,7 +81,7 @@
             android:label="@string/title_activity_category_report" >
         </activity>
         <activity
-            android:name="programmateurs.views.ReportBuilder"
+            android:name="programmateurs.views.ReportBuilderActivity"
             android:label="@string/title_activity_report_builder" >
         </activity>
         <activity

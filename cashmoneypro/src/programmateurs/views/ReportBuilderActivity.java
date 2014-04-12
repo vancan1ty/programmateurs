@@ -27,7 +27,7 @@ import android.widget.EditText;
  * @author vancan1ty
  * 
  */
-public class ReportBuilder extends Activity {
+public class ReportBuilderActivity extends Activity {
 
     EditText textStartDate;
     EditText textEndDate;
@@ -96,7 +96,7 @@ public class ReportBuilder extends Activity {
 
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(ReportBuilder.this, startDate,
+                new DatePickerDialog(ReportBuilderActivity.this, startDate,
                         startCalendar.get(Calendar.YEAR), startCalendar
                                 .get(Calendar.MONTH), startCalendar
                                 .get(Calendar.DAY_OF_MONTH)).show();
@@ -107,7 +107,7 @@ public class ReportBuilder extends Activity {
 
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(ReportBuilder.this, endDate, endCalendar
+                new DatePickerDialog(ReportBuilderActivity.this, endDate, endCalendar
                         .get(Calendar.YEAR), endCalendar.get(Calendar.MONTH),
                         endCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }

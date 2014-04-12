@@ -62,7 +62,7 @@ public class ReportFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), ReportBuilder.class);
+                Intent i = new Intent(v.getContext(), ReportBuilderActivity.class);
                 i.putExtra(reportType, Transaction.TRANSACTION_TYPE.WITHDRAWAL);
                 v.getContext().startActivity(i);
             }
@@ -72,7 +72,7 @@ public class ReportFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), ReportBuilder.class);
+                Intent i = new Intent(v.getContext(), ReportBuilderActivity.class);
                 i.putExtra(reportType, Transaction.TRANSACTION_TYPE.DEPOSIT);
                 v.getContext().startActivity(i);
             }
