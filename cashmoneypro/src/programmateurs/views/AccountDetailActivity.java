@@ -142,10 +142,7 @@ public class AccountDetailActivity extends Activity {
         //settings.setIntent(new Intent(this, SettingsActivity2.class));
 
         MenuItem reequilibrate = menu.add(rebalance);
-        reequilibrate.setIntent(new Intent(this, WelcomeActivity.class));
-        MenuItem categories = menu.add("Edit Categories");
-        categories.setIntent(new Intent(this, CategoryActivity.class));
-        // getMenuInflater().inflate(R.menu.home, menu);
+        reequilibrate.setIntent(new Intent(this, RebalanceActivity.class));
         return super.onCreateOptionsMenu(menu);
     }
 

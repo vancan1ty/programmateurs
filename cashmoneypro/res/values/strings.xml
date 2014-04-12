@@ -36,6 +36,8 @@
     <string name="title_activity_admin">AdminActivity</string>
     <string name="title_activity_transaction_history">TransactionHistoryActivity</string>
 
+    <string name="rebalance">Rebalance Account</string>
+    
     <string-array name="account_type">
         <item>Checking</item>
         <item>Savings</item>
