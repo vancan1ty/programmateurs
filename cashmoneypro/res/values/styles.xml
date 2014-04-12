@@ -1,5 +1,7 @@
 <resources>
 
+    <color name="oldblue">#33b5e5</color>
+    <color name="gungrey">#9C9C9C</color>
     <!--
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.

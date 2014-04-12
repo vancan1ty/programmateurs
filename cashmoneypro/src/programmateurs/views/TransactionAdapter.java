@@ -74,9 +74,9 @@ public class TransactionAdapter extends BaseAdapter {
         body.setText(bodyText);
 
         if (q.getTransactionType() == TRANSACTION_TYPE.DEPOSIT) {
-            imageView.setImageResource(R.drawable.circle_green);
+            imageView.setImageResource(R.drawable.deposit_icon);
         } else if (q.getTransactionType() == TRANSACTION_TYPE.WITHDRAWAL) {
-            imageView.setImageResource(R.drawable.circle_red);
+            imageView.setImageResource(R.drawable.withdraw_icon);
         } else {
             imageView.setImageResource(R.drawable.circle_orange);
         }

@@ -25,7 +25,7 @@ public final class Anchor {
      * if the app is in test mode, the app will automatically log you in as the
      * test user.
      */
-    public static final boolean TEST_MODE = true;
+    public static final boolean TEST_MODE = false;
 
     /**
      * Acts as a selective constructor for Anchor class. If no instance of

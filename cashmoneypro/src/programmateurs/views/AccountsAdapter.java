@@ -69,9 +69,9 @@ public class AccountsAdapter extends BaseAdapter {
 
         ACCOUNT_TYPE type = q.getAccountType();
         if (type == ACCOUNT_TYPE.SAVINGS) {
-            imageView.setImageResource(R.drawable.social_person);
+            imageView.setImageResource(R.drawable.savings_icon);
         } else {
-            imageView.setImageResource(R.drawable.person_dark);
+            imageView.setImageResource(R.drawable.checking_icon);
         }
 
         // onClickListener for each view
