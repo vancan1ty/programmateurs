@@ -20,34 +20,30 @@
     <string name="title_accounts">Accounts</string>
     <string name="title_history">Transaction History</string>
     <string name="title_reports">Reports</string>
-    <string name="chat_server">ip address/hostname</string>
-    <string name="locationfilter">use location filter?</string>
-    <string name="filterradius">location filter radius in meters</string>
     <string name="user_name_prompt">User Name</string>
     <string name="default_user_name">anonymous coward</string>
-    <string name="title_activity_quip_browser">QuipBrowser</string>
-    <string name="title_activity_home">HomeActivity</string>
-    <string name="title_activity_add_user">AddUserActivity</string>
-    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="title_activity_home">Home</string>
+    <string name="title_activity_add_user">Add User</string>
+    <string name="title_activity_welcome">Welcome</string>
     <string name="welcome_activity_login">Login</string>
     <string name="welcome_activity_register">Register</string>
     <string name="welcome_text">Welcome Screen</string>
-    <string name="title_activity_deposit">DepositActivity</string>
-    <string name="title_activity_admin">AdminActivity</string>
-    <string name="title_activity_transaction_history">TransactionHistoryActivity</string>
-
+    <string name="title_activity_deposit">Deposit Funds</string>
+    <string name="title_activity_admin">Admin Panel</string>
+    <string name="title_activity_transaction_history">Transaction History</string>
     <string name="rebalance">Rebalance Account</string>
+    <string name="dateformat">MM/DD/YYYY</string>
     
     <string-array name="account_type">
         <item>Checking</item>
         <item>Savings</item>
     </string-array>
 
-    <string name="title_activity_new_account">NewAccount</string>
-    <string name="title_activity_transaction_history_fragment">TransactionHistoryFragment</string>
-    <string name="title_activity_account_detail">AccountDetailActivity</string>
-    <string name="title_activity_category">CategoryActivity</string>
-    <string name="title_activity_category_report">CategoryReportActivity</string>
-    <string name="title_activity_report_builder">ReportBuilder</string>
+    <string name="title_activity_new_account">Create New Account</string>
+    <string name="title_activity_transaction_history_fragment">Transaction History</string>
+    <string name="title_activity_account_detail">Account Details</string>
+    <string name="title_activity_category">Add/Remove Categories</string>
+    <string name="title_activity_category_report">Category Report</string>
+    <string name="title_activity_report_builder">Report Builder</string>
 
 </resources>

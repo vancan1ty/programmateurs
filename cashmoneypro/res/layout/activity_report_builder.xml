@@ -29,7 +29,11 @@
      <EditText 
         android:id="@+id/text_start_date"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:hint="@string/dateformat"
+        android:editable="false"
+        android:focusableInTouchMode="false"
+        />
     </LinearLayout>
 
     <LinearLayout
@@ -46,7 +50,11 @@
      <EditText 
         android:id="@+id/text_end_date"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:hint="@string/dateformat"
+        android:editable="false"
+        android:focusableInTouchMode="false"
+        />
     </LinearLayout>
     
    	<ListView 

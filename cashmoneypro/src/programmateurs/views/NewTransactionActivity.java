@@ -11,10 +11,12 @@ import programmateurs.interfaces.DataSourceInterface;
 import programmateurs.models.AccountsDAO;
 import programmateurs.models.Anchor;
 import programmateurs.models.RealDataSource;
+import programmateurs.util.DateEntryFieldUtils;
 import net.programmateurs.R;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
@@ -72,7 +74,8 @@ public class NewTransactionActivity extends Activity {
      * lets you pick the date on which the transaction occurred. defaults to the
      * user's current day.
      */
-    private DatePicker picker;
+    private EditText textViewDate;
+    private Calendar transactionCal = Calendar.getInstance();
 
     /**
      * lets you pick a category for your transaction.
@@ -84,11 +87,6 @@ public class NewTransactionActivity extends Activity {
      */
     private Button buttonTransaction;
 
-    // some date stuff below
-    private Calendar cal = Calendar.getInstance();
-    @SuppressLint("SimpleDateFormat")
-    DateFormat sdf = new SimpleDateFormat();
-    Date currentDate = new Date(System.currentTimeMillis());
 
     /**
      * reference to the current activity so that we can get at it within inner
@@ -100,6 +98,7 @@ public class NewTransactionActivity extends Activity {
      * the anchor point provides some utility functionality.
      */
     Anchor anchor = Anchor.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,8 +113,10 @@ public class NewTransactionActivity extends Activity {
         amountText = (EditText) findViewById(R.id.amountNumber);
         textViewName = (EditText) findViewById(R.id.textViewName);
         textViewComment = (EditText) findViewById(R.id.comment);
-        picker = (DatePicker) findViewById(R.id.datePicker);
-        picker.setMaxDate(Calendar.getInstance().getTimeInMillis());
+        textViewDate = (EditText) findViewById(R.id.textViewDate);
+        DateEntryFieldUtils.makeEditTextADateChooser(this, transactionCal, 
+                textViewDate);
+        
         buttonTransaction = (Button) findViewById(R.id.buttonTransaction);
         categorySpinner = (Spinner) findViewById(R.id.transaction_category_spinner);
 
@@ -133,22 +134,18 @@ public class NewTransactionActivity extends Activity {
                 String transactionComment = textViewComment.getText()
                         .toString();
                 String amountString = amountText.getText().toString();
-                int day = picker.getDayOfMonth();
-                int month = picker.getMonth();
-                int year = picker.getYear();
-                cal.set(year, month, day);
                 Category category = getCategoryByName((String) 
                         categorySpinner.getSelectedItem());
 
 
-                if (checkIfInputsAreValid(transactionName,amountString,cal,
-                        transactionComment,category)) { 
+                if (checkIfInputsAreValid(transactionName,amountString,
+                        transactionCal,transactionComment,category)) { 
                     //if all fields validate then go ahead and add the 
                     //transaction to the db!
 
                     src.addTransactionToDB(accountID, transactionName,
                             transactionType, parseStringAsCents(amountString), 
-                            cal.getTime(), transactionComment, false,
+                            transactionCal.getTime(), transactionComment, false,
                             category);
 
                     // $$.mp3 sound goes here:
@@ -159,7 +156,7 @@ public class NewTransactionActivity extends Activity {
                     
                 } else {
                    String errorMessage = computeErrorMessage(transactionName, 
-                           amountString, cal, transactionComment, category);
+                           amountString, transactionCal, transactionComment, category);
                    anchor.showDialog(me, "Transaction Error(s)", errorMessage);
                 }
             }
@@ -182,7 +179,7 @@ public class NewTransactionActivity extends Activity {
             String transactionComment, Category category) {
 
         if (validTransactionAmount(amountString)
-                && validDate(cal)) {
+                && validDate(transactionCal)) {
             try {
                 long cents = parseStringAsCents(amountString);
                 if (!AccountsDAO.overdrawn(src, accountID,  cents, 
@@ -250,7 +247,7 @@ public class NewTransactionActivity extends Activity {
                     } else if (!validTransactionAmount(amountString)) {
                         errorMessage += "\n- Enter an amount greater than 0.";
                     }
-                    if (!validDate(cal)) {
+                    if (!validDate(transactionCal)) {
                         errorMessage += "\n- Enter a valid startDate.";
                     }
                     try {
@@ -268,34 +265,46 @@ public class NewTransactionActivity extends Activity {
                     return errorMessage;
     }
 
+
     /**
-     * validTransactionAmount.
+     * checks if a string representing money is actually valid.
      * 
-     * @param money
-     *            money
-     * @return boolean true false
+     * @param money the string to check for ex: 22.34
+     * @return boolean true if can be parsed to cents, else false
      */
     private boolean validTransactionAmount(String money) {
         if (money != null
+                //first do a regex check.
                 && money.matches("^0*[1-9][0-9]*(\\.[0-9]+)?|0+\\.[0-9]*[1-9][0-9]*$")) {
-            return true;
+            try {
+                //now check to see if we can *actually* parse the string.
+                long cents = parseStringAsCents(money);
+                return true;
+            } catch (NumberFormatException e) {
+                Log.d("NewTransactionActivity","caught routine NumberFormatException");
+                e.printStackTrace();
+            }
         }
         return false;
     }
 
     /**
-     * Makes sure the startDate is valid. I hate Date.
+     * checks all the entries on the calendar object to make sure it has
+     * the necessary fields before we attempt to persist to the db.
      * 
-     * @param cal
-     *            calendar
-     * @return boolean boolean
+     * @param transactionCal calendar to check
+     * @return true if the date is valid, else false. 
      */
-    // CHECKSTYLE:OFF
     private boolean validDate(Calendar cal) {
-        return true;
+        if (cal.isSet(cal.DAY_OF_MONTH) 
+                && cal.isSet(cal.MONTH)
+                && cal.isSet(cal.YEAR))
+        {
+            return true;
+        } else {
+            return false;
+        }
     }
-
-    // CHECKSTYLE:ON
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

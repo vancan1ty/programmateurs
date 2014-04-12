@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import net.programmateurs.R;
 import programmateurs.beans.Transaction;
+import programmateurs.util.DateEntryFieldUtils;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -38,49 +39,6 @@ public class ReportBuilderActivity extends Activity {
 
     Transaction.TRANSACTION_TYPE reportType;
 
-    /**
-     * On date listener.
-     */
-    DatePickerDialog.OnDateSetListener startDate = new DatePickerDialog.OnDateSetListener() {
-
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                int dayOfMonth) {
-            startCalendar.set(Calendar.YEAR, year);
-            startCalendar.set(Calendar.MONTH, monthOfYear);
-            startCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            updateLabel(textStartDate, startCalendar);
-        }
-    };
-
-    /**
-     * On date listener.
-     */
-    DatePickerDialog.OnDateSetListener endDate = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                int dayOfMonth) {
-            endCalendar.set(Calendar.YEAR, year);
-            endCalendar.set(Calendar.MONTH, monthOfYear);
-            endCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            updateLabel(textEndDate, endCalendar);
-        }
-    };
-
-    /**
-     * Update Label.
-     * 
-     * @param toSet
-     *            to set
-     * @param cal
-     *            calendar
-     */
-    private void updateLabel(EditText toSet, Calendar cal) {
-        String myFormat = "MM/dd/yy";
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        toSet.setText(sdf.format(cal.getTime()));
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,27 +50,11 @@ public class ReportBuilderActivity extends Activity {
         textEndDate = (EditText) findViewById(R.id.text_end_date);
         buttonGenerateReport = (Button) findViewById(R.id.button_generate_report);
 
-        textStartDate.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                new DatePickerDialog(ReportBuilderActivity.this, startDate,
-                        startCalendar.get(Calendar.YEAR), startCalendar
-                                .get(Calendar.MONTH), startCalendar
-                                .get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-
-        textEndDate.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                new DatePickerDialog(ReportBuilderActivity.this, endDate, endCalendar
-                        .get(Calendar.YEAR), endCalendar.get(Calendar.MONTH),
-                        endCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-
+        DateEntryFieldUtils.makeEditTextADateChooser(this, startCalendar, 
+                textStartDate);
+        DateEntryFieldUtils.makeEditTextADateChooser(this, endCalendar, 
+                textEndDate);
+ 
         buttonGenerateReport.setOnClickListener(new OnClickListener() {
 
             @Override
