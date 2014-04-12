@@ -14,8 +14,32 @@ import android.view.Menu;
 import android.widget.TextView;
 
 /**
+ * This Activity displays category reports about our transactions.  Currently
+ * there are two kinds of reports -- spending category reports and income
+ * source reports.  These are basically the same thing, except one takes its
+ * data from withdrawals and the other takes its data from deposits.
  * 
- * @author programmateurs
+ * Example spending category report from the 2340 project spec.
+ * 
+ *Spending Category Report for George Burdell
+   January 1, 2014 - January 31, 2014
+   Food           87.45
+   Rent          400.54
+   Entertainment  35.00
+   Clothing       23.74
+   Total         546.73 
+
+ * 
+ * Example income source report from the 2340 project spec. 
+ * Income Source Report for George Burdell
+   January 1, 2014 - January 31, 2014
+   Salary         250.00
+   Birthday       100.00
+   Parents        300.00
+   Scholarship     50.00
+   Total          700.00
+ * 
+ * @author vancan1ty
  * 
  */
 public class CategoryReportActivity extends Activity {

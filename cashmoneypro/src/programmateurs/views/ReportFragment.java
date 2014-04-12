@@ -18,8 +18,7 @@ import android.widget.Button;
 /**
  * ReportFragment serves as a jump-off point for the user to build reports.
  * 
- * @author Currell
- * @version 0.0
+ * @author vancan1ty
  */
 public class ReportFragment extends Fragment {
 

@@ -25,25 +25,33 @@ import android.support.v4.app.NavUtils;
 
 /**
  * 
- * @author programmateurs
+ * This activity displays the "details" screen for a given account.
+ * The most prominent feature of this screen is a list of transactions on
+ * the account.
+ * 
+ * @author vancan1ty
  * 
  */
 public class AccountDetailActivity extends Activity {
 
-    // CHECKSTYLE:OFF
-    DataSourceInterface src;
-    TextView textViewAccountTitle;
-    TextView textViewAccountType;
-    TextView textViewBalance;
-    ListView listViewTransactions;
-    long accountID;
-    Account account;
-    Button buttonDeposit;
-    Button buttonWithdraw;
-    List<Transaction> transactionList = new ArrayList<Transaction>();
-    String rebalance = "Rebalance Account";
+    private Account account;  //the account to display details for!
+    private long accountID;
 
-    // CHECKSTYLE:ON
+    private DataSourceInterface src; //provides db access
+    private TextView textViewAccountTitle; //displays account title
+    private TextView textViewAccountType; //checking or savings currently
+    private TextView textViewBalance; //the balance on the account
+    private ListView listViewTransactions; //the list of transactions to show.
+
+    //this button will take you to the "deposit version" of the 
+    //transactions screen
+    private Button buttonDeposit; 
+    //the withdrawal counterpart of buttonDeposit 
+    private Button buttonWithdraw;
+    //the list of transactions on this account.
+    private List<Transaction> transactionList = new ArrayList<Transaction>();
+    private static final String REBALANCE = "Rebalance Account";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +87,7 @@ public class AccountDetailActivity extends Activity {
     }
 
     /**
-     * Go to transaction screen.
+     * Go to the new transaction screen.
      * 
      * @param type
      *            deposit/withdraw
@@ -141,7 +149,7 @@ public class AccountDetailActivity extends Activity {
         //MenuItem settings = menu.add("Settings");
         //settings.setIntent(new Intent(this, SettingsActivity2.class));
 
-        MenuItem reequilibrate = menu.add(rebalance);
+        MenuItem reequilibrate = menu.add(REBALANCE);
         reequilibrate.setIntent(new Intent(this, RebalanceActivity.class));
         return super.onCreateOptionsMenu(menu);
     }

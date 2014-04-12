@@ -11,7 +11,6 @@ import android.app.AlertDialog;
  * during a given runtime.
  * 
  * @author vancan1ty
- * @version 0.0
  */
 public final class Anchor {
     /**
@@ -26,7 +25,7 @@ public final class Anchor {
      * if the app is in test mode, the app will automatically log you in as the
      * test user.
      */
-    public static final boolean TEST_MODE = false;
+    public static final boolean TEST_MODE = true;
 
     /**
      * Acts as a selective constructor for Anchor class. If no instance of

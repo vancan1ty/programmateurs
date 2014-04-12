@@ -19,14 +19,16 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 /**
- * Report builder.
+ * On this screen, the user is presented with a series of options which allow 
+ * him to choose the parameters he wants for a report.  After clicking the
+ * generate report button, the results will be tabulated and he will be shown
+ * another screen which actually contains the report.
  * 
- * @author programmateurs
+ * @author vancan1ty
  * 
  */
 public class ReportBuilder extends Activity {
 
-    // CHECKSTYLE:OFF
     EditText textStartDate;
     EditText textEndDate;
     Calendar startCalendar = Calendar.getInstance();
@@ -35,7 +37,6 @@ public class ReportBuilder extends Activity {
     String reportType0 = "reportType";
 
     Transaction.TRANSACTION_TYPE reportType;
-    // CHECKSTYLE:ON
 
     /**
      * On date listener.
@@ -56,7 +57,6 @@ public class ReportBuilder extends Activity {
      * On date listener.
      */
     DatePickerDialog.OnDateSetListener endDate = new DatePickerDialog.OnDateSetListener() {
-        // CHECKSTYLE:OFF
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                 int dayOfMonth) {
@@ -65,7 +65,6 @@ public class ReportBuilder extends Activity {
             endCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             updateLabel(textEndDate, endCalendar);
         }
-        // CHECKSTYLE:ON
     };
 
     /**

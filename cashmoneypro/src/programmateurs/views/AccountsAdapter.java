@@ -21,33 +21,34 @@ import android.widget.TextView;
 //Useful example of how to do list adapters in android... 
 
 /**
- * I'd ask Currell for more information on how this class works Basically it
- * make the view that fits inside a ListView object.
+ * This class is used to bind a list of accounts to a listview for portrayal on
+ * screen.  It serves as the go between between the view (a listview) and a
+ * java.util.List of Account entries.  
  * 
- * @author currell
- * @version 0.0
+ * @author vancan1ty
  * 
  */
 public class AccountsAdapter extends BaseAdapter {
 
-    // CHECKSTYLE:OFF
+    /**
+     * AccountsAdapter requires a reference to the parent activity "activity"
+     * in order to do operations which need access to the android Context.
+     */
     private final Activity activity;
+
+    /**
+     * the list of accounts to bind to.
+     */
     List<Account> accounts;
 
     /**
-     * Accounts adaptor.
-     * 
-     * @param activity
-     *            the activity
-     * @param accounts
-     *            the accounts
+     * constructor
      */
     public AccountsAdapter(Activity activity, List<Account> accounts) {
         this.activity = activity;
         this.accounts = accounts;
     }
 
-    // CHECKSTYLE:ON
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
