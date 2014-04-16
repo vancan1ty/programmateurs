@@ -1,7 +1,11 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <color name="oldblue">#33b5e5</color>
     <color name="gungrey">#9C9C9C</color>
+    <color name="textGold">#ffe27e</color>
+    <color name="backgroundBlack">#000000</color>
+    
+    
     <!--
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -17,6 +21,31 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+                <item name="android:textColor">#ffe27e</item>
+                <item name="android:windowBackground">@color/backgroundBlack</item>
+                <item name="android:colorBackground">@color/backgroundBlack</item>
+                <item name="android:editTextStyle">@style/TextEditStyle</item>
+                <item name="android:textViewStyle">@style/TextViewStyle</item>
+                <item name="android:buttonStyle">@style/OurButtonStyle</item>
     </style>
+
+    
+    <!-- Allows us to edit the EditText field -->
+    <style name="TextEditStyle" parent="android:Widget.EditText"> 
+        <item name="android:background">#e3e3e3</item> 
+    </style>
+    
+    <!-- Allows us to edit the TextView words (much of the app text) -->
+    <style name="TextViewStyle" parent="android:Widget.TextView">
+        <item name="android:textColor">#ffe27e</item>
+    </style>
+  
+    <!-- Allows us to edit the Buttons in the app -->
+    <style name="OurButtonStyle" parent="android:Widget.Button">
+        <item name="android:textColor">#ffe27e</item>
+        <item name="android:background">#4a4a4a</item>
+        
+    </style>    
+  
 
 </resources>

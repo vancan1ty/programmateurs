@@ -10,22 +10,24 @@
     tools:context=".WelcomeActivity"
     android:background="#000000" >
 
-
     <Button
         android:id="@+id/buttontologin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView1"
         android:layout_marginTop="15dp"
-        android:text="@string/welcome_activity_login" />
+        android:text="@string/welcome_activity_login"
+        android:textColor="#ffe27e" />
 
     <Button
         android:id="@+id/buttontoregister"
+        style="@style/OurButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttontologin"
         android:layout_marginTop="15dp"
-        android:text="@string/welcome_activity_register" />
+        android:text="@string/welcome_activity_register"
+        android:textColor="#ffe27e" />
 
     <ImageView
         android:id="@+id/imageView1"
