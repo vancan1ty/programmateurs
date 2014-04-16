@@ -4,6 +4,7 @@
     <color name="gungrey">#9C9C9C</color>
     <color name="textGold">#ffe27e</color>
     <color name="backgroundBlack">#000000</color>
+    <color name="buttonGrey">#4a4a4a</color>
     
     
     <!--
@@ -21,7 +22,7 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-                <item name="android:textColor">#ffe27e</item>
+                <item name="android:textColor">@color/textGold</item>
                 <item name="android:windowBackground">@color/backgroundBlack</item>
                 <item name="android:colorBackground">@color/backgroundBlack</item>
                 <item name="android:editTextStyle">@style/TextEditStyle</item>
@@ -37,13 +38,15 @@
     
     <!-- Allows us to edit the TextView words (much of the app text) -->
     <style name="TextViewStyle" parent="android:Widget.TextView">
-        <item name="android:textColor">#ffe27e</item>
+        <item name="android:textColor">@color/textGold</item>
     </style>
   
     <!-- Allows us to edit the Buttons in the app -->
     <style name="OurButtonStyle" parent="android:Widget.Button">
-        <item name="android:textColor">#ffe27e</item>
-        <item name="android:background">#4a4a4a</item>
+        <item name="android:textColor">@color/textGold</item>
+        <item name="android:background">@color/buttonGrey</item>
+        <item name="android:padding">"10dp"</item>
+        
         
     </style>    
   
