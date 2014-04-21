@@ -1,5 +1,9 @@
-package net.programmateurs;
+package programmateurs.views;
 
+import net.programmateurs.R;
+import net.programmateurs.R.id;
+import net.programmateurs.R.layout;
+import net.programmateurs.R.menu;
 import programmateurs.beans.User;
 import programmateurs.models.Anchor;
 import programmateurs.models.CSVHandler;

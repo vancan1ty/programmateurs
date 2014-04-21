@@ -2,7 +2,6 @@ package programmateurs.views;
 
 import java.util.Locale;
 
-import net.programmateurs.DataExportActivity;
 import net.programmateurs.R;
 import programmateurs.models.Anchor;
 
