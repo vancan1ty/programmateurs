@@ -2,6 +2,7 @@ package programmateurs.views;
 
 import java.util.Locale;
 
+import net.programmateurs.DataExportActivity;
 import net.programmateurs.R;
 import programmateurs.models.Anchor;
 
@@ -76,6 +77,9 @@ public class HomeActivity extends FragmentActivity {
         logout.setIntent(new Intent(this, WelcomeActivity.class));
         MenuItem categories = menu.add("Edit Categories");
         categories.setIntent(new Intent(this, CategoryActivity.class));
+        MenuItem exportData = menu.add("Export Data");
+        exportData.setIntent(new Intent(this, DataExportActivity.class));
+        
         // getMenuInflater().inflate(R.menu.home, menu);
         return super.onCreateOptionsMenu(menu);
     }

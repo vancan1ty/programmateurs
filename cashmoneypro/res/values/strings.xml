@@ -33,7 +33,7 @@
     <string name="title_activity_transaction_history">Transaction History</string>
     <string name="rebalance">Rebalance Account</string>
     <string name="dateformat">MM/DD/YYYY</string>
-    
+
     <string-array name="account_type">
         <item>Checking</item>
         <item>Savings</item>
@@ -45,5 +45,6 @@
     <string name="title_activity_category">Add/Remove Categories</string>
     <string name="title_activity_category_report">Category Report</string>
     <string name="title_activity_report_builder">Report Builder</string>
+    <string name="title_activity_data_export">Export Data</string>
 
 </resources>

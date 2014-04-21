@@ -58,6 +58,10 @@ public class RealDataSource implements DataSourceInterface {
     public final void close() {
         db.close();
     }
+    
+    public SQLiteDatabase getDB() {
+        return this.db;
+    }
 
     /* ******** Operations on USERS ************** */
 
@@ -177,6 +181,14 @@ public class RealDataSource implements DataSourceInterface {
         db.execSQL("delete from categories");
         db.execSQL("delete from accounts");
         db.execSQL("delete from users");
+    }
+    
+    public Transaction getTransactionWithID(long id) {
+       return TransactionsDAO.getTransactionWithID(db, id) ;
+    }
+    
+    public Category getCategoryWithID(long id) {
+        return CategoriesDAO.getCategoryWithID(db, id);
     }
 
 }

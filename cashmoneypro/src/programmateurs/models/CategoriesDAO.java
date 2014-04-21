@@ -115,6 +115,33 @@ public final class CategoriesDAO {
     }
 
     /**
+     * gets the category associated with a given id.
+     * 
+     * @param db an open db connection.
+     * @param categoryID the category's id
+     * @return a category object.
+     */
+    public static Category getCategoryWithID(final SQLiteDatabase db,
+            final long categoryID) {
+
+        Cursor c = db
+                .rawQuery(
+                        "SELECT * "
+                                + "FROM categories AS C "
+                                + " WHERE categoryID = ?",
+                        new String[] {Long.toString(categoryID)});
+
+        c.moveToFirst();
+        Category out;
+        out = cursorToCategory(c);
+        
+        // make sure to close the cursor
+        c.close();
+        return out;
+    }
+
+
+    /**
      * adds a category with the associated information to the DB, returns an
      * object representation of it.
      * 

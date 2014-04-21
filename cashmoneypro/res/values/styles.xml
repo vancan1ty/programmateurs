@@ -22,32 +22,29 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-                <item name="android:textColor">@color/textGold</item>
+              <!--   <item name="android:textColor">@color/textGold</item>
                 <item name="android:windowBackground">@color/backgroundBlack</item>
                 <item name="android:colorBackground">@color/backgroundBlack</item>
                 <item name="android:editTextStyle">@style/TextEditStyle</item>
                 <item name="android:textViewStyle">@style/TextViewStyle</item>
-                <item name="android:buttonStyle">@style/OurButtonStyle</item>
+                <item name="android:buttonStyle">@style/OurButtonStyle</item> -->
     </style>
 
     
     <!-- Allows us to edit the EditText field -->
-    <style name="TextEditStyle" parent="android:Widget.EditText"> 
-        <item name="android:background">#e3e3e3</item> 
+    <style name="TextEditStyle" parent="@android:style/Widget.EditText"> 
+       <item name="android:background">#e3e3e3</item>
     </style>
     
     <!-- Allows us to edit the TextView words (much of the app text) -->
-    <style name="TextViewStyle" parent="android:Widget.TextView">
+    <style name="TextViewStyle" parent="@android:style/Widget.TextView">
         <item name="android:textColor">@color/textGold</item>
     </style>
   
     <!-- Allows us to edit the Buttons in the app -->
-    <style name="OurButtonStyle" parent="android:Widget.Button">
+    <style name="OurButtonStyle" parent="@android:style/Widget.Button">
         <item name="android:textColor">@color/textGold</item>
         <item name="android:background">@color/buttonGrey</item>
-        <item name="android:padding">"10dp"</item>
-        
-        
     </style>    
   
 

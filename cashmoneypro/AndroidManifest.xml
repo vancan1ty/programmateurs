@@ -86,7 +86,11 @@
         </activity>
         <activity
             android:name="programmateurs.views.RebalanceActivity"
-            android:label="@string/rebalance">
+            android:label="@string/rebalance" >
+        </activity>
+        <activity
+            android:name="net.programmateurs.DataExportActivity"
+            android:label="@string/title_activity_data_export" >
         </activity>
     </application>
 
