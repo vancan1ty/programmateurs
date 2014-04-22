@@ -46,5 +46,6 @@
     <string name="title_activity_category_report">Category Report</string>
     <string name="title_activity_report_builder">Report Builder</string>
     <string name="title_activity_data_export">Export Data</string>
+    <string name="title_activity_real_settings">RealSettingsActivity</string>
 
 </resources>
