@@ -58,7 +58,7 @@ public class NewTransactionActivity extends Activity {
     /**
      * lets you enter the amount of the transaction.
      */
-    private EditText amountText; // amount of the transaction
+    protected EditText amountText; // amount of the transaction
 
     /**
      * lets you enter the name of the transaction
@@ -75,7 +75,7 @@ public class NewTransactionActivity extends Activity {
      * user's current day.
      */
     private EditText textViewDate;
-    private Calendar transactionCal = Calendar.getInstance();
+    protected Calendar transactionCal = Calendar.getInstance();
 
     /**
      * lets you pick a category for your transaction.
@@ -85,19 +85,12 @@ public class NewTransactionActivity extends Activity {
     /**
      * this button finalizes the transaction.
      */
-    private Button buttonTransaction;
-
-
-    /**
-     * reference to the current activity so that we can get at it within inner
-     * classes.
-     */
-    Activity me = this;
+    protected Button buttonTransaction;
 
     /**
      * the anchor point provides some utility functionality.
      */
-    Anchor anchor = Anchor.getInstance();
+    protected Anchor anchor = Anchor.getInstance();
 
 
     @Override
@@ -128,7 +121,7 @@ public class NewTransactionActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                @SuppressWarnings("unused")
+                //@SuppressWarnings("unused")
                 Intent i = new Intent(v.getContext(), HomeActivity.class);
                 String transactionName = textViewName.getText().toString();
                 String transactionComment = textViewComment.getText()
@@ -152,17 +145,51 @@ public class NewTransactionActivity extends Activity {
                     depositSound.start();
 
                     //now go back to previous screen.
-                    me.onBackPressed();
+                    NewTransactionActivity.this.onBackPressed();
                     
                 } else {
                    String errorMessage = computeErrorMessage(transactionName, 
                            amountString, transactionCal, transactionComment, category);
-                   anchor.showDialog(me, "Transaction Error(s)", errorMessage);
+                   anchor.showDialog(NewTransactionActivity.this, "Transaction Error(s)", errorMessage);
                 }
             }
         });
     }
 
+    /**
+     * Method used when RealDataSource is used.
+     */
+    @Override
+    protected void onResume() {
+        src.open();
+        super.onResume();
+        Category[] categories = src.getCategoriesForUser(anchor
+                .getCurrentUser().getUserID());
+        String[] stringArray = new String[categories.length];
+        if (categories != null) {
+            for (int i = 0; i < categories.length; i++) {
+                if (categories[i] != null) {
+                    stringArray[i] = categories[i].getCategory_name();
+                }
+            }
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, stringArray);
+        categorySpinner.setAdapter(adapter);
+    }
+
+    /**
+     * Method used when RealDataSource is used.
+     */
+    @Override
+    protected void onPause() {
+        src.close();
+        super.onPause();
+    }
+    
+    //--------------------------------------------------------------helpers below
+    
     /**
      * this function is used to check the inputs provided by the user on this
      * activity.
@@ -174,7 +201,7 @@ public class NewTransactionActivity extends Activity {
      * @param category the provided category of the transaction.
      * @return true if all the values check out, false if there is an error.
      */
-    private boolean checkIfInputsAreValid(String transactionName,
+    protected boolean checkIfInputsAreValid(String transactionName,
             String amountString, Calendar transactionDate,
             String transactionComment, Category category) {
 
@@ -209,7 +236,7 @@ public class NewTransactionActivity extends Activity {
      * @return the number of cents in s, or null if the string can't be
      *         parsed to a long.
      */
-    private long parseStringAsCents(String moneyString) throws
+    protected long parseStringAsCents(String moneyString) throws
         NumberFormatException {
                 double transactionAmountD = Double
                         .parseDouble(moneyString);
@@ -237,7 +264,7 @@ public class NewTransactionActivity extends Activity {
      * @param category the provided category of the transaction.
      * @return
      */
-    private String computeErrorMessage(String transactionName,
+    protected String computeErrorMessage(String transactionName,
             String amountString, Calendar transactiondate,
             String transactionComment, Category category) {
             String errorMessage = "Please resolve the following errors:\n";
@@ -245,7 +272,7 @@ public class NewTransactionActivity extends Activity {
                         errorMessage += 
                                 "\n- you must enter a transaction amount!";
                     } else if (!validTransactionAmount(amountString)) {
-                        errorMessage += "\n- Enter an amount greater than 0.";
+                        errorMessage += "\n- Transaction amount invalid.";
                     }
                     if (!validDate(transactionCal)) {
                         errorMessage += "\n- Enter a valid startDate.";
@@ -295,7 +322,7 @@ public class NewTransactionActivity extends Activity {
      * @param transactionCal calendar to check
      * @return true if the date is valid, else false. 
      */
-    private boolean validDate(Calendar cal) {
+    protected boolean validDate(Calendar cal) {
         if (cal.isSet(cal.DAY_OF_MONTH) 
                 && cal.isSet(cal.MONTH)
                 && cal.isSet(cal.YEAR))
@@ -329,38 +356,6 @@ public class NewTransactionActivity extends Activity {
         }
         throw new RuntimeException("No existing category with name " + name);
         // only executed if somebody dun goofed.
-    }
-
-    /**
-     * Method used when RealDataSource is used.
-     */
-    @Override
-    protected void onResume() {
-        src.open();
-        super.onResume();
-        Category[] categories = src.getCategoriesForUser(anchor
-                .getCurrentUser().getUserID());
-        String[] stringArray = new String[categories.length];
-        if (categories != null) {
-            for (int i = 0; i < categories.length; i++) {
-                if (categories[i] != null) {
-                    stringArray[i] = categories[i].getCategory_name();
-                }
-            }
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, stringArray);
-        categorySpinner.setAdapter(adapter);
-    }
-
-    /**
-     * Method used when RealDataSource is used.
-     */
-    @Override
-    protected void onPause() {
-        src.close();
-        super.onPause();
     }
 
 }

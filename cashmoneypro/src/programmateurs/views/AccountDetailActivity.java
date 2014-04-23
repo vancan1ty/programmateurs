@@ -160,7 +160,9 @@ public class AccountDetailActivity extends Activity {
             NavUtils.navigateUpFromSameTask(this);
             return true;
         }
-        this.startActivity(item.getIntent());
+        Intent i = item.getIntent();
+        i.putExtra("account_id", this.accountID);
+        this.startActivity(i);
         return true;
     }
     

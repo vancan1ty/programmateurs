@@ -30,7 +30,7 @@ public final class CategoriesDAO {
      * at the moment when he or she is created.
      */
     public static final String[] initialCategories = {"Uncategorized","Food"
-        ,"Gas", "Utilities", "Housing", "Work"};
+        ,"Gas", "Utilities", "Housing", "Work", "Misc."};
     
     // NO LONGER NEEDED BECAUSE ONLY ONE CATEGORY PER TRANSACTION
     /*
