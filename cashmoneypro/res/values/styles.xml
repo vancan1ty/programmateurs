@@ -53,9 +53,13 @@
         <item name="android:textColor">@color/textGold</item>
         <item name="android:background">@color/buttonGrey</item>
         <item name="android:padding">10dp</item>
-        
-        
-    </style>    
-  
-
+    </style>
+    
+    <style name="DialogStyle" parent="android:style/Theme.Dialog">
+   		<item name="android:textColor">@color/textGold</item>
+        <item name="android:background">@color/buttonGrey</item>
+        <item name="android:padding">10dp</item>
+	</style>
+    
 </resources>
+

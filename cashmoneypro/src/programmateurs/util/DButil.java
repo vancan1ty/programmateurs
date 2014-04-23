@@ -42,7 +42,7 @@ public final class DButil {
      */
     public static double doubleFromCursor(final Cursor c,
             final String columnName) {
-        return c.getLong(c.getColumnIndexOrThrow(columnName));
+        return c.getDouble(c.getColumnIndexOrThrow(columnName));
     }
 
     /**

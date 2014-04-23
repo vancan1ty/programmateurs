@@ -1,6 +1,7 @@
 package programmateurs.models;
 
 import programmateurs.beans.User;
+import android.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 
