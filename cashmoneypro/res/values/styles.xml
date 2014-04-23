@@ -44,7 +44,7 @@
    <!--  Allows us to edit the TextView words (much of the app text) -->
     <style name="TextViewStyle" parent="@android:style/Widget.TextView">
         <item name="android:textColor">@color/textGold</item>
-        <item name="android:padding">10dp</item>
+        
     </style> 
     
   
