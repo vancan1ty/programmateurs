@@ -1,11 +1,13 @@
-package net.programmateurs;
+package programmateurs.views;
 
+import net.programmateurs.R;
+import net.programmateurs.R.id;
+import net.programmateurs.R.layout;
+import net.programmateurs.R.menu;
 import programmateurs.beans.User;
 import programmateurs.interfaces.DataSourceInterface;
 import programmateurs.models.Anchor;
 import programmateurs.models.RealDataSource;
-import programmateurs.views.ConfirmDialog;
-import programmateurs.views.HomeActivity;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -54,7 +56,7 @@ public class ChangePasswordActivity extends Activity {
                         public boolean onOkClicked(String input) {
                             user.setPasshash(passField.getText().toString());
                             dbHandler.updateUser(user);
-                            anchor.showDialog(me, "Success!", "Your password has been changed.");
+                            anchor.showDialog(me, "Success!", "Your password has been changed to "+ user.getPasshash());
                             return true;
                         }
                     };

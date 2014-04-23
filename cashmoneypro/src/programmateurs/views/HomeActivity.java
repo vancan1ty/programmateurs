@@ -78,6 +78,8 @@ public class HomeActivity extends FragmentActivity {
         categories.setIntent(new Intent(this, CategoryActivity.class));
         MenuItem exportData = menu.add("Export Data");
         exportData.setIntent(new Intent(this, DataExportActivity.class));
+        MenuItem changePassword = menu.add("Change Password");
+        changePassword.setIntent(new Intent(this, ChangePasswordActivity.class));
         
         // getMenuInflater().inflate(R.menu.home, menu);
         return super.onCreateOptionsMenu(menu);
