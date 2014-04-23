@@ -4,12 +4,12 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class RealSettingsActivity extends Activity {
+public class ChangePasswordActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_real_settings);
+        setContentView(R.layout.activity_change_password);
     }
 
     @Override

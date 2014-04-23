@@ -93,7 +93,7 @@
             android:label="@string/title_activity_data_export" >
         </activity>
         <activity
-            android:name="net.programmateurs.RealSettingsActivity"
+            android:name="net.programmateurs.ChangePasswordActivity"
             android:label="@string/title_activity_real_settings" >
         </activity>
     </application>
