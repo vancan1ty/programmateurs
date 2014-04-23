@@ -19,6 +19,9 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Account Name" 
+        android:layout_marginBottom="15dp"
+        android:background="@color/editTextFieldWhite"
+        android:padding="5dp"
         >
 
         </EditText>
@@ -30,7 +33,11 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Interest rate (3.2 -> 3.2%)"
-        android:inputType="numberDecimal" >
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="15dp"
+        android:background="@color/editTextFieldWhite"
+        android:padding="5dp"
+         >
 
     </EditText>
 

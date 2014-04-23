@@ -25,7 +25,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button_print_data"
-        android:text="Print Data" />
+        android:text="Print Data" 
+        android:layout_marginRight="5dp"/>
 
     <Button
         android:layout_width="wrap_content"

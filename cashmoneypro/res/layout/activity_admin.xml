@@ -32,7 +32,11 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:ems="10" >
+        android:hint=" Username"
+        android:ems="10" 
+         android:background="@color/editTextFieldWhite"
+        android:padding="5dp"
+         >
 
         <requestFocus />
     </EditText>

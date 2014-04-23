@@ -29,31 +29,44 @@
                 android:id="@+id/inputName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="First and Last Name" >
-
-                <requestFocus />
-            </EditText>
+                android:hint=" First and Last Name" 
+                android:background="@color/editTextFieldWhite"
+                android:padding="5dp"
+                android:layout_marginBottom="15dp"
+                />
 
             <EditText
                 android:id="@+id/inputEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:hint="Email" />
+                android:hint="Email" 
+                android:background="@color/editTextFieldWhite"
+                android:padding="5dp"
+                android:layout_marginBottom="15dp"
+                 />
 
             <EditText
                 android:id="@+id/inputUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username" >
-            </EditText>
+                android:hint="Username" 
+                android:background="@color/editTextFieldWhite"
+                android:padding="5dp"
+                android:layout_marginBottom="15dp"
+                 />
+
 
             <EditText
                 android:id="@+id/inputPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
-                android:inputType="textPassword" />
+                android:inputType="textPassword" 
+                android:background="@color/editTextFieldWhite"
+                android:padding="5dp"
+                android:layout_marginBottom="15dp"
+                 />
         </LinearLayout>
     </ScrollView>
 

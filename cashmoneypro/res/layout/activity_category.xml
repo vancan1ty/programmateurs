@@ -26,7 +26,10 @@
         android:layout_marginTop="35dp"
         android:ems="10"
         android:hint="Enter Category Name"
-        android:text=" " />
+        android:text="" 
+        android:background="@color/editTextFieldWhite"
+        android:padding="5dp"
+         />
 
     <Button
         android:id="@+id/add_button"
