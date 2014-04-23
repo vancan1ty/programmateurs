@@ -9,6 +9,10 @@ import programmateurs.util.DateUtility;
 
 import android.database.sqlite.SQLiteDatabase;
 
+/**
+ * This class handles formatting data in csv format.
+ * @author vancan1ty
+ */
 public class CSVHandler {
 
     /**
@@ -19,6 +23,8 @@ public class CSVHandler {
     public static String TransactionsToCSV(RealDataSource src, long userID) {
         Transaction[] transactions = src.getTransactionsForUser(userID);
         StringBuilder out = new StringBuilder();
+        out.append("\"Name\",\"Type\",\"Amount\",\"Comment\",\"Category\"," +
+        		"\"Account Name\",\"Date\",\"Timestamp\",\"Rolled Back?\"\n");
         for (Transaction trans : transactions) {
             out.append(transactionToLineItem(src, trans) + "\n");
         }

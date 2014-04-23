@@ -185,6 +185,8 @@ public final class TransactionsDAO {
         toInsert.put("transaction_date",
                 DateUtility.formatDateAsLong(transactionDate));
         toInsert.put("transaction_comment", transactionComment);
+        Date now = new Date();
+        toInsert.put("timestamp", DateUtility.formatDateAsLong(now));
         if (rolledback) {
             toInsert.put("rolledback", true);
         } else {
